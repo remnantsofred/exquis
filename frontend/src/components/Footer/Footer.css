@@ -1,0 +1,17 @@
+footer {
+  font-family: Reenie Beanie, script;
+  align-items: center;
+  text-align: center;
+  vertical-align: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4rem;
+  background-color: #34374d; 
+  color: white;
+}
+
+footer > p {
+  margin-top: 4vh;
+}

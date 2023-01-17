@@ -31,7 +31,7 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
       </Switch>
-      <Footer id="footer" />
+      <Footer />
     </>
   );
 }

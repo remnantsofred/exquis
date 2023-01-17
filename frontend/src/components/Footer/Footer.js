@@ -1,7 +1,9 @@
+import "./Footer.css"
+
 const Footer = () => {
   return (
     <footer>
-      Copyright &copy; 2023 Exquis
+      <p>Copyright &copy; 2023 Exquis</p>
     </footer>
   )
 }
