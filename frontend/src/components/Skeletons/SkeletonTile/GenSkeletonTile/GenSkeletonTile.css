@@ -81,9 +81,9 @@
     /* margin-bottom: -10.5vw; */
     display: -webkit-box;
     /* margin-bottom: 3vw; */
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 4;
       /* number of lines to show */
-    line-clamp: 2;
+    line-clamp: 4;
     -webkit-box-orient: vertical;
   }
 
@@ -149,14 +149,20 @@
   } 
 
   div.skeleton-tags-container {
-    width: 30vw;
+    width: 40vw;
+    margin-top: 1vh;
     margin-bottom: 3vh;
+    background-color: white;
+    padding-top: 2vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    border-radius: 25px;
   }
 
   ul.skeleton-tags {
     display: flex;
     align-items: row;
-    height: 2vh;
+    height: 4vh;
     display: -webkit-box;
     width: 30vw;
       /* margin-bottom: 3vw; */
