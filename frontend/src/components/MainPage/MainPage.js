@@ -1,5 +1,6 @@
 import './MainPage.css'
 import SkeletonDisplay from '../SkeletonDisplay/SkeletonDisplay';
+import TrendingBar from './TrendingBar/TrendingBar';
 
 function MainPage() {
 
@@ -12,7 +13,7 @@ function MainPage() {
     "Quiet, sky rodent! To the shovels!",
     "Fool me once, fool me twice, fool me chicken soup with rice.",
     "Bears. Beets. Battlestar Galactica.",
-    "Just remember, every time you look up at ,the moon, I, too, will be looking at a moon.",
+    "Just remember, every time you look up at, the moon, I, too, will be looking at a moon.",
     "Sometimes you gotta work a little so you can ball a lot.",
     "There has never been a sadness that can't been cured by breakfast food.",
     "Jogging is the worst. I know it keeps you healthy, but God, at what cost?",
@@ -22,7 +23,7 @@ function MainPage() {
 
   const randomGreetingFxn = (array) => {
     return (
-      array[Math.floor((Math.random() * (array.length - 1)))]
+      array[Math.floor((Math.random() * (array.length)))]
     )
   };  
 
@@ -42,6 +43,9 @@ function MainPage() {
 
         <div class="main-content">
           <SkeletonDisplay />
+          <div>
+            {/* <TrendingBar /> */}
+          </div>
         </div>
         
       </div>

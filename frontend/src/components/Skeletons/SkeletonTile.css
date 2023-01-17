@@ -1,6 +1,6 @@
   div.skeleton-tile-container {
     width: 60vw;
-    height: 25vh;
+    height: 30vh;
     padding-left: 4vw;
     padding-right: 4vw;
     padding-top: 4vh;
@@ -72,13 +72,13 @@
     font-style: italic;
     width: 50vw;
     color: rgb(42, 42, 42);
-    
+    margin-bottom: -4vh; 
   }
 
   .skeleton-body-container > p {
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: -8.5vw;
+    /* margin-bottom: -10.5vw; */
     display: -webkit-box;
     /* margin-bottom: 3vw; */
     -webkit-line-clamp: 2;
@@ -115,8 +115,8 @@
   }
 
   img.vote-button-image {
-    width: 2vw;
-    height: 2vw;
+    max-width: 2vw;
+    max-height: 2vw;
     aspect-ratio: 1 / 1;
   }
 
@@ -150,6 +150,7 @@
 
   div.skeleton-tags-container {
     width: 30vw;
+    margin-bottom: 3vh;
   }
 
   ul.skeleton-tags {
@@ -163,6 +164,7 @@
       /* number of lines to show */
     line-clamp: 1;
     -webkit-box-orient: horizontal;
+    margin-bottom: 3vh;
   }
 
   p.ind-tag {
