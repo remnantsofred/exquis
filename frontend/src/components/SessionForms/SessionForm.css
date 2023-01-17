@@ -2,29 +2,12 @@
     text-align: center;
     align-self: center;
     width: 60vw;
-    height: 60vh;
+    height: max-content;
     margin-left: auto;
     margin-right: auto;
     padding-left: 8vw;
     padding-right: 8vw;
     padding-top: 4vh;
-    padding-bottom: 4vh;
-    background-color: rgba(188, 208, 228, 0.436);
-    display: flexbox;
-    border-radius: 25px;
-    transition: .5s;
-  }
-
-  #sign-up-form {
-    text-align: center;
-    align-self: center;
-    width: 60vw;
-    height: 95vh;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 8vw;
-    padding-right: 8vw;
-    padding-top: 7vh;
     padding-bottom: 4vh;
     background-color: rgba(188, 208, 228, 0.436);
     display: flexbox;
@@ -38,6 +21,19 @@
     font-weight: 400;
     font-size: 3vw;
     text-align: center;
+  }
+
+  div.errors {
+    font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.5vw;
+    justify-content: center;
+    text-decoration: underline;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   span.session-label {
@@ -74,20 +70,24 @@
   }
 
   input.session-form-submit-button {
+    transition: 0.5s;
     width: 20vw;
     height: 8vh;
     align-items: center;
     margin-top: 2vw;
-    /* justify-content: center; */
-    /* justify-items: center; */
-    background-color: #30303000;
     font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-decoration: none;
     font-weight: 400;
-    border: #c3c3c3;
-    border-style: solid;
-    border-width: 1px;
+    border: solid;
+    border-width: 0.5px;
+    border-color: #34374d;
     border-radius: 75px;
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+
+  input.session-form-submit-button:hover {
+    transition: 0.5s;
+    background-color: #34374d;
+    color: white;
   }

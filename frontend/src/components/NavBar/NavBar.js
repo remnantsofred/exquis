@@ -53,9 +53,9 @@ function NavBar () {
       <div className='nav-bar-container'>
         <div className='left'>
           <NavLink to="/">
-            <div class="nav-logo">
-            <img src={ExquisIcon} id="nav-icon" />
-            <img src={ExquisLogo} id="nav-logo" />     
+            <div class="nav-logo-container">
+              <img src={ExquisIcon} id="nav-icon" />
+              <img src={ExquisLogo} id="nav-logo" />     
             </div>
           </NavLink>
         </div>
