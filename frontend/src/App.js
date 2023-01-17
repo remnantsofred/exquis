@@ -12,6 +12,8 @@ import SignupForm from './components/SessionForms/SignupForm';
 
 import { getCurrentUser } from './store/session';
 
+import "./App.css"
+
 
 
 function App() {
@@ -29,7 +31,7 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
       </Switch>
-      <Footer />
+      <Footer id="footer" />
     </>
   );
 }

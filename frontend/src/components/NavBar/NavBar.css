@@ -1,7 +1,98 @@
 .nav-logo, #nav-icon, #nav-logo {
-  width: 6vw;
+  width: 3.5vw;
 }
 
+.left {
+  text-align: left;
+  display: flex;
+  margin-left: 0;
+}
 .nav-logo {
-  padding: 2vw;
+  padding: .75vw;
+  margin-left: 0;
+}
+.nav-bar-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5vw;
+  
+}
+
+.links-auth, .links-nav, #search-bar-input {
+  margin-top: 1.5vw;
+  font-family: Reenie Beanie, script;
+  text-decoration: none;
+  
+}
+
+.links-auth, .links-nav {
+  font-size: 2vw;
+}
+
+#signup-link, #login-link, #skeleton-index-link, #profile-link, #skeleton-form-link, #logout-button {
+  text-decoration: none;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  color: black;
+}
+#signup-link:hover, #login-link:hover, #skeleton-index-link:hover, #profile-link:hover, #skeleton-form-link:hover, #logout-button:hover {
+  transition: 0.5s;
+  text-shadow: 2px 2px 2px lightgray;
+}
+
+#search-bar-input {
+  width: 45vw;
+  height: .75vw;
+  margin-left: 1.5vw;
+  margin-right: .5vw;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  background-color: #30303000;
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-decoration: none;
+  font-weight: 400;
+  border: #c3c3c3;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 75px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+input#search-bar-input:focus {
+  outline-width: 1px;
+}
+
+#search-bar-button  {
+  position: absolute;
+  margin-top: 1.5vw;
+  left: 52vw;
+  width: 2.9vw;
+  height: 2.9vw;
+  background: none;
+  border-width: .0px;
+  border-color: lightgray;
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+#search-bar-button:hover {
+  cursor: pointer;
+  background: darkgray;
+  border-color: darkgray;
+  transition: .3s;
+}
+
+#search-icon {
+  width: 1.2vw;
+  height: auto;
+  border: none;
+  background-color: none;
+}
+
+button#search-bar-button:hover > #search-icon {
+  filter: invert(100%);
+  transition: .25s;
 }
