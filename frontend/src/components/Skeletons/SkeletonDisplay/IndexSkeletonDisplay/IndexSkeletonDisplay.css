@@ -1,0 +1,15 @@
+ul.index-skeleton-grid {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-count: 2;
+  column-gap: 3vw;
+  row-gap: 5vh;
+}
+
+ul.index-skeleton-grid > li {
+  margin-top: 0vh;
+  margin-bottom: 0vh;
+}

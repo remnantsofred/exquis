@@ -35,7 +35,8 @@ function NavBar () {
           <Link to={'/skeletons'} id="skeleton-index-link">All Skeletons</Link>
           <Link to={'/profile'} id="profile-link">Profile</Link>
           <Link to={'/skeletons/new'} id="skeleton-form-link">New Skeleton</Link>
-          <button onClick={logoutUser} id="logout-button">Logout</button>
+          <Link onClick={logoutUser} id="logout-button">Logout</Link>
+
         </div>
       );
     } else {
@@ -53,9 +54,9 @@ function NavBar () {
       <div className='nav-bar-container'>
         <div className='left'>
           <NavLink to="/">
-            <div class="nav-logo">
-            <img src={ExquisIcon} id="nav-icon" />
-            <img src={ExquisLogo} id="nav-logo" />     
+            <div class="nav-logo-container">
+              <img src={ExquisIcon} id="nav-icon" />
+              <img src={ExquisLogo} id="nav-logo" />     
             </div>
           </NavLink>
         </div>

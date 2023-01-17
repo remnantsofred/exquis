@@ -15,7 +15,6 @@
     transition: .5s;
   }
 
-
   h2.form-title {
     font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-decoration: none;
@@ -23,7 +22,6 @@
     font-size: 3vw;
     text-align: center;
   }
-
 
   div.errors {
     font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -38,19 +36,18 @@
     margin-right: auto;
   }
 
-
-  span.session-label {
+  span.skellie-label {
     font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-decoration: none;
     font-weight: 400;
     text-align: left;
   }
 
-  h2.session-label-text {
+  h2.skellie-label-text {
     margin-left: 8vw;
   }
 
-  input.session-input {
+  input.skellie-input, textarea.skellie-input {
     width: 45vw;
     height: 2.75vh;
     margin-left: 2.5vw;
@@ -72,9 +69,55 @@
     padding-bottom: 10px;
   }
 
-  input.session-form-submit-button {
+  textarea.skellie-input {
+    width: 20em;
+    height: 5em;
+    padding-left: 6vw;
+    padding-right: 6vw;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    /* margin-left: 2vw;
+    margin-right: 2vw; */
+    z-index: 0;
+  }
+
+  textarea.skellie-input::-webkit-scrollbar {
+    margin-top: 4vh;
+    height: 2px;
+    width: 8px;
+    z-index: 99999;
+  }
+
+  textarea.skellie-input::-webkit-scrollbar-track:vertical {
+    margin-top: 4vh;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color: #bdbdbd;
+    margin: 5px ;
+    margin-right: 2vw;
+    z-index: 99999;
+  }
+
+  textarea.skellie-input::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #2e33385b;
+    z-index: 99999;
+  }
+
+  textarea.skellie-input::-webkit-scrollbar-corner {
+    background-color: none;
+    border: none;
+  }
+
+  textarea.skellie-input::-webkit-scrollbar-resizer {
+    background-color: none;
+    border: none;
+  }
+
+  input.skellie-form-submit-button {
     transition: 0.5s;
-    width: 20vw;
+    width: 30vw;
     height: 8vh;
     align-items: center;
     margin-top: 2vw;
@@ -87,9 +130,11 @@
     border-radius: 75px;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
-  input.session-form-submit-button:hover {
+  input.skellie-form-submit-button:hover {
     transition: 0.5s;
     background-color: #34374d;
     color: white;
