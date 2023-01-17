@@ -14,4 +14,4 @@ const skeletonSchema = Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('skeleton', skeletonSchema);
+module.exports = mongoose.model('Skeleton', skeletonSchema);
