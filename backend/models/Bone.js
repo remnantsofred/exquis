@@ -8,8 +8,14 @@ const boneSchema = Schema({
     },
     skeleton: {
         type: Schema.Types.ObjectId,
-        ref: 'Skeleton'
-    }
+        ref: 'Skeleton',
+        required: true
+    },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
 }, {
     timestamps: true
 });
