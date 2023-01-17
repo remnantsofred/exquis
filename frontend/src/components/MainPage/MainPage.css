@@ -2,6 +2,30 @@
   /* background-color: rgb(35, 51, 91); */
   font-family: Arial, sans-serif;
   /* color: white; */
+  display: flex;
+  flex-direction: column;
+}
+
+.goofy-greeting-container {
+  width: 40vw;
+  text-align: left;
+}
+
+#goofy-greeting {
+  font-weight: 600;
+  font-size: 3vw;
+  text-align: left;
+}
+
+hr {
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+  width: 100%;
+}
+
+.main-content {
+  font-family: Arial, sans-serif;
   align-items: center;
   display: flex;
+  margin-top: -4vh;
 }
