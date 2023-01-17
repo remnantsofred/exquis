@@ -1,10 +1,10 @@
-import './SkeletonTile.css'
+import './IndexSkeletonTile.css'
 
 // vote buttons
-import UpvoteButton from './UpvoteButton'
-import DownvoteButton from './DownvoteButton'
+import UpvoteButton from '../UpvoteButton'
+import DownvoteButton from '../DownvoteButton'
 
-const SkeletonTile = ({skeletonInfo}) => {
+const IndexSkeletonTile = ({skeletonInfo}) => {
   // const title = skeletonInfo.title
   // const author = skeletonInfo.author
   // const collaborators = skeletonInfo.collaborators
@@ -26,32 +26,28 @@ const SkeletonTile = ({skeletonInfo}) => {
   
   return (
     <li className='skeleton-tile-object'>
-      <div className="skeleton-tile-container">
-          <div className="tile-top-container">
-            <div className="title-author-container">
-              <div className="title-container">
-                <h1 className="title">{title.toUpperCase()}</h1>
-              </div>
-              <h1 className='title-author-divider'>//</h1> 
-              <div className="author-container">
-                <h1 className="author">{author.toUpperCase()}</h1>
-              </div>
-            </div>
-            <h3 className="bone-counter">Bones: {currentBones} / {maxBones}</h3>
+      <div className="index-tile-container">
+        <div className="index-title-container">
+          <h1 className="index-title">{title.toUpperCase()}</h1>
+        </div>
+          <div className="index-author-bones-container">
+            <h1 className="index-author">{author.toUpperCase()}</h1>
+            <h1 className="index-author-bone-divider">//</h1>
+            <h1 className="index-bone-counter">Bones: {currentBones} / {maxBones}</h1>
           </div>
-          <div className='skeleton-body-likes-container'>
-            <div className="skeleton-body-container">
-              <p className="skeleton-body">{skeletonBody}</p>
+          <div className='index-skeleton-body-likes-container'>
+            <div className="index-skeleton-body-container">
+              <p className="index-skeleton-body">{skeletonBody}</p>
             </div>
-            <div className="skeleton-likes-container">
+            <div className="index-skeleton-likes-container">
               <UpvoteButton />
-                <p className="skeleton-like-count">{likes}</p>
+                <p className="index-skeleton-like-count">{likes}</p>
               <DownvoteButton />
             </div>
           </div>
-          <div className="skeleton-tags-container">
-            <ul className='skeleton-tags'>
-              {tags.map((tag) => <p className="ind-tag"> #{`${tag}`} </p>)}
+          <div className="index-skeleton-tags-container">
+            <ul className='index-skeleton-tags'>
+              {tags.map((tag) => <p className="index-ind-tag"> #{`${tag}`} </p>)}
             </ul>
           </div>
       </div>
@@ -59,4 +55,4 @@ const SkeletonTile = ({skeletonInfo}) => {
   )
 }
 
-export default SkeletonTile;
+export default IndexSkeletonTile;

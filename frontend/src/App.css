@@ -1,4 +1,4 @@
-.main-page {
+.main-page, .index-page {
   font-family: Inter, sans-serif;
   display: flex;
   padding-bottom: 2rem;

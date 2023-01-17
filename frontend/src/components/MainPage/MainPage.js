@@ -1,8 +1,8 @@
 import './MainPage.css'
-import SkeletonDisplay from '../SkeletonDisplay/SkeletonDisplay';
+import GenSkeletonDisplay from '../Skeletons/SkeletonDisplay/GenSkeletonDisplay/GenSkeletonDisplay';
 import TrendingBar from './TrendingBar/TrendingBar';
 
-function MainPage() {
+function MainPage () {
 
   const greetingPhrases = [
     "What's cookin' good lookin'?",
@@ -42,7 +42,7 @@ function MainPage() {
         <hr />
 
         <div class="main-content">
-          <SkeletonDisplay />
+          <GenSkeletonDisplay />
           <div>
             {/* <TrendingBar /> */}
           </div>

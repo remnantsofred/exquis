@@ -1,4 +1,4 @@
-import Upvote from '../../assets/skeleton_tile/triangle_button_up.png'
+import Upvote from '../../../assets/skeleton_tile/triangle_button_up.png'
 
 const UpvoteButton = () => {
 

@@ -1,0 +1,15 @@
+div.index-page {
+  /* background-color: rgb(35, 51, 91); */
+  font-family: Arial, sans-serif;
+  /* color: white; */
+  display: flex;
+  flex-direction: column;
+}
+
+
+div.index-content {
+  font-family: Arial, sans-serif;
+  align-items: center;
+  display: flex;
+  margin-top: -4vh;
+}

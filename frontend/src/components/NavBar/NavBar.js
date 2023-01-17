@@ -35,7 +35,7 @@ function NavBar () {
           <Link to={'/skeletons'} id="skeleton-index-link">All Skeletons</Link>
           <Link to={'/profile'} id="profile-link">Profile</Link>
           <Link to={'/skeletons/new'} id="skeleton-form-link">New Skeleton</Link>
-          <button onClick={logoutUser} id="logout-button">Logout</button>
+          <Link onClick={logoutUser} id="logout-button">Logout</Link>
         </div>
       );
     } else {
