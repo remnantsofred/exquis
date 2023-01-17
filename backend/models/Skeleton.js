@@ -50,7 +50,7 @@ const skeletonSchema = Schema({
     ref: 'Tag'
   }],
   likes: [{ 
-    type: Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId, 
     ref: 'Like'
   }],
   comments: [{
