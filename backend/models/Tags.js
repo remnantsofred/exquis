@@ -5,7 +5,12 @@ const tagSchema = Schema({
   name: {
     type: String,
     required: true
-  }}, {
+  }, 
+  taggedSkeletons: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Skeleton'
+  }],
+}, {
   timestamps: true
 });
 
