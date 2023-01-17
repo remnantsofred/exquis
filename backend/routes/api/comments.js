@@ -10,7 +10,7 @@ const validateBoneInput = require('../../validations/bones');  // add bone valid
 const validateCommentInput = require('../../validations/comments');
 
 
-router.get('/skeleton/:skeletonId', async (req, res) => {
+router.get('/', async (req, res) => {
   let parent;
   try {
     parent = await Skeleton.findById(req.params.skeletonId);
@@ -52,7 +52,7 @@ router.get('/:id', async (req, res, next) => {
 // to req.user. (requireUser will return an error response if there is no 
 // current user.) Also attach validateSkeletonInput as a middleware before the 
 // route handler.
-router.post('/skeleton/:skeletonId', requireUser, validateSkeletonInput, validateCommentInput, async (req, res, next) => {
+router.post('/', requireUser, validateSkeletonInput, validateCommentInput, async (req, res, next) => {
   try {
     const newComment = new Comment({
       parent: req.params.id,
@@ -68,5 +68,56 @@ router.post('/skeleton/:skeletonId', requireUser, validateSkeletonInput, validat
     next(err);
   }
 });
+
+router.patch('/:id', requireUser, validateCommentInput, async (req, res, next) => {
+  try {
+    const comment = await Comment.findById(req.params.id);
+    if (!comment) {
+      const error = new Error('Comment not found');
+      error.statusCode = 404;
+      error.errors = { message: "No comment found with that id" };
+      return next(error);
+    }
+    if (comment.author.toString() !== req.user._id.toString()) {
+      const error = new Error('Unauthorized');
+      error.statusCode = 401;
+      error.errors = { message: "You are not authorized to edit this comment" };
+      return next(error);
+    }
+    comment.text = req.body.text;
+    await comment.save();
+    return res.json(comment);
+  }
+  catch(err) {
+    next(err);
+  }
+});
+
+
+
+router.delete('/:id', requireUser, async (req, res, next) => {
+  try {
+    const comment = await Comment.findById(req.params.id);
+    if (!comment) {
+      const error = new Error('Comment not found');
+      error.statusCode = 404;
+      error.errors = { message: "No comment found with that id" };
+      return next(error);
+    }
+    if (comment.author.toString() !== req.user._id.toString()) {
+      const error = new Error('Unauthorized');
+      error.statusCode = 401;
+      error.errors = { message: "You are not authorized to delete this comment" };
+      return next(error);
+    }
+    await comment.remove();
+    return res.json(comment);
+  }
+  catch(err) {
+    next(err);
+  }
+});
+
+
 
 module.exports = router;

@@ -11,12 +11,18 @@ require('./models/User');
 require('./models/Skeleton');
 require('./models/Comment');
 require('./config/passport'); 
+require('./models/Like')
+require('./models/Bone')
+
 const passport = require('passport'); 
+
 
 const usersRouter = require('./routes/api/users'); // update the import file path
 const skeletonsRouter = require('./routes/api/skeletons'); // update the import file path
 const commentsRouter = require('./routes/api/comments'); // update the import file path
 const csrfRouter = require('./routes/api/csrf'); // update the import file path
+const likesRouter = require('./routes/api/likes'); // update the import file path
+const bonesRouter = require('./routes/api/bones'); // update the import file path
 
 const app = express();
 
@@ -52,7 +58,9 @@ app.use(
 
 app.use('/api/users', usersRouter); // update the path
 app.use('/api/skeletons', skeletonsRouter); // update the path
-app.use('/api/comments', commentsRouter); // update the path')
+app.use('/api/skeletons/:skeletonId/comments', commentsRouter); // update the path')
+app.use('/api/skeletons/:skeletonId/likes', likesRouter); // update the path
+app.use('/api/skeletons/:skeletonId/bones', bonesRouter); // update the path')
 app.use('/api/csrf', csrfRouter); // update the path
 
 // Express custom middleware for catching all unmatched requests and formatting

@@ -13,6 +13,7 @@ const likeSchema = Schema({
     ref: 'Skeleton',
     required: true
   }
+  
 }, {
   timestamps: true
 });
