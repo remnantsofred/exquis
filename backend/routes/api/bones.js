@@ -9,7 +9,8 @@ const validateBoneInput = require('../../validations/bones');
 
 
 
-router.post('/:skeletonId/bones', requireUser, validateBoneInput, async (req, res, next) => {
+// router.post('/:skeletonId/bones', requireUser, validateBoneInput, async (req, res, next) => {
+router.post('/',  async (req, res, next) => {
     try {
       const skeleton = await Skeleton.findById(req.params.skeletonId);
       if (!skeleton) {
@@ -38,7 +39,7 @@ router.post('/:skeletonId/bones', requireUser, validateBoneInput, async (req, re
     }
 });
   
-router.patch('/:skeletonId/bones/:id', requireUser, validateBoneInput, async (req, res, next) => {
+router.patch('/:id', requireUser, validateBoneInput, async (req, res, next) => {
     try {
       const skeleton = await Skeleton.findById(req.params.skeletonId);
       if (!skeleton) {
@@ -70,7 +71,7 @@ router.patch('/:skeletonId/bones/:id', requireUser, validateBoneInput, async (re
 });
 
 
-router.delete('/:skeletonId/bones/:id', requireUser, async (req, res, next) => {
+router.delete('/:id', requireUser, async (req, res, next) => {
 
     try {
       const skeleton = await Skeleton.findById(req.params.skeletonId);

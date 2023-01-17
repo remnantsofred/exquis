@@ -50,9 +50,9 @@ router.get('/:id', async (req, res, next) => {
 
 // Attach requireUser as a middleware before the route handler to gain access
 // to req.user. (requireUser will return an error response if there is no 
-// current user.) Also attach validateSkeletonInput as a middleware before the 
+// current user.) Also attach validateCommentInput as a middleware before the 
 // route handler.
-router.post('/', requireUser, validateSkeletonInput, validateCommentInput, async (req, res, next) => {
+router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
   try {
     const newComment = new Comment({
       parent: req.params.id,

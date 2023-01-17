@@ -62,8 +62,16 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
   try {
     const newSkeleton = new Skeleton({
-      text: req.body.text,
-      owner: req.user._id
+      owner: req.user._id,
+      title: req.body.title,
+      prompt: req.body.prompt,
+      maxBones: req.body.maxBones,
+      maxCollaborators: req.body.maxCollaborators,
+      collaborators: req.body.collaborators,
+      bones: [],
+      tags: [],
+      likes: [],
+      comments: []
     });
 
     let skeleton = await newSkeleton.save();
@@ -91,7 +99,19 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
       error.errors = { message: "You are not authorized to edit this skeleton" };
       return next(error);
     }
-    skeleton.text = req.body.text;
+
+      skeleton.owner = req.user._id,
+      skeleton.title = req.body.title,
+      skeleton.prompt = req.body.prompt,
+      skeleton.maxBones = req.body.maxBones,
+      skeleton.maxCollaborators = req.body.maxCollaborators,
+      skeleton.collaborators = req.body.collaborators,
+      skeleton.bones = req.body.bones,
+      skeleton.tags = req.body.tags,
+      skeleton.likes = req.body.likes,
+      skeleton.comments = req.body.comments
+    
+
     await skeleton.save();
     return res.json(skeleton);
   }
