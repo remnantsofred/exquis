@@ -1,3 +1,5 @@
+import './SkeletonTile.css'
+
 const SkeletonTile = ({skeletonInfo}) => {
   // const title = skeletonInfo.title
   // const author = skeletonInfo.author
@@ -18,14 +20,16 @@ const SkeletonTile = ({skeletonInfo}) => {
   const tags = ["lorem",  "ipsum", "dolor",  "sit", "amet", "consectetur", "adipiscing", "elit"]
   
   return (
-    <li>
+    <li className='skeleton-tile-object'>
       <div className="skeleton-tile-container">
           <div>
             <h1 className="title-author">{title} // {author}</h1>
             <h3 className="bone-counter">{currentBones} / {maxBones}</h3>
           </div>
-          <div className="skeleton-body-likes-container">
+          <div className="skeleton-body-container">
             <p className="skeleton-body">{skeletonBody}</p>
+          </div>
+          <div className="skeleton-likes-container">
             <p className="skeleton-like-count">{likes}</p>
           </div>
           <div className="skeleton-tags">

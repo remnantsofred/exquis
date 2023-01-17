@@ -1,12 +1,18 @@
 .main-page {
-  background-color: rgb(35, 51, 91);
   font-family: Inter, sans-serif;
-  color: white;
   align-items: center;
   display: flex;
+  padding-bottom: 2rem;
+  padding-left: 3vw;
+  padding-right: 3vw;
 }
 
-.body {
-  background-color: rgb(35, 51, 91);
-font-family: Inter, sans-serif;
+footer {
+  position: relative;
+  margin-top: 4rem;
+  height: 4rem;
+  width: 100%;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 0;
 }

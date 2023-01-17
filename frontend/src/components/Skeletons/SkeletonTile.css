@@ -1,0 +1,35 @@
+div.skeleton-tile-container {
+  width: 60vw;
+  height: 25vh;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  background-color: slategray;
+}
+
+li.skeleton-tile-object {
+  margin-top: 4vw;
+  margin-bottom: 4vw;
+}
+
+h1.title-author {
+  font-weight: 600;
+}
+
+.skeleton-body-container {
+  width: 50vw;
+}
+
+.skeleton-body-container > p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: -8.5vw;
+  display: -webkit-box;
+  /* margin-bottom: 3vw; */
+  -webkit-line-clamp: 2;
+    /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
