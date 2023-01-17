@@ -60,7 +60,7 @@ app.use('/api/users', usersRouter); // update the path
 app.use('/api/skeletons', skeletonsRouter); // update the path
 // app.use('/api/skeletons/:skeletonId/comments', commentsRouter); // update the path')
 app.use('/api/comments', commentsRouter); // update the path')
-app.use('/api/skeletons/:skeletonId/likes', likesRouter); // update the path
+app.use('/api/likes', likesRouter); // update the path
 // app.use('/api/skeletons/:skeletonId/bones', bonesRouter); // update the path')
 app.use('/api/bones', bonesRouter); // update the path')
 app.use('/api/csrf', csrfRouter); // update the path
