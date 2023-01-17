@@ -196,22 +196,3 @@
     cursor: pointer;
   }
 
-  ::-webkit-scrollbar {
-    margin-top: 4vh;
-    height: 3.5px;
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    margin-top: 4vh;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background-color: #bdbdbd;
-    margin: 0px 0;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: #2e33385b;
-  }

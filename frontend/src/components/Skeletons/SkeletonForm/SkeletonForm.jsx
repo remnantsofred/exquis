@@ -86,7 +86,13 @@ function SkeletonForm () {
             </h2>
           </span>
           <br/>
-          <input type="text"
+          {/* <input type="text"
+            value={prompt}
+            onChange={update('prompt')}
+            placeholder="Prompt"
+            className='skellie-input'
+          /> */}
+          <textarea
             value={prompt}
             onChange={update('prompt')}
             placeholder="Prompt"
