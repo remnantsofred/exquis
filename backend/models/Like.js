@@ -11,6 +11,7 @@ const likeSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'Skeleton'
   }
+  
 }, {
   timestamps: true
 });
