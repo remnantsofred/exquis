@@ -11,10 +11,35 @@ const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.json({
-    message: "GET /api/users"
-  });
+// router.get('/', function(req, res, next) {
+//   res.json({
+//     message: "GET /api/users"
+//   });
+// });
+
+// DL: in the future we might want to refactor get / users to this below. but it also returns hashed passwords
+router.get('/', async (req, res, next) => {
+  try {
+    const users = await User.find()
+                              .populate("skeletons", "_id, owner, title")
+                              .sort({ createdAt: -1 });
+    return res.json(users);
+  }
+  catch(err) {
+    return res.json([]);
+  }
+});
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+                              .populate("skeletons", "_id, owner, title")
+                              .sort({ createdAt: -1 });
+    return res.json(user);
+  }
+  catch(err) {
+    return res.json([]);
+  }
 });
 
 
@@ -93,4 +118,4 @@ router.get('/current', restoreUser, (req, res) => {
   });
 });
 
-module.exports = router;
+module.exports = router

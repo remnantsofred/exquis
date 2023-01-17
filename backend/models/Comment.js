@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const commentSchema = Schema({
   author: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   text: {
     type: String,
@@ -12,7 +13,8 @@ const commentSchema = Schema({
   },
   parent: {
     type: Schema.Types.ObjectId,
-    ref: 'Skeleton'
+    ref: 'Skeleton',
+    required: true
   }
 }, {
   timestamps: true
