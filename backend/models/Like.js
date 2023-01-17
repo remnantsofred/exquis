@@ -4,12 +4,14 @@ const Schema = mongoose.Schema;
 const likeSchema = Schema({
   liker: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
 
   skeleton: {
     type: Schema.Types.ObjectId,
-    ref: 'Skeleton'
+    ref: 'Skeleton',
+    required: true
   }
 }, {
   timestamps: true
