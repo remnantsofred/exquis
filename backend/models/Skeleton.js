@@ -21,14 +21,14 @@ const skeletonSchema = Schema({
   },
   title: {
     type: String,
-    // required: true
+    required: true
   }, 
   prompt: {
     type: String,
   },
   maxBones: {
     type: Number,
-    // required: true
+    required: true
   },
   maxCollaborators: {
     type: Number

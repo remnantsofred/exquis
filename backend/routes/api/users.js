@@ -30,6 +30,18 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+                              .populate("skeletons", "_id, owner, title")
+                              .sort({ createdAt: -1 });
+    return res.json(user);
+  }
+  catch(err) {
+    return res.json([]);
+  }
+});
+
 
 // POST /api/users/register
 router.post('/register', validateRegisterInput, async (req, res, next) => {

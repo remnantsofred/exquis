@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
   let parent;
   try {
     parent = await Skeleton.findById(req.params.skeletonId);
+    console.log(parent)
   }
 
   catch(err) {
@@ -23,6 +24,7 @@ router.get('/', async (req, res) => {
     return next(error); 
   }
   try {
+    console.log(Comment.find({ parent: skeleton }), "comment.find({ parent: skeleton })")
     const comments = await Comment.find({ parent: skeleton._id })
                                .sort({ createdAt: -1 })
                                .populate("author", "_id, username");
@@ -53,9 +55,14 @@ router.get('/:id', async (req, res, next) => {
 // current user.) Also attach validateCommentInput as a middleware before the 
 // route handler.
 router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
+  console.log(req.params.id, "params_id")
+  console.log(req.params.skeletonId, "params_skellie_id")
+  console.log(req.body.parent, "req_body_parent")
+  console.log(req.body.text, "req_body_text")
+  console.log(req.user._id, "req_user._id")
   try {
     const newComment = new Comment({
-      parent: req.params.id,
+      parent: req.body.parent,
       text: req.body.text,
       author: req.user._id
     });
