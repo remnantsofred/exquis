@@ -5,10 +5,10 @@ const SkeletonDisplay = ({ user }) => {
 
   // const skellies = user.followedSkeletons 
   return (
-    <ul>
+    <ul className='skeleton-grid'>
       {skellies.map((skellie) => <SkeletonTile component={skellie} />)}
     </ul>
   )
 }
 
-export default SkeletonDisplay
+export default SkeletonDisplay;

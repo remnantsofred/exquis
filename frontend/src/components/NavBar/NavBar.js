@@ -1,5 +1,12 @@
+// functions
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
+// assets
+import ExquisLogo from '../../assets/main-nav-bar/exquisLogo.png'
+import ExquisIcon from '../../assets/main-nav-bar/exquisIcon.png'
+
+// misc/css
 import './NavBar.css';
 import { logout } from '../../store/session';
 
@@ -34,7 +41,11 @@ function NavBar () {
 
   return (
     <>
-      <h1>Exquis</h1>
+      <div class="nav-logo">
+      <img src={ExquisIcon} id="nav-icon" />
+      <img src={ExquisLogo} id="nav-logo" />     
+      </div>
+ 
       { getLinks() }
     </>
   );
