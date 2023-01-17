@@ -1,0 +1,7 @@
+.main-page {
+  background-color: rgb(35, 51, 91);
+  font-family: Arial, sans-serif;
+  color: white;
+  align-items: center;
+  display: flex;
+}

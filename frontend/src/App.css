@@ -1,0 +1,12 @@
+.main-page {
+  background-color: rgb(35, 51, 91);
+  font-family: Inter, sans-serif;
+  color: white;
+  align-items: center;
+  display: flex;
+}
+
+.body {
+  background-color: rgb(35, 51, 91);
+font-family: Inter, sans-serif;
+}
