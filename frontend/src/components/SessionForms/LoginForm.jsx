@@ -27,32 +27,49 @@ function LoginForm () {
   }
 
   return (
-    <form className="session-form" onSubmit={handleSubmit}>
-      <h2>Log In Form</h2>
-      <div className="errors">{errors?.email}</div>
-      <label>
-        <span>Email</span>
-        <input type="text"
-          value={email}
-          onChange={update('email')}
-          placeholder="Email"
+    <div className='form-container'>
+      <form className="session-form" onSubmit={handleSubmit}>
+        <h2 className='form-title'>Log In</h2>
+        <div className="errors">{errors?.email}</div>
+        <label>
+          <span className='session-label'>
+            <h2 className='session-label-text'>            
+              Email:
+            </h2>
+          </span>
+          <br />
+          <input type="text"
+            value={email}
+            onChange={update('email')}
+            placeholder="Email"
+            className='session-input'
+          />
+        </label>
+        <div className="errors">{errors?.password}</div>
+        <label>
+          <span className='session-label'>
+            <h2 className='session-label-text'>            
+              Password:
+            </h2>
+          </span>
+          <br />
+          <input type="password"
+            value={password}
+            onChange={update('password')}
+            placeholder="Password"
+            className='session-input'
+          />
+        </label>
+        <br />
+        <input
+          className='session-form-submit-button'
+          type="submit"
+          value="Log In"
+          disabled={!email || !password}
         />
-      </label>
-      <div className="errors">{errors?.password}</div>
-      <label>
-        <span>Password</span>
-        <input type="password"
-          value={password}
-          onChange={update('password')}
-          placeholder="Password"
-        />
-      </label>
-      <input
-        type="submit"
-        value="Log In"
-        disabled={!email || !password}
-      />
-    </form>
+      </form>
+      
+    </div>
   );
 }
 
