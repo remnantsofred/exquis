@@ -7,7 +7,7 @@ const IndexSkeletonDisplay = ({ skelliesProps }) => {
   // all skeletons? 
   // const skellies = user.followedSkeletons 
   return (
-    <ul className='skeleton-grid'>
+    <ul className='index-skeleton-grid'>
       {skellies.map((skellie) => <IndexSkeletonTile component={skellie} />)}
     </ul>
   )

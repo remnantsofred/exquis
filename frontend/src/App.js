@@ -13,6 +13,7 @@ import { getCurrentUser } from './store/session';
 
 import "./App.css"
 import SkeletonIndex from './components/Skeletons/SkeletonIndex/SkeletonIndex.jsx';
+import SkeletonForm from './components/Skeletons/SkeletonForm/SkeletonForm.jsx';
 
 
 
@@ -33,7 +34,7 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute exact path="/profile" />
-        <ProtectedRoute exact path="/skeletons/new" />
+        <ProtectedRoute exact path="/skeletons/new" component={SkeletonForm} />
       </Switch>
       <Footer />
     </>

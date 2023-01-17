@@ -16,11 +16,6 @@
     transition: .5s;
   }
 
-  li.skeleton-tile-object {
-    margin-top: 4vw;
-    margin-bottom: 4vw;
-  }
-
   div.index-tile-top-container {
     justify-content: space-between;
     display: flexbox;
@@ -160,8 +155,14 @@
   } 
 
   div.index-skeleton-tags-container {
-    width: 30vw;
+    width: 27vw;
+    height: 5vh;
     margin-bottom: 3vh;
+    background-color: white;
+    padding-top: 2vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    border-radius: 25px;
   }
 
   ul.index-skeleton-tags {
@@ -169,9 +170,8 @@
     align-items: row;
     height: 4vh;
     overflow: auto;
-    display: -webkit-box;
-    width: 30vw;
-    /* margin-bottom: 2vh; */
+    width: 27vw;
+    margin-bottom: 1vh;
   }
 
   ul.index-skeleton-tags ~ li {
@@ -197,11 +197,13 @@
   }
 
   ::-webkit-scrollbar {
+    margin-top: 4vh;
     height: 3.5px;
     width: 8px;
   }
 
   ::-webkit-scrollbar-track {
+    margin-top: 4vh;
     -webkit-border-radius: 10px;
     border-radius: 10px;
     background-color: #bdbdbd;
