@@ -19,7 +19,7 @@ const userSchema = Schema({
     ref: 'Skeleton'
   }],
   comments: [{
-    type: Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId, 
     ref: 'Comment'
   }],
   likes: [{

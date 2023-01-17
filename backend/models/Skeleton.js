@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
 const BoneSchema = new Schema({
   author: {
     type: Schema.Types.ObjectId,
@@ -49,7 +50,7 @@ const skeletonSchema = Schema({
     ref: 'Tag'
   }],
   likes: [{ 
-    type: Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId, 
     ref: 'Like'
   }],
   comments: [{
