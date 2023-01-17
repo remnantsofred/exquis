@@ -9,12 +9,25 @@ const validateSkeletonInput = require('../../validations/skeletons'); // add ske
 const validateBoneInput = require('../../validations/bones');  // add bone validations
 const validateCommentInput = require('../../validations/comments');
 
-
 router.get('/', async (req, res) => {
+  try {
+    const comments = await Comment.find()
+                              .populate("author", "_id, username")
+                              .sort({ createdAt: -1 });
+    return res.json(comments);
+  }
+  catch(err) {
+    return res.json([]);
+  }
+})
+
+
+router.get('/skeletons/:skeletonId', async (req, res) => {
   let parent;
   try {
     parent = await Skeleton.findById(req.params.skeletonId);
     console.log(parent)
+    console.log(req.params)
   }
 
   catch(err) {
@@ -54,15 +67,34 @@ router.get('/:id', async (req, res, next) => {
 // to req.user. (requireUser will return an error response if there is no 
 // current user.) Also attach validateCommentInput as a middleware before the 
 // route handler.
-router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
-  console.log(req.params.id, "params_id")
-  console.log(req.params.skeletonId, "params_skellie_id")
-  console.log(req.body.parent, "req_body_parent")
-  console.log(req.body.text, "req_body_text")
-  console.log(req.user._id, "req_user._id")
+// Note: old way
+// router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
+//   console.log(req.params.id, "params_id")
+//   console.log(req.params.skeletonId, "params_skellie_id")
+//   console.log(req.body.parent, "req_body_parent")
+//   console.log(req.body.text, "req_body_text")
+//   console.log(req.user._id, "req_user._id")
+//   try {
+//     const newComment = new Comment({
+//       parent: req.body.parent,
+//       text: req.body.text,
+//       author: req.user._id
+//     });
+
+//     let comment = await newComment.save();
+//     comment = await comment.populate('author', '_id, username');
+//     return res.json(comment);
+//   }
+//   catch(err) {
+//     next(err);
+//   }
+// });
+
+
+router.post('/skeletons/:skeletonId', requireUser, validateCommentInput, async (req, res, next) => {
   try {
     const newComment = new Comment({
-      parent: req.body.parent,
+      parent: req.params.skeletonId,
       text: req.body.text,
       author: req.user._id
     });

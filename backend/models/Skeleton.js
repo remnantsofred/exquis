@@ -9,6 +9,11 @@ const BoneSchema = new Schema({
   body: {
     type: String
   },
+  skeleton: {
+    type: Schema.Types.ObjectId,
+    ref: 'Skeleton',
+    // required: true
+  },
 }, {
   timestamps: true
 });
