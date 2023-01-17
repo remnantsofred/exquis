@@ -1,3 +1,4 @@
+
 .nav-logo-container, #nav-icon, #nav-logo {
   width: 3.5vw;
 }
@@ -13,11 +14,13 @@ div.center, div.right {
   margin-top: 1vw;
 }
 
+
 .nav-logo-container {
   padding: .25vw;
   padding-left: .75vw;
   margin-left: 0;
 }
+
 
 .nav-logo-container:hover {
   padding: .25vw;

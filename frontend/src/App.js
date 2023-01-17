@@ -12,8 +12,10 @@ import SignupForm from './components/SessionForms/SignupForm.jsx';
 import { getCurrentUser } from './store/session';
 
 import "./App.css"
+
 import SkeletonIndex from './components/Skeletons/SkeletonIndex/SkeletonIndex.jsx';
 import SkeletonForm from './components/Skeletons/SkeletonForm/SkeletonForm.jsx';
+
 
 
 

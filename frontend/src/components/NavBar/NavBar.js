@@ -36,6 +36,7 @@ function NavBar () {
           <Link to={'/profile'} id="profile-link">Profile</Link>
           <Link to={'/skeletons/new'} id="skeleton-form-link">New Skeleton</Link>
           <Link onClick={logoutUser} id="logout-button">Logout</Link>
+
         </div>
       );
     } else {
