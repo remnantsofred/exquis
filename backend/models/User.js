@@ -13,7 +13,19 @@ const userSchema = Schema({
   hashedPassword: {
     type: String,
     required: true
-  }
+  }, 
+  skeletons: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Skeleton'
+  }],
+  comments: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Comment'
+  }],
+  likes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Like'
+  }],
 }, {
   timestamps: true
 });
