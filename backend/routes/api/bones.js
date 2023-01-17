@@ -9,7 +9,9 @@ const validateBoneInput = require('../../validations/bones');
 
 
 
-router.post('/:skeletonId/bones', requireUser, validateBoneInput, async (req, res, next) => {
+// router.post('/:skeletonId/bones', requireUser, validateBoneInput, async (req, res, next) => {
+router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req, res, next) => {
+  console.log(req.params, "req.params")
     try {
       const skeleton = await Skeleton.findById(req.params.skeletonId);
       if (!skeleton) {
@@ -18,15 +20,17 @@ router.post('/:skeletonId/bones', requireUser, validateBoneInput, async (req, re
         error.errors = { message: "No skeleton found with that id" };
         return next(error);
       }
-      if (skeleton.currentEditor._id.toString() !== req.user._id.toString()) {
-        const error = new Error('Unauthorized');
-        error.statusCode = 401;
-        error.errors = { message: "You are not authorized to add bones to this skeleton" };
-        return next(error);
-      }
+      // if (skeleton.currentEditor._id.toString() !== req.user._id.toString()) {
+      //   const error = new Error('Unauthorized');
+      //   error.statusCode = 401;
+      //   error.errors = { message: "You are not authorized to add bones to this skeleton" };
+      //   return next(error);
+      // }
+      console.log(skeleton, "skeleton")
       const newBone = new Bone({
         text: req.body.text,
-        skeleton: skeleton._id
+        skeleton: skeleton._id,
+        author: req.user._id
       });
       
       let bone = await newBone.save();
@@ -38,7 +42,38 @@ router.post('/:skeletonId/bones', requireUser, validateBoneInput, async (req, re
     }
 });
   
-router.patch('/:skeletonId/bones/:id', requireUser, validateBoneInput, async (req, res, next) => {
+// router.patch('/:id', requireUser, validateBoneInput, async (req, res, next) => {
+//     try {
+//       const skeleton = await Skeleton.findById(req.params.skeletonId);
+//       if (!skeleton) {
+//         const error = new Error('Skeleton not found');
+//         error.statusCode = 404;
+//         error.errors = { message: "No skeleton found with that id" };
+//         return next(error);
+//       }
+//       if (skeleton.owner.toString() !== req.user._id.toString()) {
+//         const error = new Error('Unauthorized');
+//         error.statusCode = 401;
+//         error.errors = { message: "You are not authorized to edit bones on this skeleton" };
+//         return next(error);
+//       }
+//       const bone = await Bone.findById(req.params.id);
+//       if (!bone) {  
+//         const error = new Error('Bone not found');  
+//         error.statusCode = 404;
+//         error.errors = { message: "No bone found with that id" };
+//         return next(error);
+//       }
+//       bone.text = req.body.text;
+//       await bone.save();
+//       return res.json(bone);
+//     }
+//     catch(err) {
+//       next(err);
+//     }
+// });
+
+router.patch('/skeletons/:skeletonId/:id', requireUser, validateBoneInput, async (req, res, next) => {
     try {
       const skeleton = await Skeleton.findById(req.params.skeletonId);
       if (!skeleton) {
@@ -61,6 +96,7 @@ router.patch('/:skeletonId/bones/:id', requireUser, validateBoneInput, async (re
         return next(error);
       }
       bone.text = req.body.text;
+
       await bone.save();
       return res.json(bone);
     }
@@ -70,7 +106,7 @@ router.patch('/:skeletonId/bones/:id', requireUser, validateBoneInput, async (re
 });
 
 
-router.delete('/:skeletonId/bones/:id', requireUser, async (req, res, next) => {
+router.delete('/skeletons/:skeletonId/:id', requireUser, async (req, res, next) => {
 
     try {
       const skeleton = await Skeleton.findById(req.params.skeletonId);

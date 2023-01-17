@@ -4,10 +4,15 @@ const BoneSchema = new Schema({
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    // required: true
   },
   body: {
     type: String
+  },
+  skeleton: {
+    type: Schema.Types.ObjectId,
+    ref: 'Skeleton',
+    // required: true
   },
 }, {
   timestamps: true
@@ -30,7 +35,7 @@ const skeletonSchema = Schema({
     type: Number,
     required: true
   },
-  maxCollabrators: {
+  maxCollaborators: {
     type: Number
   },
   collaborators: [{
@@ -38,6 +43,7 @@ const skeletonSchema = Schema({
     ref: 'User'
   }], 
   bones: [BoneSchema],
+
   tags: [{
     type: Schema.Types.ObjectId,
     ref: 'Tag'
