@@ -1,3 +1,6 @@
+import DownvoteButton from "../../DownvoteButton"
+import UpvoteButton from "../../UpvoteButton"
+import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
 import "./SkeletonShow.css"
 const SkeletonShow = ({ Skellie }) => {
   const title = Skellie.title
@@ -9,6 +12,7 @@ const SkeletonShow = ({ Skellie }) => {
   const maxCollaborators = Skellie.maxCollaborators
   const tags = Skellie.tags
   const likes = Skellie.likes
+  const currentCollaborator = CurrentCollaboratorFxn(Skellie)
 
   return (
     <>
@@ -22,6 +26,7 @@ const SkeletonShow = ({ Skellie }) => {
           <p id="skeleton-body">
             {body}
           </p>
+          <input />
         </div>
         <div class="collaborator-panel">
           <ul>
@@ -30,7 +35,11 @@ const SkeletonShow = ({ Skellie }) => {
         </div>
       </div>
       <div class="show-bottom">
-
+          <div class="horizontal-skeleton-likes-container">
+            <DownvoteButton />
+              {likes}
+            <UpvoteButton />
+          </div>
       </div>
       <div class="comments-section">
         
