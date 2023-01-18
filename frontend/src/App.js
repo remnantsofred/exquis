@@ -9,6 +9,7 @@ import MainPage from './components/MainPage/MainPage.js';
 import LoginForm from './components/SessionForms/LoginForm.jsx';
 import SignupForm from './components/SessionForms/SignupForm.jsx';
 import ProfilePage from './components/ProfilePage/ProfilePage/ProfilePage'
+import TempUsersIndex from './components/ProfilePage/ProfilePage/TempUsersIndex'
 
 import { getCurrentUser } from './store/session';
 
@@ -38,7 +39,8 @@ function App() {
 
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
-        <ProtectedRoute exact path="/profile/:userId" component={ProfilePage} />
+        <Route exact path="/users/:userId" component={ProfilePage} />
+        <Route exact path="/temp" component={TempUsersIndex}/>
       </Switch>
       <Footer />
     </>
