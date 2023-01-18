@@ -10,18 +10,6 @@ const validateBoneInput = require('../../validations/bones');
 const handleValidationErrors = require('../../validations/handleValidationErrors');
 
 
-router.get('/', async (req, res) => {
-  try {
-    const skeletons = await Skeleton.find()
-                              .populate("owner", "_id, username")
-                              .sort({ createdAt: -1 });
-    return res.json(skeletons);
-  }
-  catch(err) {
-    return res.json([]);
-  }
-});
-
 router.get('/user/:userId', async (req, res, next) => {
   let user;
   try {
@@ -46,6 +34,7 @@ router.get('/user/:userId', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
+    console.log("inside backend skeleton get route")
     const skeleton = await Skeleton.findById(req.params.id)
                              .populate("owner", "id, username");
     return res.json(skeleton);
@@ -62,31 +51,6 @@ router.get('/:id', async (req, res, next) => {
 // to req.user. (requireUser will return an error response if there is no 
 // current user.) Also attach validateSkeletonInput as a middleware before the 
 // route handler.
-router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
-    console.log("hit backend skeleton post route")
-  try {
-    const newSkeleton = new Skeleton({
-      owner: req.user._id,
-      title: req.body.title,
-      prompt: req.body.prompt,
-      maxBones: req.body.maxBones,
-      maxCollaborators: req.body.maxCollaborators,
-      collaborators: req.body.collaborators,
-      bones: [],
-      tags: [],
-      likes: [],
-      comments: []
-    });
-
-    let skeleton = await newSkeleton.save();
-    skeleton = await skeleton.populate('owner', '_id, username');
-    return res.json(skeleton);
-  }
-  catch(err) {
-    next(err);
-  }
-});
-
 
 router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) => {
   try {
@@ -146,6 +110,45 @@ router.delete('/:id', requireUser, async (req, res, next) => {
   }
   catch(err) {
     next(err);
+  }
+});
+
+router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
+  console.log("hit backend skeleton post route")
+try {
+  const newSkeleton = new Skeleton({
+    owner: req.user._id,
+    title: req.body.title,
+    prompt: req.body.prompt,
+    maxBones: req.body.maxBones,
+    maxCollaborators: req.body.maxCollaborators,
+    collaborators: req.body.collaborators,
+    bones: [],
+    tags: [],
+    likes: [],
+    comments: []
+  });
+
+  let skeleton = await newSkeleton.save();
+  skeleton = await skeleton.populate('owner', '_id, username');
+  return res.json(skeleton);
+}
+catch(err) {
+  next(err);
+}
+});
+
+
+
+router.get('/', async (req, res) => {
+  try {
+    const skeletons = await Skeleton.find()
+                              .populate("owner", "_id, username")
+                              .sort({ createdAt: -1 });
+    return res.json(skeletons);
+  }
+  catch(err) {
+    return res.json([]);
   }
 });
 

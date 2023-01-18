@@ -15,7 +15,7 @@ const SkeletonShow = () => {
   const { skeletonId } = useParams()
   const skeleton = useSelector(getSkeleton(skeletonId))
 
-  console.log(skeletonId)
+  console.log("components skeletonId:", skeletonId)
 
   useEffect(() => {
     Promise.all([
@@ -27,10 +27,10 @@ const SkeletonShow = () => {
 
   // useEffect(() => {
   //   dispatch(fetchSkeleton(skeletonId))
+  //   console.log("dispatched fetchSkeleton")
   // }, [dispatch, skeletonId])
 
-  console.log('hey look listen! skellie here')
-  console.log(skeleton)
+  
 
   // const title = Skellie.title
   // const body = Skellie.body
