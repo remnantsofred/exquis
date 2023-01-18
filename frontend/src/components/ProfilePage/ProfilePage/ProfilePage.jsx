@@ -62,8 +62,8 @@ const ProfilePage = () => {
 
 
           <div className='username-block'>
-            <h1>
-              USERNAME!!!
+            <h1 id="username">
+              {user.username}
             </h1>
           </div>
 
