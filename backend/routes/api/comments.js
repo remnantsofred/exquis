@@ -60,7 +60,10 @@ router.get('/skeletons/:skeletonId', async (req, res) => {
 });
 
 
-router.post('/skeletons/:skeletonId', requireUser, validateCommentInput, async (req, res, next) => {
+// router.post('/skeletons/:skeletonId', requireUser, validateCommentInput, async (req, res, next) => {
+router.post('/skeletons/:skeletonId', validateCommentInput, requireUser, async (req, res, next) => {
+  console.log("req.params: ", req.params)
+  console.log("req.body: ", req.body)
   try {
     const newComment = new Comment({
       parent: req.params.skeletonId,
@@ -68,6 +71,8 @@ router.post('/skeletons/:skeletonId', requireUser, validateCommentInput, async (
       author: req.user._id
     });
 
+    console.log("req.body.text: ", req.body.text)
+    console.log("newComment: ", newComment)
     let comment = await newComment.save();
     comment = await comment.populate('author', '_id, username');
     return res.json(comment);

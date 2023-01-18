@@ -31,7 +31,7 @@ const SkeletonShow = () => {
   
   const handlePost = (e) => {
     e.preventDefault();
-    const newComment = {comment: {authorId: author._id, text: comment, skellieId: skellie._id}}
+    const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
 
     dispatch(createComment(newComment, skeletonId));
     e.target.value = "";
