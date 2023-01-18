@@ -37,7 +37,7 @@ div.collaborator-panel {
 }
 
 div.collaborator-panel-text {
-  width: 20vw;
+  width: 18vw;
   align-self: center;
   align-items: center;
   align-content: center;
@@ -195,5 +195,10 @@ textarea#current-collab-input {
 div.horizontal-skeleton-likes-container {
   display: flex;
   flex-direction: row;
+  vertical-align: middle;
+  background-color: antiquewhite;
+  text-align: center;
+  align-items: center;
+  align-content: center;
 }
 
