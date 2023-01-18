@@ -55,6 +55,7 @@ export const getSkeletons = (store) => {
 }; 
 
 export const getSkeleton = (skeletonId) => (store) => {
+<<<<<<< HEAD
   // TODO - 01-17-2023 - fix store skeletons -only returns one specific one
   // if (store.skeletons && store.skeletons[skeletonId]) {
   if (store.skeletons) {
@@ -62,21 +63,34 @@ export const getSkeleton = (skeletonId) => (store) => {
   } else {
     return null;
 }};
+=======
+  if (store.skeletons && store.skeletons[skeletonId]) return store.skeletons[skeletonId];
+  return null;
+};
+>>>>>>> main
 
 // THUNK ACTION CREATORS
 
-export const fetchSkeletons = () => async dispatch => {
-  try {
-      const res = await jwtFetch('/api/skeletons');
-      const skeletons = await res.json();
-      dispatch(receiveSkeletons(skeletons));
-  } catch (err) {
-      const resBody = await err.json();
-      if (resBody.statusCode === 400) {
-      dispatch(receiveErrors(resBody.errors));
-      }
+// export const fetchSkeletons = () => async dispatch => {
+//   try {
+//       const res = await jwtFetch('/api/skeletons');
+//       const skeletons = await res.json();
+//       dispatch(receiveSkeletons(skeletons));
+//   } catch (err) {
+//       const resBody = await err.json();
+//       if (resBody.statusCode === 400) {
+//       dispatch(receiveErrors(resBody.errors));
+//       }
+//   }
+// }
+export const fetchSkeletons = () => async (dispatch) => {
+  const res = await fetch('/api/skeletons');
+  if (res.ok) {
+    const skeletons = await res.json();
+    dispatch(receiveSkeletons(skeletons));
+    return Promise.resolve();
   }
-}
+};
 
 export const fetchUserSkeletons = userId => async dispatch => {
   try {
@@ -91,18 +105,27 @@ export const fetchUserSkeletons = userId => async dispatch => {
   }
 }
 
-export const fetchSkeleton = skeletonId => async dispatch => {
-  try {
-      const res = await jwtFetch(`/api/skeletons/${skeletonId}`);
-      const skeleton = await res.json();
-      dispatch(receiveSkeleton(skeleton));
-  } catch (err) {
-      const resBody = await err.json();
-      if (resBody.statusCode === 400) {
-      dispatch(receiveErrors(resBody.errors));
-      }
+export const fetchSkeleton = (skeletonId) => async (dispatch) => {
+  const res = await fetch(`/api/skeletons/${skeletonId}`);
+  if (res.ok) {
+    const skeleton = await res.json();
+    dispatch(receiveSkeleton(skeleton));
+    return Promise.resolve();
   }
 }
+
+// export const fetchSkeleton = skeletonId => async dispatch => {
+//   try {
+//       const res = await jwtFetch(`/api/skeletons/${skeletonId}`);
+//       const skeleton = await res.json();
+//       dispatch(receiveSkeleton(skeleton));
+//   } catch (err) {
+//       const resBody = await err.json();
+//       if (resBody.statusCode === 400) {
+//       dispatch(receiveErrors(resBody.errors));
+//       }
+//   }
+// }
 
 export const createSkeleton = data => async dispatch => {
   console.log("data", data)
@@ -176,7 +199,7 @@ const skeletonsReducer = (state = {}, action) => {
     case RECEIVE_SKELETONS:
       return {...newState, ...action.skeletons};
     case RECEIVE_SKELETON:
-      return { ...newState, [action.skeleton.id]: action.skeleton };
+      return { ...newState, [action.skeleton._id]: action.skeleton };
     case REMOVE_SKELETON:
       delete newState[action.skeletonId];
       return newState;
