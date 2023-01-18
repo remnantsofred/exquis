@@ -47,7 +47,7 @@ const SkeletonShow = () => {
   // TODO 01/18/2023 - add length constraint on prompt
 
   // const currentCollaborator = CurrentCollaboratorFxn(skellie)
-
+  const currentCollaborator = 'nathan, the wondrous'
   // const collaborators = collaboratorIds.map(collaboratorId => store)
   if (!loaded) {
     return (
@@ -68,11 +68,16 @@ const SkeletonShow = () => {
         </div>
         <div class="show-middle">
           {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
-          <div>
+          <div className="skeleton-body-input-container">
             <div id="skeleton-body">
               {bones}
             </div>
-            <input />
+            <div class="user-input-div">
+              <hr id="body-input-divider" />
+              <div id="current-writer-note" ><span>It is</span><span id="current-writer-username">{`${currentCollaborator}`}'s</span><span>turn.</span></div>
+              {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
+              <textarea id="current-collab-input" />
+            </div>
           </div>
           <div class="collaborator-panel">
             <ul>

@@ -38,7 +38,7 @@ function PlaceBones (bones) {
 
   for (var i = 0; i < bonesLength; i ++) {
     resetPNum();
-    let sentence = <p style={{color: `${palette[pNum]}`}}>{bones[i]}</p> 
+    let sentence = <span style={{color: `${palette[pNum]}`}}>{bones[i]} </span> 
     body.push(sentence)
     pNum++
   }
