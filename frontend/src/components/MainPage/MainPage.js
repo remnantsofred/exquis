@@ -38,12 +38,12 @@ function MainPage () {
   return (
     <>
       <div className='main-page'>
-        <div class="goofy-greeting-container">
+        <div className="goofy-greeting-container">
           <h1 id="goofy-greeting">{randomGreeting()}</h1>
         </div>
         <hr />
 
-        <div class="main-content">
+        <div className="main-content">
 
           <GenSkeletonDisplay />
 
