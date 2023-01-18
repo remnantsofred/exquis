@@ -104,7 +104,8 @@ router.get('/:id', async (req, res, next) => {
 router.get('/', async (req, res) => {
   try {
     const users = await User.find()
-                            .populate("_id, username, skeletons, likes, comments")
+                            .populate("username", "_id, skeletons, likes, comments")
+                            .sort({ createdAt: -1})
     return res.json(users);
   }
   catch(err) {

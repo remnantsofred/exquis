@@ -39,6 +39,8 @@ function App() {
 
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
+        <ProtectedRoute exact path="/profile/:userId" component={ProfilePage} />
+
         <Route exact path="/users/:userId" component={ProfilePage} />
         <Route exact path="/temp" component={TempUsersIndex}/>
       </Switch>
