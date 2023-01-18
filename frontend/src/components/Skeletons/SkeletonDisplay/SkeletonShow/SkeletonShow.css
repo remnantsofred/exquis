@@ -1,4 +1,51 @@
 div.skellie-main-container {
+  display: flex;
+  flex-direction: column;
+  font-family: Inter, sans-serif;
+}
+div.show-top {
+  margin-left: 4vw;
+  width: 55vw;
+  height: min-content;
+  padding-left: 4vw;
+  padding-right: 4vw;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+  background-color: rgba(188, 208, 228, 0.436);
+  display: flexbox;
+  border-radius: 25px;
+  transition: .5s;
+}
+
+h1#skeleton-title {
+  font-size: 2vw;
+  font-weight: 600;
+}
+
+div.sub-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h3#skeleton-owner {
+  font-size: 1.5vw;
+}
+
+h3#skeleton-prompt {
+  font-size: 1vw;
+  font-style: italic;
+  width: 45vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+div.show-middle {
   margin-left: 4vw;
   width: 65vw;
   height: max-content;
@@ -11,4 +58,19 @@ div.skellie-main-container {
   display: flexbox;
   border-radius: 25px;
   transition: .5s;
+}
+
+div.collaborator-panel {
+    margin-left: 4vw;
+    width: 65vw;
+    height: max-content;
+    min-height: 60vh;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+    background-color: rgba(188, 208, 228, 0.436);
+    display: flexbox;
+    border-radius: 25px;
+    transition: .5s;
 }

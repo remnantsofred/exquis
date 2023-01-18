@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getSkeleton, fetchSkeleton, updateSkeleton } from '../../../../store/skeletons'
 // import { getUser, fetchUser } from '../../../../store/'
-import { useState } from "react"
+
+import PlaceBones from "./PlaceBones"
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
@@ -15,6 +16,19 @@ const SkeletonShow = () => {
 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
+
+  const tempBones = [
+    "As she sat watching the world go by, something caught her eye.",
+    "It wasn't so much its color or shape, but the way it was moving.",
+    "She squinted to see if she could better understand what it was and where it was going, but it didn't help.",
+    "As she continued to stare into the distance, she didn't understand why this uneasiness was building inside her body.", 
+    "She felt like she should get up and run.",
+    "If only she could make out what it was.",
+    "At that moment, she comprehended what it was and where it was heading, and she knew her life would never be the same."
+  ]
+
+  console.log(tempBones)
+  const bones = PlaceBones(tempBones)
 
   // const userById = (userId) => {
   //   const user = useSelector(getUser(userId))
@@ -30,26 +44,11 @@ const SkeletonShow = () => {
     })
   }, [dispatch, skeletonId])
 
-  // useEffect(() => {
-  //   dispatch(fetchSkeleton(skeletonId))
-  // }, [dispatch, skeletonId])
+  // TODO 01/18/2023 - add length constraint on prompt
 
-  console.log('hey look listen! skellie here')
-  console.log(skellie)
-
-  const title = skellie.title
-  const body = skellie.body
-  const skellieOwner = skellie.owner
-  const prompt = skellie.prompt
-  const maxBones = skellie.maxBones
-  const collaboratorIds = skellie.collaborators
-  const maxCollaborators = skellie.maxCollaborators
-  const tags = skellie.tags
-  const likes = skellie.likes
   // const currentCollaborator = CurrentCollaboratorFxn(skellie)
 
   // const collaborators = collaboratorIds.map(collaboratorId => store)
-  const collaborators = [1, 2, 3, 4]
   if (!loaded) {
     return (
       null
@@ -59,40 +58,45 @@ const SkeletonShow = () => {
     <>
     <div class="skellie-main-container">
         <div class="show-top">
-          <h1 id="skeleton-title">{title}</h1>
-          <h3 id="skeleton-owner">{skellieOwner}</h3>
-          <h3 id="skeleton-prompt">{prompt}</h3>
+          <h1 id="skeleton-title">{skellie.title}</h1>
+          <hr />
+          <div className="sub-title">
+            <h3 id="skeleton-owner">{skellie.owner.username}</h3>
+            <h3 id="skeleton-prompt">"{skellie.prompt}"</h3>
+          </div>
+          <hr />
         </div>
         <div class="show-middle">
           {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
           <div>
-            <p id="skeleton-body">
-              {body}
-            </p>
+            <div id="skeleton-body">
+              {bones}
+            </div>
             <input />
           </div>
           <div class="collaborator-panel">
             <ul>
-              {collaborators.map(collaborator => <li>{"steve the placeholder"}</li>)}
+
             </ul>
           </div>
         </div>
         <div class="show-bottom">
             <div class="horizontal-skeleton-likes-container">
               <DownvoteButton />
-                {likes}
+                <h1>{skellie.likes}</h1>
               <UpvoteButton />
             </div>
         </div>
       </div>
-        <div class="comments-section">
-          
-        </div>
         
+      <div class="comments-section">
+          
+      </div>
 
     </>
   )
 }
 
 export default SkeletonShow;
+
 
