@@ -54,14 +54,14 @@ function NavBar () {
       <div className='nav-bar-container'>
         <div className='left'>
           <NavLink to="/">
-            <div class="nav-logo-container">
+            <div className="nav-logo-container">
               <img src={ExquisIcon} id="nav-icon" />
               <img src={ExquisLogo} id="nav-logo" />     
             </div>
           </NavLink>
         </div>
         <div className='center'>
-            <div class="search-bar-container">
+            <div className="search-bar-container">
             <input type="text" className="search-bar" id="search-bar-input" placeholder="Search a new story here..." />
             <SearchButton className="search-bar" id="search-bar-button" />
           </div>

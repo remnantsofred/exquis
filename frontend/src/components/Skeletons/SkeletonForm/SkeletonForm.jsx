@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './SkeletonForm.css';
+import { createSkeleton } from '../../../store/skeletons';
 
 function SkeletonForm () {
   const [title, setTitle] = useState('');
@@ -53,11 +54,10 @@ function SkeletonForm () {
       title,
       prompt,
       maxBones,
-      maxCollaborators,
-      tags
+      maxCollaborators
     };
 
-    // dispatch(create());
+    dispatch(createSkeleton(skeleton));
 
   }
 
