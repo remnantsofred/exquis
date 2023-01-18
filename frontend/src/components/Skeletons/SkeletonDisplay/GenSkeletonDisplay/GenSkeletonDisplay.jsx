@@ -8,7 +8,7 @@ const GenSkeletonDisplay = ({ skelliesProps }) => {
   // const skellies = user.followedSkeletons 
   return (
     <ul className='skeleton-grid'>
-      {skellies.map((skellie) => <GenSkeletonTile component={skellie} />)}
+      {skellies.map((skellie) => <GenSkeletonTile component={skellie} key={skellie.id} />)}
     </ul>
   )
 }

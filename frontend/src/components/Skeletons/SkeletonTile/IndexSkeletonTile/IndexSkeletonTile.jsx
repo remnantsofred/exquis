@@ -16,17 +16,13 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
   // const likes = skeletonInfo.likes
   // const tags = skeletonInfo.tags
 
-  const title = "Lorem Ipsum Kitty I love Cats"
-  console.log(skeletonInfo.title)
-  const author = "Skellie Crew"
   const collaborators = ["natty", "daphne", "andrea"]
-  const maxBones = 20
-  const currentBones = 4 // length of bones attribute
   const skeletonBody = "A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information Pepsi-Cola."
   const likes = 20
-  const tags = ["lorem",  "ipsum", "dolor",  "sit", "amet", "consectetur", "adipiscing", "elit"]
+  const tags = ["happy",  "nature", "scary",  "romance", "thriller", "mystery", "fantasy", "sci-fi"]
   // console.log(tags)
-  
+  // TODO: fetch skeleton bones from backend?
+
   return (
     <li className='skeleton-tile-object'>
       <div className="index-tile-container">
@@ -40,7 +36,7 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
           </div>
           <div className='index-skeleton-body-likes-container'>
             <div className="index-skeleton-body-container">
-              <p className="index-skeleton-body">{skeletonInfo.skeletonBody}</p>
+              <p className="index-skeleton-body">{skeletonBody}</p>
               
             </div>
             <div className="index-skeleton-likes-container">
@@ -51,7 +47,7 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
           </div>
           <div className="index-skeleton-tags-container">
             <ul className='index-skeleton-tags'>
-              {tags.map((tag) => <p className="index-ind-tag"> #{`${tag}`} </p>)}
+              {tags.map((tag) => <p className="index-ind-tag" key={tag} > #{`${tag}`} </p>)}
             </ul>
           </div>
       </div>

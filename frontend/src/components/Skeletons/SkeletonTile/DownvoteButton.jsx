@@ -2,8 +2,12 @@ import Downvote from '../../../assets/skeleton_tile/triangle_button_down.png'
 
 const DownvoteButton = () => {
 
+  const handleDownvote = () => {
+    console.log("downvote")
+  }
+
   return (
-    <button onClick={""} className="vote-button" id="downvote-button">
+    <button onClick={handleDownvote} className="vote-button" id="downvote-button">
       <img src={Downvote} className="vote-button-image" />
     </button>
   )

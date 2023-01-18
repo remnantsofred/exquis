@@ -7,7 +7,7 @@ const TrendingBar = ({skellies}) => {
   return (
     <div className="trending-bar-container">
       <ul className="trending-bar-list">
-        {skellies.map(skellie => <TrendingSkellie component={skellie} />)}
+        {skellies.map(skellie => <TrendingSkellie component={skellie} key={skellie.id}/>)}
       </ul>
     </div>
 

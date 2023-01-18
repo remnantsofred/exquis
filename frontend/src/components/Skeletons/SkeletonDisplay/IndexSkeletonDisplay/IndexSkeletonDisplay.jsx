@@ -11,7 +11,7 @@ const IndexSkeletonDisplay = ({ skelliesProps, skeletons}) => {
       {skeletons.map((skellie) => 
         <IndexSkeletonTile 
           component={skellie} 
-          id={skellie.id} 
+          key={skellie.id} 
           skeletonInfo={skellie}/>)}
     </ul>
   )
