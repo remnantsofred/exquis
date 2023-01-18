@@ -35,7 +35,7 @@ router.get('/user/:userId', async (req, res, next) => {
   try {
     const skeletons = await Skeleton.find({ owner: user._id })
                               .sort({ createdAt: -1 })
-                              .populate("owner", "_id, username");
+                              .populate("owner", "_id, username", "bones", "_id, body, author");
     return res.json(skeletons);
   }
   catch(err) {

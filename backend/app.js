@@ -56,8 +56,6 @@ const bonesRouter = require('./routes/api/bones'); // update the import file pat
 const csrfRouter = require('./routes/api/csrf'); // update the import file path
 
 // Attach Express routers
-
-
 app.use('/api/users', usersRouter); // update the path
 app.use('/api/skeletons', skeletonsRouter); // update the path
 // app.use('/api/skeletons/:skeletonId/comments', commentsRouter); // update the path')

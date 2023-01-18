@@ -51,7 +51,7 @@ const SkeletonTile = ({skeletonInfo}) => {
           </div>
           <div className="skeleton-tags-container">
             <ul className='skeleton-tags'>
-              {tags.map((tag) => <p className="ind-tag"> #{`${tag}`} </p>)}
+              {tags.map((tag) => <p className="ind-tag" key={tag}> #{`${tag}`} </p>)}
             </ul>
           </div>
       </div>
