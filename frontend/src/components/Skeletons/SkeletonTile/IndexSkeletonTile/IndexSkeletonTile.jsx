@@ -5,6 +5,8 @@ import UpvoteButton from '../UpvoteButton'
 import DownvoteButton from '../DownvoteButton'
 
 const IndexSkeletonTile = ({skeletonInfo}) => {
+  // console.log(skeletonInfo)
+  // console.log(Object.values(skeletonInfo))
   // const title = skeletonInfo.title
   // const author = skeletonInfo.author
   // const collaborators = skeletonInfo.collaborators
@@ -22,13 +24,13 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
   const skeletonBody = "A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information Pepsi-Cola."
   const likes = 20
   const tags = ["lorem",  "ipsum", "dolor",  "sit", "amet", "consectetur", "adipiscing", "elit"]
-  console.log(tags)
+  // console.log(tags)
   
   return (
     <li className='skeleton-tile-object'>
       <div className="index-tile-container">
         <div className="index-title-container">
-          <h1 className="index-title">{title.toUpperCase()}</h1>
+          <h1 className="index-title">{skeletonInfo.title.toUpperCase()}</h1>
         </div>
           <div className="index-author-bones-container">
             <h1 className="index-author">{author.toUpperCase()}</h1>
