@@ -55,14 +55,33 @@ export const getSkeletons = (store) => {
 }; 
 
 export const getSkeleton = (skeletonId) => (store) => {
-  // if (store.skeletons && store.skeletons[skeletonId]) {
-  if (store.skeletons && store.skeletons[skeletonId]) {
-  } else {
-    return null;
-}};
+  if (store.skeletons && store.skeletons[skeletonId]) return store.skeletons[skeletonId];
+  return null;
+};
 
 // THUNK ACTION CREATORS
 
+// export const fetchSkeletons = () => async dispatch => {
+//   try {
+//       const res = await jwtFetch('/api/skeletons');
+//       const skeletons = await res.json();
+//       dispatch(receiveSkeletons(skeletons));
+//   } catch (err) {
+//       const resBody = await err.json();
+//       if (resBody.statusCode === 400) {
+//       dispatch(receiveErrors(resBody.errors));
+//       }
+//   }
+// }
+
+// export const fetchSkeletons = () => async (dispatch) => {
+//   const res = await fetch('/api/skeletons');
+//   if (res.ok) {
+//     const skeletons = await res.json();
+//     dispatch(receiveSkeletons(skeletons));
+//     return Promise.resolve();
+//   }
+// };
 
 
 export const fetchSkeletons = () => async (dispatch) => {
@@ -74,45 +93,14 @@ export const fetchSkeletons = () => async (dispatch) => {
   }
 }
 
-export const fetchSkeleton = (skeletondId) => async (dispatch) => {
-  let res = await fetch(`/api/skeletons/${skeletondId}`);
-  console.log("res in fetchSkeleton", res)
+export const fetchSkeleton = (skeletonId) => async (dispatch) => {
+  const res = await fetch(`/api/skeletons/${skeletonId}`);
   if (res.ok) {
-      let skeleton = await res.json();
-      dispatch(receiveSkeletons(skeleton))
+    const skeleton = await res.json();
+    dispatch(receiveSkeleton(skeleton));
+    return Promise.resolve();
   }
 }
-
-
-
-// export const fetchSkeletons = () => async dispatch => {
-//   try {
-//       console.log("fetching skeletons")
-//       const res = await jwtFetch('/api/skeletons');
-//       console.log("res", res)
-//       const skeletons = await res.json();
-//       dispatch(receiveSkeletons(skeletons));
-//   } catch (err) {
-//       const resBody = await err.json();
-//       if (resBody.statusCode === 400) {
-//       dispatch(receiveErrors(resBody.errors));
-//       }
-//   }
-// }
-
-// export const fetchUserSkeletons = userId => async dispatch => {
-//   try {
-//     console.log("fetching user skeletons")
-//       const res = await jwtFetch(`/api/skeletons/user/${userId}`);
-//       const skeletons = await res.json();
-//       dispatch(receiveUserSkeletons(skeletons));
-//   } catch (err) {
-//       const resBody = await err.json();
-//       if (resBody.statusCode === 400) {
-//       dispatch(receiveErrors(resBody.errors));
-//       }
-//   }
-// }
 
 // export const fetchSkeleton = skeletonId => async dispatch => {
 //   try {

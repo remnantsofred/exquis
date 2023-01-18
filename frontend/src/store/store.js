@@ -4,12 +4,14 @@ import session from './session';
 import errors from './errors';
 import comments from './comment';
 import skeletons from './skeletons';
+import bones from './bones'
 
 const rootReducer = combineReducers({
   session,
   errors,
   skeletons,
-  comments
+  comments,
+  bones
 });
 
 
