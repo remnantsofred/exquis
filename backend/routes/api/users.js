@@ -1,49 +1,24 @@
-// imports
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
-const User = mongoose.model('User'); // importing User model
+const User = mongoose.model('User');
 const passport = require('passport');
 const { loginUser, restoreUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
 
+
 /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.json({
-//     message: "GET /api/users"
-//   });
-// });
-
-// DL: in the future we might want to refactor get / users to this below. but it also returns hashed passwords
-router.get('/', async (req, res, next) => {
-  try {
-    const users = await User.find()
-                              .populate("skeletons", "_id, owner, title")
-                              .sort({ createdAt: -1 });
-    return res.json(users);
-  }
-  catch(err) {
-    return res.json([]);
-  }
-});
-
-router.get('/:id', async (req, res, next) => {
-  try {
-    const user = await User.findById(req.params.id)
-                              .populate("skeletons", "_id, owner, title")
-                              .sort({ createdAt: -1 });
-    return res.json(user);
-  }
-  catch(err) {
-    return res.json([]);
-  }
+router.get('/', function(req, res, next) {
+  res.json({
+    message: "GET /api/users"
+  });
 });
 
 
-// POST /api/users/register
+
 router.post('/register', validateRegisterInput, async (req, res, next) => {
   // Check to make sure no one has already registered with the proposed email or
   // username.
@@ -52,7 +27,7 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
   });
 
   if (user) {
-    // Throw a 400 error if the email address and/or username already exists
+    // Throw a 400 error if the email address and/or email already exists
     const err = new Error("Validation Error");
     err.statusCode = 400;
     const errors = {};
@@ -65,6 +40,7 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     err.errors = errors;
     return next(err);
   }
+
   // Otherwise create a new user
   const newUser = new User({
     username: req.body.username,
@@ -85,10 +61,9 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
       }
     })
   });
-
 });
 
-// POST /api/users/login
+
 router.post('/login', validateLoginInput, async (req, res, next) => {
   passport.authenticate('local', async function(err, user) {
     if (err) return next(err);
@@ -98,7 +73,7 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
       err.errors = { email: "Invalid credentials" };
       return next(err);
     }
-    return res.json(await loginUser(user));
+    return res.json(await loginUser(user)); // <-- THIS IS THE CHANGED LINE
   })(req, res, next);
 });
 
@@ -107,6 +82,8 @@ router.get('/current', restoreUser, (req, res) => {
     // In development, allow React server to gain access to the CSRF token
     // whenever the current user information is first loaded into the
     // React application
+    console.log(req)
+    console.log(req.host)
     const csrfToken = req.csrfToken();
     res.cookie("CSRF-TOKEN", csrfToken);
   }
@@ -118,4 +95,4 @@ router.get('/current', restoreUser, (req, res) => {
   });
 });
 
-module.exports = router
+module.exports = router;

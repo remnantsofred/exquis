@@ -7,7 +7,7 @@ const BoneSchema = new Schema({
     ref: 'User',
     // required: true
   },
-  body: {
+  text: {
     type: String
   },
   skeleton: {

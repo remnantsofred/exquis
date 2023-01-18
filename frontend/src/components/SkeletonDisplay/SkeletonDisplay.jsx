@@ -6,7 +6,7 @@ const SkeletonDisplay = ({ user }) => {
   // const skellies = user.followedSkeletons 
   return (
     <ul className='skeleton-grid'>
-      {skellies.map((skellie) => <SkeletonTile component={skellie} />)}
+      {skellies.map((skellie) => <SkeletonTile component={skellie} key={skellie.id}/>)}
     </ul>
   )
 }
