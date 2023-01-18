@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import Loading from '../../Loading/Loading'
 
 import { getUser, fetchUser } from '../../../store/users'
 
@@ -17,18 +18,35 @@ const ProfilePage = () => {
   useEffect(() => {
     Promise.all([
       dispatch(fetchUser(userId))
+      
     ]).then(()=>{
       setLoaded(true);
     })
-  }, [dispatch, userId])
+  }, [])
 
-  console.log(userId)
+  // useEffect(() => {
+  //   Promise.all([
+  //     dispatch(fetchUser(userId))
+      
+  //   ]).then(()=>{
+  //     // setLoaded(true);
+  //   })
+  // }, [dispatch, userId])
+
+  console.log(userId, "userId from profile page")
+  console.log(user, "user from profile page")
   // const OwnedSkeletons = () => {
   //   const filteredSkeletons =  skeletons.filter(skeleton => skeleton.ownerId === userId);
   //   return (filteredSkeletons);
   // }
-
-  return(
+  // if (user !== null) setLoaded(true)
+  if (!loaded) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    )} else {
+  return (
     <div className='general-profile-container'>
       <div className='profile-top'>
         <div className='profile-banner'>
@@ -59,7 +77,7 @@ const ProfilePage = () => {
 
 
     </div>
-  )
+  )}
 }
 
 export default ProfilePage;
