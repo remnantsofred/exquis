@@ -55,16 +55,11 @@ export const getSkeletons = (store) => {
 }; 
 
 export const getSkeleton = (skeletonId) => (store) => {
-  console.log('STORE SKELETONS HERE ')
-  console.log(store.skeletons)
-  console.log('SPECIFIC SKELETON HEY HEY HEY HEY')
-  console.log(store.skeletons[skeletonId])
+  // TODO - 01-17-2023 - fix store skeletons -only returns one specific one
   // if (store.skeletons && store.skeletons[skeletonId]) {
-  if (store.skeletons && store.skeletons[skeletonId]) {
-    console.log('HERE IS GET SKELETON FROM SKELETONS JS')
-    return store.skeletons[skeletonId]
+  if (store.skeletons) {
+    return store.skeletons
   } else {
-    console.log('NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
     return null;
 }};
 

@@ -1,15 +1,14 @@
-ul.index-skeleton-grid {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5vh;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-count: 2;
-  column-gap: 3vw;
-  row-gap: 5vh;
-}
-
-ul.index-skeleton-grid > li {
-  margin-top: 0vh;
-  margin-bottom: 0vh;
+div.skellie-main-container {
+  margin-left: 4vw;
+  width: 65vw;
+  height: max-content;
+  min-height: 60vh;
+  padding-left: 4vw;
+  padding-right: 4vw;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+  background-color: rgba(188, 208, 228, 0.436);
+  display: flexbox;
+  border-radius: 25px;
+  transition: .5s;
 }
