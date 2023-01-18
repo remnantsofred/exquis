@@ -59,6 +59,8 @@ export const getSkeleton = (skeletonId) => (store) => {
   return null;
 };
 
+
+
 // THUNK ACTION CREATORS
 
 // export const fetchSkeletons = () => async dispatch => {

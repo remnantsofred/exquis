@@ -51,8 +51,7 @@ router.get('/skeletons/:skeletonId', async (req, res) => {
   let parent;
   try {
     parent = await Skeleton.findById(req.params.skeletonId);
-    console.log(parent)
-    console.log(req.params)
+
   }
 
   catch(err) {

@@ -25,7 +25,7 @@ router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req
       //   error.errors = { message: "You are not authorized to add bones to this skeleton" };
       //   return next(error);
       // }
-      console.log(skeleton, "skeleton")
+  
       const newBone = new Bone({
         text: req.body.text,
         skeleton: skeleton._id,

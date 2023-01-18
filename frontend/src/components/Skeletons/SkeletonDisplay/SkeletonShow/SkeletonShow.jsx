@@ -8,7 +8,10 @@ import PlaceBones from "./PlaceBones"
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
+import { createComment } from "../../../../store/comment"
 import "./SkeletonShow.css"
+import CommentPanel from "./CommentPanel/CommentPanel"
+import { getSkeletonComments } from "../../../../store/comment"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
@@ -16,6 +19,26 @@ const SkeletonShow = () => {
 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
+  const comments = useSelector((state) => getSkeletonComments(state, skeletonId))
+
+  
+  
+  
+
+  const author = useSelector(state => state.session.user)
+
+  const [comment, setComment] = useState('');
+  
+  const handlePost = (e) => {
+    e.preventDefault();
+    const newComment = {comment: {authorId: author._id, text: comment, skellieId: skellie._id}}
+
+    dispatch(createComment(newComment, skeletonId));
+    e.target.value = "";
+    setComment("");
+  };
+
+
 
   const tempBones = [
     "As she sat watching the world go by, something caught her eye.",
@@ -27,14 +50,13 @@ const SkeletonShow = () => {
     "At that moment, she comprehended what it was and where it was heading, and she knew her life would never be the same."
   ]
 
-  console.log(tempBones)
+
   const bones = PlaceBones(tempBones)
 
   // const userById = (userId) => {
   //   const user = useSelector(getUser(userId))
   // }
 
-  console.log("components skeletonId:", skeletonId)
 
   useEffect(() => {
     Promise.all([
@@ -98,7 +120,15 @@ const SkeletonShow = () => {
       </div>
         
       <div class="comments-section">
-          
+       <h1>Comments</h1>
+
+       < CommentPanel skeletonId={skellie._id} comments={comments}/>
+
+        <div className='create-comment-container'>
+          <input className="create-comment-form" type="text" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
+          <button className="create-comment-sumbit" onClick={handlePost}>Submit</button>
+        </div>
+
       </div>
 
     </>
