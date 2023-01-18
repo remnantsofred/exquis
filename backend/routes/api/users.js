@@ -10,31 +10,28 @@ const { isProduction } = require('../../config/keys');
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
 
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.json({
-//     message: "GET /api/users"
-//   });
-// });
 
-// DL: in the future we might want to refactor get / users to this below. but it also returns hashed passwords
-router.get('/', async (req, res, next) => {
-  try {
-    const users = await User.find()
-                              .populate("skeletons", "_id, owner, title")
-                              .sort({ createdAt: -1 });
-    return res.json(users);
-  }
-  catch(err) {
-    return res.json([]);
-  }
+router.post('/login', validateLoginInput, async (req, res, next) => {
+  console.log("hello")
+  passport.authenticate('local', async function(err, user) {
+    console.log("hello")
+    if (err) return next(err);
+    if (!user) {
+      const err = new Error('Invalid credentials');
+      err.statusCode = 400;
+      err.errors = { email: "Invalid credentials" };
+      return next(err);
+    }
+    return res.json(await loginUser(user));
+  })(req, res, next);
 });
+  
 
 router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id)
-                              .populate("skeletons", "_id, owner, title")
-                              .sort({ createdAt: -1 });
+    .populate("skeletons", "_id, owner, title")
+    .sort({ createdAt: -1 });
     return res.json(user);
   }
   catch(err) {
@@ -43,16 +40,13 @@ router.get('/:id', async (req, res, next) => {
 });
 
 
-// POST /api/users/register
 router.post('/register', validateRegisterInput, async (req, res, next) => {
-  // Check to make sure no one has already registered with the proposed email or
-  // username.
+
   const user = await User.findOne({
     $or: [{ email: req.body.email }, { username: req.body.username }]
   });
-
+  
   if (user) {
-    // Throw a 400 error if the email address and/or username already exists
     const err = new Error("Validation Error");
     err.statusCode = 400;
     const errors = {};
@@ -65,12 +59,12 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     err.errors = errors;
     return next(err);
   }
-  // Otherwise create a new user
+
   const newUser = new User({
     username: req.body.username,
     email: req.body.email
   });
-
+  
   bcrypt.genSalt(10, (err, salt) => {
     if (err) throw err;
     bcrypt.hash(req.body.password, salt, async (err, hashedPassword) => {
@@ -85,22 +79,9 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
       }
     })
   });
-
+  
 });
 
-// POST /api/users/login
-router.post('/login', validateLoginInput, async (req, res, next) => {
-  passport.authenticate('local', async function(err, user) {
-    if (err) return next(err);
-    if (!user) {
-      const err = new Error('Invalid credentials');
-      err.statusCode = 400;
-      err.errors = { email: "Invalid credentials" };
-      return next(err);
-    }
-    return res.json(await loginUser(user));
-  })(req, res, next);
-});
 
 router.get('/current', restoreUser, (req, res) => {
   if (!isProduction) {
@@ -116,6 +97,19 @@ router.get('/current', restoreUser, (req, res) => {
     username: req.user.username,
     email: req.user.email
   });
+});
+
+router.get('/', async (req, res, next) => {
+  console.log("GET /api/users")
+  try {
+    const users = await User.find()
+                              .populate("skeletons", "_id, owner, title")
+                              .sort({ createdAt: -1 });
+    return res.json(users);
+  }
+  catch(err) {
+    return res.json([]);
+  }
 });
 
 module.exports = router
