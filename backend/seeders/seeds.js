@@ -47,21 +47,26 @@ const ownerId = users[random]._id
 
 // Seed skeletons
 const skeletons = [];
+for (const user of users){
+  let ownerIndex = users.indexOf(user);
+  for (let i = 0; i < 3; i++) {
+    let collaborator1Id = users[(ownerIndex+1) % NUM_SEED_USERS]._id;
+    let collaborator2Id = users[(ownerIndex+2) % NUM_SEED_USERS]._id; 
+    const skeleton = new Skeleton ({
+      owner: user._id, 
+      title: faker.lorem.sentence(),
+      prompt: faker.lorem.paragraph(),
+      maxBones: faker.datatype.number({'min': 3,'max': 6}),
+      maxCollabrators: faker.datatype.number({'min': 3,'max': 6}),
+      collaborators: [collaborator1Id, collaborator2Id],
+      bones: [],
+      tags: [],
+      likes: [],
+      comments: []
+    });
+    skeletons.push(skeleton);
+  }
 
-for (let i = 0; i < NUM_SEED_SKELETONS; i++) {
-  const skeleton = new Skeleton ({
-    owner: ownerId, 
-    title: faker.lorem.sentence(),
-    prompt: faker.lorem.paragraph(),
-    maxBones: faker.datatype.number({'min': 3,'max': 6}),
-    maxCollabrators: faker.datatype.number({'min': 3,'max': 6}),
-    collaborators: [users[(random + 1) % NUM_SEED_USERS]._id, users[(random + 2) % NUM_SEED_USERS]._id],
-    bones: [],
-    tags: [],
-    likes: [],
-    comments: []
-  });
-  skeletons.push(skeleton);
 }
  
 

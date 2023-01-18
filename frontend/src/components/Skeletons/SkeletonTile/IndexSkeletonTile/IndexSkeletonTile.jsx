@@ -17,6 +17,7 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
   // const tags = skeletonInfo.tags
 
   const title = "Lorem Ipsum Kitty I love Cats"
+  console.log(skeletonInfo.title)
   const author = "Skellie Crew"
   const collaborators = ["natty", "daphne", "andrea"]
   const maxBones = 20
@@ -33,17 +34,18 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
           <h1 className="index-title">{skeletonInfo.title.toUpperCase()}</h1>
         </div>
           <div className="index-author-bones-container">
-            <h1 className="index-author">{author.toUpperCase()}</h1>
+            <h1 className="index-author">{skeletonInfo.owner.username.toUpperCase()}</h1>
             <h1 className="index-author-bone-divider">//</h1>
-            <h1 className="index-bone-counter">Bones: {currentBones} / {maxBones}</h1>
+            <h1 className="index-bone-counter">Bones: {skeletonInfo.bones.length} / {skeletonInfo.maxBones}</h1>
           </div>
           <div className='index-skeleton-body-likes-container'>
             <div className="index-skeleton-body-container">
-              <p className="index-skeleton-body">{skeletonBody}</p>
+              <p className="index-skeleton-body">{skeletonInfo.skeletonBody}</p>
+              
             </div>
             <div className="index-skeleton-likes-container">
               <UpvoteButton />
-                <p className="index-skeleton-like-count">{likes}</p>
+                <p className="index-skeleton-like-count">{skeletonInfo.likes.length}</p>
               <DownvoteButton />
             </div>
           </div>
