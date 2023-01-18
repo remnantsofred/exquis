@@ -55,19 +55,9 @@ export const getSkeletons = (store) => {
 }; 
 
 export const getSkeleton = (skeletonId) => (store) => {
-<<<<<<< HEAD
-  // TODO - 01-17-2023 - fix store skeletons -only returns one specific one
-  // if (store.skeletons && store.skeletons[skeletonId]) {
-  if (store.skeletons) {
-    return store.skeletons
-  } else {
-    return null;
-}};
-=======
   if (store.skeletons && store.skeletons[skeletonId]) return store.skeletons[skeletonId];
   return null;
 };
->>>>>>> main
 
 // THUNK ACTION CREATORS
 
