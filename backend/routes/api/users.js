@@ -74,8 +74,7 @@ router.get('/current', restoreUser, (req, res) => {
     // In development, allow React server to gain access to the CSRF token
     // whenever the current user information is first loaded into the
     // React application
-    console.log(req)
-    console.log(req.host)
+
     const csrfToken = req.csrfToken();
     res.cookie("CSRF-TOKEN", csrfToken);
   }
@@ -90,7 +89,7 @@ router.get('/current', restoreUser, (req, res) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id)
-                            .populate("id, username")
+ 
     return res.json(user);
   }
   catch(err) {
@@ -103,8 +102,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.get('/', async (req, res) => {
   try {
-    const users = await User.find()
-                            .populate("username", "_id, skeletons, likes, comments")
+    const users = await User.find()                          
                             .sort({ createdAt: -1})
     return res.json(users);
   }

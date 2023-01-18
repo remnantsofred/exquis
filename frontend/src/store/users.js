@@ -38,9 +38,6 @@ export const getUsers = (store) => {
 }; 
 
 export const getUser = (userId) => (store) => {
-  console.log('USERS JS')
-  console.log(userId)
-  console.log(store.users)
   if (store.users && store.users[userId]) return store.users[userId];
   return null;
 };
@@ -58,6 +55,7 @@ export const fetchUsers = () => async (dispatch) => {
 };
 
 export const fetchUser = (userId) => async (dispatch) => {
+  console.log(userId, "userId from fetchUser")
   const res = await fetch(`/api/users/${userId}`);
   if (res.ok) {
     const user = await res.json();
