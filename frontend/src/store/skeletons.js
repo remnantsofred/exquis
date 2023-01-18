@@ -206,7 +206,8 @@ const skeletonsReducer = (state = { all: {}, user: {}, new: undefined }, action)
       return { ...newState, [action.skeleton._id]: action.skeleton };
         // return { ...state, new: action.skeleton, new: undefined };
     case RECEIVE_SKELETONS:
-        return { ...newState, all: action.skeletons };
+        // return { ...newState, all: action.skeletons };
+        return { ...newState, ...action.skeletons };
     case RECEIVE_USER_SKELETONS:
         return {...newState, user: action.skeletons, new: undefined };
     case REMOVE_SKELETON:

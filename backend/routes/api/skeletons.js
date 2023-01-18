@@ -123,6 +123,7 @@ router.get('/', async (req, res) => {
 
 
 router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
+router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
    
   try {
     const newSkeleton = new Skeleton({

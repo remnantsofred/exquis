@@ -30,28 +30,28 @@ const SkeletonTile = ({skeletonInfo}) => {
           <div className="tile-top-container">
             <div className="title-author-container">
               <div className="title-container">
-                <h1 className="title">{title.toUpperCase()}</h1>
+                <h1 className="title">{skeletonInfo.title.toUpperCase()}</h1>
               </div>
               <h1 className='title-author-divider'>//</h1> 
               <div className="author-container">
-                <h1 className="author">{author.toUpperCase()}</h1>
+                <h1 className="author">{skeletonInfo.author.toUpperCase()}</h1>
               </div>
             </div>
-            <h3 className="bone-counter">Bones: {currentBones} / {maxBones}</h3>
+            <h3 className="bone-counter">Bones: {skeletonInfo.bones.length} / {skeletonInfo.maxBones}</h3>
           </div>
           <div className='skeleton-body-likes-container'>
             <div className="skeleton-body-container">
-              <p className="skeleton-body">{skeletonBody}</p>
+              <p className="skeleton-body">{skeletonInfo.skeletonBody}</p>
             </div>
             <div className="skeleton-likes-container">
               <UpvoteButton />
-                <p className="skeleton-like-count">{likes}</p>
+                <p className="skeleton-like-count">{skeletonInfo.likes}</p>
               <DownvoteButton />
             </div>
           </div>
           <div className="skeleton-tags-container">
             <ul className='skeleton-tags'>
-              {tags.map((tag) => <p className="ind-tag" key={tag}> #{`${tag}`} </p>)}
+              {skeletonInfo.tags.map((tag) => <p className="ind-tag" key={tag}> #{`${tag}`} </p>)}
             </ul>
           </div>
       </div>
