@@ -87,10 +87,32 @@ router.get('/current', restoreUser, (req, res) => {
   });
 });
 
-router.get('/', function(req, res, next) {
-  res.json({
-    message: "GET /api/users"
-  });
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+                            .populate("id, username")
+    return res.json(user);
+  }
+  catch(err) {
+    const error = new Error('User not found');
+    error.statusCode = 404;
+    error.errors = { message: "No user found with that id." };
+    return next(error);
+  }
+})
+
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find()
+                            .populate("_id, username, skeletons, likes, comments")
+    return res.json(users);
+  }
+  catch(err) {
+    return res.json([])
+  }
+//   res.json({
+//     message: "GET /api/users"
+//   });
 });
 
 module.exports = router;
