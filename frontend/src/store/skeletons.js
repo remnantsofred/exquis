@@ -181,37 +181,39 @@ export const skeletonErrorsReducer = (state = nullErrors, action) => {
 }
 
 
-const skeletonsReducer = (state = {}, action) => {
-  let newState = { ... state};
-  switch (action.type) {
-    case RECEIVE_SKELETONS:
-      return {...newState, ...action.skeletons};
-    case RECEIVE_SKELETON:
-      return {...newState, [action.skeleton._id]: action.skeleton}
-    case REMOVE_SKELETON:
-      delete newState[action.skeletonId];
-      return newState;
-    default:
-      return state;
-  }
-}
-
-// const skeletonsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+// const skeletonsReducer = (state = {}, action) => {
+//   let newState = { ... state};
 //   switch (action.type) {
-//     case RECEIVE_SKELETON:
-//       return action.skeleton
-//         // return { ...state, new: action.skeleton, new: undefined };
 //     case RECEIVE_SKELETONS:
-//         return { ...state, all: action.skeletons };
-//     case RECEIVE_USER_SKELETONS:
-//         return {...state, user: action.skeletons, new: undefined };
+//       return {...newState, ...action.skeletons};
+//     case RECEIVE_SKELETON:
+//       return { ...newState, [action.skeleton._id]: action.skeleton };
 //     case REMOVE_SKELETON:
-//         const newState = { ...state };
-//         delete newState[action.skeletonId];
-//         return newState;
+//       delete newState[action.skeletonId];
+//       return newState;
 //     default:
-//         return state;
+//       return state;
 //   }
 // }
+
+const skeletonsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+  let newState = { ... state};
+  switch (action.type) {
+    case RECEIVE_SKELETON:
+      // return action.skeleton
+      return { ...newState, [action.skeleton._id]: action.skeleton };
+        // return { ...state, new: action.skeleton, new: undefined };
+    case RECEIVE_SKELETONS:
+        return { ...newState, all: action.skeletons };
+    case RECEIVE_USER_SKELETONS:
+        return {...newState, user: action.skeletons, new: undefined };
+    case REMOVE_SKELETON:
+        // const newState = { ...state };
+        delete newState[action.skeleton._id];
+        return newState;
+    default:
+        return state;
+  }
+}
 
 export default skeletonsReducer;

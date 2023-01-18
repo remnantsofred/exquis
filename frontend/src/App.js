@@ -32,13 +32,13 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" component={MainPage} />
-        <Route exact path="/skeletons" component={SkeletonIndex} />
+        <ProtectedRoute exact path="/skeletons/new" component={SkeletonForm} />
         <Route exact path="/skeletons/:skeletonId" component={SkeletonShow} />
+        <Route exact path="/skeletons" component={SkeletonIndex} />
 
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute exact path="/profile/:userId" component={ProfilePage} />
-        <ProtectedRoute exact path="/skeletons/new" component={SkeletonForm} />
       </Switch>
       <Footer />
     </>
