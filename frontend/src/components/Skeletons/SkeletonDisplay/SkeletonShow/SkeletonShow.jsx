@@ -57,14 +57,15 @@ const SkeletonShow = () => {
   return (
     <>
     <div class="skellie-main-container">
+      <div class="show-top-middle">
         <div class="show-top">
           <h1 id="skeleton-title">{skellie.title}</h1>
-          <hr />
-          <div className="sub-title">
-            <h3 id="skeleton-owner">{skellie.owner.username}</h3>
-            <h3 id="skeleton-prompt">"{skellie.prompt}"</h3>
-          </div>
-          <hr />
+            <hr />
+              <div className="sub-title">
+                <h3 id="skeleton-owner">{skellie.owner.username}</h3>
+                <h3 id="skeleton-prompt">"{skellie.prompt}"</h3>
+              </div>
+            <hr />
         </div>
         <div class="show-middle">
           {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
@@ -78,19 +79,21 @@ const SkeletonShow = () => {
               {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
               <textarea id="current-collab-input" />
             </div>
-          </div>
-          <div class="collaborator-panel">
-            <ul>
-
-            </ul>
-          </div>
-        </div>
-        <div class="show-bottom">
             <div class="horizontal-skeleton-likes-container">
               <DownvoteButton />
                 <h1>{skellie.likes}</h1>
               <UpvoteButton />
             </div>
+          </div>
+        </div>
+      </div>
+        <div class="collaborator-panel">
+          <ul>
+
+          </ul>
+        </div>
+        <div class="show-bottom">
+
         </div>
       </div>
         

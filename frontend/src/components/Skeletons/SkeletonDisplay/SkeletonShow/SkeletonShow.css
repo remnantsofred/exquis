@@ -1,8 +1,35 @@
 div.skellie-main-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   font-family: Inter, sans-serif;
 }
+
+div.show-top-middle {
+  width: 55vw;
+  height: min-content;
+  padding-left: 0vw;
+  padding-right: 1vw;
+  padding-top: 4vh;
+  margin-right: 10vw;
+  padding-bottom: 4vh;
+}
+
+div.collaborator-panel {
+  margin-left: 4vw;
+  width: 65vw;
+  height: 100%;
+  min-height: 60vh;
+  margin-top: 4vh;
+  margin-left: 5vw;
+  padding-right: 4vw;
+  padding-top: 6vh;
+  padding-bottom: 4vh;
+  background-color: rgba(188, 208, 228, 0.436);
+  display: flexbox;
+  border-radius: 25px;
+  transition: .5s;
+}
+
 div.show-top {
   margin-left: 4vw;
   width: 55vw;
@@ -49,15 +76,41 @@ div.show-middle {
   margin-left: 4vw;
   width: 55vw;
   height: max-content;
+  justify-content: space-between;
   min-height: 60vh;
+  /* padding-left: 4vw;
+  padding-right: 4vw; */
+  padding-top: 4vh;
+  padding-bottom: 4vh; 
+  /* background-color: rgba(188, 208, 228, 0.436); */
+  display: flex;
+  border-radius: 25px;
+  transition: .5s;
+}
+
+div.skeleton-body-input-container {
+  margin-left: 4vw;
+  /* height: max-content; */
+  height: 100vh;
+  /* min-height: 80vh; */
   padding-left: 4vw;
   padding-right: 4vw;
   padding-top: 4vh;
   padding-bottom: 4vh;
   background-color: rgba(188, 208, 228, 0.436);
-  display: flex;
   border-radius: 25px;
   transition: .5s;
+}
+
+div.skeleton-body-input-container {
+  width: 55vw;
+  margin-left: 0px;
+  margin-right: 4vw;
+}
+
+div.collaborator-panel {
+  margin-left: 4vw;
+  width: 10vw;
 }
 
 div#skeleton-body {
@@ -113,17 +166,8 @@ textarea#current-collab-input {
   padding-bottom: 5vh;
 }
 
-div.collaborator-panel {
-    margin-left: 4vw;
-    width: 65vw;
-    height: max-content;
-    min-height: 60vh;
-    padding-left: 4vw;
-    padding-right: 4vw;
-    padding-top: 4vh;
-    padding-bottom: 4vh;
-    background-color: rgba(188, 208, 228, 0.436);
-    display: flexbox;
-    border-radius: 25px;
-    transition: .5s;
+div.horizontal-skeleton-likes-container {
+  display: flex;
+  flex-direction: row;
 }
+
