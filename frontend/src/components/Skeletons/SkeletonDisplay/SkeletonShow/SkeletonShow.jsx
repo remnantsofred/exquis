@@ -51,16 +51,16 @@ const SkeletonShow = () => {
   return (
     <>
       <h1>
-        HELLO???????????????
+        Skeleton Show Page
       </h1>
       <h2>
-        {skeleton.title}
+        Skeleton title: {skeleton.title}
       </h2>
       <h2>
-        {skeleton.owner.username}
+        Skeleton owner: {skeleton.owner.username}
       </h2>
       <h2>
-        {skeleton.title}
+        Skeleton prompt: {skeleton.prompt}
       </h2>
     </>
   )
