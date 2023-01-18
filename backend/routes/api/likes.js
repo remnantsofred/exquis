@@ -12,28 +12,7 @@ const validateCommentInput = require('../../validations/comments');
 const validateLikeInput = require('../../validations/likes');
 
 
-router.get('/', async (req, res) => {
-  let parent;
-  try {
-    parent = await Skeleton.findById(req.params.skeletonId);
-  }
 
-  catch(err) {
-    const error = new Error('Parent skeleton not found');
-    error.statusCode = 404;
-    error.errors = { message: "No parent skeleton found with that id" };
-    return next(error); 
-  }
-  try {
-    const likes = await Like.find({ parent: skeleton._id })
-                               .sort({ createdAt: -1 })
-                               .populate("liker", "_id, username");
-    return res.json(likes);
-  }
-  catch(err) {
-    return res.json([]);
-  }
-});
 
 
 router.get('/:id', async (req, res, next) => {
@@ -54,22 +33,7 @@ router.get('/:id', async (req, res, next) => {
 // to req.user. (requireUser will return an error response if there is no 
 // current user.) Also attach validateSkeletonInput as a middleware before the 
 // route handler.
-router.post('/', requireUser, validateLikeInput, async (req, res, next) => {
-  try {
-    const newLike = new Like({
-      parent: req.params.id,
-      text: req.body.text,
-      liker: req.user._id
-    });
 
-    let like = await newLike.save();
-    like = await like.populate('liker', '_id, username');
-    return res.json(like);
-  }
-  catch(err) {
-    next(err);
-  }
-});
 
 router.delete('/:id', requireUser, async (req, res, next) => {
   try {
@@ -94,6 +58,45 @@ router.delete('/:id', requireUser, async (req, res, next) => {
   }
 });
 
+router.get('/', async (req, res) => {
+  let parent;
+  try {
+    parent = await Skeleton.findById(req.params.skeletonId);
+  }
+
+  catch(err) {
+    const error = new Error('Parent skeleton not found');
+    error.statusCode = 404;
+    error.errors = { message: "No parent skeleton found with that id" };
+    return next(error); 
+  }
+  try {
+    const likes = await Like.find({ parent: skeleton._id })
+                               .sort({ createdAt: -1 })
+                               .populate("liker", "_id, username");
+    return res.json(likes);
+  }
+  catch(err) {
+    return res.json([]);
+  }
+});
+
+router.post('/', requireUser, validateLikeInput, async (req, res, next) => {
+  try {
+    const newLike = new Like({
+      parent: req.params.id,
+      text: req.body.text,
+      liker: req.user._id
+    });
+
+    let like = await newLike.save();
+    like = await like.populate('liker', '_id, username');
+    return res.json(like);
+  }
+  catch(err) {
+    next(err);
+  }
+});
 
 
 module.exports = router;

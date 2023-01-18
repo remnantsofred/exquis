@@ -9,17 +9,7 @@ const validateSkeletonInput = require('../../validations/skeletons'); // add ske
 const validateBoneInput = require('../../validations/bones');  // add bone validations
 const validateCommentInput = require('../../validations/comments');
 
-router.get('/', async (req, res) => {
-  try {
-    const comments = await Comment.find()
-                              .populate("author", "_id, username")
-                              .sort({ createdAt: -1 });
-    return res.json(comments);
-  }
-  catch(err) {
-    return res.json([]);
-  }
-})
+
 
 
 router.get('/users/:userId', async (req, res) => {
@@ -42,9 +32,6 @@ router.get('/users/:userId', async (req, res) => {
     return res.json([]);
   }
 })
-
-
-
 
 
 router.get('/skeletons/:skeletonId', async (req, res) => {
@@ -70,6 +57,24 @@ router.get('/skeletons/:skeletonId', async (req, res) => {
   }
   catch(err) {
     return res.json([]);
+  }
+});
+
+
+router.post('/skeletons/:skeletonId', requireUser, validateCommentInput, async (req, res, next) => {
+  try {
+    const newComment = new Comment({
+      parent: req.params.skeletonId,
+      text: req.body.text,
+      author: req.user._id
+    });
+
+    let comment = await newComment.save();
+    comment = await comment.populate('author', '_id, username');
+    return res.json(comment);
+  }
+  catch(err) {
+    next(err);
   }
 });
 
@@ -116,22 +121,6 @@ router.get('/:id', async (req, res, next) => {
 // });
 
 
-router.post('/skeletons/:skeletonId', requireUser, validateCommentInput, async (req, res, next) => {
-  try {
-    const newComment = new Comment({
-      parent: req.params.skeletonId,
-      text: req.body.text,
-      author: req.user._id
-    });
-
-    let comment = await newComment.save();
-    comment = await comment.populate('author', '_id, username');
-    return res.json(comment);
-  }
-  catch(err) {
-    next(err);
-  }
-});
 
 router.patch('/:id', requireUser, validateCommentInput, async (req, res, next) => {
   try {
@@ -182,6 +171,17 @@ router.delete('/:id', requireUser, async (req, res, next) => {
   }
 });
 
+router.get('/', async (req, res) => {
+  try {
+    const comments = await Comment.find()
+                              .populate("author", "_id, username")
+                              .sort({ createdAt: -1 });
+    return res.json(comments);
+  }
+  catch(err) {
+    return res.json([]);
+  }
+})
 
 
 module.exports = router;
