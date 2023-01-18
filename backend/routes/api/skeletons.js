@@ -46,11 +46,6 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-// Attach requireUser as a middleware before the route handler to gain access
-// to req.user. (requireUser will return an error response if there is no 
-// current user.) Also attach validateSkeletonInput as a middleware before the 
-// route handler.
-
 router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) => {
   try {
     const skeleton = await Skeleton.findById(req.params.id);
@@ -66,8 +61,6 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
       error.errors = { message: "You are not authorized to edit this skeleton" };
       return next(error);
     }
-
-
       skeleton.owner = req.user._id,
       skeleton.title = req.body.title,
       skeleton.prompt = req.body.prompt,
@@ -79,7 +72,6 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
       skeleton.likes = req.body.likes,
       skeleton.comments = req.body.comments
     
-
     await skeleton.save();
     return res.json(skeleton);
   }
@@ -112,33 +104,10 @@ router.delete('/:id', requireUser, async (req, res, next) => {
   }
 });
 
-router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
-  console.log("hit backend skeleton post route")
-try {
-  const newSkeleton = new Skeleton({
-    owner: req.user._id,
-    title: req.body.title,
-    prompt: req.body.prompt,
-    maxBones: req.body.maxBones,
-    maxCollaborators: req.body.maxCollaborators,
-    collaborators: req.body.collaborators,
-    bones: [],
-    tags: [],
-    likes: [],
-    comments: []
-  });
-
-  let skeleton = await newSkeleton.save();
-  skeleton = await skeleton.populate('owner', '_id, username');
-  return res.json(skeleton);
-}
-catch(err) {
-  next(err);
-}
-});
-
-
-
+// Attach requireUser as a middleware before the route handler to gain access
+// to req.user. (requireUser will return an error response if there is no 
+// current user.) Also attach validateSkeletonInput as a middleware before the 
+// route handler.
 router.get('/', async (req, res) => {
   try {
     const skeletons = await Skeleton.find()
@@ -150,6 +119,34 @@ router.get('/', async (req, res) => {
     return res.json([]);
   }
 });
+
+
+router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
+   
+  try {
+    const newSkeleton = new Skeleton({
+      owner: req.user._id,
+      title: req.body.title,
+      prompt: req.body.prompt,
+      maxBones: req.body.maxBones,
+      maxCollaborators: req.body.maxCollaborators,
+      collaborators: req.body.collaborators,
+      bones: [],
+      tags: [],
+      likes: [],
+      comments: []
+    });
+
+    let skeleton = await newSkeleton.save();
+    skeleton = await skeleton.populate('owner', '_id, username');
+    return res.json(skeleton);
+  }
+  catch(err) {
+    next(err);
+  }
+});
+
+
 
 
 module.exports = router;

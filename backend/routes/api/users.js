@@ -11,11 +11,6 @@ const validateLoginInput = require('../../validations/login');
 
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.json({
-    message: "GET /api/users"
-  });
-});
   
 router.post('/register', validateRegisterInput, async (req, res, next) => {
 
@@ -88,6 +83,12 @@ router.get('/current', restoreUser, (req, res) => {
     _id: req.user._id,
     username: req.user.username,
     email: req.user.email
+  });
+});
+
+router.get('/', function(req, res, next) {
+  res.json({
+    message: "GET /api/users"
   });
 });
 

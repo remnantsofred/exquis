@@ -83,8 +83,8 @@ export const fetchUserBones = userId => async dispatch => {
   }
 }
 
-export const fetchBone = (boneId) => async (dispatch) => {
-  const res = await fetch(`/api/bones/${boneId}`);
+export const fetchBone = (skeletonId, boneId) => async (dispatch) => {
+  const res = await fetch(`/api/bones/skeletons/${skeletonId}/${boneId}`);
   if (res.ok) {
     const bone = await res.json();
     dispatch(receiveBone(bone));
@@ -92,10 +92,10 @@ export const fetchBone = (boneId) => async (dispatch) => {
   }
 }
 
-export const createBone = data => async dispatch => {
-  console.log("data", data)
+export const createBone = (skeletonId, data) => async dispatch => {
+  // console.log("data", data)
   try {
-      const res = await jwtFetch('/api/bones/', {
+      const res = await jwtFetch(`/api/bones/skeletons/${skeletonId}`, {
           method: 'POST',
           body: JSON.stringify(data)
       });
@@ -110,9 +110,9 @@ export const createBone = data => async dispatch => {
   }
 }
 
-export const updateBone = (boneId, data) => async dispatch => {
+export const updateBone = (skeletonId, boneId, data) => async dispatch => {
   try {
-      const res = await jwtFetch(`/api/bones/${boneId}`, {
+      const res = await jwtFetch(`/api/bones/skeletons/${skeletonId}/${boneId}`, {
           method: 'PATCH',
           body: JSON.stringify(data)
       });
@@ -126,13 +126,13 @@ export const updateBone = (boneId, data) => async dispatch => {
   }
 }
 
-export const deleteBone = boneId => async dispatch => {
+export const deleteBone = (skeletonId, boneId) => async dispatch => {
   try {
-      const res = await jwtFetch(`/api/bones/${boneId}`, {
+      const res = await jwtFetch(`/api/bones/skeletons/${skeletonId}/${boneId}`, {
           method: 'DELETE'
       });
-      const deletedBone = await res.json();
-      dispatch(removeBone(deletedBone.id));
+      // const deletedBone = await res.json();
+      dispatch(removeBone(boneId));
   } catch (err) {
       const resBody = await err.json();
       if (resBody.statusCode === 400) {
