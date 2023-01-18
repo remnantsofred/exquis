@@ -13,6 +13,7 @@ function SkeletonForm () {
   const errors = useSelector(state => state.errors.skeletons);
   const dispatch = useDispatch();
 
+
   // useEffect(() => {
   //   return () => {
   //     dispatch(clearSessionErrors());
@@ -46,6 +47,7 @@ function SkeletonForm () {
   }
 
   const skeletonSubmit = e => {
+    console.log("hit the function");
     e.preventDefault();
     const skeleton = {
       title,
@@ -55,7 +57,7 @@ function SkeletonForm () {
       tags
     };
 
-    // dispatch(create(skeletono)));
+    // dispatch(create());
 
   }
 
@@ -130,6 +132,7 @@ function SkeletonForm () {
           />
         </label>
         <input
+          onClick={e => skeletonSubmit(e)}
           className='skellie-form-submit-button'
           type="submit"
           value="Start a New Skellie :)"
