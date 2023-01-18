@@ -22,6 +22,31 @@ router.get('/', async (req, res) => {
 })
 
 
+router.get('/users/:userId', async (req, res) => {
+  let user;
+  try {
+    user = await User.findById(req.params.userId);
+  } catch(err) {
+    const error = new Error('User not found');
+    error.statusCode = 404;
+    error.errors = { message: "No user found with that id" };
+    return next(error);
+  }
+  try {
+    const comments = await Comment.find({ author: user._id })
+                              .sort({ createdAt: -1 })
+                              .populate("author", "_id, username");
+    return res.json(comments);
+  }
+  catch(err) {
+    return res.json([]);
+  }
+})
+
+
+
+
+
 router.get('/skeletons/:skeletonId', async (req, res) => {
   let parent;
   try {
