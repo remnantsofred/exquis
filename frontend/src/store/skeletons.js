@@ -156,8 +156,8 @@ export const deleteSkeleton = skeletonId => async dispatch => {
       const res = await jwtFetch(`/api/skeletons/${skeletonId}`, {
           method: 'DELETE'
       });
-      const deletedSkeleton = await res.json();
-      dispatch(removeSkeleton(deletedSkeleton.id));
+      // const deletedSkeleton = await res.json();
+      dispatch(removeSkeleton(skeletonId));
   } catch (err) {
       const resBody = await err.json();
       if (resBody.statusCode === 400) {
