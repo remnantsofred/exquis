@@ -102,6 +102,7 @@ export const createSkeleton = data => async dispatch => {
       dispatch(receiveSkeleton(newSkeleton));
   } catch (err) {
       const resBody = await err.json();
+      console.log("resBody", resBody)
       if (resBody.statusCode === 400) {
        return dispatch(receiveErrors(resBody.errors));
       }
@@ -158,7 +159,7 @@ export const skeletonErrorsReducer = (state = nullErrors, action) => {
 const skeletonsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
   switch (action.type) {
     case RECEIVE_SKELETON:
-        return { ...state, new: action.skeleton, new: undefined };
+        return action.skeleton
     case RECEIVE_SKELETONS:
         return { ...state, all: action.skeletons };
     case RECEIVE_USER_SKELETONS:
