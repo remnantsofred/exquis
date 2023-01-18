@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 
 import { getUser, fetchUser } from '../../../store/users'
 
+import Banner from '../../../assets/profile_page/exquis_banner.png'
+import ProfileIcon from '../../../assets/profile_page/exquis_profile_icon.png'
 import './ProfilePage.css'
 
 const ProfilePage = () => {
@@ -27,8 +29,35 @@ const ProfilePage = () => {
   // }
 
   return(
-    <div>
-      <h1>this is the profile page!</h1>
+    <div className='general-profile-container'>
+      <div className='profile-top'>
+        <div className='profile-banner'>
+            <img src={Banner} className="profile-banner" id="banner-image" />
+        </div>
+
+        <div className='profile-top-middle'>
+          <div className='profile-icon-border'>
+            <div className='profile-icon'>
+                <img src={ProfileIcon} className='profile-icon' id="profile-icon-image" />
+            </div>
+          </div>
+
+
+          <div className='username-block'>
+            <h1>
+              USERNAME!!!
+            </h1>
+          </div>
+
+        </div>
+      </div>
+      <div className='skeletons-block'>
+        <ul className='skeletons-block-list'>
+
+        </ul>
+      </div>
+
+
     </div>
   )
 }
