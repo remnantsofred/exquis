@@ -74,24 +74,23 @@ export const getSkeleton = (skeletonId) => (store) => {
 //   }
 // }
 
-// export const fetchSkeletons = () => async (dispatch) => {
-//   const res = await fetch('/api/skeletons');
-//   if (res.ok) {
-//     const skeletons = await res.json();
-//     dispatch(receiveSkeletons(skeletons));
-//     return Promise.resolve();
-//   }
-// };
-
-
 export const fetchSkeletons = () => async (dispatch) => {
-  let res = await fetch("/api/skeletons");
-  console.log("res in fetchSkeletons", res)
+  const res = await fetch('/api/skeletons');
   if (res.ok) {
-      let skeletons = await res.json();
-      dispatch(receiveSkeletons(skeletons))
+    const skeletons = await res.json();
+    dispatch(receiveSkeletons(skeletons));
+    return Promise.resolve();
   }
-}
+};
+
+
+// export const fetchSkeletons = () => async (dispatch) => {
+//   let res = await fetch("/api/skeletons");
+//   if (res.ok) {
+//       let skeletons = await res.json();
+//       dispatch(receiveSkeletons(skeletons))
+//   }
+// }
 
 export const fetchSkeleton = (skeletonId) => async (dispatch) => {
   const res = await fetch(`/api/skeletons/${skeletonId}`);
@@ -188,8 +187,7 @@ const skeletonsReducer = (state = {}, action) => {
     case RECEIVE_SKELETONS:
       return {...newState, ...action.skeletons};
     case RECEIVE_SKELETON:
-      return newState[action.skeleton.id] = action.skeleton;
-      // return {[action.skeleton.id]: action.skeleton }
+      return {...newState, [action.skeleton._id]: action.skeleton}
     case REMOVE_SKELETON:
       delete newState[action.skeletonId];
       return newState;

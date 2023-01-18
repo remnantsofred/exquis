@@ -34,7 +34,6 @@ router.get('/user/:userId', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    console.log("inside backend skeleton get route")
     const skeleton = await Skeleton.findById(req.params.id)
                              .populate("owner", "id, username");
     return res.json(skeleton);
