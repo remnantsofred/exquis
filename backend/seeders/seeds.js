@@ -142,7 +142,7 @@ skeletons.forEach(skeleton => {
   const skeletonId = skeleton._id;
 
   const boneForOwner = new Bone ({
-    body: faker.lorem.paragraph(),
+    text: faker.lorem.paragraph(),
     skeleton: skeletonId,
     author: skeleton.owner
   });
@@ -151,7 +151,7 @@ skeletons.forEach(skeleton => {
 
   skeleton.collaborators.forEach(collaborator => {
     const bone = new Bone ({
-      body: faker.lorem.paragraph(),
+      text: faker.lorem.paragraph(),
       skeleton: skeletonId,
       author: collaborator
     });
