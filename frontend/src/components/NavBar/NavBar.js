@@ -32,10 +32,10 @@ function NavBar () {
     if (loggedIn) {
       return (
         <div className="links-nav">
-          <Link to={'/skeletons'} id="skeleton-index-link">All Skeletons</Link>
-          <Link to={'/profile'} id="profile-link">Profile</Link>
-          <Link to={'/skeletons/new'} id="skeleton-form-link">New Skeleton</Link>
-          <Link onClick={logoutUser} id="logout-button">Logout</Link>
+          <Link to={'/skeletons'} id="skeleton-index-link">all skeletons</Link>
+          <Link to={'/profile'} id="profile-link">profile</Link>
+          <Link to={'/skeletons/new'} id="skeleton-form-link">new skeleton</Link>
+          <Link onClick={logoutUser} id="logout-button">logout</Link>
 
         </div>
       );
