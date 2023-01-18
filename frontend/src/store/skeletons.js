@@ -40,14 +40,33 @@ const receiveUserSkeletons = skeletons => ({
 
 
 
-export const getSkeletons = state => {
-    const skeletons = Object.values(state.skeletons);
-    return skeletons;
-}
+// export const getSkeletons = state => {
+//     const skeletons = Object.values(state.skeletons);
+//     return skeletons;
+// }
 
-export const getSkeleton = (state, skeletonId) => state.skeletons[skeletonId];
+// export const getSkeleton = (state, skeletonId) => state.skeletons[skeletonId];
 
+// export const getSkeleton = skeletonId => store
 
+export const getSkeletons = (store) => { 
+  if (store.skeletons) return Object.values(store.skeletons);
+  return [];
+}; 
+
+export const getSkeleton = (skeletonId) => (store) => {
+  console.log('STORE SKELETONS HERE ')
+  console.log(store.skeletons)
+  console.log('SPECIFIC SKELETON HEY HEY HEY HEY')
+  console.log(store.skeletons[skeletonId])
+  // if (store.skeletons && store.skeletons[skeletonId]) {
+  if (store.skeletons && store.skeletons[skeletonId]) {
+    console.log('HERE IS GET SKELETON FROM SKELETONS JS')
+    return store.skeletons[skeletonId]
+  } else {
+    console.log('NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
+    return null;
+}};
 
 // THUNK ACTION CREATORS
 
@@ -155,21 +174,38 @@ export const skeletonErrorsReducer = (state = nullErrors, action) => {
   }
 }
 
-const skeletonsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+
+const skeletonsReducer = (state = {}, action) => {
+  let newState = { ... state};
   switch (action.type) {
-    case RECEIVE_SKELETON:
-        return { ...state, new: action.skeleton, new: undefined };
     case RECEIVE_SKELETONS:
-        return { ...state, all: action.skeletons };
-    case RECEIVE_USER_SKELETONS:
-        return {...state, user: action.skeletons, new: undefined };
+      return {...newState, ...action.skeletons};
+    case RECEIVE_SKELETON:
+      return { ...newState, [action.skeleton.id]: action.skeleton };
     case REMOVE_SKELETON:
-        const newState = { ...state };
-        delete newState[action.skeletonId];
-        return newState;
+      delete newState[action.skeletonId];
+      return newState;
     default:
-        return state;
+      return state;
   }
 }
+
+// const skeletonsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+//   switch (action.type) {
+//     case RECEIVE_SKELETON:
+//       return action.skeleton
+//         // return { ...state, new: action.skeleton, new: undefined };
+//     case RECEIVE_SKELETONS:
+//         return { ...state, all: action.skeletons };
+//     case RECEIVE_USER_SKELETONS:
+//         return {...state, user: action.skeletons, new: undefined };
+//     case REMOVE_SKELETON:
+//         const newState = { ...state };
+//         delete newState[action.skeletonId];
+//         return newState;
+//     default:
+//         return state;
+//   }
+// }
 
 export default skeletonsReducer;

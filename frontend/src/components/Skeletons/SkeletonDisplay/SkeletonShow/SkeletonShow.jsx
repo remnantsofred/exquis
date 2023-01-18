@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getSkeleton, fetchSkeleton, updateSkeleton } from '../../../../store/skeletons'
-
+import { useState } from "react"
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
@@ -10,14 +10,27 @@ import "./SkeletonShow.css"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
+  const [loaded, setLoaded] = useState(false)
+
   const { skeletonId } = useParams()
-  const Skellie = useSelector(getSkeleton(skeletonId))
+  const skeleton = useSelector(getSkeleton(skeletonId))
+
+  console.log(skeletonId)
 
   useEffect(() => {
-    dispatch(fetchSkeleton(skeletonId))
+    Promise.all([
+      dispatch(fetchSkeleton(skeletonId))
+    ]).then(()=>{
+      setLoaded(true);
+    })
   }, [dispatch, skeletonId])
 
-  console.log(Skellie)
+  // useEffect(() => {
+  //   dispatch(fetchSkeleton(skeletonId))
+  // }, [dispatch, skeletonId])
+
+  console.log('hey look listen! skellie here')
+  console.log(skeleton)
 
   // const title = Skellie.title
   // const body = Skellie.body
@@ -30,7 +43,7 @@ const SkeletonShow = () => {
   // const likes = Skellie.likes
   // const currentCollaborator = CurrentCollaboratorFxn(Skellie)
 
-  if (!skeletonId) {
+  if (!loaded) {
     return (
       null
     )
@@ -40,6 +53,9 @@ const SkeletonShow = () => {
       <h1>
         HELLO???????????????
       </h1>
+      {/* <h2>
+        {skeleton.title}
+      </h2> */}
     </>
   )
 }
