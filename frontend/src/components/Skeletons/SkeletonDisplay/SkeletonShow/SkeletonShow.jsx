@@ -53,9 +53,15 @@ const SkeletonShow = () => {
       <h1>
         HELLO???????????????
       </h1>
-      {/* <h2>
+      <h2>
         {skeleton.title}
-      </h2> */}
+      </h2>
+      <h2>
+        {skeleton.owner.username}
+      </h2>
+      <h2>
+        {skeleton.title}
+      </h2>
     </>
   )
 }
