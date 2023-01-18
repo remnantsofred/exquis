@@ -16,16 +16,13 @@ router.get('/', function(req, res, next) {
     message: "GET /api/users"
   });
 });
-
-
-
+  
 router.post('/register', validateRegisterInput, async (req, res, next) => {
-  // Check to make sure no one has already registered with the proposed email or
-  // username.
+
   const user = await User.findOne({
     $or: [{ email: req.body.email }, { username: req.body.username }]
   });
-
+  
   if (user) {
     // Throw a 400 error if the email address and/or email already exists
     const err = new Error("Validation Error");
@@ -46,7 +43,7 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     username: req.body.username,
     email: req.body.email
   });
-
+  
   bcrypt.genSalt(10, (err, salt) => {
     if (err) throw err;
     bcrypt.hash(req.body.password, salt, async (err, hashedPassword) => {

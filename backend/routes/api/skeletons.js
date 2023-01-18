@@ -62,20 +62,8 @@ router.get('/:id', async (req, res, next) => {
 // to req.user. (requireUser will return an error response if there is no 
 // current user.) Also attach validateSkeletonInput as a middleware before the 
 // route handler.
-router.post(
-  '/', 
-  requireUser, 
-  validateSkeletonInput, 
-  // check('title').custom(( value, {req}) => {
-  //   console.log( Skeleton.findOne({title: value, owner: req.user._id}), "skeleton");
-  //   return Skeleton.findOne({title: value, owner: req.user._id}).then(skeleton => {
-  //     if (skeleton) {
-  //       handleValidationErrors
-  //       return Promise.reject('Skeleton title already in use');
-  //     }
-  //   });
-  // }),
-  async (req, res, next) => {
+router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
+    console.log("hit backend skeleton post route")
   try {
     const newSkeleton = new Skeleton({
       owner: req.user._id,
