@@ -6,7 +6,7 @@ import { createSkeleton } from '../../../store/skeletons';
 function SkeletonForm () {
   const [title, setTitle] = useState('');
   const [prompt, setPrompt] = useState('')
-  const [maxBones, setMaxBones] = useState(4);
+  const [maxBones, setMaxBones] = useState();
   const [maxCollaborators, setMaxCollaborators] = useState(1);
   const [tags, setTags] = useState([]);
 
@@ -109,10 +109,10 @@ function SkeletonForm () {
             </h2>
           </span>
           <br/>
-          <input type="nummber"
+          <input type="number"
             value={maxBones}
             onChange={update('maxBones')}
-            placeholder="Max Bones"
+            placeholder="At least 5 bones"
             className='skellie-input'
           />
         </label>
@@ -124,7 +124,7 @@ function SkeletonForm () {
             </h2>
           </span>
           <br/>
-          <input type="nummber"
+          <input type="number"
             value={maxCollaborators}
             onChange={update('maxCollaborators')}
             placeholder="Max Collaborators"
