@@ -65,15 +65,34 @@ const ProfilePage = () => {
             <h1 id="username">
               {user.username}
             </h1>
+            <hr id="username-line-divider" />
           </div>
 
         </div>
       </div>
-      <div className='skeletons-block'>
-        <ul className='skeletons-block-list'>
+      <div className='profile-bottom'>
+        <div className='profile-top-bottom'>
+          <div className='skeletons-block' id="current-skeletons-block">
+            <h2 className='profile-bottom-title'>Current Skeletons</h2>
+            <ul className='skeletons-block-list' id="current-skeletons-block-list">
 
-        </ul>
+            </ul>
+          </div>
+          <div className='skeletons-block' id="owned-skeletons-block">
+            <h2 className='profile-bottom-title'>Owned Skeletons</h2>
+            <ul className='skeletons-block-list' id="owned-skeletons-block-list">
+
+            </ul>
+          </div>
+        </div>
+        <div className='bottom-skeletons-block' id="previous-skeletons-block">
+          <h2 className='profile-bottom-title'>Previous Skeletons</h2>
+          <ul className='skeletons-block-list' id="previous-skeletons-block-list">
+
+          </ul>
+        </div>
       </div>
+
 
 
     </div>
