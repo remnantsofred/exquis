@@ -2,9 +2,10 @@ div.general-profile-container {
   /* align-items: center; */
   text-align: left;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding-left: 4vw;
   padding-right: 4vw;
+  justify-content: space-between;
 }
 
 h1.current-user-greeting, h2.current-user-sub-greeting, ul.current-user-options {
@@ -34,6 +35,39 @@ hr.current-user-hr {
 
 li.user-option {
   margin-top: 2vh;
-  
+
 }
+
+div.general-profile-left {
+  width: min-content;
+  margin-top: 20vh;
+  margin-left: 4vw;
+}
+
+div.general-profile-right {
+  margin-top: 2vh;
+  width: 1vw;
+  height: 5vw;
+  margin-right: 45vw;
+  /* margin-left: 5vw; */
+}
+
+img#skull-buddy-ani {
+  object-fit: contain;
+  width: 45vw;
+  height: 45vw;
+  transition: 1s;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px #979cc6;
+}
+
+img#skull-buddy-ani:hover {
+  transition: 1s;
+  box-shadow: 0px 0px 10px #979cc6;
+  filter: hue-rotate(275deg);
+}
+
+div#current-user-whitespace > br.whitespace {
+  margin-bottom: 20vw;
+} 
 
