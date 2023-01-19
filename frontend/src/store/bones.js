@@ -99,7 +99,6 @@ export const createBone = (skeletonId, data) => async dispatch => {
           method: 'POST',
           body: JSON.stringify(data)
       });
-      console.log("res", res)
       const newBone = await res.json();
       dispatch(receiveBone(newBone));
   } catch (err) {

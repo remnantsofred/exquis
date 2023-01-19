@@ -7,7 +7,7 @@ const IndexSkeletonDisplay = ({ skelliesProps, skeletons, setLoaded}) => {
   // all skeletons? 
   // const skellies = user.followedSkeletons 
   if (skeletons) setLoaded(true)
-  console.log(skeletons, "skeletons")
+
   if (skeletons) {
     return (
       <ul className='index-skeleton-grid'>

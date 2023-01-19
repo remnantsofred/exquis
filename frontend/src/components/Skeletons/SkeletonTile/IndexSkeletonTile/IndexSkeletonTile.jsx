@@ -22,8 +22,6 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
   const tags = ["happy",  "nature", "scary",  "romance", "thriller", "mystery", "fantasy", "sci-fi"]
   // console.log(tags)
   // TODO: fetch skeleton bones from backend?
-  console.log(skeletonInfo)
-  console.log(skeletonInfo.title)
 
   return (
     <li className='skeleton-tile-object'>

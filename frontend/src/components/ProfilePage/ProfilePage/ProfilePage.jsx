@@ -20,7 +20,6 @@ const ProfilePage = () => {
     })
   }, [dispatch, userId])
 
-  console.log(userId)
   // const OwnedSkeletons = () => {
   //   const filteredSkeletons =  skeletons.filter(skeleton => skeleton.ownerId === userId);
   //   return (filteredSkeletons);

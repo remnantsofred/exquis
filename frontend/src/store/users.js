@@ -38,9 +38,6 @@ export const getUsers = (store) => {
 }; 
 
 export const getUser = (userId) => (store) => {
-  console.log('USERS JS')
-  console.log(userId)
-  console.log(store.users)
   if (store.users && store.users[userId]) return store.users[userId];
   return null;
 };

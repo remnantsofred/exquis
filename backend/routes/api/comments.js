@@ -38,8 +38,6 @@ router.get('/skeletons/:skeletonId', async (req, res) => {
   let parent;
   try {
     parent = await Skeleton.findById(req.params.skeletonId);
-    console.log(parent)
-    console.log(req.params)
   }
 
   catch(err) {
@@ -49,7 +47,7 @@ router.get('/skeletons/:skeletonId', async (req, res) => {
     return next(error); 
   }
   try {
-    console.log(Comment.find({ parent: skeleton }), "comment.find({ parent: skeleton })")
+    // console.log(Comment.find({ parent: skeleton }), "comment.find({ parent: skeleton })")
     const comments = await Comment.find({ parent: skeleton._id })
                                .sort({ createdAt: -1 })
                                .populate("author", "_id, username");

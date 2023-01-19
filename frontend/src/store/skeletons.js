@@ -118,13 +118,11 @@ export const fetchSkeleton = (skeletonId) => async (dispatch) => {
 // }
 
 export const createSkeleton = data => async dispatch => {
-  console.log("data", data)
   try {
       const res = await jwtFetch('/api/skeletons/', {
           method: 'POST',
           body: JSON.stringify(data)
       });
-      console.log("res", res)
       const newSkeleton = await res.json();
       dispatch(receiveSkeleton(newSkeleton));
   } catch (err) {
