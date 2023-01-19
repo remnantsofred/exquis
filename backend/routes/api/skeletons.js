@@ -150,9 +150,7 @@ router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
     });
 
     let skeleton = await newSkeleton.save();
-    skeleton = await skeleton.populate('owner', '_id, username')
-                              .populate("collaborators", "_id, username")
-                              .populate("comments")
+    skeleton = await skeleton
                               // .populate("tags")
                               // .populate("likes")
     return res.json(skeleton);

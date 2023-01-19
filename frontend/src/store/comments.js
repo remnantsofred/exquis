@@ -106,18 +106,18 @@ export const createComment = (newComment, skeletonId )=> async dispatch => {
         dispatch(receiveComment(comment));
         fetchSkeletonCommentsLocal(skeletonId);
     } catch (err) {
-        console.log("error in createComment")
+        // console.log("error in createComment")
     }
 }
 
 export const updateComment = comment => async dispatch => {
-    console.log("comment in updateComment", comment)
+    // console.log("comment in updateComment", comment)
     try {
         const res = await jwtFetch(`/api/comments/${comment._id}`, { // /api/comments/skeletons/${skeletonId}/${commentId}
             method: 'PATCH',
             body: JSON.stringify(comment)
         });
-        console.log("res in updateComment", res)
+        // console.log("res in updateComment", res)
         const updatedComment = await res.json();
         dispatch(receiveComment(updatedComment));
     } catch (err) {

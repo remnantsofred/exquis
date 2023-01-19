@@ -38,7 +38,7 @@ const ProfilePage = () => {
         skellies
       )
     case "previous":
-      console.log('hello???')
+      // console.log('hello???')
       return (
         skellies
       )
@@ -53,9 +53,9 @@ const ProfilePage = () => {
     whichSkellies(e.target.id)
   }
 
-  console.log(userId, "userId from profile page")
-  console.log(user, "user from profile page")
-  // const OwnedSkeletons = () => {
+  // console.log(userId, "userId from profile page")
+  // console.log(user, "user from profile page")
+  // // const OwnedSkeletons = () => {
   //   const filteredSkeletons =  skeletons.filter(skeleton => skeleton.ownerId === userId);
   //   return (filteredSkeletons);
   // }

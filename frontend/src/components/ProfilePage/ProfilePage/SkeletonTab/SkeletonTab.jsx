@@ -32,7 +32,7 @@ const SkeletonTab = (switchValue) => {
         </div>
       )
     case "previous":
-      console.log('hello???')
+      // console.log('hello???')
       return (
         <div className='skeletons-block' id="previous-skeletons-block">
         <h2 className='profile-bottom-title'>Previous Skeletons</h2>

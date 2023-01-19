@@ -44,6 +44,7 @@ function SkeletonForm () {
   }
 
   const skeletonSubmit = e => {
+
     e.preventDefault();
     const skeleton = {
       title,
@@ -52,9 +53,10 @@ function SkeletonForm () {
       maxCollaborators
     };
 
-    dispatch(createSkeleton(skeleton))
-    .then(() => {history.push(`/users/${currentUser._id}`)})
-
+    // Promise.all ([
+    //   dispatch(createSkeleton(skeleton))
+    // ]).then(() => setTimeout(history.push(`/skeletons/${skeleton._id}`), 1000))
+   
   }
 
   return (

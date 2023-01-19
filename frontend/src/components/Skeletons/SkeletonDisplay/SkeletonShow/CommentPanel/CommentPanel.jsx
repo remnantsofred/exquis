@@ -13,7 +13,7 @@ const CommentPanel= ({skeletonId, skellie, comments}) => {
     // const user = useSelector(state => state.session.user);
     const skeleton = useSelector(getSkeleton);  
    
-    console.log(comments)
+console.log("comments in commentPanel", comments)
 
     if (!comments) return null;
   

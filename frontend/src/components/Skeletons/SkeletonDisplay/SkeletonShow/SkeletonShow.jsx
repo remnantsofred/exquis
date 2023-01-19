@@ -25,6 +25,8 @@ const SkeletonShow = () => {
 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
+  // console.log("skeletonId: ", skeletonId)
+  // console.log("skellie.comments:", skellie.comments)
   const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
   //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
  
@@ -59,7 +61,7 @@ const SkeletonShow = () => {
   useEffect(() => {
     Promise.all([
       dispatch(fetchSkeleton(skeletonId)),
-      dispatch(fetchSkeletonComments(skeletonId))
+      // dispatch(fetchSkeletonComments(skeletonId))
     ]).then(()=>{
       setLoaded(true);
     })
@@ -70,7 +72,7 @@ const SkeletonShow = () => {
     return (
       <Loading />
     )
-  } else if (loaded && skellie) {
+  } else if (loaded && (skellie !== null)) {
     return (
       <>
         <div className="skellie-main-container">
@@ -119,8 +121,8 @@ const SkeletonShow = () => {
 
           <hr id="comment-divider" />
           <div className="comments-section">
-              <CommentForm />
-              <CommentPanel />
+              {/* <CommentForm />
+              <CommentPanel /> */}
 
           </div>
           
