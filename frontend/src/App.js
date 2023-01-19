@@ -18,6 +18,7 @@ import "./App.css"
 import SkeletonIndex from './components/Skeletons/SkeletonIndex/SkeletonIndex.jsx';
 import SkeletonForm from './components/Skeletons/SkeletonForm/SkeletonForm.jsx';
 import SkeletonShow from './components/Skeletons/SkeletonDisplay/SkeletonShow/SkeletonShow';
+import UpdateForm from './components/SessionForms/UpdateForm';
 
 
 
@@ -40,6 +41,7 @@ function App() {
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute exact path="/profile" component={CurrentUserProfilePage} />
+        <ProtectedRoute exact path="/edit/profile" component={UpdateForm} />
 
         <Route exact path="/users/:userId" component={ProfilePage} />
       </Switch>

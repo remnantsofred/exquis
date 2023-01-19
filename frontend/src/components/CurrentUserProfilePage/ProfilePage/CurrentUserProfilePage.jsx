@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Loading from '../../Loading/Loading'
 
 import AniFrame1 from '../../../assets/profile_page/exquis_smol_ani_1.png'
 import AniFrame2 from '../../../assets/profile_page/exquis_smol_ani_2.png'
+import DangerImage from '../../../assets/profile_page/danger_anger.jfif'
 
 import { getUser, fetchUser } from '../../../store/users'
 
@@ -17,6 +18,7 @@ const CurrentUserProfilePage = () => {
   const userId = sessionUser._id
   const [loaded, setLoaded] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [isDisobey, setIsDisobey] = useState(false)
   // const { userId } = useParams()
   // const [tabVal, setTabVal] = useState("current")
   // const [skellies, setSkellies] = useState({})
@@ -30,6 +32,12 @@ const CurrentUserProfilePage = () => {
       setLoaded(true);
     })
   }, [])
+
+  const DangerClick = () => {
+    console.log('is it working?')
+    setIsDisobey(true)
+    console.log(isDisobey)
+  }
 
   console.log(userId, "userId from profile page")
   // const OwnedSkeletons = () => {
@@ -45,7 +53,7 @@ const CurrentUserProfilePage = () => {
     )} else {
   return (
     <>
-      <div className='general-profile-container'>
+      <div className='general-current-user-profile-container'>
         <div className='general-profile-left'>
           <div className='profile-top'>
             <h1 className='current-user-greeting'>Hello <span id="current-user-username">{`${sessionUser.username}`}</span>,</h1>
@@ -54,9 +62,13 @@ const CurrentUserProfilePage = () => {
           </div>
           <div className="current-user-options-container">
             <ul className='current-user-options'>
-              <li className='user-option'>Go to my Page</li>
-              <li className='user-option'>Change Profile Settings</li>
-              <li className='user-option'>Don't think of clicking me. Don't do it.</li>
+              <Link to={`/users/${sessionUser._id}`} id="current-user-profile-link">
+                <li className='user-option'>Go to my Page</li>
+              </Link>
+              <Link to={`/edit/profile`} id="edit-current-user-profile-link">
+                <li className='user-option'>Update Profile Settings</li>
+              </Link>
+              <li className='user-option' onClick={DangerClick}>Don't think of clicking me. Don't do it.</li>
             </ul>
           </div>
         </div>
@@ -68,6 +80,11 @@ const CurrentUserProfilePage = () => {
           />
         </div>
       </div>
+      <img src={DangerImage} class={isDisobey ? "cat-activate" : "danger-image"} />
+      <h1 class={isDisobey ? "danger-text" : "silent-text"} id="danger-text-1">YOU JUST HAD TO - I WARNED YOU. I WARNED YOU BUT YOU SAID 'OOOH NO, NO NO I GOTTA PRESS IT NO'</h1>
+      <h1 class={isDisobey ? "danger-text" : "silent-text"} id="danger-text-2">LOOK WHAT YOU DID. NOW YOU HAVE TO REFRESH THE PAGE. ARE YOU HAPPY NOW???? ARE YOU???? ARE YOU HAPPY? ARE YOU??</h1>
+      <h1 class={isDisobey ? "danger-text" : "silent-text"} id="danger-text-3">YOU HAVEN'T REFRESHED YET?? WHAT ARE YOU WAITING FOR?? DEAR LORD</h1>
+
       <div id="current-user-whitespace">
         <br className='whitespace' />
         <br className='whitespace' />
