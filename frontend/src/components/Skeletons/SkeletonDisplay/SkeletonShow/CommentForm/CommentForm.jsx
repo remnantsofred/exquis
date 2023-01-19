@@ -28,7 +28,7 @@ const CommentForm = ({comment, skeleton}) => {
 
   const handleUpdateSubmit = (e) => {
       e.preventDefault();
-      const commentToUpdate = {"userId": user._id, "text": updatedComment, "skeletonId": skeleton._id, "commentId": comment._id}
+      const commentToUpdate = {"author": user._id, "text": updatedComment, "parent": skeleton._id, "_id": comment._id}
       dispatch(updateComment(commentToUpdate));
       setUpdatingComment(false);
       e.target.value = "";

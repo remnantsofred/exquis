@@ -100,7 +100,6 @@ router.get('/:id', async (req, res, next) => {
 
 
 router.patch('/:id', requireUser, validateCommentInput, async (req, res, next) => {
-  console.log("in patch")
   try {
     const comment = await Comment.findById(req.params.id);
     if (!comment) {
@@ -115,6 +114,8 @@ router.patch('/:id', requireUser, validateCommentInput, async (req, res, next) =
       error.errors = { message: "You are not authorized to edit this comment" };
       return next(error);
     }
+    console.log("comment: ", comment)
+    console.log("req.body: ", req.body)
     comment.text = req.body.text;
     await comment.save();
     return res.json(comment);
