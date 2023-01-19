@@ -84,7 +84,6 @@ const SkeletonShow = () => {
                   </div>
                 <hr />
             </div>
-          </div>
           <div className="show-middle">
               {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
               <div className="skeleton-body-input-container">
@@ -104,6 +103,7 @@ const SkeletonShow = () => {
                 </div>
               </div>
           </div>
+          </div>
             <div className="collaborator-panel">
               <div className="collaborator-panel-text">
                 <h2>Collaborators</h2>
@@ -114,7 +114,7 @@ const SkeletonShow = () => {
               </div>
             </div>
             <br />
-
+        </div>
         <hr id="comment-divider" />
           
         {/* <div className="comments-section">
@@ -127,7 +127,7 @@ const SkeletonShow = () => {
           <CommentPanel skeletonId={skellie._id} skellie={skellie} comments={skellie.comments}/>
         </div> */}
 
-      </div>
+      
 
       </>
     )

@@ -1,11 +1,11 @@
 div.skellie-main-container {
   display: inline-flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   /* flex-direction: row; */
   font-family: Inter, sans-serif;
   /* padding-bottom: 0; */
   /* padding-right: 0; */
-  width: 100vw;
+  width: 95vw;
   margin-right: 0em;
 }
 
@@ -15,6 +15,8 @@ div.show-top-middle {
   padding-left: 0vw;
   padding-right: 1vw;
   padding-top: 4vh;
+  display: flex;
+  flex-direction: column;
   /* margin-right: 10vw; */
   padding-bottom: 4vh;
 }
@@ -26,7 +28,7 @@ div.collaborator-panel {
   /* height: 100%; */
   min-height: 123vh;
   margin-top: 4vh;
-  /* margin-left: 2vw; */
+  margin-left: 5vw;
   text-align: center;
   align-items: center;
 
@@ -48,6 +50,7 @@ div.collaborator-panel-text {
   padding-bottom: 2.75vh;
   padding-left: 3vw;
   padding-right: 3vw;
+  margin-left: 12vw;
   border-radius: 25px;
 }
 
@@ -59,6 +62,8 @@ ul.collaborators-list {
 div.show-top {
   margin-left: 4vw;
   width: 55vw;
+  display: flex;
+  flex-direction: column;
   height: min-content;
   padding-left: 4vw;
   padding-right: 4vw;
