@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Loading from '../../Loading/Loading'
 
+import AniFrame1 from '../../../assets/profile_page/exquis_smol_ani_1.png'
+import AniFrame2 from '../../../assets/profile_page/exquis_smol_ani_2.png'
+
 import { getUser, fetchUser } from '../../../store/users'
 
 import Banner from '../../../assets/profile_page/exquis_banner.png'
