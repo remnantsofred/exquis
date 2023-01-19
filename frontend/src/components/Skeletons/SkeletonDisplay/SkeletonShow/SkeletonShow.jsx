@@ -10,6 +10,8 @@ import PlaceBones from "./PlaceBones"
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
+import CommentForm from "./CommentForm/CommentForm"
+import CommentPanel from "./CommentPanel/CommentPanel"
 import "./SkeletonShow.css"
 
 const SkeletonShow = () => {
@@ -122,9 +124,10 @@ const SkeletonShow = () => {
 
           </div>
         </div>
-          
+        <hr id="comment-divider" />
         <div className="comments-section">
-            
+            <CommentForm />
+            <CommentPanel />
         </div>
 
       </>

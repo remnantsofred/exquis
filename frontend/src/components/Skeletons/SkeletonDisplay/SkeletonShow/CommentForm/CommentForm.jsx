@@ -1,4 +1,4 @@
-
+import './CommentForm.css'
 
 const CommentForm = () => {
 
@@ -9,9 +9,11 @@ const CommentForm = () => {
   const commentBody = 'anyone over the age of six celebrating a birthday shoudl go to hell'
 
   return (
-    <div>
-        <h3>{commenter}</h3>
-        <p>{commentBody}</p>
+    <div id="comment-form-container">
+        <h2 for="comment" id="comment-form-label">Thoughts?</h2>
+        <br />
+        <input name="comment" id="comment-input" />
+        <button type="submit" id="submit-comment-button">Submit Your Comment</button>
     </div>
   )
 }
