@@ -26,8 +26,8 @@ router.get('/user/:userId', async (req, res, next) => {
                               .populate("owner", "_id, username")
                               .populate("collaborators", "_id, username")
                               .populate("comments")
-                              .populate("tags")
-                              .populate("likes")
+                              // .populate("tags")
+                              // .populate("likes")
     return res.json(skeletons);
   }
   catch(err) {
@@ -42,8 +42,8 @@ router.get('/:id', async (req, res, next) => {
                              .populate("owner", "_id, username")
                              .populate("collaborators", "_id, username")
                              .populate("comments")
-                             .populate("tags")
-                             .populate("likes")
+                            //  .populate("tags")
+                            //  .populate("likes")
     return res.json(skeleton);
   }
   catch(err) {
@@ -122,8 +122,8 @@ router.get('/', async (req, res) => {
                               .populate("owner", "_id, username")
                               .populate("collaborators", "_id, username")
                               .populate("comments")
-                              .populate("tags")
-                              .populate("likes")                         
+                              // .populate("tags")
+                              // .populate("likes")                         
                               .sort({ createdAt: -1 });
     return res.json(skeletons);
   }
@@ -153,8 +153,8 @@ router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
     skeleton = await skeleton.populate('owner', '_id, username')
                               .populate("collaborators", "_id, username")
                               .populate("comments")
-                              .populate("tags")
-                              .populate("likes")
+                              // .populate("tags")
+                              // .populate("likes")
     return res.json(skeleton);
   }
   catch(err) {

@@ -6,7 +6,7 @@ const GenSkeletonDisplay = ({ skeletons, setLoaded }) => {
   // all skeletons? 
   // const skellies = user.followedSkeletons 
 
-  if (skeletons) setLoaded(true)
+  // if (skeletons) setLoaded(true)
 
   return (
     <ul className='skeleton-grid'>
