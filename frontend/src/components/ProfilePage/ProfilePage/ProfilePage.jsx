@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import Loading from '../../Loading/Loading'
 
 import { getUser, fetchUser } from '../../../store/users'
+import SkeletonTab from './SkeletonTab/SkeletonTab'
 
 import Banner from '../../../assets/profile_page/exquis_banner.png'
 import ProfileIcon from '../../../assets/profile_page/exquis_profile_icon.png'
@@ -13,6 +14,8 @@ const ProfilePage = () => {
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false)
   const { userId } = useParams()
+  const [tabVal, setTabVal] = useState("current")
+  const [skellies, setSkellies] = useState({})
   const user = useSelector(getUser(userId))
 
   useEffect(() => {
@@ -24,14 +27,31 @@ const ProfilePage = () => {
     })
   }, [])
 
-  // useEffect(() => {
-  //   Promise.all([
-  //     dispatch(fetchUser(userId))
-      
-  //   ]).then(()=>{
-  //     // setLoaded(true);
-  //   })
-  // }, [dispatch, userId])
+  const whichSkellies = (switchValue) => {
+   switch(switchValue) {
+    case "current":
+      return (
+        skellies
+      )
+    case "owned":
+      return (
+        skellies
+      )
+    case "previous":
+      console.log('hello???')
+      return (
+        skellies
+      )
+    default:
+      return (
+        "death, destruction"
+      )
+  }}
+
+  const handleClick = (e) => {
+    setTabVal(e.target.id)
+    whichSkellies(e.target.id)
+  }
 
   console.log(userId, "userId from profile page")
   console.log(user, "user from profile page")
@@ -71,27 +91,37 @@ const ProfilePage = () => {
         </div>
       </div>
       <div className='profile-bottom'>
-        <div className='profile-top-bottom'>
-          <div className='skeletons-block' id="current-skeletons-block">
-            <h2 className='profile-bottom-title'>Current Skeletons</h2>
-            <ul className='skeletons-block-list' id="current-skeletons-block-list">
-
-            </ul>
+        <div className='profile-skeleton-tab-bar'>
+          <div>
+            <h3 className='profile-skeleton-tab'
+                onClick={(e) => handleClick(e)}
+                id="current"
+              >
+              Current Skeletons
+            </h3>
           </div>
-          <div className='skeletons-block' id="owned-skeletons-block">
-            <h2 className='profile-bottom-title'>Owned Skeletons</h2>
-            <ul className='skeletons-block-list' id="owned-skeletons-block-list">
-
-            </ul>
+          <div>
+            <h3 className='profile-skeleton-tab'
+              onClick={(e) => handleClick(e)}
+              id="owned"
+              >
+              Owned Skeletons
+            </h3>
           </div>
-        </div>
-        <div className='bottom-skeletons-block' id="previous-skeletons-block">
-          <h2 className='profile-bottom-title'>Previous Skeletons</h2>
-          <ul className='skeletons-block-list' id="previous-skeletons-block-list">
-
-          </ul>
+          <div>
+            <h3 className='profile-skeleton-tab'
+              onClick={(e) => handleClick(e)}
+              id="previous"
+              >
+              Previous Skeletons
+            </h3>
+          </div>
         </div>
       </div>
+      <div>
+        <SkeletonTab switchValue={tabVal} />
+      </div>
+
 
 
 

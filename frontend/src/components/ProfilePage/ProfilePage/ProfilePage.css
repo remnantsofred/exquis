@@ -37,7 +37,7 @@ div.profile-icon-border {
     max-height: 40vh;
     object-fit: cover;
     border-radius: 50%;
-    box-shadow: 0px 0px 4px rgb(243, 243, 243);
+    box-shadow: 0px 0px 4px rgb(206, 206, 206);
 }
 
 div.profile-icon {
@@ -90,18 +90,43 @@ h1#username {
 
 hr#username-line-divider {
   margin-top: 12vh;
-  width: 80%;
+  margin-left: 18.5vw;
+  width: 62.5vw;
+  align-self: center;
 }
 
 div.username-block {
   width: 98vw;
-  height: 23vh;
+  height: 18vh;
+  align-content: center;
 }
 
 div.profile-bottom {
   align-items: center;
   margin-left: auto;
   margin-right: auto;
+}
+
+div.profile-skeleton-tab-bar {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3vh;
+}
+
+h3.profile-skeleton-tab  {
+  font-family: Inter, sans-serif;
+  margin-left: 0;
+  /* margin-right: 1.5vw; */
+  transition: .5s;
+  padding: 2vw;
+}
+
+h3.profile-skeleton-tab:hover  {
+  font-family: Inter, sans-serif;
+  color: aliceblue;
+  background-color: #35374D;
+  transition: .5s;
+  cursor: pointer;
 }
 
 div.profile-top-bottom {
@@ -115,7 +140,7 @@ div.profile-top-bottom {
 }
 
 div.skeletons-block {
-  width: 32vw;
+  width: 75vw;
   height: 40vh;
   background-color: rgba(188, 208, 228, 0.436);
   border-radius: 25px;
@@ -123,6 +148,7 @@ div.skeletons-block {
   padding-bottom: 4vh;
   padding-left: 4vw;
   padding-right: 4vw;
+  margin-top: 4vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -139,4 +165,8 @@ div.bottom-skeletons-block {
   margin-left: auto;
   margin-right: auto;
   background-color: rgba(188, 208, 228, 0.436);
+}
+
+h2.profile-bottom-title {
+  font-family: Inter, sans-serif;
 }
