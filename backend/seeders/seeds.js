@@ -84,13 +84,18 @@ skeletons.forEach(skeleton => {
 // Seed comments
 const comments = [];
 
-for (let i = 0; i < NUM_SEED_COMMENTS; i++) {
-  const comment = new Comment ({
-    text: faker.lorem.paragraph(),
-    parent: skeletons[random]._id,
-    author: users[random]._id
-  });
-  comments.push(comment);
+for (const skeleton of skeletons) {
+
+  for (let i = 0; i < NUM_SEED_COMMENTS; i++) {
+    const comment = new Comment ({
+      text: faker.lorem.paragraph(),
+      parent: skeleton._id,
+
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
+    });
+
+    comments.push(comment);
+  }
 }
 
 
@@ -114,13 +119,16 @@ comments.forEach(comment => {
 // Seed likes
 const likes = [];
 
-for (let i = 0; i < NUM_SEED_LIKES; i++) {
-  const like = new Like ({
-    skeleton: skeletons[random]._id,
-    liker: users[random]._id,
-    type: faker.random.word(["like", "dislike"])
-  });
-  likes.push(like);
+for (const skeleton of skeletons) {
+  
+  for (let i = 0; i < NUM_SEED_LIKES; i++) {
+    const like = new Like ({
+      skeleton: skeleton._id,
+      liker: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      type: faker.random.word(["like", "dislike", "like", "like"]) //[1, -1, 1, 1, 1, -1, -1]
+    });
+    likes.push(like);
+  }
 }
 
 likes.forEach(like => {

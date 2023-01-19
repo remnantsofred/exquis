@@ -1,13 +1,15 @@
 import jwtFetch from './jwt';
 
-export const RECEIVE_COMMENT = 'RECEIVE_COMMENT';
-export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
-export const REMOVE_COMMENT = 'REMOVE_COMMENT';
-export const RECEIVE_COMMENT_ERRORS = 'RECEIVE_COMMENT_ERRORS';
-export const CLEAR_COMMENT_ERRORS = 'CLEAR_COMMENT_ERRORS';
-export const RECEIVE_USER_COMMENTS = 'RECEIVE_USER_COMMENTS';
-export const RECEIVE_SKELETON_COMMENTS = 'RECEIVE_SKELETON_COMMENTS';
+export const RECEIVE_COMMENT = 'comments/RECEIVE_COMMENT';
+export const RECEIVE_COMMENTS = 'comments/RECEIVE_COMMENTS';
+export const REMOVE_COMMENT = 'comments/REMOVE_COMMENT';
+export const RECEIVE_COMMENT_ERRORS = 'comments/RECEIVE_COMMENT_ERRORS';
+export const CLEAR_COMMENT_ERRORS = 'comments/CLEAR_COMMENT_ERRORS';
+export const RECEIVE_USER_COMMENTS = 'comments/RECEIVE_USER_COMMENTS';
+export const RECEIVE_SKELETON_COMMENTS = 'comments/RECEIVE_SKELETON_COMMENTS';
 
+
+// ACTION CREATORS
 export const receiveComment = comment => ({
     type: RECEIVE_COMMENT,
     comment
@@ -37,74 +39,85 @@ export const receiveUserComments = comments => ({
     comments
 });
 
-export const receiveSkeletonComments = comments => ({
+export const receiveSkeletonComments = (skeletonId, comments) => ({
     type: RECEIVE_SKELETON_COMMENTS,
+    skeletonId,
     comments
 });
 
 
+// export const getSkeletonComments = (state, skeletonId) => {
+//     // console.log("skeletonId inside getSkeletonComments", skeletonId)
+//     // const comments = Object.values(state.comments);
+//     // return comments.filter(comment => comment.skeletonId === skeletonId);
+
+//     // return Object.values(state.comments).filter(comment => comment.skeletonId === skeletonId);
+//     // let skeleton = state.entities.skeletons[skeletonId];
+//     // let comments = skeleton.comments.map(commentId => state.entities.comments[commentId]);
+//     // return comments;
+
+// }
+
+
+
+// THUNK ACTION CREATORS
+
 export const fetchComments = () => async dispatch => {
-    try {
-        const res = await jwtFetch('/api/comments');
+    const res = await fetch('/api/comments');
+    if (res.ok) {
         const comments = await res.json();
         dispatch(receiveComments(comments));
-    } catch (err) {
-        const resBody = await err.json();
-        if (resBody.statusCode === 400) {
-        dispatch(receiveErrors(resBody.errors));
-        }
     }
 }
 
 export const fetchUserComments = userId => async dispatch => {
-    try {
-        const res = await jwtFetch(`/api/comments/users/${userId}`);
+    const res = await fetch(`/api/comments/users/${userId}`);
+    if (res.ok) {
         const comments = await res.json();
         dispatch(receiveUserComments(comments));
-    } catch (err) {
-        const resBody = await err.json();
-        if (resBody.statusCode === 400) {
-        dispatch(receiveErrors(resBody.errors));
-        }
     }
 }
+
 
 export const fetchSkeletonComments = skeletonId => async dispatch => {
-    try {
-        const res = await jwtFetch(`/api/comments/skeletons/${skeletonId}`);
+    const res = await fetch(`/api/comments/skeletons/${skeletonId}`);
+    if (res.ok) {
         const comments = await res.json();
-        dispatch(receiveSkeletonComments(comments));
-    } catch (err) {
-        const resBody = await err.json();
-        if (resBody.statusCode === 400) {
-            dispatch(receiveErrors(resBody.errors));
-        }
+        dispatch(receiveSkeletonComments(skeletonId, comments));
+        // dispatch(receiveSkeletonComments(comments));
+    }
+}
+const fetchSkeletonCommentsLocal = skeletonId => async dispatch => {
+    const res = await fetch(`/api/comments/skeletons/${skeletonId}`);
+    if (res.ok) {
+        const comments = await res.json();
+        dispatch(receiveSkeletonComments(skeletonId, comments));
     }
 }
 
 
-export const createComment = data => async dispatch => {
+export const createComment = (newComment, skeletonId )=> async dispatch => {
     try {
-        const res = await jwtFetch('/api/comments', {
+        const res = await jwtFetch(`/api/comments/skeletons/${skeletonId}`, {
             method: 'POST',
-            body: JSON.stringify(data)
+            body: JSON.stringify(newComment)
         });
-        const newComment = await res.json();
-        dispatch(receiveComment(newComment));
+        const comment = await res.json();
+        dispatch(receiveComment(comment));
+        fetchSkeletonCommentsLocal(skeletonId);
     } catch (err) {
-        const resBody = await err.json();
-        if (resBody.statusCode === 400) {
-            dispatch(receiveErrors(resBody.errors));
-        }
+        console.log("error in createComment")
     }
 }
 
-export const updateComment = commentId => async dispatch => {
+export const updateComment = comment => async dispatch => {
+    console.log("comment in updateComment", comment)
     try {
-        const res = await jwtFetch(`/api/comments/${commentId}`, {
+        const res = await jwtFetch(`/api/comments/${comment._id}`, { // /api/comments/skeletons/${skeletonId}/${commentId}
             method: 'PATCH',
-            body: JSON.stringify(commentId)
+            body: JSON.stringify(comment)
         });
+        console.log("res in updateComment", res)
         const updatedComment = await res.json();
         dispatch(receiveComment(updatedComment));
     } catch (err) {
@@ -147,24 +160,43 @@ export const commentErrorReducer = (state = nullErrors, action) => {
 }
 
 
-const commentsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+// const commentsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+//     let newState = {...state};
+//     switch (action.type) {
+//         case RECEIVE_COMMENT:
+//             // return { ...state, all: { ...state.all, [action.comment.id]: action.comment}, new: action.comment };
+//             return { ...newState, [action.comment._id]: action.comment};
+//         case RECEIVE_COMMENTS:
+//             return { ...newState, all: action.comments };
+//         case REMOVE_COMMENT:
+//             delete newState.all[action.commentId];
+//             return newState;
+//         case RECEIVE_USER_COMMENTS:
+//             return { ...newState, user: action.comments };
+//         case RECEIVE_SKELETON_COMMENTS:
+//             return { ...newState, skeleton: action.comments};
+//         default:
+//             return state;
+//     }
+// }
+const commentsReducer = (state = {  }, action) => {
+    let newState = {...state};
     switch (action.type) {
-        case RECEIVE_COMMENTS:
-            return { ...state, all: action.comments, user: action.comments };
         case RECEIVE_COMMENT:
-            return { ...state, all: { ...state.all, [action.comment.id]: action.comment}, new: action.comment };
-            // return { ...state, new: action.comment};
+            // return { ...state, all: { ...state.all, [action.comment.id]: action.comment}, new: action.comment };
+            // return newState[action.comments.comment_id];
+            return { ...newState, [action.comment._id]: action.comment};
+        case RECEIVE_COMMENTS:
+            return { ...newState, ...action.comments };
         case REMOVE_COMMENT:
-            const newState = { ...state };
             delete newState.all[action.commentId];
             return newState;
         case RECEIVE_USER_COMMENTS:
-            return { ...state, user: action.comments, new: undefined };
-        case RECEIVE_SKELETON_COMMENTS:
-            return { ...state, skeleton: action.comments, new: undefined };
+            return { ...newState, ...action.comments };
+        // case RECEIVE_SKELETON_COMMENTS:
+        //     return { ...newState, ...action.skeletons.skeleton._id.comment};
         default:
             return state;
     }
 }
-
 export default commentsReducer;
