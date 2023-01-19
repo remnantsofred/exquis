@@ -45,11 +45,11 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
               <DownvoteButton />
             </div>
           </div>
-          <div className="index-skeleton-tags-container">
+          {/* <div className="index-skeleton-tags-container"> */}
             <ul className='index-skeleton-tags'>
               {tags.map((tag) => <p className="index-ind-tag" key={tag} > #{`${tag}`} </p>)}
             </ul>
-          </div>
+          {/* </div> */}
       </div>
     </li>
   )

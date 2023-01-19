@@ -86,17 +86,17 @@
     /* margin-bottom: -10.5vw; */
     display: -webkit-box;
     /* margin-bottom: 3vw; */
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 5;
       /* number of lines to show */
-    line-clamp: 4;
+    line-clamp: 5;
     -webkit-box-orient: vertical;
   }
 
   div.index-skeleton-likes-container {
     display: flexbox;
-    scale: 60%;
-    margin-left: auto;
-    margin-right: 0;
+    scale: 75%;
+    margin-left: 1vw;
+    margin-right: -2.5vw;
     text-align: center;
     align-content: center;
     vertical-align: center;
@@ -156,36 +156,75 @@
 
   div.index-skeleton-tags-container {
     width: 27vw;
-    height: 5vh;
-    margin-bottom: 3vh;
-    background-color: white;
-    padding-top: 2vh;
-    padding-left: 2vh;
-    padding-right: 2vh;
+    height: 1.75vh;
+    /* margin-top: min(5vh); */
+    /* margin-bottom: 4vh; */
+    /* background-color: rgb(241, 241, 241); */
+    padding-top: 2.25vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-bottom: 2.25vh;
     border-radius: 25px;
   }
 
   ul.index-skeleton-tags {
-    display: flex;
+    align-self: center;
+    margin-top: min(3.5vh);
+    margin-right: 2vw;
+    padding-top: 2vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-bottom: 2vh;
+    display: inline-flex;
     align-items: row;
-    height: 4vh;
-    overflow: auto;
+    height: 2vh;
+    overflow-x: auto;
+    overflow-y: none;
     width: 27vw;
-    margin-bottom: 1vh;
+    margin-bottom: auto;
+    border-radius: 25px;
+    background-color: rgb(241, 241, 241);
+  }
+
+ 
+  ul.index-skeleton-tags::-webkit-scrollbar {
+    margin-bottom: -2vh;
+    height: 4.5px;
+    width: 12px;
+  }
+
+  ul.index-skeleton-tags::-webkit-scrollbar-track {
+    /* margin-top: 4vh; */
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color: #bdbdbd;
+    /* margin-top: 4vh; */
+    margin-bottom: 4vh;
+
+  }
+
+  ul.index-skeleton-tags#-webkit-scrollbar-corner {
+    background-color: none;
+  }
+
+  ul.index-skeleton-tags::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #2e33385b;
   }
 
   ul.index-skeleton-tags ~ li {
-    overflow: hidden;
+    /* overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     line-clamp: 1;
-    -webkit-box-orient: horizontal;
+    -webkit-box-orient: horizontal; */
   }
 
   p.index-ind-tag {
     font-style: italic;
     margin-right: 1vw;
-    font-size: 1.25vw;
+    font-size: 1.05vw;
     filter: opacity(50%);
   }
 

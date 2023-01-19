@@ -1,14 +1,36 @@
 import TrendingSkellie from "./TrendingSkellie"
+import './TrendingBar.css'
+const TrendingBar = ({skeletons}) => {
 
-const TrendingBar = ({skellies}) => {
+  const topTen = skeletons.slice(0, 5)
+  console.log(topTen)
 
-  skellies = [1, 2, 3, 4]
+  const TrendingSayings = [
+    "Here's what's currently poppin! 🔥🔥",
+    "Currently on their way to fame - ✨✨",
+    "These current picks are too good to pass up~ 💅💅"
+  ]
+
+  const randomSayingFxn = (array) => {
+    return (
+      array[Math.floor((Math.random() * (array.length)))]
+    )
+  };  
+
+  const saying = randomSayingFxn(TrendingSayings)
 
   return (
     <div className="trending-bar-container">
-      <ul className="trending-bar-list">
-        {skellies.map(skellie => <TrendingSkellie component={skellie} key={skellie.id}/>)}
-      </ul>
+      <h1 id="trending-bar-header">{saying}</h1>
+      <hr id="trending-hl"/>
+      <ol className="trending-bar-list">
+        {topTen.map((skellie, idx) => 
+        <TrendingSkellie 
+          component={skellie} 
+          key={idx}
+          skellie={skellie}
+        />)}
+      </ol>
     </div>
 
   )

@@ -20,7 +20,6 @@ const GenSkeletonTile = ({skeletonInfo}) => {
   const maxBones = 20
   const currentBones = 4 // length of bones attribute
   const skeletonBody = "A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information Pepsi-Cola."
-  const likes = 20
   const tags = ["lorem",  "ipsum", "dolor",  "sit", "amet", "consectetur", "adipiscing", "elit"]
   console.log(tags)
   
@@ -30,14 +29,14 @@ const GenSkeletonTile = ({skeletonInfo}) => {
           <div className="tile-top-container">
             <div className="title-author-container">
               <div className="title-container">
-                <h1 className="title">{title.toUpperCase()}</h1>
+                <h1 className="title">{skeletonInfo && skeletonInfo.title.toUpperCase()}</h1>
               </div>
               <h1 className='title-author-divider'>//</h1> 
               <div className="author-container">
-                <h1 className="author">{author.toUpperCase()}</h1>
+                <h1 className="author">{skeletonInfo && skeletonInfo.owner.username.toUpperCase()}</h1>
               </div>
             </div>
-            <h3 className="bone-counter">Bones: {currentBones} / {maxBones}</h3>
+            <h3 className="bone-counter">Bones: {skeletonInfo.currentBones} / {skeletonInfo.maxBones}</h3>
           </div>
           <div className='skeleton-body-likes-container'>
             <div className="skeleton-body-container">
@@ -45,7 +44,7 @@ const GenSkeletonTile = ({skeletonInfo}) => {
             </div>
             <div className="skeleton-likes-container">
               <UpvoteButton />
-                <p className="skeleton-like-count">{likes}</p>
+                <p className="skeleton-like-count">{skeletonInfo.likes.length}</p>
               <DownvoteButton />
             </div>
           </div>
