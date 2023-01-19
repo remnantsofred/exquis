@@ -17,6 +17,7 @@ import { createComment } from "../../../../store/comments"
 import "./SkeletonShow.css"
 import {getCommentsForSkeleton} from "../../../../store/skeletons"
 import { fetchSkeletonComments } from "../../../../store/comments"
+import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
@@ -25,10 +26,10 @@ const SkeletonShow = () => {
 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
-  const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
+  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
   //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
  
-
+  // console.log(skellie, "skeleton in skeleton show")
 
   const author = useSelector(state => state.session.user);
 
@@ -59,7 +60,7 @@ const SkeletonShow = () => {
   useEffect(() => {
     Promise.all([
       dispatch(fetchSkeleton(skeletonId)),
-      dispatch(fetchSkeletonComments(skeletonId))
+      // dispatch(fetchSkeletonComments(skeletonId))
     ]).then(()=>{
       setLoaded(true);
     })
@@ -67,10 +68,12 @@ const SkeletonShow = () => {
 
 
   if (!loaded) {
+    console.log('loading...');
     return (
       <Loading />
     )
   } else if (loaded && skellie) {
+    console.log('skellie:', skellie);
     return (
       <>
         <div className="skellie-main-container">
@@ -119,8 +122,6 @@ const SkeletonShow = () => {
 
           <hr id="comment-divider" />
           <div className="comments-section">
-              <CommentForm />
-              <CommentPanel />
 
           </div>
           
@@ -134,7 +135,8 @@ const SkeletonShow = () => {
             <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit Your Comment</button>
           </div>
         
-          < CommentPanel skeletonId={skellie._id} skellie={skellie} comments={skellie.comments}/>
+          <CommentPanel skeleton={skellie} />
+          {/* {skellie.comments.length && skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)} */}
         </div>
         </div>
 
