@@ -59,7 +59,7 @@ const SkeletonShow = () => {
   useEffect(() => {
     Promise.all([
       dispatch(fetchSkeleton(skeletonId)),
-      dispatch(fetchSkeletonComments(skeletonId))
+      // dispatch(fetchSkeletonComments(skeletonId))
     ]).then(()=>{
       setLoaded(true);
     })
@@ -114,29 +114,20 @@ const SkeletonShow = () => {
               </div>
             </div>
             <br />
-            <div className="show-bottom">
-            </div>
 
-          <hr id="comment-divider" />
-          <div className="comments-section">
-              <CommentForm />
-              <CommentPanel />
-
-          </div>
+        <hr id="comment-divider" />
           
-        <div className="comments-section">
-
-
+        {/* <div className="comments-section">
           <div className='create-comment-container' id="comment-form-container">
-          <h2 for="comment" id="comment-form-label">Thoughts?</h2>
-          <br />
+            <h2 for="comment" id="comment-form-label">Thoughts?</h2>
+            <br />
             <input name="comment" id="comment-input" className="create-comment-form" type="text" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
             <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit Your Comment</button>
           </div>
-        
-          < CommentPanel skeletonId={skellie._id} skellie={skellie} comments={skellie.comments}/>
-        </div>
-        </div>
+          <CommentPanel skeletonId={skellie._id} skellie={skellie} comments={skellie.comments}/>
+        </div> */}
+
+      </div>
 
       </>
     )
