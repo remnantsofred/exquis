@@ -37,13 +37,10 @@ const startSession = (userInfo, route) => async dispatch => {
       body: JSON.stringify(userInfo)
     });
     const { user, token } = await res.json();
-    console.log("user", user)
-    console.log("token", token)
     localStorage.setItem('jwtToken', token);
     return dispatch(receiveCurrentUser(user));
   } catch(err) {
     const res = await err.json();
-    console.log("res", res)
     if (res.statusCode === 400) {
       return dispatch(receiveErrors(res.errors));
     }

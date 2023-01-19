@@ -1,4 +1,5 @@
 import jwtFetch from "./jwt";
+import { RECEIVE_SKELETON_COMMENTS } from "./comments";
 
 export const RECEIVE_SKELETON = "skeletons/RECEIVE_SKELETON";
 export const RECEIVE_SKELETONS = "skeletons/RECEIVE_SKELETONS";
@@ -60,6 +61,13 @@ export const getSkeleton = (skeletonId) => (store) => {
 };
 
 
+export const getCommentsForSkeleton = (state, skeletonId) => {
+  let skeleton = state?.skeletons[skeletonId]
+  // return skeleton.comments ? Object.values(skeleton.comments) : [];
+  return skeletonId.comments ? Object.values(skeleton.comments) : [];
+}
+
+
 
 // THUNK ACTION CREATORS
 
@@ -117,18 +125,15 @@ export const fetchSkeleton = (skeletonId) => async (dispatch) => {
 // }
 
 export const createSkeleton = data => async dispatch => {
-  console.log("data", data)
   try {
       const res = await jwtFetch('/api/skeletons/', {
           method: 'POST',
           body: JSON.stringify(data)
       });
-      console.log("res", res)
       const newSkeleton = await res.json();
       dispatch(receiveSkeleton(newSkeleton));
   } catch (err) {
       const resBody = await err.json();
-      console.log("resBody", resBody)
       if (resBody.statusCode === 400) {
        return dispatch(receiveErrors(resBody.errors));
       }
@@ -212,6 +217,14 @@ const skeletonsReducer = (state = { all: {}, user: {}, new: undefined }, action)
     case REMOVE_SKELETON:
         // const newState = { ...state };
         delete newState[action.skeleton._id];
+        return newState;
+    case RECEIVE_SKELETON_COMMENTS:
+        // here we are overriding the old comments with the new comments
+        let skeletonComments = newState[action.skeletonId]
+        skeletonComments.comments = action.comments
+        // return { ...newState, [action.skeletonId]: action.comments }
+        // return { ...newState, [action.comment.skeleton._id]: action.comment.skeleton }
+
         return newState;
     default:
         return state;

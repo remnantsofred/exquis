@@ -2,14 +2,17 @@ import React from "react";
 import { useDispatch } from "react-redux";
 // import { deleteComment, updateComment } from "../../../../store/comment";
 import { useState } from "react";
-import { deleteComment, updateComment } from "../../../../../store/comment";
+import { deleteComment, updateComment } from "../../../../../store/comments";
+import { useSelector } from "react-redux";
 
 
 
 
-const CommentForm = ({comment, user, skeleton}) => {
+const CommentForm = ({comment, skeleton}) => {
   const commentId = comment._id;
-  const skeletonId = comment.skeletonId === undefined ? comment.skeleton._id : comment.skeletonId;
+  const skeletonId = skeleton._id;
+  // const skeletonId = comment.skeletonId === undefined ? comment.skeleton._id : comment.skeletonId;
+  const user = useSelector(state => state.session.user);
 
   const [updatedComment, setUpdatedComment] = useState(comment.text);
   const [updatingComment, setUpdatingComment] = useState(false);
@@ -25,7 +28,7 @@ const CommentForm = ({comment, user, skeleton}) => {
 
   const handleUpdateSubmit = (e) => {
       e.preventDefault();
-      const commentToUpdate = {comment: {userId: user._id, text: updatedComment, skeletonId: skeleton._id, commentId: comment._id}}
+      const commentToUpdate = {"userId": user._id, "text": updatedComment, "skeletonId": skeleton._id, "commentId": comment._id}
       dispatch(updateComment(commentToUpdate));
       setUpdatingComment(false);
       e.target.value = "";
@@ -39,12 +42,15 @@ const CommentForm = ({comment, user, skeleton}) => {
 
 
   return (
-    <div className="" key={comment._id}>  
+    <>
+      <div className="post-index-item-comment" key={user._id}> </div>
+    <div className="" >  
+            <div>{comment.author.username}</div>
             <div className="" style={{display: !updatingComment ? "block" : "none"}} >{comment.text}</div>
           
         <div className="">
-            { (user._id === comment.user_id || user._id === comment.userId) ? <button className="delete-botton" onClick={handleDelete} >Delete</button> : <></>}
-            { (user._id === comment.user_id || user._id === comment.userId) ? <button className="update-button" onClick={handleShowUpdateField} >Edit</button> : <></>}
+            { (user._id === comment.author._id ) ? <button className="delete-botton" onClick={handleDelete} >Delete</button> : <></>}
+            { (user._id === comment.author._id ) ? <button className="update-button" onClick={handleShowUpdateField} >Edit</button> : <></>}
         </div>
 
         <div className="" style={{display: updatingComment ? "block" : "none"}}>
@@ -53,7 +59,7 @@ const CommentForm = ({comment, user, skeleton}) => {
         </div>
 
     </div>
-
+    </>
   )
 }
 

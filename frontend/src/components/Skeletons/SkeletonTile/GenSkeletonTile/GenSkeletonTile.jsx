@@ -22,7 +22,7 @@ const GenSkeletonTile = ({skeletonInfo}) => {
   const skeletonBody = "A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information Pepsi-Cola."
   const likes = 20
   const tags = ["lorem",  "ipsum", "dolor",  "sit", "amet", "consectetur", "adipiscing", "elit"]
-  console.log(tags)
+
   
   return (
     <li className='skeleton-tile-object'>

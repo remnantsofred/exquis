@@ -48,7 +48,6 @@ function SkeletonForm () {
   }
 
   const skeletonSubmit = e => {
-    console.log("hit the function");
     e.preventDefault();
     const skeleton = {
       title,

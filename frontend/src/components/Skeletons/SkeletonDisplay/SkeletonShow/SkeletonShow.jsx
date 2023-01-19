@@ -8,27 +8,26 @@ import PlaceBones from "./PlaceBones"
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
-import { createComment } from "../../../../store/comment"
+import { createComment } from "../../../../store/comments"
 import "./SkeletonShow.css"
 import CommentPanel from "./CommentPanel/CommentPanel"
-import { getSkeletonComments } from "../../../../store/comment"
+import {getCommentsForSkeleton} from "../../../../store/skeletons"
+import { fetchSkeletonComments } from "../../../../store/comments"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false)
+  const [comment, setComment] = useState('');
 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
-  const comments = useSelector((state) => getSkeletonComments(state, skeletonId))
+  const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // in order for the comment to show when added w/o page refresh 
+  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
+ 
 
-  
-  
-  
 
-  const author = useSelector(state => state.session.user)
+  const author = useSelector(state => state.session.user);
 
-  const [comment, setComment] = useState('');
-  
   const handlePost = (e) => {
     e.preventDefault();
     const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
@@ -60,7 +59,8 @@ const SkeletonShow = () => {
 
   useEffect(() => {
     Promise.all([
-      dispatch(fetchSkeleton(skeletonId))
+      dispatch(fetchSkeleton(skeletonId)),
+      dispatch(fetchSkeletonComments(skeletonId))
     ]).then(()=>{
       setLoaded(true);
     })
@@ -126,9 +126,9 @@ const SkeletonShow = () => {
       </div>
         
       <div class="comments-section">
-       <h1>Comments</h1>
+       {/* <h1>Comments</h1> */}
 
-       < CommentPanel skeletonId={skellie._id} comments={comments}/>
+       < CommentPanel skeletonId={skellie._id} skellie={skellie} comments={skellie.comments}/>
 
         <div className='create-comment-container'>
           <input className="create-comment-form" type="text" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>

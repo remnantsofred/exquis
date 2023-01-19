@@ -15,10 +15,6 @@ const SkeletonIndex = ({skellieProps}) => {
   let history = useHistory();
 
   useEffect(() => {
-    // console.log(paramsMap, "paramsMap");
-    // console.log(history, "history");
-    // console.log(history.location.search, "history.location.search");
-    // const paramsMap = getParams(history.location.search);
     Promise.all([
       dispatch(fetchSkeletons())
     ]).then(()=>{

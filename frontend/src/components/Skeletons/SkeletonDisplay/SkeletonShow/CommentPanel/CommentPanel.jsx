@@ -1,27 +1,29 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSkeleton } from "../../../../../store/skeletons";
-import { fetchSkeletonComments } from "../../../../../store/comment";
+import { fetchSkeletonComments } from "../../../../../store/comments";
 import CommentForm from "../CommentForm/CommentForm";
 
-const CommentPanel= ({skeletonId, comments}) => {
+const CommentPanel= ({skeletonId, skellie, comments}) => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.session.user);
+    // const user = useSelector(state => state.session.user);
     const skeleton = useSelector(getSkeleton);  
-    
-    useEffect(() => {
-        dispatch(fetchSkeletonComments(skeletonId));
-    }, [dispatch]);
+   
 
     if (!comments) return null;
-    console.log("comments:", comments)
+  
 
     return (
         <div>
             {comments.map((comment, idx) => (
-                <CommentForm key={idx} comment={comment} user={user} skeleton={skeleton} />
+                <CommentForm key={idx} comment={comment} skeleton={skellie} />
             ))}
         </div>
+        // <div>
+        //     {comments.map((comment, idx) => (
+        //         <CommentForm key={idx} comment={comment} skeleton={skeleton} />
+        //     ))}
+        // </div>
     )
 }
 
