@@ -91,6 +91,7 @@
     display: flexbox;
     margin-left: auto;
     margin-right: 0;
+    margin-top: 2vh;
     text-align: center;
     align-content: center;
     vertical-align: center;
@@ -149,20 +150,25 @@
   } 
 
   div.skeleton-tags-container {
-    width: 40vw;
-    margin-top: 1vh;
-    margin-bottom: 3vh;
+    width: 50vw;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    max-height: .5vh;
+    align-items: center;
     background-color: white;
-    padding-top: 2vh;
+    padding-top: 1vh;
     padding-left: 2vh;
     padding-right: 2vh;
+    padding-bottom: 2vh;
     border-radius: 25px;
   }
 
   ul.skeleton-tags {
     display: flex;
     align-items: row;
-    height: 4vh;
+    height: 2vh;
+    margin-top: auto;
+    margin-bottom: auto;
     display: -webkit-box;
     width: 30vw;
       /* margin-bottom: 3vw; */

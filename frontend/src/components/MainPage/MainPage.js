@@ -20,7 +20,7 @@ function MainPage () {
     "There has never been a sadness that can't been cured by breakfast food.",
     "Jogging is the worst. I know it keeps you healthy, but God, at what cost?",
     "When life gives you lemons, make lemonade. I read that one on a can of lemonade. I like to think it applies to life.",
-    "I typed your symptoms into the thing up here, and it says you could have network connectivity problems."
+    "I typed your symptoms into the thing up here, and it says you could have... network connectivity problems?"
   ]
 
   const randomGreetingFxn = (array) => {
