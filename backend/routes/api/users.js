@@ -81,14 +81,16 @@ router.get('/current', restoreUser, (req, res) => {
   res.json({
     _id: req.user._id,
     username: req.user.username,
-    email: req.user.email
+    email: req.user.email,
+    skeletons: req.user.skeletons,
   });
 });
 
 router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id)
-                            .populate("id, username")
+                              .populate("skeletons", "_id, owner, title, prompt, collaborators, bones, likes, comments")
+                              .populate("comments", "_id, text, parent")
     return res.json(user);
   }
   catch(err) {
@@ -102,7 +104,8 @@ router.get('/:id', async (req, res, next) => {
 router.get('/', async (req, res) => {
   try {
     const users = await User.find()
-                            .populate("username", "_id, skeletons, likes, comments")
+                            .populate("skeletons", "_id, owner, title, prompt, collaborators, bones, likes, comments")
+                            .populate("comments", "_id, text, parent")
                             .sort({ createdAt: -1})
     return res.json(users);
   }
