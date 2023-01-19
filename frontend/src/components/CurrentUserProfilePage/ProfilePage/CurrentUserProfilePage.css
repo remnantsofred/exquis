@@ -1,0 +1,39 @@
+div.general-profile-container {
+  /* align-items: center; */
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+h1.current-user-greeting, h2.current-user-sub-greeting, ul.current-user-options {
+  font-family: Inter, sans-serif;
+
+}
+
+h1.current-user-greeting {
+  font-size: 3vw;
+}
+
+h2.current-user-sub-greeting {
+  margin-top: 2vh;
+  font-size: 1.5vw;
+}
+
+span#current-user-username {
+  /* font-style: oblique; */
+  font-weight: 600;
+}
+
+hr.current-user-hr {
+  width: 33vw;
+  margin-left: 0vw;
+  margin-right: auto;
+}
+
+li.user-option {
+  margin-top: 2vh;
+  
+}
+
