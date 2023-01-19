@@ -7,8 +7,8 @@ import { useHistory } from 'react-router-dom';
 function SkeletonForm () {
   const [title, setTitle] = useState('');
   const [prompt, setPrompt] = useState('')
-  const [maxBones, setMaxBones] = useState();
-  const [maxCollaborators, setMaxCollaborators] = useState(1);
+  const [maxBones, setMaxBones] = useState('');
+  const [maxCollaborators, setMaxCollaborators] = useState('');
   const [tags, setTags] = useState([]);
   const history = useHistory();
 
@@ -44,7 +44,6 @@ function SkeletonForm () {
   }
 
   const skeletonSubmit = e => {
-
     e.preventDefault();
     const skeleton = {
       title,
@@ -53,11 +52,12 @@ function SkeletonForm () {
       maxCollaborators
     };
 
-    // Promise.all ([
-    //   dispatch(createSkeleton(skeleton))
-    // ]).then(() => setTimeout(history.push(`/skeletons/${skeleton._id}`), 1000))
-   
+    dispatch(createSkeleton(skeleton))
+    .then(() => {history.push(`/users/${currentUser._id}`)})
+
   }
+
+
 
   return (
     <div className='form-container' id="new-skeleton-form">
@@ -72,7 +72,7 @@ function SkeletonForm () {
           </span>
           <br/>
           <input type="text"
-            value={title}
+            value={title || ''}
             onChange={update('title')}
             placeholder="Title"
             className='skellie-input'
@@ -93,7 +93,7 @@ function SkeletonForm () {
             className='skellie-input'
           /> */}
           <textarea
-            value={prompt}
+            value={prompt || ''}
             onChange={update('prompt')}
             placeholder="Prompt"
             className='skellie-input'
@@ -108,7 +108,7 @@ function SkeletonForm () {
           </span>
           <br/>
           <input type="number"
-            value={maxBones}
+            value={maxBones || ''}
             onChange={update('maxBones')}
             placeholder="At least 5 bones"
             className='skellie-input'
@@ -123,7 +123,7 @@ function SkeletonForm () {
           </span>
           <br/>
           <input type="number"
-            value={maxCollaborators}
+            value={maxCollaborators || ''}
             onChange={update('maxCollaborators')}
             placeholder="Max Collaborators"
             className='skellie-input'
