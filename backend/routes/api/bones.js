@@ -97,7 +97,27 @@ router.delete('/skeletons/:skeletonId/:id', requireUser, async (req, res, next) 
   }
 });
 
-// router.post('/:skeletonId/bones', requireUser, validateBoneInput, async (req, res, next) => {
+router.get('/skeletons/:skeletonId', async (req, res, next) => {
+  // console.log(req.params, "req.params")
+  try {
+    const skeleton = await Skeleton.findById(req.params.skeletonId);
+  } catch(err) {
+    const error = new Error('Skeleton not found');
+    error.statusCode = 404;
+    error.errors = { message: "No skeleton found with that id" };
+    return next(error); 
+  }
+  try {
+    const bones = await Bone.find({ skeleton: req.params.skeletonId })
+                          .sort({ createdAt: -1 })
+                          .populate("author", "_id, username");;
+    return res.json(bones);
+  }
+  catch(err) {
+    next(err);
+  }
+});
+
 router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req, res, next) => {
   // console.log(req.params, "req.params")
     try {
@@ -126,7 +146,7 @@ router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req
       return res.json(bone);
     }
     catch(err) {
-      next(err);
+      return res.json([]);
     }
 });
   

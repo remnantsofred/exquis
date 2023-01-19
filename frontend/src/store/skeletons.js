@@ -118,13 +118,11 @@ export const fetchSkeleton = (skeletonId) => async (dispatch) => {
 // }
 
 export const createSkeleton = data => async dispatch => {
-  console.log("data", data)
   try {
       const res = await jwtFetch('/api/skeletons/', {
           method: 'POST',
           body: JSON.stringify(data)
       });
-      console.log("res", res)
       const newSkeleton = await res.json();
       dispatch(receiveSkeleton(newSkeleton));
   } catch (err) {
@@ -198,7 +196,7 @@ export const skeletonErrorsReducer = (state = nullErrors, action) => {
 //   }
 // }
 
-const skeletonsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+const skeletonsReducer = (state = {}, action) => {
   let newState = { ... state};
   switch (action.type) {
     case RECEIVE_SKELETON:
@@ -206,10 +204,10 @@ const skeletonsReducer = (state = { all: {}, user: {}, new: undefined }, action)
       return { ...newState, [action.skeleton._id]: action.skeleton };
         // return { ...state, new: action.skeleton, new: undefined };
     case RECEIVE_SKELETONS:
-      return { ...newState, all: action.skeletons };
-      // return { ...newState, ...action.skeletons };
-      case RECEIVE_USER_SKELETONS:
-        return {...newState, user: action.skeletons, new: undefined };
+        // return { ...newState, all: action.skeletons };
+        return { ...newState, ...action.skeletons };
+    case RECEIVE_USER_SKELETONS:
+        return {...newState, ...action.skeletons};
     case REMOVE_SKELETON:
         // const newState = { ...state };
         delete newState[action.skeleton._id];

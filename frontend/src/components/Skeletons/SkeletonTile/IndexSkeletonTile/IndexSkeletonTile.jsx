@@ -27,10 +27,10 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
     <li className='skeleton-tile-object'>
       <div className="index-tile-container">
         <div className="index-title-container">
-          <h1 className="index-title">{skeletonInfo.title.toUpperCase()}</h1>
+          <h1 className="index-title">{skeletonInfo && skeletonInfo.title.toUpperCase()}</h1>
         </div>
           <div className="index-author-bones-container">
-            <h1 className="index-author">{skeletonInfo.owner.username.toUpperCase()}</h1>
+            <h1 className="index-author">{skeletonInfo && skeletonInfo.owner.username.toUpperCase()}</h1>
             <h1 className="index-author-bone-divider">//</h1>
             <h1 className="index-bone-counter">Bones: {skeletonInfo.bones.length} / {skeletonInfo.maxBones}</h1>
           </div>
