@@ -168,17 +168,21 @@ skeletons.forEach(skeleton => {
       skeleton: skeletonId,
       author: collaborator
     });
-    bones.push(bone);
-  })
+    skeleton.bones.push(bone);
+  });
+
+  skeleton.update()
 });
 
-bones.forEach(bone => {
-  skeletons.forEach(skeleton => {
-    if (skeleton._id === bone.skeleton) {
-      skeleton.bones.push(bone._id);
-    }
-  })
-})
+
+// bones.forEach(bone => {
+//   skeletons.forEach(skeleton => {
+//     if (skeleton._id === bone.skeleton) {
+//       skeleton.bones.push(bone._id);
+//     }
+//   })
+// })
+
 
 
 // Seed tags

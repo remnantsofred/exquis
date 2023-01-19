@@ -64,6 +64,8 @@ export const getSkeleton = (skeletonId) => (store) => {
 export const getCommentsForSkeleton = (state, skeletonId) => {
   let skeleton = state?.skeletons[skeletonId]
   // return skeleton.comments ? Object.values(skeleton.comments) : [];
+  console.log("skeleton inside getCommentsForSkeleton", skeleton)
+  console.log("skeleton.comments inside getCommentsForSkeleton", state)
   return skeletonId.comments ? Object.values(skeleton.comments) : [];
 }
 
