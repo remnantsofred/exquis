@@ -1,15 +1,17 @@
-const TrendingSkellie = (skellie) => {
+import { Link } from "react-router-dom"
+
+const TrendingSkellie = ({skellie}) => {
   // const title = skellie.title
   // const likeCount = skellie.likes
-
-  const title = "You'll Never Guess What Happens Next!"
-  const likeCount = 200000
+   const skeletonId = skellie._id
 
   return (
     <li className="trending-bar-list-item">
       <div>
-        <h2>{title}</h2>
-        <p>{likeCount}</p>
+        <Link to={`/skeletons/${skeletonId}`} id="gen-title-link">
+          <p id="trending-title">{skellie.title} </p>
+        </Link>
+        <p id="trending-likes">/////////////// {skellie.likes.length} Votes</p>
       </div>
     </li>
   )

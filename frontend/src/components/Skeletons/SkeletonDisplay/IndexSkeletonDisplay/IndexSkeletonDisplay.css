@@ -5,8 +5,8 @@ ul.index-skeleton-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-count: 2;
-  column-gap: 3vw;
-  row-gap: 5vh;
+  column-gap: 5vw;
+  row-gap: 9vh;
 }
 
 ul.index-skeleton-grid > li {

@@ -1,0 +1,164 @@
+div.general-current-user-profile-container {
+  /* align-items: center; */
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  padding-left: 4vw;
+  padding-right: 4vw;
+  justify-content: space-between;
+}
+
+h1.current-user-greeting, h2.current-user-sub-greeting, ul.current-user-options {
+  font-family: Inter, sans-serif;
+
+}
+
+h1.current-user-greeting {
+  font-size: 3vw;
+}
+
+h2.current-user-sub-greeting {
+  margin-top: 2vh;
+  font-size: 1.5vw;
+}
+
+span#current-user-username {
+  /* font-style: oblique; */
+  font-weight: 600;
+}
+
+hr.current-user-hr {
+  width: 33vw;
+  margin-left: 0vw;
+  margin-right: auto;
+}
+
+li.user-option {
+  margin-top: 2vh;
+
+}
+
+div.general-profile-left {
+  width: min-content;
+  margin-top: 20vh;
+  margin-left: 4vw;
+  margin-bottom: 25vh;
+}
+
+div.general-profile-right {
+  margin-top: 2vh;
+  width: 1vw;
+  height: 5vw;
+  margin-right: 45vw;
+  /* margin-left: 5vw; */
+}
+
+img#skull-buddy-ani {
+  object-fit: contain;
+  width: 40vw;
+  height: 40vw;
+  transition: 5s;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px #979cc6;
+}
+
+li.user-option, #current-user-profile-link, #edit-current-user-profile-link {
+  transition: 0.2s;
+  text-decoration: none;
+  color: black;
+}
+
+li.user-option:hover {
+  color: #979cc6;
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+img#skull-buddy-ani:hover {
+  transition: 1s;
+  box-shadow: 0px 0px 10px #979cc6;
+  filter: hue-rotate(275deg);
+}
+
+div#current-user-whitespace > br.whitespace {
+  margin-bottom: 20vw;
+} 
+
+img.danger-image {
+  display: none;
+  position: absolute;
+  align-self: center;
+}
+
+img.cat-activate {
+  transition: .5s;
+  display: flex;
+  position: absolute;
+  bottom: -100vh;
+  left: 5.05vw;
+  scale: 120%;
+  object-fit: cover;
+  width: 87.75vw;
+  z-index: 9999;
+  align-self: center;
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+
+h1.silent-text {
+  display: none;
+}
+
+h1.danger-text {
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  font-size: 4vw;
+  display: flex;
+  color: white;
+  position: absolute;
+  z-index: 10002;
+} 
+
+h1.danger-text:hover {
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+
+h1#danger-text-1 {
+  text-align: left;
+  left: 3vw;
+  bottom: 65vh;
+  text-shadow: 0 0 2px black;
+}
+
+h1#danger-text-2 {
+  text-align: right;
+  margin-right: 5vw;
+  left: 3vw;
+  bottom: -30vh;
+  text-shadow: 0 0 5px black;
+}
+
+h1#danger-text-3 {
+  text-align: center;
+  margin-right: 5vw;
+  left: 3vw;
+  bottom: -120vh;
+  text-shadow: 0 0 2px black;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}

@@ -1,10 +1,9 @@
+import './CommentForm.css'
 import React from "react";
 import { useDispatch } from "react-redux";
-// import { deleteComment, updateComment } from "../../../../store/comment";
 import { useState } from "react";
 import { deleteComment, updateComment } from "../../../../../store/comments";
 import { useSelector } from "react-redux";
-
 
 
 
@@ -42,6 +41,13 @@ const CommentForm = ({comment, skeleton}) => {
 
 
   return (
+
+    <div id="comment-form-container">
+        <h2 for="comment" id="comment-form-label">Thoughts?</h2>
+        <br />
+        <input name="comment" id="comment-input" />
+        <button type="submit" id="submit-comment-button">Submit Your Comment</button>
+
     <>
       <div className="post-index-item-comment" key={user._id}> </div>
     <div className="" >  

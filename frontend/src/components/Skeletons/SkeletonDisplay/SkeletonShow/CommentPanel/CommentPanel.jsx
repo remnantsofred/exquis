@@ -1,3 +1,7 @@
+
+import { Link } from "react-router-dom"
+import "./CommentPanel.css"
+
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSkeleton } from "../../../../../store/skeletons";
@@ -9,6 +13,7 @@ const CommentPanel= ({skeletonId, skellie, comments}) => {
     // const user = useSelector(state => state.session.user);
     const skeleton = useSelector(getSkeleton);  
    
+
 
     if (!comments) return null;
   
@@ -27,24 +32,18 @@ const CommentPanel= ({skeletonId, skellie, comments}) => {
     )
 }
 
+
+  const commenter = 'jon jon the leprechaun'
+  const commentBody = 'anyone over the age of six celebrating a birthday shoudl go to hell'
+  const timestamps = 'some day, some where'
+  return (
+    <div className="comment-panel-container">
+      <Link id="link-to-profile" to="">
+        <h3 className="commenter-username" id="commenter-username">{commenter}</h3>
+      </Link>
+      <p id="comment-timestamp"> // {timestamps}</p>
+        <p className="comment-body">~"{commentBody}"</p>
+    </div>
+  )
+}
 export default CommentPanel;
-
-
-
-
-// const CommentPanel = ({CommentProps}) => {
-
-//   // const commenter = CommentProps.commenter.username
-//   // const commentBody = CommentProps.body
-
-//   const commenter = 'jon jon the leprechaun'
-//   const commentBody = 'anyone over the age of six celebrating a birthday shoudl go to hell'
-
-//   return (
-//     <div>
-//         <h3>{commenter}</h3>
-//         <p>{commentBody}</p>
-//     </div>
-//   )
-// }
-// export default CommentPanel;
