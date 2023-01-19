@@ -27,8 +27,6 @@ const ProfilePage = () => {
     })
   }, [])
 
-<<<<<<< HEAD
-=======
   const whichSkellies = (switchValue) => {
    switch(switchValue) {
     case "current":
@@ -57,7 +55,6 @@ const ProfilePage = () => {
 
   console.log(userId, "userId from profile page")
   console.log(user, "user from profile page")
->>>>>>> main
   // const OwnedSkeletons = () => {
   //   const filteredSkeletons =  skeletons.filter(skeleton => skeleton.ownerId === userId);
   //   return (filteredSkeletons);
