@@ -1,5 +1,5 @@
 import './IndexSkeletonTile.css'
-
+import { Link } from "react-router-dom"
 // vote buttons
 import UpvoteButton from '../UpvoteButton'
 import DownvoteButton from '../DownvoteButton'
@@ -14,6 +14,9 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
   // const likes = skeletonInfo.likes
   // const tags = skeletonInfo.tags
 
+  const skeletonId = skeletonInfo._id
+  const ownerId = skeletonInfo.owner._id
+
   const collaborators = ["natty", "daphne", "andrea"]
   const skeletonBody = "A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information Pepsi-Cola."
   const likes = 20
@@ -24,10 +27,14 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
     <li className='skeleton-tile-object'>
       <div className="index-tile-container">
         <div className="index-title-container">
-          <h1 className="index-title">{skeletonInfo && skeletonInfo.title.toUpperCase()}</h1>
+          <Link to={`/skeletons/${skeletonId}`} id="index-title-link">
+            <h1 className="index-title">{skeletonInfo && skeletonInfo.title.toUpperCase()}</h1>
+          </Link>
         </div>
           <div className="index-author-bones-container">
-            <h1 className="index-author">{skeletonInfo && skeletonInfo.owner.username.toUpperCase()}</h1>
+            <Link to={`/users/${ownerId}`} id="index-profile-link">
+              <h1 className="index-author">{skeletonInfo && skeletonInfo.owner.username.toUpperCase()}</h1>
+            </Link>
             <h1 className="index-author-bone-divider">//</h1>
             <h1 className="index-bone-counter">Bones: {skeletonInfo.bones.length} / {skeletonInfo.maxBones}</h1>
           </div>
@@ -42,11 +49,11 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
               <DownvoteButton />
             </div>
           </div>
-          <div className="index-skeleton-tags-container">
+          {/* <div className="index-skeleton-tags-container"> */}
             <ul className='index-skeleton-tags'>
               {tags.map((tag) => <p className="index-ind-tag" key={tag} > #{`${tag}`} </p>)}
             </ul>
-          </div>
+          {/* </div> */}
       </div>
     </li>
   )

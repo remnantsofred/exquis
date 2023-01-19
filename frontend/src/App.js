@@ -9,7 +9,7 @@ import MainPage from './components/MainPage/MainPage.js';
 import LoginForm from './components/SessionForms/LoginForm.jsx';
 import SignupForm from './components/SessionForms/SignupForm.jsx';
 import ProfilePage from './components/ProfilePage/ProfilePage/ProfilePage'
-import TempUsersIndex from './components/ProfilePage/ProfilePage/TempUsersIndex'
+import CurrentUserProfilePage from './components/CurrentUserProfilePage/ProfilePage/CurrentUserProfilePage';
 
 import { getCurrentUser } from './store/session';
 
@@ -18,6 +18,7 @@ import "./App.css"
 import SkeletonIndex from './components/Skeletons/SkeletonIndex/SkeletonIndex.jsx';
 import SkeletonForm from './components/Skeletons/SkeletonForm/SkeletonForm.jsx';
 import SkeletonShow from './components/Skeletons/SkeletonDisplay/SkeletonShow/SkeletonShow';
+import UpdateForm from './components/SessionForms/UpdateForm';
 
 
 
@@ -39,10 +40,10 @@ function App() {
 
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
-        <ProtectedRoute exact path="/profile/:userId" component={ProfilePage} />
+        <ProtectedRoute exact path="/profile" component={CurrentUserProfilePage} />
+        <ProtectedRoute exact path="/edit/profile" component={UpdateForm} />
 
         <Route exact path="/users/:userId" component={ProfilePage} />
-        <Route exact path="/temp" component={TempUsersIndex}/>
       </Switch>
       <Footer />
     </>

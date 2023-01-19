@@ -8,7 +8,12 @@ import PlaceBones from "./PlaceBones"
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
+
+import CommentForm from "./CommentForm/CommentForm"
+import CommentPanel from "./CommentPanel/CommentPanel"
+
 import { createComment } from "../../../../store/comments"
+
 import "./SkeletonShow.css"
 import CommentPanel from "./CommentPanel/CommentPanel"
 import {getCommentsForSkeleton} from "../../../../store/skeletons"
@@ -112,15 +117,22 @@ const SkeletonShow = () => {
           <br />
           <div className="show-bottom">
         </div>
-      </div>
+
+        <hr id="comment-divider" />
+        <div className="comments-section">
+            <CommentForm />
+            <CommentPanel />
+
+        </div>
         
-      <div class="comments-section">
+      <div className="comments-section">
 
        < CommentPanel skeletonId={skellie._id} skellie={skellie} comments={skellie.comments}/>
 
         <div className='create-comment-container'>
           <input className="create-comment-form" type="text" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
           <button className="create-comment-sumbit" onClick={handlePost}>Submit</button>
+
         </div>
       
       </div>

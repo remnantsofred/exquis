@@ -202,3 +202,8 @@ div.horizontal-skeleton-likes-container {
   align-content: center;
 }
 
+hr#comment-divider {
+  width: 85%;
+  margin-bottom: 8vh;
+  opacity: 45%;
+}

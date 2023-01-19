@@ -7,7 +7,7 @@
 }
 
 .goofy-greeting-container {
-  width: 40vw;
+  width: 67.85vw;
   text-align: left;
 }
 
@@ -17,10 +17,11 @@
   text-align: left;
 }
 
-hr {
+hr#main-page-hr {
   margin-top: 2vh;
   margin-bottom: 1vh;
-  width: 100%;
+  width: 60%;
+  align-self: flex-start;
 }
 
 .main-content {
