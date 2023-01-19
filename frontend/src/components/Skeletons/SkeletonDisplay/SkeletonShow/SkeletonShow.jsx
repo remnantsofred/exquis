@@ -9,6 +9,8 @@ import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
 
+import NewBoneInput from "./NewBoneInput/NewBoneInput"
+
 import CommentForm from "./CommentForm/CommentForm"
 import CommentPanel from "./CommentPanel/CommentPanel"
 
@@ -25,21 +27,21 @@ const SkeletonShow = () => {
 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
-  const author = useSelector(state => state.session.user);
+  // const author = useSelector(state => state.session.user);
 
   // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
   //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
 
 
 
-  const handlePost = (e) => {
-    e.preventDefault();
-    const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
+  // const handlePost = (e) => {
+  //   e.preventDefault();
+  //   const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
 
-    dispatch(createComment(newComment, skeletonId));
-    e.target.value = "";
-    setComment("");
-  };
+  //   dispatch(createComment(newComment, skeletonId));
+  //   e.target.value = "";
+  //   setComment("");
+  // };
 
 
   const tempBones = [
@@ -58,7 +60,7 @@ const SkeletonShow = () => {
   useEffect(() => {
     Promise.all([
       dispatch(fetchSkeleton(skeletonId)),
-      dispatch(fetchSkeletonComments(skeletonId))
+      // dispatch(fetchSkeletonComments(skeletonId))
     ]).then(()=>{
       setLoaded(true);
     })
@@ -92,7 +94,7 @@ const SkeletonShow = () => {
                   <hr id="body-input-divider" />
                   <div id="current-writer-note" ><span>It is</span><span id="current-writer-username">{`${currentCollaborator}`}'s</span><span>turn.</span></div>
                   {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
-                  <textarea id="current-collab-input" />
+                  <NewBoneInput skellie={skellie} />
                 </div>
                 <div className="horizontal-skeleton-likes-container">
                   <DownvoteButton />

@@ -25,21 +25,6 @@ const PlaceBones = (bones) => {
 
   }, [])
 
-
-  // bones.forEach(boneId => {
-  //   var bone = useSelector(getBone(boneId))
-  //     useEffect(() => {
-  //       Promise.all([
-  //         dispatch(fetchBone(boneId))
-  //       ])
-  //     })
-  //     bonesObjArray.push(bone)
-  //     if (bonesObjArray.length() === bones.length) {
-  //       setLoaded(true)
-  //     }
-  //   }, [dispatch]
-  // )
-
   
   const compileBones = () => {
     console.log("i'm not here shhhhhh")
@@ -57,9 +42,9 @@ const PlaceBones = (bones) => {
     }
 
     for (var i = 0; i < bonesLength; i ++) {
-      console.log("WHY HELLO JOHNNY BOOTH")
-      console.log(bones.component[i].text)
       resetPNum();
+      console.log(palette)
+      console.log(palette[pNum])
       let sentence = <span style={{color: `${palette[pNum]}`}}>{bones.component[i].text} </span> 
       body.push(sentence)
       pNum++
