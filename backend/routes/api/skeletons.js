@@ -24,8 +24,10 @@ router.get('/user/:userId', async (req, res, next) => {
     const skeletons = await Skeleton.find({ owner: user._id })
                               .sort({ createdAt: -1 })
                               .populate("owner", "_id, username")
-                              .populate("bones", "_id, text, author")
-                              .populate("collaborators", "_id, username");
+                              .populate("collaborators", "_id, username")
+                              .populate("comments")
+                              .populate("tags")
+                              .populate("likes")
     return res.json(skeletons);
   }
   catch(err) {
@@ -38,8 +40,10 @@ router.get('/:id', async (req, res, next) => {
   try {
     const skeleton = await Skeleton.findOne({_id: req.params.id})
                              .populate("owner", "_id, username")
-                             .populate("bones", "_id, text, author")
-                             .populate("collaborators", "_id, username");
+                             .populate("collaborators", "_id, username")
+                             .populate("comments")
+                             .populate("tags")
+                             .populate("likes")
     return res.json(skeleton);
   }
   catch(err) {
@@ -116,8 +120,10 @@ router.get('/', async (req, res) => {
   try {
     const skeletons = await Skeleton.find()
                               .populate("owner", "_id, username")
-                              .populate("bones", "_id, text, author")
-                              .populate("collaborators", "_id, username")                          
+                              .populate("collaborators", "_id, username")
+                              .populate("comments")
+                              .populate("tags")
+                              .populate("likes")                         
                               .sort({ createdAt: -1 });
     return res.json(skeletons);
   }
@@ -145,8 +151,10 @@ router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
 
     let skeleton = await newSkeleton.save();
     skeleton = await skeleton.populate('owner', '_id, username')
-                        .populate("bones", "_id, text, author")
-                        .populate("collaborators", "_id, username");
+                              .populate("collaborators", "_id, username")
+                              .populate("comments")
+                              .populate("tags")
+                              .populate("likes")
     return res.json(skeleton);
   }
   catch(err) {
