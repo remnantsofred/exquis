@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { deleteComment, updateComment } from "../../../../../store/comments";
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 
 
 
@@ -42,17 +43,15 @@ const CommentForm = ({comment, skeleton}) => {
 
   return (
 
-    <div id="comment-form-container">
-        <h2 for="comment" id="comment-form-label">Thoughts?</h2>
-        <br />
-        <input name="comment" id="comment-input" />
-        <button type="submit" id="submit-comment-button">Submit Your Comment</button>
-
     <>
-      <div className="post-index-item-comment" key={user._id}> </div>
-    <div className="" >  
-            <div>{comment.author.username}</div>
-            <div className="" style={{display: !updatingComment ? "block" : "none"}} >{comment.text}</div>
+    
+    <div className="post-index-item-comment" key={user._id}> 
+        <div className="comment-panel-container" >  
+            <Link id="link-to-profile" to="">
+                <h3 className="commenter-username" id="commenter-username">{comment.author.username}</h3>
+            </Link>
+            <p id="comment-timestamp"> {comment.createdAt}</p>
+            <div className="comment-body" style={{display: !updatingComment ? "block" : "none"}} >{comment.text}</div>
           
         <div className="">
             { (user._id === comment.author._id ) ? <button className="delete-botton" onClick={handleDelete} >Delete</button> : <></>}
@@ -64,6 +63,7 @@ const CommentForm = ({comment, skeleton}) => {
             <button className="" onClick={handleUpdateSubmit}>Save Comment</button>
         </div>
 
+        </div>
     </div>
     </>
   )

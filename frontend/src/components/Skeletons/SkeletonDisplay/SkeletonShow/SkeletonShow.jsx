@@ -15,7 +15,6 @@ import CommentPanel from "./CommentPanel/CommentPanel"
 import { createComment } from "../../../../store/comments"
 
 import "./SkeletonShow.css"
-import CommentPanel from "./CommentPanel/CommentPanel"
 import {getCommentsForSkeleton} from "../../../../store/skeletons"
 import { fetchSkeletonComments } from "../../../../store/comments"
 
@@ -74,68 +73,70 @@ const SkeletonShow = () => {
   } else if (loaded && skellie) {
     return (
       <>
-      <div className="skellie-main-container">
-        <div className="show-top-middle">
-          <div className="show-top">
-            <h1 id="skeleton-title">{skellie.title}</h1>
-              <hr />
-                <div className="sub-title">
-                  <h3 id="skeleton-owner">{skellie.owner.username}</h3>
-                  <h3 id="skeleton-prompt">"{skellie.prompt}"</h3>
-                </div>
-              <hr />
-          </div>
+        <div className="skellie-main-container">
+          <div className="show-top-middle">
+            <div className="show-top">
+              <h1 id="skeleton-title">{skellie.title}</h1>
+                <hr />
+                  <div className="sub-title">
+                    <h3 id="skeleton-owner">{skellie.owner.username}</h3>
+                    <h3 id="skeleton-prompt">"{skellie.prompt}"</h3>
                   </div>
+                <hr />
+            </div>
+          </div>
           <div className="show-middle">
-            {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
-            <div className="skeleton-body-input-container">
-              <div id="skeleton-body">
-                {/* {PlaceBones(skellie.bones)} */}
-              <div className="user-input-div">
-                <hr id="body-input-divider" />
-                <div id="current-writer-note" ><span>It is</span><span id="current-writer-username">{`${currentCollaborator}`}'s</span><span>turn.</span></div>
-                {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
-                <textarea id="current-collab-input" />
+              {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
+              <div className="skeleton-body-input-container">
+                <div id="skeleton-body">
+                  {/* {PlaceBones(skellie.bones)} */}
+                <div className="user-input-div">
+                  <hr id="body-input-divider" />
+                  <div id="current-writer-note" ><span>It is</span><span id="current-writer-username">{`${currentCollaborator}`}'s</span><span>turn.</span></div>
+                  {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
+                  <textarea id="current-collab-input" />
+                </div>
+                <div className="horizontal-skeleton-likes-container">
+                  <DownvoteButton />
+                    <h1>{skellie.likes.length}</h1>
+                  <UpvoteButton />
+                </div>
+                </div>
               </div>
-              <div className="horizontal-skeleton-likes-container">
-                <DownvoteButton />
-                  <h1>{skellie.likes.length}</h1>
-                <UpvoteButton />
+          </div>
+            <div className="collaborator-panel">
+              <div className="collaborator-panel-text">
+                <h2>Collaborators</h2>
+                <hr />
+                  <ul className="collaborators-list">
+                    {skellie.collaborators.map(collaborator => <h2>{collaborator.username}</h2>)}
+                  </ul>
               </div>
             </div>
-          </div>
-        </div>
-          <div className="collaborator-panel">
-            <div className="collaborator-panel-text">
-              <h2>Collaborators</h2>
-              <hr />
-                <ul className="collaborators-list">
-                  {skellie.collaborators.map(collaborator => <h2>{collaborator.username}</h2>)}
-                </ul>
+            <br />
+            <div className="show-bottom">
             </div>
-          </div>
-          <br />
-          <div className="show-bottom">
-        </div>
 
-        <hr id="comment-divider" />
+          <hr id="comment-divider" />
+          <div className="comments-section">
+              <CommentForm />
+              <CommentPanel />
+
+          </div>
+          
         <div className="comments-section">
-            <CommentForm />
-            <CommentPanel />
 
-        </div>
+
+          <div className='create-comment-container' id="comment-form-container">
+          <h2 for="comment" id="comment-form-label">Thoughts?</h2>
+          <br />
+            <input name="comment" id="comment-input" className="create-comment-form" type="text" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
+            <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit Your Comment</button>
+          </div>
         
-      <div className="comments-section">
-
-       < CommentPanel skeletonId={skellie._id} skellie={skellie} comments={skellie.comments}/>
-
-        <div className='create-comment-container'>
-          <input className="create-comment-form" type="text" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
-          <button className="create-comment-sumbit" onClick={handlePost}>Submit</button>
-
+          < CommentPanel skeletonId={skellie._id} skellie={skellie} comments={skellie.comments}/>
         </div>
-      
-      </div>
+        </div>
 
       </>
     )

@@ -13,37 +13,18 @@ const CommentPanel= ({skeletonId, skellie, comments}) => {
     // const user = useSelector(state => state.session.user);
     const skeleton = useSelector(getSkeleton);  
    
-
+    console.log(comments)
 
     if (!comments) return null;
   
 
     return (
         <div>
-            {comments.map((comment, idx) => (
-                <CommentForm key={idx} comment={comment} skeleton={skellie} />
+            {comments.map((comment) => (
+                <CommentForm key={comment._id} comment={comment} skeleton={skellie} />
             ))}
         </div>
-        // <div>
-        //     {comments.map((comment, idx) => (
-        //         <CommentForm key={idx} comment={comment} skeleton={skeleton} />
-        //     ))}
-        // </div>
     )
-}
 
-
-  const commenter = 'jon jon the leprechaun'
-  const commentBody = 'anyone over the age of six celebrating a birthday shoudl go to hell'
-  const timestamps = 'some day, some where'
-  return (
-    <div className="comment-panel-container">
-      <Link id="link-to-profile" to="">
-        <h3 className="commenter-username" id="commenter-username">{commenter}</h3>
-      </Link>
-      <p id="comment-timestamp"> // {timestamps}</p>
-        <p className="comment-body">~"{commentBody}"</p>
-    </div>
-  )
 }
 export default CommentPanel;

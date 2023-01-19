@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './SkeletonForm.css';
 import { createSkeleton } from '../../../store/skeletons';
+import { useHistory } from 'react-router-dom';
 
 function SkeletonForm () {
   const [title, setTitle] = useState('');
@@ -9,6 +10,7 @@ function SkeletonForm () {
   const [maxBones, setMaxBones] = useState();
   const [maxCollaborators, setMaxCollaborators] = useState(1);
   const [tags, setTags] = useState([]);
+  const history = useHistory();
 
   const currentUser = useSelector(state => state.session.user)
   const errors = useSelector(state => state.errors.skeletons);
@@ -50,7 +52,8 @@ function SkeletonForm () {
       maxCollaborators
     };
 
-    dispatch(createSkeleton(skeleton));
+    dispatch(createSkeleton(skeleton))
+    .then(() => {history.push(`/users/${currentUser._id}`)})
 
   }
 
