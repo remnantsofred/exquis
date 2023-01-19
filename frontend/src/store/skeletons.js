@@ -50,7 +50,7 @@ const receiveUserSkeletons = skeletons => ({
 // export const getSkeleton = skeletonId => store
 
 export const getSkeletons = (store) => { 
-  if (store.skeletons) return Object.values(store.skeletons);
+  if (store.skeletons) return Object.values(store.skeletons.all);
   return [];
 }; 
 
@@ -207,7 +207,7 @@ const skeletonsReducer = (state = { all: {}, user: {}, new: undefined }, action)
         // return { ...state, new: action.skeleton, new: undefined };
     case RECEIVE_SKELETONS:
         // return { ...newState, all: action.skeletons };
-        return { ...newState, ...action.skeletons };
+        return { ...newState, all: action.skeletons };
     case RECEIVE_USER_SKELETONS:
         return {...newState, user: action.skeletons, new: undefined };
     case REMOVE_SKELETON:
