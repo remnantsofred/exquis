@@ -51,10 +51,6 @@ router.get('/skeletons/:skeletonId', async (req, res) => {
     const comments = await Comment.find({ parent: parent._id })
                                .sort({ createdAt: -1 })
                                .populate("author", "_id, username");
-
-    // const comments = await Comment.find({ parent: skeleton._id })
-    //                            .sort({ createdAt: -1 })
-    //                            .populate("author", "_id, username");
     return res.json(comments);
   }
   catch(err) {

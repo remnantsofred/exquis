@@ -19,7 +19,6 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
   });
   
   if (user) {
-    // Throw a 400 error if the email address and/or email already exists
     const err = new Error("Validation Error");
     err.statusCode = 400;
     const errors = {};
@@ -33,7 +32,6 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     return next(err);
   }
 
-  // Otherwise create a new user
   const newUser = new User({
     username: req.body.username,
     email: req.body.email
@@ -65,16 +63,12 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
       err.errors = { email: "Invalid credentials" };
       return next(err);
     }
-    return res.json(await loginUser(user)); // <-- THIS IS THE CHANGED LINE
+    return res.json(await loginUser(user)); 
   })(req, res, next);
 });
 
 router.get('/current', restoreUser, (req, res) => {
   if (!isProduction) {
-    // In development, allow React server to gain access to the CSRF token
-    // whenever the current user information is first loaded into the
-    // React application
-    
     const csrfToken = req.csrfToken();
     res.cookie("CSRF-TOKEN", csrfToken);
   }
@@ -82,14 +76,37 @@ router.get('/current', restoreUser, (req, res) => {
   res.json({
     _id: req.user._id,
     username: req.user.username,
-    email: req.user.email
+    email: req.user.email,
+    skeletons: req.user.skeletons,
   });
 });
 
-router.get('/', function(req, res, next) {
-  res.json({
-    message: "GET /api/users"
-  });
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+                              .populate("skeletons", "_id, owner, title, prompt, collaborators, bones, likes, comments")
+                              .populate("comments", "_id, text, parent")
+    return res.json(user);
+  }
+  catch(err) {
+    const error = new Error('User not found');
+    error.statusCode = 404;
+    error.errors = { message: "No user found with that id." };
+    return next(error);
+  }
+})
+
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find()
+                            .populate("skeletons", "_id, owner, title, prompt, collaborators, bones, likes, comments")
+                            .populate("comments", "_id, text, parent")
+                            .sort({ createdAt: -1})
+    return res.json(users);
+  }
+  catch(err) {
+    return res.json([])
+  }
 });
 
 module.exports = router;

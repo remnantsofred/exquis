@@ -5,13 +5,15 @@ import errors from './errors';
 import comments from './comments';
 import skeletons from './skeletons';
 import bones from './bones'
+import users from './users'
 
 const rootReducer = combineReducers({
   session,
   errors,
   skeletons,
   comments,
-  bones
+  bones,
+  users
 });
 
 

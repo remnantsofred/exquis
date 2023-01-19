@@ -70,6 +70,15 @@ export const fetchBones = () => async (dispatch) => {
   }
 };
 
+export const fetchSkeletonBones = (skeletonId) => async (dispatch) => {
+  const res = await fetch(`/api/bones/skeletons/${skeletonId}`);
+  if (res.ok) {
+    const bones = await res.json();
+    dispatch(receiveBones(bones));
+    return Promise.resolve();
+  }
+};
+
 export const fetchUserBones = userId => async dispatch => {
   try {
       const res = await jwtFetch(`/api/bones/user/${userId}`);
@@ -99,7 +108,6 @@ export const createBone = (skeletonId, data) => async dispatch => {
           method: 'POST',
           body: JSON.stringify(data)
       });
-      console.log("res", res)
       const newBone = await res.json();
       dispatch(receiveBone(newBone));
   } catch (err) {

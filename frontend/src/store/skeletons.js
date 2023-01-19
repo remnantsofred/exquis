@@ -203,7 +203,7 @@ export const skeletonErrorsReducer = (state = nullErrors, action) => {
 //   }
 // }
 
-const skeletonsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+const skeletonsReducer = (state = {}, action) => {
   let newState = { ... state};
   switch (action.type) {
     case RECEIVE_SKELETON:
@@ -211,9 +211,10 @@ const skeletonsReducer = (state = { all: {}, user: {}, new: undefined }, action)
       return { ...newState, [action.skeleton._id]: action.skeleton };
         // return { ...state, new: action.skeleton, new: undefined };
     case RECEIVE_SKELETONS:
-        return { ...newState, all: action.skeletons };
+        // return { ...newState, all: action.skeletons };
+        return { ...newState, ...action.skeletons };
     case RECEIVE_USER_SKELETONS:
-        return {...newState, user: action.skeletons, new: undefined };
+        return {...newState, ...action.skeletons};
     case REMOVE_SKELETON:
         // const newState = { ...state };
         delete newState[action.skeleton._id];

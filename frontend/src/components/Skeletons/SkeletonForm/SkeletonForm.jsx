@@ -15,12 +15,6 @@ function SkeletonForm () {
   const dispatch = useDispatch();
 
 
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(clearSessionErrors());
-  //   };
-  // }, [dispatch]);
-
   const update = field => {
     let setState;
 

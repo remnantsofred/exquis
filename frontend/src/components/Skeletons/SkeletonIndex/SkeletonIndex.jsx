@@ -54,6 +54,7 @@ const SkeletonIndex = ({skellieProps}) => {
           <div className="index-content">
               <IndexSkeletonDisplay 
                 component={skellieProps} 
+                setLoaded={setLoaded}  
                 skeletons={skeletons} />
           </div>
         </div>
