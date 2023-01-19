@@ -45,6 +45,13 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    text-decoration: none;
+    transition: .5s;
+  }
+
+  #gen-title-link, #gen-profile-link {
+    text-decoration: none;
+    color: black;
   }
 
   h1.title-author-divider {

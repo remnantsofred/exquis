@@ -6,7 +6,7 @@ const IndexSkeletonDisplay = ({ skelliesProps, skeletons, setLoaded}) => {
   // like user.followedSkeletons for followed skeletons and Skeleton.All for
   // all skeletons? 
   // const skellies = user.followedSkeletons 
-  if (skeletons) setLoaded(true)
+  // if (skeletons) setLoaded(true)
 
   if (skeletons) {
     return (

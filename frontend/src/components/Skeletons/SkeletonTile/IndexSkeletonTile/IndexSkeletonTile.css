@@ -55,6 +55,10 @@
     white-space: nowrap;
   }
 
+  #index-title-link, #index-profile-link {
+    text-decoration: none;
+    color: black;
+  }
 
   h1.index-title:hover, h1.index-author:hover {
     color: #979cc6;
