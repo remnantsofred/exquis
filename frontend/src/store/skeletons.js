@@ -220,7 +220,7 @@ const skeletonsReducer = (state = {}, action) => {
         delete newState[action.skeleton._id];
         return newState;
     case RECEIVE_SKELETON_COMMENTS:
-        // here we are overriding the old comments with the new comments
+        // here we are overriding the old comments with the new comments 
         let skeletonComments = newState[action.skeletonId]
         skeletonComments.comments = action.comments
         // return { ...newState, [action.skeletonId]: action.comments }
