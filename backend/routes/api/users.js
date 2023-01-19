@@ -19,7 +19,6 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
   });
   
   if (user) {
-    // Throw a 400 error if the email address and/or email already exists
     const err = new Error("Validation Error");
     err.statusCode = 400;
     const errors = {};
@@ -33,7 +32,6 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     return next(err);
   }
 
-  // Otherwise create a new user
   const newUser = new User({
     username: req.body.username,
     email: req.body.email
@@ -65,15 +63,12 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
       err.errors = { email: "Invalid credentials" };
       return next(err);
     }
-    return res.json(await loginUser(user)); // <-- THIS IS THE CHANGED LINE
+    return res.json(await loginUser(user)); 
   })(req, res, next);
 });
 
 router.get('/current', restoreUser, (req, res) => {
   if (!isProduction) {
-    // In development, allow React server to gain access to the CSRF token
-    // whenever the current user information is first loaded into the
-    // React application
     const csrfToken = req.csrfToken();
     res.cookie("CSRF-TOKEN", csrfToken);
   }
@@ -112,9 +107,6 @@ router.get('/', async (req, res) => {
   catch(err) {
     return res.json([])
   }
-//   res.json({
-//     message: "GET /api/users"
-//   });
 });
 
 module.exports = router;

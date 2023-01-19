@@ -1,4 +1,5 @@
 import jwtFetch from "./jwt";
+import { RECEIVE_SKELETON_COMMENTS } from "./comments";
 
 export const RECEIVE_SKELETON = "skeletons/RECEIVE_SKELETON";
 export const RECEIVE_SKELETONS = "skeletons/RECEIVE_SKELETONS";
@@ -59,6 +60,15 @@ export const getSkeleton = (skeletonId) => (store) => {
   return null;
 };
 
+
+export const getCommentsForSkeleton = (state, skeletonId) => {
+  let skeleton = state?.skeletons[skeletonId]
+  // return skeleton.comments ? Object.values(skeleton.comments) : [];
+  return skeletonId.comments ? Object.values(skeleton.comments) : [];
+}
+
+
+
 // THUNK ACTION CREATORS
 
 // export const fetchSkeletons = () => async dispatch => {
@@ -73,6 +83,7 @@ export const getSkeleton = (skeletonId) => (store) => {
 //       }
 //   }
 // }
+
 export const fetchSkeletons = () => async (dispatch) => {
   const res = await fetch('/api/skeletons');
   if (res.ok) {
@@ -82,18 +93,14 @@ export const fetchSkeletons = () => async (dispatch) => {
   }
 };
 
-export const fetchUserSkeletons = userId => async dispatch => {
-  try {
-      const res = await jwtFetch(`/api/skeletons/user/${userId}`);
-      const skeletons = await res.json();
-      dispatch(receiveUserSkeletons(skeletons));
-  } catch (err) {
-      const resBody = await err.json();
-      if (resBody.statusCode === 400) {
-      dispatch(receiveErrors(resBody.errors));
-      }
-  }
-}
+
+// export const fetchSkeletons = () => async (dispatch) => {
+//   let res = await fetch("/api/skeletons");
+//   if (res.ok) {
+//       let skeletons = await res.json();
+//       dispatch(receiveSkeletons(skeletons))
+//   }
+// }
 
 export const fetchSkeleton = (skeletonId) => async (dispatch) => {
   const res = await fetch(`/api/skeletons/${skeletonId}`);
@@ -211,6 +218,14 @@ const skeletonsReducer = (state = {}, action) => {
     case REMOVE_SKELETON:
         // const newState = { ...state };
         delete newState[action.skeleton._id];
+        return newState;
+    case RECEIVE_SKELETON_COMMENTS:
+        // here we are overriding the old comments with the new comments 
+        let skeletonComments = newState[action.skeletonId]
+        skeletonComments.comments = action.comments
+        // return { ...newState, [action.skeletonId]: action.comments }
+        // return { ...newState, [action.comment.skeleton._id]: action.comment.skeleton }
+
         return newState;
     default:
         return state;
