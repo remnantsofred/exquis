@@ -8,20 +8,21 @@ import { getSkeleton } from "../../../../../store/skeletons";
 import { fetchSkeletonComments } from "../../../../../store/comments";
 import CommentForm from "../CommentForm/CommentForm";
 
-const CommentPanel= ({skeletonId, skellie, comments}) => {
+const CommentPanel= ({skeleton}) => {
     const dispatch = useDispatch();
     // const user = useSelector(state => state.session.user);
-    const skeleton = useSelector(getSkeleton);  
+    // const skeleton = useSelector(getSkeleton);  
    
-console.log("comments in commentPanel", comments)
+    // console.log(skeleton, "comments in comment panel")
 
-    if (!comments) return null;
+    // if (skeleton?.comments.length === 0) return null;
   
+    // console.log(skeleton.comments);
 
     return (
         <div>
-            {comments.map((comment) => (
-                <CommentForm key={comment._id} comment={comment} skeleton={skellie} />
+            {skeleton.comments.map((comment) => (
+                <CommentForm key={comment._id} comment={comment} skeleton={skeleton} />
             ))}
         </div>
     )
