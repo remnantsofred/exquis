@@ -4,21 +4,41 @@ import { useSelector, useDispatch } from "react-redux"
 import { getSkeleton, fetchSkeleton, updateSkeleton } from '../../../../store/skeletons'
 import { getBones, fetchBones } from '../../../../store/bones'
 import Loading from "../../../Loading/Loading"
-// import { getUser, fetchUser } from '../../../../store/'
-
 import PlaceBones from "./PlaceBones"
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
+import { createComment } from "../../../../store/comments"
 import "./SkeletonShow.css"
+import CommentPanel from "./CommentPanel/CommentPanel"
+import {getCommentsForSkeleton} from "../../../../store/skeletons"
+import { fetchSkeletonComments } from "../../../../store/comments"
 
 const SkeletonShow = () => {
-  const dispatch = useDispatch();
-  const [loaded, setLoaded] = useState(false);
-  const { skeletonId } = useParams();
-  const skellie = useSelector(getSkeleton(skeletonId));
-  // const bones = useSelector(getBones)
-  // const bones = skellie.bones;
+  const dispatch = useDispatch()
+  const [loaded, setLoaded] = useState(false)
+  const [comment, setComment] = useState('');
+
+  const { skeletonId } = useParams()
+  const skellie = useSelector(getSkeleton(skeletonId))
+  const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
+  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
+ 
+
+
+  const author = useSelector(state => state.session.user);
+
+  const handlePost = (e) => {
+    e.preventDefault();
+    const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
+
+    dispatch(createComment(newComment, skeletonId));
+    e.target.value = "";
+    setComment("");
+  };
+
+
+
   const tempBones = [
     "As she sat watching the world go by, something caught her eye.",
     "It wasn't so much its color or shape, but the way it was moving.",
@@ -30,45 +50,17 @@ const SkeletonShow = () => {
   ]
   const currentCollaborator = 'nathan, the wondrous'
   const collaborators = ['this knee', 'dare in', 'the eggo', 'tailor', 'ab yee', 'dab-ne', 'and rhea', 'neigh thin']
-  // const collaborators = skellie.collaborators
-  
-  // console.log(skeletonId, "skeletonId from params")
-  // console.log(skellie, "skeleton")
-  // console.log(bones, "bones")
-  // console.log(skellie.bones[0], "bones[0]")
 
 
   useEffect(() => {
     Promise.all([
-      dispatch(fetchSkeleton(skeletonId))
+      dispatch(fetchSkeleton(skeletonId)),
+      dispatch(fetchSkeletonComments(skeletonId))
     ]).then(()=>{
       setLoaded(true);
     })
   }, [])
 
-
-
-  // console.log(tempBones)
-  // const bones = PlaceBones(tempBones)
-
-  // const userById = (userId) => {
-  //   const user = useSelector(getUser(userId))
-  // }
-
-
-  // useEffect(() => {
-  //   Promise.all([
-  //     dispatch(fetchSkeleton(skeletonId)),
-  //     dispatch(fetchBones())
-  //   ]).then(()=>{
-  //     setLoaded(true);
-  //   })
-  // }, [dispatch, skeletonId])
-
-  // TODO 01/18/2023 - add length constraint on prompt
-
-  // const currentCollaborator = CurrentCollaboratorFxn(skellie)
-  // const collaborators = collaboratorIds.map(collaboratorId => store)
 
   if (!loaded) {
     return (
@@ -88,12 +80,12 @@ const SkeletonShow = () => {
                 </div>
               <hr />
           </div>
+                  </div>
           <div className="show-middle">
             {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
             <div className="skeleton-body-input-container">
               <div id="skeleton-body">
                 {/* {PlaceBones(skellie.bones)} */}
-              </div>
               <div className="user-input-div">
                 <hr id="body-input-divider" />
                 <div id="current-writer-note" ><span>It is</span><span id="current-writer-username">{`${currentCollaborator}`}'s</span><span>turn.</span></div>
@@ -119,13 +111,19 @@ const SkeletonShow = () => {
           </div>
           <br />
           <div className="show-bottom">
+        </div>
+      </div>
+        
+      <div class="comments-section">
 
-          </div>
+       < CommentPanel skeletonId={skellie._id} skellie={skellie} comments={skellie.comments}/>
+
+        <div className='create-comment-container'>
+          <input className="create-comment-form" type="text" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
+          <button className="create-comment-sumbit" onClick={handlePost}>Submit</button>
         </div>
-          
-        <div className="comments-section">
-            
-        </div>
+      
+      </div>
 
       </>
     )

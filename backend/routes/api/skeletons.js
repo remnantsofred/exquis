@@ -10,7 +10,6 @@ const validateBoneInput = require('../../validations/bones');
 const handleValidationErrors = require('../../validations/handleValidationErrors');
 
 
-
 router.get('/user/:userId', async (req, res, next) => {
   let user;
   try {

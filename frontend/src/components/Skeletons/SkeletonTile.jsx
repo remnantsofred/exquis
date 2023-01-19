@@ -5,14 +5,6 @@ import UpvoteButton from './UpvoteButton'
 import DownvoteButton from './DownvoteButton'
 
 const SkeletonTile = ({skeletonInfo}) => {
-  // const title = skeletonInfo.title
-  // const author = skeletonInfo.author
-  // const collaborators = skeletonInfo.collaborators
-  // const maxBones = skeletonInfo.maxBones
-  // const currentBones = skeletonInfo.currentBones // length of bones attribute
-  // const skeletonBody = skeletonInfo.skeletonBody
-  // const likes = skeletonInfo.likes
-  // const tags = skeletonInfo.tags
 
   const title = "Lorem Ipsum Kitty I love Cats"
   const author = "Skellie Crew"
@@ -22,7 +14,6 @@ const SkeletonTile = ({skeletonInfo}) => {
   const skeletonBody = "A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information Pepsi-Cola."
   const likes = 20
   const tags = ["lorem",  "ipsum", "dolor",  "sit", "amet", "consectetur", "adipiscing", "elit"]
-  // console.log(tags)
   
   return (
     <li className='skeleton-tile-object'>

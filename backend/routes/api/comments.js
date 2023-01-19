@@ -47,8 +47,8 @@ router.get('/skeletons/:skeletonId', async (req, res) => {
     return next(error); 
   }
   try {
-    // console.log(Comment.find({ parent: skeleton }), "comment.find({ parent: skeleton })")
-    const comments = await Comment.find({ parent: skeleton._id })
+
+    const comments = await Comment.find({ parent: parent._id })
                                .sort({ createdAt: -1 })
                                .populate("author", "_id, username");
     return res.json(comments);
@@ -59,7 +59,8 @@ router.get('/skeletons/:skeletonId', async (req, res) => {
 });
 
 
-router.post('/skeletons/:skeletonId', requireUser, validateCommentInput, async (req, res, next) => {
+
+router.post('/skeletons/:skeletonId', validateCommentInput, requireUser, async (req, res, next) => {
   try {
     const newComment = new Comment({
       parent: req.params.skeletonId,
@@ -67,6 +68,7 @@ router.post('/skeletons/:skeletonId', requireUser, validateCommentInput, async (
       author: req.user._id
     });
 
+    
     let comment = await newComment.save();
     comment = await comment.populate('author', '_id, username');
     return res.json(comment);
@@ -91,33 +93,6 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-// Attach requireUser as a middleware before the route handler to gain access
-// to req.user. (requireUser will return an error response if there is no 
-// current user.) Also attach validateCommentInput as a middleware before the 
-// route handler.
-// Note: old way
-// router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
-//   console.log(req.params.id, "params_id")
-//   console.log(req.params.skeletonId, "params_skellie_id")
-//   console.log(req.body.parent, "req_body_parent")
-//   console.log(req.body.text, "req_body_text")
-//   console.log(req.user._id, "req_user._id")
-//   try {
-//     const newComment = new Comment({
-//       parent: req.body.parent,
-//       text: req.body.text,
-//       author: req.user._id
-//     });
-
-//     let comment = await newComment.save();
-//     comment = await comment.populate('author', '_id, username');
-//     return res.json(comment);
-//   }
-//   catch(err) {
-//     next(err);
-//   }
-// });
-
 
 
 router.patch('/:id', requireUser, validateCommentInput, async (req, res, next) => {
@@ -135,6 +110,8 @@ router.patch('/:id', requireUser, validateCommentInput, async (req, res, next) =
       error.errors = { message: "You are not authorized to edit this comment" };
       return next(error);
     }
+    console.log("comment: ", comment)
+    console.log("req.body: ", req.body)
     comment.text = req.body.text;
     await comment.save();
     return res.json(comment);
