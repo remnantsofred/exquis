@@ -25,12 +25,12 @@ const SkeletonShow = () => {
 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
-  const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
-  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
- 
-
-
   const author = useSelector(state => state.session.user);
+
+  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
+  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
+
+
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -40,7 +40,6 @@ const SkeletonShow = () => {
     e.target.value = "";
     setComment("");
   };
-
 
 
   const tempBones = [
@@ -59,7 +58,7 @@ const SkeletonShow = () => {
   useEffect(() => {
     Promise.all([
       dispatch(fetchSkeleton(skeletonId)),
-      // dispatch(fetchSkeletonComments(skeletonId))
+      dispatch(fetchSkeletonComments(skeletonId))
     ]).then(()=>{
       setLoaded(true);
     })
@@ -88,7 +87,7 @@ const SkeletonShow = () => {
               {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
               <div className="skeleton-body-input-container">
                 <div id="skeleton-body">
-                  {/* {PlaceBones(skellie.bones)} */}
+                  <PlaceBones component={loaded ? skellie.bones : []} />
                 <div className="user-input-div">
                   <hr id="body-input-divider" />
                   <div id="current-writer-note" ><span>It is</span><span id="current-writer-username">{`${currentCollaborator}`}'s</span><span>turn.</span></div>
@@ -109,7 +108,7 @@ const SkeletonShow = () => {
                 <h2>Collaborators</h2>
                 <hr />
                   <ul className="collaborators-list">
-                    {skellie.collaborators.map(collaborator => <h2>{collaborator.username}</h2>)}
+                    {skellie.collaborators.map(collaborator => <h2 key={collaborator._id}>{collaborator.username}</h2>)}
                   </ul>
               </div>
             </div>
