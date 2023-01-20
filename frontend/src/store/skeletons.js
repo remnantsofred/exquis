@@ -110,6 +110,7 @@ export const updateSkeleton = (skeletonId, data) => async dispatch => {
       dispatch(receiveSkeleton(updatedSkeleton));
   } catch (err) {
       const resBody = await err.json();
+      console.log(resBody)
       if (resBody.statusCode === 400) {
       dispatch(receiveErrors(resBody.errors));
       }

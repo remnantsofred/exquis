@@ -7,10 +7,16 @@ const handleValidationErrors = require('./handleValidationErrors');
 const validateSkeletonInput = [
   check('title')
     .exists({ checkFalsy: true })
-    .withMessage('Skeleton title is required'),
+    .isLength({ min: 1, max: 100 })
+    .withMessage('Skeleton title is required and must be between 1 and 100 characters'),
+  check('prompt')
+    .isLength({ min: 0, max: 100 }),
   check('maxBones')
     .isFloat({ min: 5, max: 50 })
     .withMessage('Skeleton should have at least 5 bones and no more than 50 bones'),
+  check('tags')
+    .isLength({ min: 0, max: 30 }),
+  
     // this was causing issues. Not sure .isFloat is correct
   // check('maxCollabrators')
   //   .isFloat({ min: 2, max: 10 })

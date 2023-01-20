@@ -110,6 +110,7 @@ export const createBone = (skeletonId, data) => async dispatch => {
       });
       const newBone = await res.json();
       dispatch(receiveBone(newBone));
+      return (newBone)
   } catch (err) {
       const resBody = await err.json();
       if (resBody.statusCode === 400) {
