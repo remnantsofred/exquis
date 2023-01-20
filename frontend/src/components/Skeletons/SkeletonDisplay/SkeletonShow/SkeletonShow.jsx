@@ -35,7 +35,6 @@ const SkeletonShow = () => {
   // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
   //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
  
-  // console.log(skellie, "skeleton in skeleton show")
 
 
 
@@ -73,7 +72,6 @@ const SkeletonShow = () => {
 
 
   if (!loaded) {
-    console.log('loading...');
     return (
       <Loading />
     )
@@ -82,7 +80,6 @@ const SkeletonShow = () => {
     console.log('skellie RIGHT HERE BABYYYYYYYYYYY:', skellie);
     return (
       <>
-        <div className="skellie-main-container">
           <div className="show-top-middle">
             <div className="show-top">
               <h1 id="skeleton-title">{skellie.title}</h1>
@@ -93,25 +90,27 @@ const SkeletonShow = () => {
                   </div>
                 <hr />
             </div>
-          <div className="show-middle">
+            <div className="show-middle">
               {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
-              <div className="skeleton-body-input-container">
-                <div id="skeleton-body">
-                  <PlaceBones component={loaded ? skellie.bones : []} />
-                <div className="user-input-div">
-                  <hr id="body-input-divider" />
-                  <div id="current-writer-note" ><span>It is</span><span id="current-writer-username">{`${currentCollaborator}`}'s</span><span>turn.</span></div>
-                  {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
-                  <NewBoneInput skellie={skellie} />
+                <div className="skeleton-body-input-container">
+                    <div id="skeleton-body">
+                      <PlaceBones component={loaded ? skellie.bones : []} />
+                    </div> 
+                      <div className="user-input-div">
+                        <hr id="body-input-divider" />
+                        <div id="current-writer-note" >
+                            <span>It is</span><span id="current-writer-username">{`${currentCollaborator}`}'s</span><span>turn.</span>
+                        </div>
+                        {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
+                        <NewBoneInput skellie={skellie} />
+                      </div>
+                      <div className="horizontal-skeleton-likes-container">
+                        <DownvoteButton />
+                          <h1>{skellie.likes.length}</h1>
+                        <UpvoteButton />
+                      </div>
                 </div>
-                <div className="horizontal-skeleton-likes-container">
-                  <DownvoteButton />
-                    <h1>{skellie.likes.length}</h1>
-                  <UpvoteButton />
-                </div>
-                </div>
-              </div>
-          </div>
+            </div>
           </div>
             <div className="collaborator-panel">
               <div className="collaborator-panel-text">
@@ -123,7 +122,7 @@ const SkeletonShow = () => {
               </div>
             </div>
             <br />
-        </div>
+        
         <hr id="comment-divider" />
 
           
