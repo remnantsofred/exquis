@@ -10,7 +10,7 @@ const validateSkeletonInput = [
     .isLength({ min: 1, max: 100 })
     .withMessage('Skeleton title is required and must be between 1 and 100 characters'),
   check('prompt')
-    .isLength({ min: 0, max: 100 }),
+    .isLength({ min: 0, max: 150 }),
   check('maxBones')
     .isFloat({ min: 5, max: 50 })
     .withMessage('Skeleton should have at least 5 bones and no more than 50 bones'),

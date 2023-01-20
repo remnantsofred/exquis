@@ -7,6 +7,7 @@ div.skellie-main-container {
   /* padding-right: 0; */
   width: 95vw;
   margin-right: 0em;
+  height: max-content;
 }
 
 div.show-top-middle {
@@ -122,7 +123,7 @@ div.show-middle {
 div.skeleton-body-input-container {
   margin-left: 4vw;
   /* height: max-content; */
-  height: 100vh;
+  height: max-content;
   /* min-height: 80vh; */
   padding-left: 4vw;
   padding-right: 4vw;
@@ -205,6 +206,7 @@ div.horizontal-skeleton-likes-container {
   text-align: center;
   align-items: center;
   align-content: center;
+  margin-bottom: 3vh;
 }
 
 hr#comment-divider {

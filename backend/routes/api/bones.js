@@ -141,7 +141,7 @@ router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req
       });
       
       let bone = await newBone.save();
-      await Skeleton.updateOne({_id: bone.skeleton}, {$push: {bones: bone._id}});
+      await Skeleton.updateOne({_id: bone.skeleton}, {$push: {bones: bone}});
       // bone = await bone.populate('skeleton', '_id, text');
       return res.json(bone);
     }
