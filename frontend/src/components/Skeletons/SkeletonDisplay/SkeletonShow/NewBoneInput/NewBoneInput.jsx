@@ -34,7 +34,6 @@ const NewBoneInput = (skellie) => {
   const createNewBone = (e) => {
     e.preventDefault()
     const authorId = author._id;
-    console.log('new bone text', newBoneText)
     const data = {
       text: newBoneText,
       skeleton: skellieId,
@@ -58,7 +57,6 @@ const NewBoneInput = (skellie) => {
       likes: likes,
       comments: comments
     }
-
     dispatch(updateSkeleton(skellieId, data))
     }
     )

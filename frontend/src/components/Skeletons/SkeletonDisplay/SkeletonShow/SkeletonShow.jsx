@@ -28,25 +28,19 @@ const SkeletonShow = () => {
 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
-  const bones = useSelector(state => state.bones)
+  const author = useSelector(state => state.session.user);
+  // const bones = useSelector(state => state.bones)
   // const author = useSelector(state => state.session.user);
 
-  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
-  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
-  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
-  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
- 
 
+  const handlePost = (e) => {
+    e.preventDefault();
+    const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
 
-
-  // const handlePost = (e) => {
-  //   e.preventDefault();
-  //   const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
-
-  //   dispatch(createComment(newComment, skeletonId));
-  //   e.target.value = "";
-  //   setComment("");
-  // };
+    dispatch(createComment(newComment, skeletonId));
+    e.target.value = "";
+    setComment("");
+  };
 
 
   const tempBones = [
@@ -98,7 +92,7 @@ const SkeletonShow = () => {
               {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
                 <div className="skeleton-body-input-container">
                     <div id="skeleton-body">
-                      <PlaceBones component={loaded ? skellie.bones : bones} />
+                      <PlaceBones component={loaded ? skellie.bones : []} />
                     </div> 
                       <div className="user-input-div">
                         <hr id="body-input-divider" />
@@ -130,18 +124,17 @@ const SkeletonShow = () => {
         <hr id="comment-divider" />
 
           
-        {/* <div className="comments-section">
+        <div className="comments-section">
           <div className='create-comment-container' id="comment-form-container">
             <h2 for="comment" id="comment-form-label">Thoughts?</h2>
             <br />
             <input name="comment" id="comment-input" className="create-comment-form" type="text" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
             <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit Your Comment</button>
           </div>
+        </div>
 
         
           <CommentPanel skeleton={skellie} />
-          {/* {skellie.comments.length && skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)} */}
-    
       </>
     )
   }
