@@ -9,10 +9,12 @@ import { Link } from 'react-router-dom';
 
 
 const CommentForm = ({comment, skeleton}) => {
-  const commentId = comment._id;
-  const skeletonId = skeleton._id;
+//   const commentId = comment._id;
+//   const skeletonId = skeleton._id;
   // const skeletonId = comment.skeletonId === undefined ? comment.skeleton._id : comment.skeletonId;
   const user = useSelector(state => state.session.user);
+//   console.log(comment, "comment in comment form")
+//   console.log(skeleton, "skeleton in comment form")
 
   const [updatedComment, setUpdatedComment] = useState(comment.text);
   const [updatingComment, setUpdatingComment] = useState(false);
@@ -22,7 +24,7 @@ const CommentForm = ({comment, skeleton}) => {
   
   const handleDelete = (e) => {
       e.preventDefault();
-      dispatch(deleteComment(commentId, skeletonId));
+      dispatch(deleteComment(comment._id, skeleton._id));
       e.target.value = "";
   }
 

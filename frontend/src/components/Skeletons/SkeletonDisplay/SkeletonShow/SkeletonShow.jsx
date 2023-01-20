@@ -19,6 +19,7 @@ import { createComment } from "../../../../store/comments"
 import "./SkeletonShow.css"
 import {getCommentsForSkeleton} from "../../../../store/skeletons"
 import { fetchSkeletonComments } from "../../../../store/comments"
+import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
@@ -31,6 +32,10 @@ const SkeletonShow = () => {
 
   // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
   //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
+  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
+  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
+ 
+  // console.log(skellie, "skeleton in skeleton show")
 
 
 
@@ -68,10 +73,12 @@ const SkeletonShow = () => {
 
 
   if (!loaded) {
+    console.log('loading...');
     return (
       <Loading />
     )
   } else if (loaded && skellie) {
+    console.log('skellie:', skellie);
     return (
       <>
         <div className="skellie-main-container">
@@ -117,6 +124,7 @@ const SkeletonShow = () => {
             <br />
         </div>
         <hr id="comment-divider" />
+
           
         {/* <div className="comments-section">
           <div className='create-comment-container' id="comment-form-container">
@@ -125,10 +133,13 @@ const SkeletonShow = () => {
             <input name="comment" id="comment-input" className="create-comment-form" type="text" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
             <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit Your Comment</button>
           </div>
-          <CommentPanel skeletonId={skellie._id} skellie={skellie} comments={skellie.comments}/>
-        </div> */}
 
-      
+        
+          <CommentPanel skeleton={skellie} />
+          {/* {skellie.comments.length && skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)} */}
+        </div>
+        </div>
+
 
       </>
     )
