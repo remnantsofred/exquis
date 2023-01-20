@@ -28,6 +28,7 @@ const SkeletonShow = () => {
 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
+  const bones = useSelector(state => state.bones)
   // const author = useSelector(state => state.session.user);
 
   // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
@@ -57,6 +58,7 @@ const SkeletonShow = () => {
     "If only she could make out what it was.",
     "At that moment, she comprehended what it was and where it was heading, and she knew her life would never be the same."
   ]
+
   const currentCollaborator = 'nathan, the wondrous'
   const collaborators = ['this knee', 'dare in', 'the eggo', 'tailor', 'ab yee', 'dab-ne', 'and rhea', 'neigh thin']
 
@@ -80,6 +82,8 @@ const SkeletonShow = () => {
     console.log('skellie RIGHT HERE BABYYYYYYYYYYY:', skellie);
     return (
       <>
+        <div className="skellie-main-container">
+          
           <div className="show-top-middle">
             <div className="show-top">
               <h1 id="skeleton-title">{skellie.title}</h1>
@@ -94,7 +98,7 @@ const SkeletonShow = () => {
               {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
                 <div className="skeleton-body-input-container">
                     <div id="skeleton-body">
-                      <PlaceBones component={loaded ? skellie.bones : []} />
+                      <PlaceBones component={loaded ? skellie.bones : bones} />
                     </div> 
                       <div className="user-input-div">
                         <hr id="body-input-divider" />
@@ -105,9 +109,9 @@ const SkeletonShow = () => {
                         <NewBoneInput skellie={skellie} />
                       </div>
                       <div className="horizontal-skeleton-likes-container">
-                        <DownvoteButton />
-                          <h1>{skellie.likes.length}</h1>
-                        <UpvoteButton />
+                        <DownvoteButton id="skeleton-show-downvote" />
+                          <h1 id="skeleton-show-votes">{skellie.likes.length}</h1>
+                        <UpvoteButton id="skeleton-show-downvote"/>
                       </div>
                 </div>
             </div>
@@ -122,7 +126,7 @@ const SkeletonShow = () => {
               </div>
             </div>
             <br />
-        
+        </div>
         <hr id="comment-divider" />
 
           

@@ -19,9 +19,6 @@ const NewBoneInput = (skellie) => {
 
   const skellieId = skellie.skellie._id
 
-
-  let tempId
-
   useEffect(() => {
     dispatch(fetchSkeleton(skellieId))
     setBones(skellie.skellie.bones)
@@ -37,17 +34,19 @@ const NewBoneInput = (skellie) => {
   const createNewBone = (e) => {
     e.preventDefault()
     const authorId = author._id;
-
+    console.log('new bone text', newBoneText)
     const data = {
       text: newBoneText,
       skeleton: skellieId,
       author: authorId
     }
+    console.log('DATA HERE', data)
     dispatch(createBone(skellieId, data))
     .then((newBone) => {
+      console.log(newBone)
       setBones(skellie.bones)
       bones.push(newBone)
-
+      console.log(bones)
       const data = {
       bones: bones,
       title: title,
