@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import UpvoteButton from '../UpvoteButton'
 import DownvoteButton from '../DownvoteButton'
 import GenPlaceBones from './GenPlaceBones'
+
 const GenSkeletonTile = ({skeletonInfo}) => {
 
   const skeletonId = skeletonInfo._id
@@ -15,7 +16,6 @@ const GenSkeletonTile = ({skeletonInfo}) => {
   const maxBones = 20
   const currentBones = 4 // length of bones attribute
   const skeletonBody = skeletonInfo.bones
-  console.log(skeletonInfo.bones)
   // "A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information Pepsi-Cola."
   const tags = ["lorem",  "ipsum", "dolor",  "sit", "amet", "consectetur", "adipiscing", "elit"]
 

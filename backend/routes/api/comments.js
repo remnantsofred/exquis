@@ -68,12 +68,10 @@ router.post('/skeletons/:skeletonId', validateCommentInput, requireUser, async (
       author: req.user._id
     });
     
-    
     let comment = await newComment.save();
     await Skeleton.updateOne({_id: req.params.skeletonId}, {$push: {comments: comment._id}});
     await User.updateOne({_id: comment.author}, {$push: {comments: comment._id}});
     comment = await comment.populate('author', '_id, username');
-
 
     return res.json(comment);
   }
@@ -154,6 +152,7 @@ router.get('/', async (req, res) => {
   try {
     const comments = await Comment.find()
                               .populate("author", "_id, username")
+                              .populate("author")
                               .sort({ createdAt: -1 });
     return res.json(comments);
   }

@@ -126,7 +126,7 @@ export const userErrorsReducer = (state = nullErrors, action) => {
 //   }
 // }
 
-const usersReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+const usersReducer = (state = { }, action) => {
   let newState = { ... state};
   switch (action.type) {
     case RECEIVE_USER:
@@ -134,7 +134,7 @@ const usersReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
       return { ...newState, [action.user._id]: action.user };
         // return { ...state, new: action.skeleton, new: undefined };
     case RECEIVE_USERS:
-        return { ...newState, all: action.users };
+        return { ...newState, ...action.users };
     case REMOVE_USER:
         // const newState = { ...state };
         delete newState[action.user._id];

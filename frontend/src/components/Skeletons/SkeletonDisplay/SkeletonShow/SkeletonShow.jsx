@@ -20,16 +20,17 @@ import "./SkeletonShow.css"
 import {getCommentsForSkeleton} from "../../../../store/skeletons"
 import { fetchSkeletonComments } from "../../../../store/comments"
 import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
+import { fetchUsers, getUser } from "../../../../store/users"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false)
   const [comment, setComment] = useState('');
-
+ 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
   const bones = useSelector(state => state.bones)
-  const author = useSelector(state => state.session.user);
+  // const author = useSelector(state => state.session.user);
 
   // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
   //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
@@ -38,6 +39,11 @@ const SkeletonShow = () => {
  
 
 
+  // const bones = useSelector(state => state.bones)
+ 
+  const handlePost = (e) => {
+    e.preventDefault();
+    const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -78,8 +84,6 @@ const SkeletonShow = () => {
       <Loading />
     )
   } else if (loaded && skellie) {
-    console.log('skellie RIGHT HERE BABYYYYYYYYYYY:', skellie);
-    console.log('skellie RIGHT HERE BABYYYYYYYYYYY:', skellie);
     return (
       <>
         <div className="skellie-main-container">
@@ -98,7 +102,7 @@ const SkeletonShow = () => {
               {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
                 <div className="skeleton-body-input-container">
                     <div id="skeleton-body">
-                      <PlaceBones component={loaded ? skellie.bones : bones} />
+                      <PlaceBones component={loaded ? skellie.bones : []} />
                     </div> 
                       <div className="user-input-div">
                         <hr id="body-input-divider" />
@@ -131,21 +135,22 @@ const SkeletonShow = () => {
 
           
         <div className="comments-section">
-          <h2 id="comment-section-label">Comments</h2>
           <div className='create-comment-container' id="comment-form-container">
             {/* <h2 for="comment" id="comment-form-label">Thoughts?</h2> */}
             {/* <br /> */}
             <textarea name="comment" id="comment-input" className="create-comment-form" rows="5" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
             <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit Your Comment</button>
           </div>
+        </div>
 
         
           <CommentPanel skeleton={skellie} />
           {skellie.comments.length && skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)}
-        </div>
+        {/* </div> */}
       </>
     )
   }
+}
 }
 
 export default SkeletonShow;

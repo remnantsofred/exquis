@@ -24,21 +24,10 @@ const PlaceBones = (bones) => {
     }
 
   }, [])
-
-  // if (!bones.length) {
-  //   return []
-  // }
-
   
   const compileBones = () => {
-    console.log("i'm not here shhhhhh")
-
     const bonesLength = bones.component.length
-
-
     var pNum = 0
-
-
 
     const resetPNum = () => {
       if (pNum >= palette.length) {
@@ -48,7 +37,6 @@ const PlaceBones = (bones) => {
 
     for (var i = 0; i < bonesLength; i ++) {
       resetPNum();
-
       let sentence = <span style={{color: `${palette[pNum]}`}}>{bones.component[i].text} </span> 
       body.push(sentence)
       pNum++

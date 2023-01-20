@@ -5,17 +5,17 @@ import { useState } from "react";
 import { deleteComment, updateComment } from "../../../../../store/comments";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import { fetchUsers, getUsers } from "../../../../../store/users";
+import { useEffect } from 'react';
 
 
 
 const CommentForm = ({comment, skeleton}) => {
   const user = useSelector(state => state.session.user);
 
-
   const [updatedComment, setUpdatedComment] = useState(comment.text);
   const [updatingComment, setUpdatingComment] = useState(false);
 
-  
   const dispatch = useDispatch();
   
   const handleDelete = (e) => {
@@ -38,9 +38,10 @@ const CommentForm = ({comment, skeleton}) => {
       setUpdatingComment(true);
   }
 
+
+
   if (comment._id){
       return (
-    
         <>
         
         <div className="post-index-item-comment" key={user._id}> 
@@ -56,10 +57,10 @@ const CommentForm = ({comment, skeleton}) => {
                 { (user._id === comment.author._id ) ? <button className="comment-update-button" onClick={handleShowUpdateField} >Edit</button> : <></>}
             </div>
     
-            <div className="" style={{display: updatingComment ? "block" : "none"}}>
-                <input type="text" className="" placeholder="Update Comment" onChange={(e) => setUpdatedComment(e.target.value)} value={updatedComment} name=""/>
-                <button className="" onClick={handleUpdateSubmit}>Save Comment</button>
-            </div>
+                <div className="" style={{display: updatingComment ? "block" : "none"}}>
+                    <input type="text" className="" placeholder="Update Comment" onChange={(e) => setUpdatedComment(e.target.value)} value={updatedComment} name=""/>
+                    <button className="" onClick={handleUpdateSubmit}>Save Comment</button>
+                </div>
     
             </div>
         </div>
