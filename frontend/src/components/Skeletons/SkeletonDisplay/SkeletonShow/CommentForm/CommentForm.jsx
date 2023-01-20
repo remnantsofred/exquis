@@ -36,7 +36,11 @@ const CommentForm = ({comment, skeleton}) => {
 
   const handleShowUpdateField = (e) => {
       e.preventDefault();
-      setUpdatingComment(true);
+      if (updatingComment) {
+      setUpdatingComment(false);
+      } else {
+        setUpdatingComment(true)
+      }
   }
 
 
@@ -56,7 +60,7 @@ const CommentForm = ({comment, skeleton}) => {
                 <div className="comment-body" style={{display: !updatingComment ? "block" : "none"}} >~ " {comment.text} "</div>
               
             <div className="owner-comment-class-actions-container">
-                { (user._id === comment.author._id ) ? <button className="comment-update-button" onClick={handleShowUpdateField} >Edit</button> : <></>}
+                { (user._id === comment.author._id ) ? <button className="comment-update-button" onClick={handleShowUpdateField}>Edit</button> : <></>}
                 <div className="" style={{display: updatingComment ? "block" : "none"}}>
                     <input type="text" className="comment-update-input" placeholder="Update Comment" onChange={(e) => setUpdatedComment(e.target.value)} value={updatedComment} name=""/>
                     <button className="comment-save-update-button" onClick={handleUpdateSubmit}>Save Comment</button>
