@@ -172,7 +172,7 @@ const commentsReducer = (state = {  }, action) => {
         case RECEIVE_USER_COMMENTS:
             return { ...newState, ...action.comments };
         // case RECEIVE_SKELETON_COMMENTS:
-        //     return { ...newState, ...action.skeletons.skeleton._id.comment};
+        //     return { ...newState, ...action.skeletons.skeletonId.comment};
         default:
             return state;
     }

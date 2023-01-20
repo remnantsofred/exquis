@@ -15,7 +15,7 @@ const likeSchema = Schema({
   },
 
   type: {
-    type: [String],
+    type: Boolean,
     required: true
   }
 

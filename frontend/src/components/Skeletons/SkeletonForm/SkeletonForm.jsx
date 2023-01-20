@@ -21,9 +21,7 @@ function SkeletonForm () {
   const errors = useSelector(state => state.errors.skeletons);
   const dispatch = useDispatch();
   const options = users?.filter(user => user._id !== currentUser._id).map(user => ({value: user._id, label: user.username}));
-  console.log(users, "users")
-  console.log(options, "options")
-  // console.log(users, "users")
+
 
   useEffect(() => {
     Promise.all([
