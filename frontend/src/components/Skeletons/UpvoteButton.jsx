@@ -1,9 +1,8 @@
 import Upvote from '../../assets/skeleton_tile/triangle_button_up.png'
 
 const clickHandle = () => {
-  return (
-  console.log('teehee')
-)}
+  
+}
 
 const UpvoteButton = () => {
 

@@ -215,7 +215,6 @@ tags.forEach(tag => {
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => {
-    console.log('Connected to MongoDB successfully');
     insertSeeds();
   })
   .catch(err => {
@@ -225,8 +224,6 @@ mongoose
 
 // Reset and seed db
 const insertSeeds = () => {
-  console.log("Resetting db and seeding users and tweets...");
-
   Skeleton.collection.drop()
                   .then(() => User.collection.drop())
                   .then(() => User.insertMany(users))
@@ -238,7 +235,6 @@ const insertSeeds = () => {
                   .then(() => Bone.collection.drop())
                   .then(() => Bone.insertMany(bones))
                   .then(() => {
-                   console.log("Done!");
                    mongoose.disconnect();
                   })
                   .catch(err => {

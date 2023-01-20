@@ -16,7 +16,9 @@ const NewBoneInput = (skellie) => {
   const [tags, setTags] = useState([])
   const [likes, setLikes] = useState([])
   const [comments, setComments] = useState([])
+
   const skellieId = skellie.skellie._id
+
 
   let tempId
 
@@ -44,7 +46,6 @@ const NewBoneInput = (skellie) => {
     .then((newBone) => {
       setBones(skellie.bones)
       bones.push(newBone)
-    
 
       const data = {
       bones: bones,

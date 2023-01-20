@@ -99,7 +99,6 @@ router.delete('/skeletons/:skeletonId/:id', requireUser, async (req, res, next) 
 });
 
 router.get('/skeletons/:skeletonId', async (req, res, next) => {
-  // console.log(req.params, "req.params")
   try {
     const skeleton = await Skeleton.findById(req.params.skeletonId);
   } catch(err) {
@@ -120,7 +119,6 @@ router.get('/skeletons/:skeletonId', async (req, res, next) => {
 });
 
 router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req, res, next) => {
-  // console.log(req.params, "req.params")
     try {
       const skeleton = await Skeleton.findById(req.params.skeletonId);
       if (!skeleton) {

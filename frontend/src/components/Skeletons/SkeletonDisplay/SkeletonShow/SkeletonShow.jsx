@@ -30,14 +30,6 @@ const SkeletonShow = () => {
   const skellie = useSelector(getSkeleton(skeletonId))
   const author = useSelector(state => state.session.user);
 
-  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
-  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
-  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
-  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
- 
-  
-
-
 
   const handlePost = (e) => {
     e.preventDefault();

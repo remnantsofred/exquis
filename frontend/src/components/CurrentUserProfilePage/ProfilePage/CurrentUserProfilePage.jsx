@@ -35,7 +35,6 @@ const CurrentUserProfilePage = () => {
 
   const DangerClick = () => {
     setIsDisobey(true)
-
   }
 
   // const OwnedSkeletons = () => {
