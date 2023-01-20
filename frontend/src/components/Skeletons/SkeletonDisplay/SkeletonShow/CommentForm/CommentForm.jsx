@@ -58,13 +58,13 @@ const CommentForm = ({comment, skeleton}) => {
                 </Link>
                 <p id="comment-timestamp"> {Date(comment.createdAt)}</p>
                 <div className="comment-body" style={{display: !updatingComment ? "block" : "none"}} >~ " {comment.text} "</div>
-              
+                <div className="" style={{display: updatingComment ? "block" : "none"}}>
+                    <textarea className="comment-update-input" placeholder="Update Comment" onChange={(e) => setUpdatedComment(e.target.value)} value={updatedComment} rows="3" columns="15" name=""/>
+                    {/* <button className="comment-save-update-button" onClick={handleUpdateSubmit}>Save Comment</button> */}
+                </div>
             <div className="owner-comment-class-actions-container">
                 { (user._id === comment.author._id ) ? <button className="comment-update-button" onClick={handleShowUpdateField}>Edit</button> : <></>}
-                <div className="" style={{display: updatingComment ? "block" : "none"}}>
-                    <input type="text" className="comment-update-input" placeholder="Update Comment" onChange={(e) => setUpdatedComment(e.target.value)} value={updatedComment} name=""/>
-                    <button className="comment-save-update-button" onClick={handleUpdateSubmit}>Save Comment</button>
-                </div>
+                <button className="comment-save-update-button" onClick={handleUpdateSubmit} style={{display: updatingComment ? "block" : "none"}}>Save Comment</button>
 
                 { (user._id === comment.author._id ) ? <button className="comment-delete-button" onClick={handleDelete} >Delete</button> : <></>}    
             </div>
