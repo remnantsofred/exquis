@@ -28,24 +28,19 @@ const SkeletonShow = () => {
 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
+  const author = useSelector(state => state.session.user);
+  // const bones = useSelector(state => state.bones)
   // const author = useSelector(state => state.session.user);
 
-  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
-  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
-  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
-  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
- 
 
+  const handlePost = (e) => {
+    e.preventDefault();
+    const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
 
-
-  // const handlePost = (e) => {
-  //   e.preventDefault();
-  //   const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
-
-  //   dispatch(createComment(newComment, skeletonId));
-  //   e.target.value = "";
-  //   setComment("");
-  // };
+    dispatch(createComment(newComment, skeletonId));
+    e.target.value = "";
+    setComment("");
+  };
 
 
   const tempBones = [
@@ -57,6 +52,7 @@ const SkeletonShow = () => {
     "If only she could make out what it was.",
     "At that moment, she comprehended what it was and where it was heading, and she knew her life would never be the same."
   ]
+
   const currentCollaborator = 'nathan, the wondrous'
   const collaborators = ['this knee', 'dare in', 'the eggo', 'tailor', 'ab yee', 'dab-ne', 'and rhea', 'neigh thin']
 
@@ -76,9 +72,12 @@ const SkeletonShow = () => {
       <Loading />
     )
   } else if (loaded && skellie) {
+    console.log('skellie RIGHT HERE BABYYYYYYYYYYY:', skellie);
+    console.log('skellie RIGHT HERE BABYYYYYYYYYYY:', skellie);
     return (
       <>
         <div className="skellie-main-container">
+          
           <div className="show-top-middle">
             <div className="show-top">
               <h1 id="skeleton-title">{skellie.title}</h1>
@@ -89,25 +88,27 @@ const SkeletonShow = () => {
                   </div>
                 <hr />
             </div>
-          <div className="show-middle">
+            <div className="show-middle">
               {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
-              <div className="skeleton-body-input-container">
-                <div id="skeleton-body">
-                  <PlaceBones component={loaded ? skellie.bones : []} />
-                <div className="user-input-div">
-                  <hr id="body-input-divider" />
-                  <div id="current-writer-note" ><span>It is</span><span id="current-writer-username">{`${currentCollaborator}`}'s</span><span>turn.</span></div>
-                  {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
-                  <NewBoneInput skellie={skellie} />
+                <div className="skeleton-body-input-container">
+                    <div id="skeleton-body">
+                      <PlaceBones component={loaded ? skellie.bones : []} />
+                    </div> 
+                      <div className="user-input-div">
+                        <hr id="body-input-divider" />
+                        <div id="current-writer-note" >
+                            <span>It is</span><span id="current-writer-username">{`${currentCollaborator}`}'s</span><span>turn.</span>
+                        </div>
+                        {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
+                        <NewBoneInput skellie={skellie} />
+                      </div>
+                      <div className="horizontal-skeleton-likes-container">
+                        <DownvoteButton id="skeleton-show-downvote" />
+                          <h1 id="skeleton-show-votes">{skellie.likes.length}</h1>
+                        <UpvoteButton id="skeleton-show-downvote"/>
+                      </div>
                 </div>
-                <div className="horizontal-skeleton-likes-container">
-                  <DownvoteButton />
-                    <h1>{skellie.likes.length}</h1>
-                  <UpvoteButton />
-                </div>
-                </div>
-              </div>
-          </div>
+            </div>
           </div>
             <div className="collaborator-panel">
               <div className="collaborator-panel-text">
@@ -123,18 +124,17 @@ const SkeletonShow = () => {
         <hr id="comment-divider" />
 
           
-        {/* <div className="comments-section">
+        <div className="comments-section">
           <div className='create-comment-container' id="comment-form-container">
             <h2 for="comment" id="comment-form-label">Thoughts?</h2>
             <br />
             <input name="comment" id="comment-input" className="create-comment-form" type="text" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
             <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit Your Comment</button>
           </div>
+        </div>
 
         
           <CommentPanel skeleton={skellie} />
-          {/* {skellie.comments.length && skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)} */}
-    
       </>
     )
   }

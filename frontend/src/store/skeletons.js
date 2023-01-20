@@ -1,5 +1,6 @@
 import jwtFetch from "./jwt";
-import { RECEIVE_SKELETON_COMMENTS } from "./comments";
+import { RECEIVE_SKELETON_COMMENTS, RECEIVE_COMMENT, REMOVE_COMMENT } from "./comments";
+
 
 export const RECEIVE_SKELETON = "skeletons/RECEIVE_SKELETON";
 export const RECEIVE_SKELETONS = "skeletons/RECEIVE_SKELETONS";
@@ -86,11 +87,8 @@ export const createSkeleton = data => async dispatch => {
           body: JSON.stringify(data)
       });
       const newSkeleton = await res.json();
-
-
       dispatch(receiveSkeleton(newSkeleton));
       return newSkeleton;
-      // return Promise.resolve();
 
   } catch (err) {
       const resBody = await err.json();
@@ -153,26 +151,20 @@ const skeletonsReducer = (state = {}, action) => {
   let newState = { ... state};
   switch (action.type) {
     case RECEIVE_SKELETON:
-      // return action.skeleton
       return { ...newState, [action.skeleton._id]: action.skeleton };
-        // return { ...state, new: action.skeleton, new: undefined };
     case RECEIVE_SKELETONS:
-        // return { ...newState, all: action.skeletons };
         return { ...newState, ...action.skeletons };
     case RECEIVE_USER_SKELETONS:
         return {...newState, ...action.skeletons};
     case REMOVE_SKELETON:
-        // const newState = { ...state };
         delete newState[action.skeleton._id];
         return newState;
     case RECEIVE_SKELETON_COMMENTS:
-        // here we are overriding the old comments with the new comments 
         let skeletonComments = newState[action.skeletonId]
         skeletonComments.comments = action.comments
-        // return { ...newState, [action.skeletonId]: action.comments }
-        // return { ...newState, [action.comment.skeleton._id]: action.comment.skeleton }
-
         return newState;
+    case RECEIVE_COMMENT:
+      return {...newState, [action.comment.parent]: {...newState[action.comment.parent], comments: [...newState[action.comment.parent].comments, action.comment]}}
     default:
         return state;
   }

@@ -11,12 +11,11 @@ import CommentForm from "../CommentForm/CommentForm";
 const CommentPanel= ({skeleton}) => {
     const dispatch = useDispatch();
 
-
     return (
         <div>
             {skeleton.comments.map((comment) => (
                 <CommentForm key={comment._id} comment={comment} skeleton={skeleton} />
-            ))}
+            )).reverse()}
         </div>
     )
 

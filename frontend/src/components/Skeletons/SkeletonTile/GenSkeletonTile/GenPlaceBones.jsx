@@ -2,11 +2,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import Loading from "../../../Loading/Loading"
 
-import ColorPalettePicker from "./ColorPalettePicker/ColorPalettePicker"
 
-const PlaceBones = (bones) => {
+const GenPlaceBones = (bones) => {
+  console.log(bones)
   const [loaded, setLoaded] = useState(false)
-  const palette = ColorPalettePicker()
   const body = []
   
 
@@ -33,25 +32,13 @@ const PlaceBones = (bones) => {
   const compileBones = () => {
     console.log("i'm not here shhhhhh")
 
-    const bonesLength = bones.component.length
-
-
-    var pNum = 0
-
-
-
-    const resetPNum = () => {
-      if (pNum >= palette.length) {
-        pNum -= pNum;
-      }
-    }
-
-    for (var i = 0; i < bonesLength; i ++) {
-      resetPNum();
-      let sentence = <span style={{color: `${palette[pNum]}`}}>{bones.component[i].text} </span> 
-      body.push(sentence)
-      pNum++
-    }
+    console.log('BONES LENGTH')
+    console.log(bones)
+    bones.bones.map(bone => {
+      const sentence = <span>{bone.text} </span>
+      body.push(sentence)    
+    })
+    console.log(body)
     return (
       body
     )
@@ -78,4 +65,4 @@ const PlaceBones = (bones) => {
 // }
 }
 
-export default PlaceBones;
+export default GenPlaceBones;
