@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import UpvoteButton from '../UpvoteButton'
 import DownvoteButton from '../DownvoteButton'
 import GenPlaceBones from './GenPlaceBones'
+
 const GenSkeletonTile = ({skeletonInfo}) => {
 
   const skeletonId = skeletonInfo._id
