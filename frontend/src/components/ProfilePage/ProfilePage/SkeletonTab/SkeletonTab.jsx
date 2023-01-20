@@ -1,6 +1,32 @@
 import { Link } from "react-router-dom"
+import { useSelector, useDispatch} from "react-redux"
+import getSkeletons from "../../../../store/skeletons";
+import { useEffect } from "react";
 
-const SkeletonTab = (switchValue) => {
+
+const SkeletonTab = ({switchValue, skellies, userId}) => {
+
+  const skelliesCurrent = [];
+  const skelliesOwned = [];
+  const skelliesPrevious = [];
+
+  for (let i = 0; i < skellies?.length; i++) {
+    let skellie = skellies[i]
+    if (skellie.owner === userId) {
+      skelliesOwned.push(skellie)
+    }
+  }
+
+  for (let i = 0; i < skellies?.length; i++) { 
+    let skellie = skellies[i]
+    if (skellie.collaborators.includes(userId)) {
+      if ( skellie.bones.length < skellie.maxBones) {
+        skelliesCurrent.push(skellie)
+      } else {
+        skelliesPrevious.push(skellie)
+      }
+    }
+  }
 
 
   // const SkellieLinkName = (skellie) => {
@@ -11,6 +37,10 @@ const SkeletonTab = (switchValue) => {
   // </Link>
   // }
 
+  // console.log('skellies in skeletonTab', skellies)
+
+  // if (!skellies) return null;
+
 
   switch(switchValue.switchValue) {
     case "current":
@@ -18,7 +48,7 @@ const SkeletonTab = (switchValue) => {
         <div className='skeletons-block' id="current-skeletons-block">
         <h2 className='profile-bottom-title'>Current Skeletons</h2>
           <ul className='skeletons-block-list' id="current-skeletons-block-list">
-            {/* {skellies.map(skellie => <SkellieLinkName skellie={skellie} />)} */}
+            {skelliesCurrent}
           </ul>
         </div>
       )
@@ -27,17 +57,17 @@ const SkeletonTab = (switchValue) => {
         <div className='skeletons-block' id="owned-skeletons-block">
         <h2 className='profile-bottom-title'>Owned Skeletons</h2>
           <ul className='skeletons-block-list' id="owned-skeletons-block-list">
-            {/* {skellies.map(skellie => <SkellieLinkName skellie={skellie} />)} */}
+            {skelliesOwned}
           </ul>
         </div>
       )
     case "previous":
-      console.log('hello???')
+      // console.log('hello???')
       return (
         <div className='skeletons-block' id="previous-skeletons-block">
         <h2 className='profile-bottom-title'>Previous Skeletons</h2>
           <ul className='skeletons-block-list' id="previous-skeletons-block-list">
-            {/* {skellies.map(skellie => <SkellieLinkName skellie={skellie} />)} */}
+            {skelliesPrevious}
           </ul>
         </div>
       )
@@ -46,7 +76,7 @@ const SkeletonTab = (switchValue) => {
         <div className='skeletons-block' id="current-skeletons-block">
         <h2 className='profile-bottom-title'>Current Skeletons</h2>
           <ul className='skeletons-block-list' id="current-skeletons-block-list">
-            {/* {skellies.map(skellie => <SkellieLinkName skellie={skellie} />)} */}
+          {skelliesCurrent}
           </ul>
         </div>
       )

@@ -73,9 +73,9 @@ for (const user of users){
 skeletons.forEach(skeleton => {
   users.forEach(user => {
     if (user._id === skeleton.owner) {
-      user.skeletons.push(skeleton._id);
+      user.skeletons.push(skeleton);
     } else if (skeleton.collaborators.includes(user._id)) {
-      user.skeletons.push(skeleton._id);
+      user.skeletons.push(skeleton);
     }
   })
 })

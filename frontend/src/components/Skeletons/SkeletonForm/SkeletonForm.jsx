@@ -4,11 +4,12 @@ import './SkeletonForm.css';
 import { createSkeleton } from '../../../store/skeletons';
 import { useHistory } from 'react-router-dom';
 
+
 function SkeletonForm () {
   const [title, setTitle] = useState('');
   const [prompt, setPrompt] = useState('')
-  const [maxBones, setMaxBones] = useState();
-  const [maxCollaborators, setMaxCollaborators] = useState(1);
+  const [maxBones, setMaxBones] = useState('');
+  const [maxCollaborators, setMaxCollaborators] = useState('');
   const [tags, setTags] = useState([]);
   const history = useHistory();
 
@@ -53,9 +54,11 @@ function SkeletonForm () {
     };
 
     dispatch(createSkeleton(skeleton))
-    .then(() => {history.push(`/users/${currentUser._id}`)})
+    .then((res) => {history.push(`/skeletons/${res._id}`)})
 
   }
+
+
 
   return (
     <div className='form-container' id="new-skeleton-form">
@@ -70,7 +73,7 @@ function SkeletonForm () {
           </span>
           <br/>
           <input type="text"
-            value={title}
+            value={title || ''}
             onChange={update('title')}
             placeholder="Title"
             className='skellie-input'
@@ -91,7 +94,7 @@ function SkeletonForm () {
             className='skellie-input'
           /> */}
           <textarea
-            value={prompt}
+            value={prompt || ''}
             onChange={update('prompt')}
             placeholder="Prompt"
             className='skellie-input'
@@ -106,7 +109,7 @@ function SkeletonForm () {
           </span>
           <br/>
           <input type="number"
-            value={maxBones}
+            value={maxBones || ''}
             onChange={update('maxBones')}
             placeholder="At least 5 bones"
             className='skellie-input'
@@ -121,12 +124,29 @@ function SkeletonForm () {
           </span>
           <br/>
           <input type="number"
-            value={maxCollaborators}
+            value={maxCollaborators || ''}
             onChange={update('maxCollaborators')}
             placeholder="Max Collaborators"
             className='skellie-input'
           />
         </label>
+
+        {/* <div className="errors">{errors?.tags}</div>
+        <label>
+          <span className='skellie-label'>
+            <h2 className='skellie-label-text'>
+              Tags:
+            </h2>
+          </span>
+          <br/>
+            <input type="word"
+            value={tags || ''}
+            onChange={update('tags')}
+            placeholder="Tags"
+            className='skellie-input'>
+            </input>
+        </label> */}
+
         <input
           onClick={e => skeletonSubmit(e)}
           className='skellie-form-submit-button'
@@ -134,6 +154,7 @@ function SkeletonForm () {
           value="Start a New Skellie :)"
           disabled={!title || !maxBones || !maxCollaborators || !tags }
         />
+
       </form>
     </div>
   );

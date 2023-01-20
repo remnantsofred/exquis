@@ -2,13 +2,12 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Loading from '../../Loading/Loading'
-
 import { getUser, fetchUser } from '../../../store/users'
 import SkeletonTab from './SkeletonTab/SkeletonTab'
-
 import Banner from '../../../assets/profile_page/exquis_banner.png'
 import ProfileIcon from '../../../assets/profile_page/exquis_profile_icon.png'
 import './ProfilePage.css'
+import { fetchSkeletons, getSkeletons } from '../../../store/skeletons'
 
 const ProfilePage = () => {
   const dispatch = useDispatch()
@@ -16,17 +15,26 @@ const ProfilePage = () => {
   const { userId } = useParams()
   const [tabVal, setTabVal] = useState("current")
   const [skellies, setSkellies] = useState({})
+
+
   const user = useSelector(getUser(userId))
 
+  
   useEffect(() => {
     Promise.all([
-      dispatch(fetchUser(userId))
+      dispatch(fetchUser(userId)),
+      // dispatch(fetchSkeletons())
       
     ]).then(()=>{
       setLoaded(true);
     })
   }, [])
 
+
+  const userSkeletons = user?.skeletons
+
+
+  
   const whichSkellies = (switchValue) => {
    switch(switchValue) {
     case "current":
@@ -38,7 +46,6 @@ const ProfilePage = () => {
         skellies
       )
     case "previous":
-      console.log('hello???')
       return (
         skellies
       )
@@ -48,18 +55,13 @@ const ProfilePage = () => {
       )
   }}
 
+
   const handleClick = (e) => {
     setTabVal(e.target.id)
     whichSkellies(e.target.id)
   }
 
-  console.log(userId, "userId from profile page")
-  console.log(user, "user from profile page")
-  // const OwnedSkeletons = () => {
-  //   const filteredSkeletons =  skeletons.filter(skeleton => skeleton.ownerId === userId);
-  //   return (filteredSkeletons);
-  // }
-  // if (user !== null) setLoaded(true)
+
   if (!loaded) {
     return (
       <div>
@@ -119,11 +121,8 @@ const ProfilePage = () => {
         </div>
       </div>
       <div>
-        <SkeletonTab switchValue={tabVal} />
+        <SkeletonTab switchValue={tabVal} skellies={{userSkeletons}} userId={userId}/>
       </div>
-
-
-
 
     </div>
   )}

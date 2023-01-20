@@ -40,16 +40,6 @@ const receiveUserSkeletons = skeletons => ({
 });
 
 
-
-// export const getSkeletons = state => {
-//     const skeletons = Object.values(state.skeletons);
-//     return skeletons;
-// }
-
-// export const getSkeleton = (state, skeletonId) => state.skeletons[skeletonId];
-
-// export const getSkeleton = skeletonId => store
-
 export const getSkeletons = (store) => { 
   if (store.skeletons) return Object.values(store.skeletons);
   return [];
@@ -64,27 +54,10 @@ export const getSkeleton = (skeletonId) => (store) => {
 export const getCommentsForSkeleton = (state, skeletonId) => {
   let skeleton = state?.skeletons[skeletonId]
   // return skeleton.comments ? Object.values(skeleton.comments) : [];
-  console.log("skeleton inside getCommentsForSkeleton", skeleton)
-  console.log("skeleton.comments inside getCommentsForSkeleton", state)
   return skeletonId.comments ? Object.values(skeleton.comments) : [];
 }
 
 
-
-// THUNK ACTION CREATORS
-
-// export const fetchSkeletons = () => async dispatch => {
-//   try {
-//       const res = await jwtFetch('/api/skeletons');
-//       const skeletons = await res.json();
-//       dispatch(receiveSkeletons(skeletons));
-//   } catch (err) {
-//       const resBody = await err.json();
-//       if (resBody.statusCode === 400) {
-//       dispatch(receiveErrors(resBody.errors));
-//       }
-//   }
-// }
 
 export const fetchSkeletons = () => async (dispatch) => {
   const res = await fetch('/api/skeletons');
@@ -96,14 +69,6 @@ export const fetchSkeletons = () => async (dispatch) => {
 };
 
 
-// export const fetchSkeletons = () => async (dispatch) => {
-//   let res = await fetch("/api/skeletons");
-//   if (res.ok) {
-//       let skeletons = await res.json();
-//       dispatch(receiveSkeletons(skeletons))
-//   }
-// }
-
 export const fetchSkeleton = (skeletonId) => async (dispatch) => {
   const res = await fetch(`/api/skeletons/${skeletonId}`);
   if (res.ok) {
@@ -113,18 +78,6 @@ export const fetchSkeleton = (skeletonId) => async (dispatch) => {
   }
 }
 
-// export const fetchSkeleton = skeletonId => async dispatch => {
-//   try {
-//       const res = await jwtFetch(`/api/skeletons/${skeletonId}`);
-//       const skeleton = await res.json();
-//       dispatch(receiveSkeleton(skeleton));
-//   } catch (err) {
-//       const resBody = await err.json();
-//       if (resBody.statusCode === 400) {
-//       dispatch(receiveErrors(resBody.errors));
-//       }
-//   }
-// }
 
 export const createSkeleton = data => async dispatch => {
   try {
@@ -133,7 +86,12 @@ export const createSkeleton = data => async dispatch => {
           body: JSON.stringify(data)
       });
       const newSkeleton = await res.json();
+
+      console.log('newSkeleton', newSkeleton);
       dispatch(receiveSkeleton(newSkeleton));
+      return newSkeleton;
+      // return Promise.resolve();
+
   } catch (err) {
       const resBody = await err.json();
       if (resBody.statusCode === 400) {
@@ -191,20 +149,6 @@ export const skeletonErrorsReducer = (state = nullErrors, action) => {
 }
 
 
-// const skeletonsReducer = (state = {}, action) => {
-//   let newState = { ... state};
-//   switch (action.type) {
-//     case RECEIVE_SKELETONS:
-//       return {...newState, ...action.skeletons};
-//     case RECEIVE_SKELETON:
-//       return { ...newState, [action.skeleton._id]: action.skeleton };
-//     case REMOVE_SKELETON:
-//       delete newState[action.skeletonId];
-//       return newState;
-//     default:
-//       return state;
-//   }
-// }
 
 const skeletonsReducer = (state = {}, action) => {
   let newState = { ... state};
