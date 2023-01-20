@@ -16,11 +16,7 @@ const NewBoneInput = (skellie) => {
   const [tags, setTags] = useState([])
   const [likes, setLikes] = useState([])
   const [comments, setComments] = useState([])
-  console.log(skellie)
-  console.log("HEYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY")
-  // console.log(skellie)
   const skellieId = skellie.skellie._id
-  console.log(author)
 
   let tempId
 
@@ -39,8 +35,6 @@ const NewBoneInput = (skellie) => {
   const createNewBone = (e) => {
     e.preventDefault()
     const authorId = author._id;
-    console.log(authorId)
-    console.log(newBoneText)
     const data = {
       text: newBoneText,
       skeleton: skellieId,
@@ -49,9 +43,8 @@ const NewBoneInput = (skellie) => {
     dispatch(createBone(skellieId, data))
     .then((newBone) => {
       setBones(skellie.bones)
-      console.log(bones)
       bones.push(newBone)
-      console.log(bones)
+    
 
       const data = {
       bones: bones,
@@ -64,7 +57,6 @@ const NewBoneInput = (skellie) => {
       likes: likes,
       comments: comments
     }
-    console.log("hey! here here here")
     dispatch(updateSkeleton(skellieId, data))
     }
     )

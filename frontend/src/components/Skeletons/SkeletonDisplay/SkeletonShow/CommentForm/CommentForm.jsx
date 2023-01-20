@@ -5,21 +5,22 @@ import { useState } from "react";
 import { deleteComment, updateComment } from "../../../../../store/comments";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import { getUsers } from "../../../../../store/users";
 
 
 
 const CommentForm = ({comment, skeleton}) => {
-//   const commentId = comment._id;
-//   const skeletonId = skeleton._id;
-  // const skeletonId = comment.skeletonId === undefined ? comment.skeleton._id : comment.skeletonId;
   const user = useSelector(state => state.session.user);
-//   console.log(comment, "comment in comment form")
-//   console.log(skeleton, "skeleton in comment form")
+
 
   const [updatedComment, setUpdatedComment] = useState(comment.text);
   const [updatingComment, setUpdatingComment] = useState(false);
 
-  
+//   const users = useSelector(getUsers());
+//   console.log("users", users)
+
+// console.log("comment", comment)
+
   const dispatch = useDispatch();
   
   const handleDelete = (e) => {
@@ -42,9 +43,12 @@ const CommentForm = ({comment, skeleton}) => {
       setUpdatingComment(true);
   }
 
+
+
   if (comment._id){
+    // console.log("user: ", user);
+    console.log("comment: ", comment);
       return (
-    
         <>
         
         <div className="post-index-item-comment" key={user._id}> 
@@ -55,15 +59,15 @@ const CommentForm = ({comment, skeleton}) => {
                 <p id="comment-timestamp"> {comment.createdAt}</p>
                 <div className="comment-body" style={{display: !updatingComment ? "block" : "none"}} >{comment.text}</div>
               
-            <div className="">
-                { (user._id === comment.author._id ) ? <button className="delete-botton" onClick={handleDelete} >Delete</button> : <></>}
-                { (user._id === comment.author._id ) ? <button className="update-button" onClick={handleShowUpdateField} >Edit</button> : <></>}
-            </div>
+                <div className="">
+                    { (user._id === comment.author._id || user._id === comment.author ) ? <button className="delete-botton" onClick={handleDelete} >Delete</button> : <></>}
+                    { (user._id === comment.author._id || user._id === comment.author ) ? <button className="update-button" onClick={handleShowUpdateField} >Edit</button> : <></>}
+                </div>
     
-            <div className="" style={{display: updatingComment ? "block" : "none"}}>
-                <input type="text" className="" placeholder="Update Comment" onChange={(e) => setUpdatedComment(e.target.value)} value={updatedComment} name=""/>
-                <button className="" onClick={handleUpdateSubmit}>Save Comment</button>
-            </div>
+                <div className="" style={{display: updatingComment ? "block" : "none"}}>
+                    <input type="text" className="" placeholder="Update Comment" onChange={(e) => setUpdatedComment(e.target.value)} value={updatedComment} name=""/>
+                    <button className="" onClick={handleUpdateSubmit}>Save Comment</button>
+                </div>
     
             </div>
         </div>

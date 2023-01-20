@@ -11,7 +11,6 @@ const TempUsersIndex = () => {
   const [loaded, setLoaded] = useState(false)
   const users = useSelector(getUsers)
 
-  // console.log(users)
 
   useEffect(() => {
     Promise.all([

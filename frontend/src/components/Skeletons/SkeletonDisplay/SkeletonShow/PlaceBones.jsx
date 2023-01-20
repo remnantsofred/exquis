@@ -5,7 +5,6 @@ import Loading from "../../../Loading/Loading"
 import ColorPalettePicker from "./ColorPalettePicker/ColorPalettePicker"
 
 const PlaceBones = (bones) => {
-  console.log(bones)
   const [loaded, setLoaded] = useState(false)
   const palette = ColorPalettePicker()
   const body = []
@@ -27,11 +26,8 @@ const PlaceBones = (bones) => {
 
   
   const compileBones = () => {
-    console.log("i'm not here shhhhhh")
-    console.log(bones)
     const bonesLength = bones.component.length
-    console.log('BONES LENGTH')
-    console.log(bonesLength)
+
 
     var pNum = 0
 
@@ -43,8 +39,7 @@ const PlaceBones = (bones) => {
 
     for (var i = 0; i < bonesLength; i ++) {
       resetPNum();
-      console.log(palette)
-      console.log(palette[pNum])
+    
       let sentence = <span style={{color: `${palette[pNum]}`}}>{bones.component[i].text} </span> 
       body.push(sentence)
       pNum++

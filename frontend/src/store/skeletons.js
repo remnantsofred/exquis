@@ -1,5 +1,6 @@
 import jwtFetch from "./jwt";
-import { RECEIVE_SKELETON_COMMENTS } from "./comments";
+import { RECEIVE_SKELETON_COMMENTS, RECEIVE_COMMENT, REMOVE_COMMENT } from "./comments";
+
 
 export const RECEIVE_SKELETON = "skeletons/RECEIVE_SKELETON";
 export const RECEIVE_SKELETONS = "skeletons/RECEIVE_SKELETONS";
@@ -86,11 +87,8 @@ export const createSkeleton = data => async dispatch => {
           body: JSON.stringify(data)
       });
       const newSkeleton = await res.json();
-
-      console.log('newSkeleton', newSkeleton);
       dispatch(receiveSkeleton(newSkeleton));
       return newSkeleton;
-      // return Promise.resolve();
 
   } catch (err) {
       const resBody = await err.json();
@@ -110,7 +108,6 @@ export const updateSkeleton = (skeletonId, data) => async dispatch => {
       dispatch(receiveSkeleton(updatedSkeleton));
   } catch (err) {
       const resBody = await err.json();
-      console.log(resBody)
       if (resBody.statusCode === 400) {
       dispatch(receiveErrors(resBody.errors));
       }
@@ -155,6 +152,7 @@ const skeletonsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_SKELETON:
       // return action.skeleton
+      // debugger
       return { ...newState, [action.skeleton._id]: action.skeleton };
         // return { ...state, new: action.skeleton, new: undefined };
     case RECEIVE_SKELETONS:
@@ -174,6 +172,15 @@ const skeletonsReducer = (state = {}, action) => {
         // return { ...newState, [action.comment.skeleton._id]: action.comment.skeleton }
 
         return newState;
+    case RECEIVE_COMMENT:
+
+      return {...newState, [action.comment.parent]: {...newState[action.comment.parent], comments: [...newState[action.comment.parent].comments, action.comment]}}
+    // case REMOVE_COMMENT:
+    //   let skeleton = newState[action.comment.parent]
+    //   let comments = skeleton.comments.filter(comment => comment._id !== action.comment._id)
+    //   skeleton.comments = comments
+    //   return newState
+
     default:
         return state;
   }

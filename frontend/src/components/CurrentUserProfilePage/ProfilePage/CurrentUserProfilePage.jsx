@@ -34,12 +34,10 @@ const CurrentUserProfilePage = () => {
   }, [])
 
   const DangerClick = () => {
-    console.log('is it working?')
     setIsDisobey(true)
-    console.log(isDisobey)
+
   }
 
-  console.log(userId, "userId from profile page")
   // const OwnedSkeletons = () => {
   //   const filteredSkeletons =  skeletons.filter(skeleton => skeleton.ownerId === userId);
   //   return (filteredSkeletons);

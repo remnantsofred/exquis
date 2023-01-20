@@ -1,4 +1,5 @@
 import jwtFetch from './jwt';
+import { fetchSkeleton } from './skeletons';
 
 export const RECEIVE_COMMENT = 'comments/RECEIVE_COMMENT';
 export const RECEIVE_COMMENTS = 'comments/RECEIVE_COMMENTS';
@@ -47,7 +48,6 @@ export const receiveSkeletonComments = (skeletonId, comments) => ({
 
 
 // export const getSkeletonComments = (state, skeletonId) => {
-//     // console.log("skeletonId inside getSkeletonComments", skeletonId)
 //     // const comments = Object.values(state.comments);
 //     // return comments.filter(comment => comment.skeletonId === skeletonId);
 
@@ -106,20 +106,19 @@ export const createComment = (newComment, skeletonId )=> async dispatch => {
         dispatch(receiveComment(comment));
         fetchSkeletonCommentsLocal(skeletonId);
     } catch (err) {
-        // console.log("error in createComment")
+        console.log(err);
     }
 }
 
 export const updateComment = comment => async dispatch => {
-    // console.log("comment in updateComment", comment)
     try {
         const res = await jwtFetch(`/api/comments/${comment._id}`, { // /api/comments/skeletons/${skeletonId}/${commentId}
             method: 'PATCH',
             body: JSON.stringify(comment)
         });
-        // console.log("res in updateComment", res)
         const updatedComment = await res.json();
         dispatch(receiveComment(updatedComment));
+        dispatch(fetchSkeleton(updatedComment.parent));
     } catch (err) {
         const resBody = await err.json();
         if (resBody.statusCode === 400) {
@@ -135,11 +134,12 @@ export const deleteComment = commentId => async dispatch => {
             method: 'DELETE'
         });
         const deletedComment = await res.json();
-        dispatch(removeComment(deletedComment));
+        dispatch(removeComment(deletedComment._id))
+        dispatch(fetchSkeleton(deletedComment.parent));
     } catch (err) {
         const resBody = await err.json();
         if (resBody.statusCode === 400) {
-            dispatch(receiveErrors(resBody.errors));
+            dispatch(receiveErrors(resBody.errors))
         }
     }
 }
@@ -151,7 +151,7 @@ export const commentErrorReducer = (state = nullErrors, action) => {
     switch (action.type) {
         case RECEIVE_COMMENT_ERRORS:
             return action.errors;
-        case RECEIVE_COMMENT:
+        // case RECEIVE_COMMENT:
         case CLEAR_COMMENT_ERRORS:
             return nullErrors;
         default:
@@ -159,37 +159,20 @@ export const commentErrorReducer = (state = nullErrors, action) => {
     }
 }
 
-
-// const commentsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
-//     let newState = {...state};
-//     switch (action.type) {
-//         case RECEIVE_COMMENT:
-//             // return { ...state, all: { ...state.all, [action.comment.id]: action.comment}, new: action.comment };
-//             return { ...newState, [action.comment._id]: action.comment};
-//         case RECEIVE_COMMENTS:
-//             return { ...newState, all: action.comments };
-//         case REMOVE_COMMENT:
-//             delete newState.all[action.commentId];
-//             return newState;
-//         case RECEIVE_USER_COMMENTS:
-//             return { ...newState, user: action.comments };
-//         case RECEIVE_SKELETON_COMMENTS:
-//             return { ...newState, skeleton: action.comments};
-//         default:
-//             return state;
-//     }
-// }
 const commentsReducer = (state = {  }, action) => {
     let newState = {...state};
     switch (action.type) {
         case RECEIVE_COMMENT:
+            // debugger
             // return { ...state, all: { ...state.all, [action.comment.id]: action.comment}, new: action.comment };
             // return newState[action.comments.comment_id];
             return { ...newState, [action.comment._id]: action.comment};
+            // return {...newState, [action.comment.parent]: {...newState[action.comment.parent], comments: [...newState[action.comment.parent].comments, action.comment]}}
+
         case RECEIVE_COMMENTS:
             return { ...newState, ...action.comments };
         case REMOVE_COMMENT:
-            delete newState.all[action.commentId];
+            newState = {};
             return newState;
         case RECEIVE_USER_COMMENTS:
             return { ...newState, ...action.comments };

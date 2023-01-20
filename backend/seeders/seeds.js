@@ -90,7 +90,6 @@ for (const skeleton of skeletons) {
     const comment = new Comment ({
       text: faker.lorem.paragraph(),
       parent: skeleton._id,
-
       author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
     });
 
@@ -102,7 +101,7 @@ for (const skeleton of skeletons) {
 comments.forEach(comment => {
   users.forEach(user => {
     if (user._id === comment.author) {
-      user.comments.push(comment._id);
+      user.comments.push(comment);
     }
   })
 })
@@ -110,7 +109,7 @@ comments.forEach(comment => {
 comments.forEach(comment => {
   skeletons.forEach(skeleton => {
     if (skeleton._id === comment.parent) {
-      skeleton.comments.push(comment._id);
+      skeleton.comments.push(comment);
     }
   })
 })

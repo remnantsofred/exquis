@@ -29,17 +29,6 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
   }
 
 
-  // const SkellieLinkName = (skellie) => {
-  // <Link to={`/skeletons/${skellie.id}`}>
-  //   <li id={skellie.id}>
-  //     {skellie.title}
-  //   </li>
-  // </Link>
-  // }
-
-  // console.log('skellies in skeletonTab', skellies)
-
-  // if (!skellies) return null;
 
 
   switch(switchValue.switchValue) {
@@ -62,7 +51,6 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
         </div>
       )
     case "previous":
-      // console.log('hello???')
       return (
         <div className='skeletons-block' id="previous-skeletons-block">
         <h2 className='profile-bottom-title'>Previous Skeletons</h2>
