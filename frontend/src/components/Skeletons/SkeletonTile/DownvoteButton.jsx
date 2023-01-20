@@ -3,7 +3,7 @@ import Downvote from '../../../assets/skeleton_tile/triangle_button_down.png'
 const DownvoteButton = () => {
 
   const handleDownvote = () => {
-    console.log("downvote")
+
   }
 
   return (

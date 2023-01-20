@@ -1,9 +1,8 @@
 import Downvote from '../../assets/skeleton_tile/triangle_button_down.png'
 
 const clickHandle = () => {
-  return (
-  console.log('teehee')
-)}
+
+}
 
 const DownvoteButton = () => {
 
