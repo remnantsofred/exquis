@@ -4,7 +4,8 @@ const handleValidationErrors = require('./handleValidationErrors');
 const validateCommentInput = [
   check('text')
     .exists({ checkFalsy: true })
-    .withMessage('Comment text is required'),
+    .isLength({ min: 1, max: 1000 })
+    .withMessage('Comment text is required and must be between 1 and 1000 characters'),
   check('parent')
     .exists({ checkFalsy: true })
     .withMessage('Comment must belong to a skeleton'),

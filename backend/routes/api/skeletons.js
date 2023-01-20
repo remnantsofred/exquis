@@ -76,11 +76,32 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
       skeleton.maxCollaborators = req.body.maxCollaborators,
       skeleton.collaborators = req.body.collaborators,
       skeleton.bones = req.body.bones,
-      skeleton.tags = req.body.tags,
-      skeleton.likes = req.body.likes,
-      skeleton.comments = req.body.comments
-    
+      skeleton.tags = req.body.tags
+      // need to add future logic to add/remove tags
+
+    let currentCollaborators = [];
+    let newCollaborators = [];
+    let removedCollaborators = [];
+
+    for (const newCollaborator of req.body.collaborators) {
+      if (!skeleton.collaborators.includes(newCollaborator)) {
+        newCollaborators.push(newCollaborator);
+      } else  {
+        currentCollaborators.push(newCollaborator);
+      }
+    }
+
+    for (const prevCollaborator of skeleton.collaborators) {
+      if (!req.body.collaborators.includes(prevCollaborator)) {
+        removedCollaborators.push(prevCollaborator);
+      }
+    }
+
     await skeleton.save();
+    await User.updateMany({_id: {$in: newCollaborators}}, {$push: {skeletons: skeleton._id} });
+    await User.updateMany({_id: {$in: removedCollaborators}}, {$pull: {skeletons: skeleton._id} });
+ 
+    
     return res.json(skeleton);
   }
   catch(err) {
@@ -91,7 +112,8 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
 
 router.delete('/:id', requireUser, async (req, res, next) => {
   try {
-    const skeleton = await Skeleton.findById(req.params.id);
+    // const skeleton = await Skeleton.findById(req.params.id);
+    const skeleton = await Skeleton.findOneAndDelete({_id: req.params.id});
     if (!skeleton) {
       const error = new Error('Skeleton not found');
       error.statusCode = 404;
@@ -104,6 +126,9 @@ router.delete('/:id', requireUser, async (req, res, next) => {
       error.errors = { message: "You are not authorized to delete this skeleton" };
       return next(error);
     }
+    // let user = await User.findOneAndUpdate({_id: sameSkeleton.owner._id}, {$pull: {skeletons: sameSkeleton._id}}, {new: true})
+    await User.updateOne({_id: skeleton.owner._id}, {$pull: {skeletons: skeleton._id} });
+    await User.updateMany({_id: {$in: skeleton.collaborators}}, {$pull: {skeletons: skeleton._id} });
     await skeleton.remove();
     return res.json(skeleton);
   }
@@ -150,11 +175,15 @@ router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
     });
 
     let skeleton = await newSkeleton.save();
-    skeleton = await skeleton.populate('owner', '_id, username')
-                              .populate("collaborators", "_id, username")
-                              .populate("comments")
+    skeleton = await skeleton
+                              // .populate('owner', '_id, username')
+                              // .populate("collaborators", "_id, username")
+                              // .populate("comments")
                               // .populate("tags")
                               // .populate("likes")
+    await User.updateOne({_id: skeleton.owner._id}, {$push: {skeletons: skeleton._id} });
+    await User.updateMany({_id: {$in: skeleton.collaborators}}, {$push: {skeletons: skeleton._id} });
+
     return res.json(skeleton);
   }
   catch(err) {
