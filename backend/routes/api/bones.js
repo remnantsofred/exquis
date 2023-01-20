@@ -90,6 +90,7 @@ router.delete('/skeletons/:skeletonId/:id', requireUser, async (req, res, next) 
       return next(error);
     }
     await bone.remove();
+    await Skeleton.updateOne({_id: bone.skeleton}, {$pull: {bones: bone._id}});
     return res.json(bone);
   }
   catch(err) {
@@ -142,6 +143,7 @@ router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req
       });
       
       let bone = await newBone.save();
+      await Skeleton.updateOne({_id: bone.skeleton}, {$push: {bones: bone._id}});
       // bone = await bone.populate('skeleton', '_id, text');
       return res.json(bone);
     }

@@ -51,6 +51,8 @@ router.delete('/:id', requireUser, async (req, res, next) => {
       return next(error);
     }
     await like.remove();
+    await Skeleton.updateOne({_id: like.skeleton}, {$pull: {likes: like._id}});
+    await User.updateOne({_id: like.liker}, {$pull: {likes: like._id}});
     return res.json(like);
   }
   catch(err) {
@@ -91,6 +93,8 @@ router.post('/', requireUser, validateLikeInput, async (req, res, next) => {
 
     let like = await newLike.save();
     like = await like.populate('liker', '_id, username');
+    await Skeleton.updateOne({_id: like.skeleton}, {$push: {likes: like._id}});
+    await User.updateOne({_id: like.liker}, {$push: {likes: like._id}});
     return res.json(like);
   }
   catch(err) {

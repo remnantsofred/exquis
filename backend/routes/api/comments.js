@@ -62,15 +62,16 @@ router.get('/skeletons/:skeletonId', async (req, res) => {
 
 router.post('/skeletons/:skeletonId', validateCommentInput, requireUser, async (req, res, next) => {
   try {
-    const parent = await Skeleton.findById(req.params.skeletonId);
     const newComment = new Comment({
       parent: req.params.skeletonId,
       text: req.body.text,
       author: req.user._id
     });
-
+    
     
     let comment = await newComment.save();
+    await Skeleton.updateOne({_id: req.params.skeletonId}, {$push: {comments: comment._id}});
+    await User.updateOne({_id: comment.author}, {$push: {comments: comment._id}});
     comment = await comment.populate('author', '_id, username');
 
 
@@ -142,6 +143,8 @@ router.delete('/:id', requireUser, async (req, res, next) => {
       return next(error);
     }
     await comment.remove();
+    await Skeleton.updateOne({_id: comment.parent}, {$pull: {comments: comment._id}});
+    await User.updateOne({_id: comment.author}, {$pull: {comments: comment._id}});
     return res.json(comment);
   }
   catch(err) {
