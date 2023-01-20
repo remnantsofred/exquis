@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch} from "react-redux"
-import getSkeletons from "../../../../store/skeletons";
-import { useEffect } from "react";
+import { getSkeletons , fetchSkeletons } from "../../../../store/skeletons";
+import { useEffect, useState } from "react";
 
 
 const SkeletonTab = ({switchValue, skellies, userId}) => {
+
 
   const skelliesCurrent = [];
   const skelliesOwned = [];

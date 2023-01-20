@@ -22,7 +22,7 @@ const ProfilePage = () => {
   useEffect(() => {
     Promise.all([
       dispatch(fetchUser(userId)),
-      // dispatch(fetchSkeletons())
+      dispatch(fetchSkeletons())
       
     ]).then(()=>{
       setLoaded(true);
