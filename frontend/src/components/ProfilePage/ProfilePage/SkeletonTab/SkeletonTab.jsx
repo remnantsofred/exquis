@@ -1,14 +1,73 @@
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch} from "react-redux"
-import getSkeletons from "../../../../store/skeletons";
-import { useEffect } from "react";
+import { getSkeletons , fetchSkeletons } from "../../../../store/skeletons";
+import { useEffect, useState } from "react";
 
 
-const SkeletonTab = ({switchValue, skellies, userId}) => {
+const SkeletonTab = ({switchValue, userId}) => {
 
+  const dispatch = useDispatch()
+  const [loaded, setLoaded] = useState(false)
+  const skellies = useSelector(getSkeletons())
+  // console.log('store skeletons', (store) => store.skeletons)
+  
+  useEffect(() => {
+    Promise.all([
+      dispatch(fetchSkeletons())
+    ]).then(()=>{
+      setLoaded(true);
+    })
+  }, [])
+
+
+  console.log("skellies", skellies)
+  
   const skelliesCurrent = [];
   const skelliesOwned = [];
   const skelliesPrevious = [];
+
+  const [isCollab, setIsCollab] = useState(false)
+  const [isOwner, setIsOwner] = useState(false)
+  const [isFinished, setIsFinished] = useState(false)
+
+
+  const theyCollab = (skellie) => {
+    setIsCollab(false)
+    if (skellie.collaborators.includes(userId) || skellie.owner === userId) {
+      if (skellie.bones.length < skellie.maxBones) {
+        setIsCollab(true)
+      }
+    }
+    return isCollab
+  }
+
+  const theyOwner = (skellie) => {
+    setIsOwner(false)
+    if (skellie.owner === userId) {
+    setIsOwner(true)
+    }
+    return isOwner
+  } 
+
+  const theyDone = (skellie) => {
+    setIsFinished(false)
+    if (skellie.collaborators.includes(userId) || skellie.owner === userId) {
+      if (skellie.bones.length >= skellie.maxBones) {
+        setIsFinished(true)
+      }
+    }
+    return isFinished
+  }
+
+  skellies.forEach(skellie => {
+    if (theyOwner(skellie)) {
+      skelliesOwned.push(skellie)
+    } else if (theyDone(skellie)) {
+      skelliesPrevious.push(skellie)
+    } else if (theyCollab(skellie)) {
+      skelliesCurrent.push(skellie)
+    }
+  })
 
   for (let i = 0; i < skellies?.length; i++) {
     let skellie = skellies[i]

@@ -78,7 +78,8 @@ const SkeletonShow = () => {
       <Loading />
     )
   } else if (loaded && skellie) {
-    console.log('skellie:', skellie);
+    console.log('skellie RIGHT HERE BABYYYYYYYYYYY:', skellie);
+    console.log('skellie RIGHT HERE BABYYYYYYYYYYY:', skellie);
     return (
       <>
         <div className="skellie-main-container">
