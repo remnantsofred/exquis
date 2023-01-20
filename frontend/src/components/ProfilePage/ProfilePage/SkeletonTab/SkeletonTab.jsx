@@ -30,8 +30,9 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
       }
     }
   }
+
   
-  switch(switchValue.switchValue) {
+  switch(switchValue) {
     case "current":
       return (
         <div className='skeletons-block' id="current-skeletons-block">
