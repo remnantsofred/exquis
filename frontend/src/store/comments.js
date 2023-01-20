@@ -163,12 +163,7 @@ const commentsReducer = (state = {  }, action) => {
     let newState = {...state};
     switch (action.type) {
         case RECEIVE_COMMENT:
-            // debugger
-            // return { ...state, all: { ...state.all, [action.comment.id]: action.comment}, new: action.comment };
-            // return newState[action.comments.comment_id];
             return { ...newState, [action.comment._id]: action.comment};
-            // return {...newState, [action.comment.parent]: {...newState[action.comment.parent], comments: [...newState[action.comment.parent].comments, action.comment]}}
-
         case RECEIVE_COMMENTS:
             return { ...newState, ...action.comments };
         case REMOVE_COMMENT:

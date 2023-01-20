@@ -151,36 +151,20 @@ const skeletonsReducer = (state = {}, action) => {
   let newState = { ... state};
   switch (action.type) {
     case RECEIVE_SKELETON:
-      // return action.skeleton
-      // debugger
       return { ...newState, [action.skeleton._id]: action.skeleton };
-        // return { ...state, new: action.skeleton, new: undefined };
     case RECEIVE_SKELETONS:
-        // return { ...newState, all: action.skeletons };
         return { ...newState, ...action.skeletons };
     case RECEIVE_USER_SKELETONS:
         return {...newState, ...action.skeletons};
     case REMOVE_SKELETON:
-        // const newState = { ...state };
         delete newState[action.skeleton._id];
         return newState;
     case RECEIVE_SKELETON_COMMENTS:
-        // here we are overriding the old comments with the new comments 
         let skeletonComments = newState[action.skeletonId]
         skeletonComments.comments = action.comments
-        // return { ...newState, [action.skeletonId]: action.comments }
-        // return { ...newState, [action.comment.skeleton._id]: action.comment.skeleton }
-
         return newState;
     case RECEIVE_COMMENT:
-
       return {...newState, [action.comment.parent]: {...newState[action.comment.parent], comments: [...newState[action.comment.parent].comments, action.comment]}}
-    // case REMOVE_COMMENT:
-    //   let skeleton = newState[action.comment.parent]
-    //   let comments = skeleton.comments.filter(comment => comment._id !== action.comment._id)
-    //   skeleton.comments = comments
-    //   return newState
-
     default:
         return state;
   }
