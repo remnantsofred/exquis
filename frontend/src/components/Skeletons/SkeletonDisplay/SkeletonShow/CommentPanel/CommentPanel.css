@@ -1,15 +1,20 @@
 div.comment-panel-container {
-  width: 50vw;
+  width: 47.5vw;
+  display: flex;
+  flex-direction: column;
   background-color: rgba(188, 208, 228, 0.436);
-  height: min-content;
-  padding-left: 4vw;
-  padding-right: 4vw;
-  padding-top: 4vh;
-  padding-bottom: 4vh;
-  border-radius: 25px;
+  height: max-content;
+  padding-left: 3vw;
+  padding-right: .5vw;
+  padding-top: 4.5vh;
+  padding-bottom: 2.5vh;
+  border-radius: 10px;
   margin-left: 4vw;
   margin-right: auto;
+  margin-bottom: 4vh;
+  align-items: left;
   font-family: Inter, sans-serif;
+
 }
 
 h3.commenter-username, #link-to-profile {
@@ -29,11 +34,14 @@ p#comment-timestamp {
   margin-top: 1vh;
   font-weight: 300;
   font-style: oblique;
+  font-size: 1vw;
 }
 
-p.comment-body {
+div.comment-body {
   margin-top: .75vw;
-  margin-left: 4vw;
+  margin-left: 1vw;
+  margin-bottom: 2vh;
   opacity: 55%;
   font-style: oblique;
+  font-size: 1.25vw;
 }

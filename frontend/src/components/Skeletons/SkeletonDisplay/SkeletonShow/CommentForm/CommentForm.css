@@ -1,14 +1,14 @@
 div#comment-form-container {
-  width: 40vw;
+  width: 50vw;
   display: flex;
   flex-direction: column;
   background-color: rgba(188, 208, 228, 0.436);
-  height: min-content;
-  padding-left: 4vw;
-  padding-right: 4vw;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-  border-radius: 25px;
+  height: max-content;
+  padding-left: .5vw;
+  padding-right: .5vw;
+  padding-top: 3.5vh;
+  padding-bottom: 2.5vh;
+  border-radius: 10px;
   margin-left: 4vw;
   margin-right: auto;
   margin-bottom: 4vh;
@@ -16,20 +16,27 @@ div#comment-form-container {
   font-family: Inter, sans-serif;
 }
 
-#comment-form-label {
+h2#comment-section-label {
+  font-family: Inter, sans-serif;
   margin-bottom: 2vh;
   font-size: 1.5vw;
+  margin-left: 4vw;
+  margin-right: auto;
+}
+
+#comment-form-label {
+  margin-bottom: 2vh;
+  font-size: 2.5vw;
   margin-left: 1vw;
   margin-right: auto;
 }
 
-input#comment-input {
-  width: 30vw;
-  height: 1vh;
-  margin-left: auto;
-  margin-right: auto;
-
-  margin-bottom: 2vw;
+textarea#comment-input {
+  width: 45vw;
+  /* height: 1vh; */
+  margin-left: 1vw;
+  margin-right: 1vw;
+  margin-bottom: 1.5vh;
   align-items: center;
   /* justify-content: center; */
   /* justify-items: center; */
@@ -40,30 +47,33 @@ input#comment-input {
   border: #c3c3c3;
   border-style: solid;
   border-width: 1px;
-  border-radius: 75px;
-  padding-left: 5vw;
-  padding-right: 5vw;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
+  border-radius: 10px;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
 }
 
 button#submit-comment-button {
   transition: 0.5s;
-  width: 20vw;
-  height: 8vh;
+  width: min-content;
+  height: min-content;
+  align-content: center;
   align-items: center;
-  margin-top: 1vh;
-  margin-right: 0vw;
+  margin-top: .5vh;
+  margin-right: 1vw;
   margin-left: auto;
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1vw;
+  vertical-align: text-top;
   text-decoration: none;
   font-weight: 400;
   border: solid;
   border-width: 0.5px;
-  border-color: #34374d;
+  border-color: #34374d49;
   border-radius: 75px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   padding-left: 10px;
   padding-right: 10px;
 }
