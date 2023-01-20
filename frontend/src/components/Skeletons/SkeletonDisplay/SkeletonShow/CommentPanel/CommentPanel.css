@@ -80,7 +80,7 @@ div.owner-comment-class-actions-container {
 .comment-update-input {
   transition: 0.5s;
   width: min-content;
-  height: min-content;
+  height: 14vh;
   align-content: center;
   align-items: center;
   margin-top: .5vh;
@@ -94,11 +94,21 @@ div.owner-comment-class-actions-container {
   border: solid;
   border-width: 0.5px;
   border-color: #34374d49;
-  border-radius: 75px;
+  border-radius: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+textarea#comment-update-input {
+  margin-top: .75vw;
+  margin-left: 1vw;
+  margin-bottom: 2vh;
+  opacity: 55%;
+  font-style: oblique;
+  font-size: 1.25vw;
+  width: 42vw;
 }
 
 .comment-save-update-button {

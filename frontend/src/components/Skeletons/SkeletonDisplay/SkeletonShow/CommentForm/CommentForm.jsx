@@ -59,7 +59,7 @@ const CommentForm = ({comment, skeleton}) => {
                 <p id="comment-timestamp"> {Date(comment.createdAt)}</p>
                 <div className="comment-body" style={{display: !updatingComment ? "block" : "none"}} >~ " {comment.text} "</div>
                 <div className="" style={{display: updatingComment ? "block" : "none"}}>
-                    <textarea className="comment-update-input" placeholder="Update Comment" onChange={(e) => setUpdatedComment(e.target.value)} value={updatedComment} rows="3" columns="15" name=""/>
+                    <textarea className="comment-update-input" id="comment-update-input" placeholder="Update Comment" onChange={(e) => setUpdatedComment(e.target.value)} value={updatedComment} rows="3" columns="40" name=""/>
                     {/* <button className="comment-save-update-button" onClick={handleUpdateSubmit}>Save Comment</button> */}
                 </div>
             <div className="owner-comment-class-actions-container">
