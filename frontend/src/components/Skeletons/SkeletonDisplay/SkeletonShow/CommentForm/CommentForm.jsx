@@ -16,11 +16,6 @@ const CommentForm = ({comment, skeleton}) => {
   const [updatedComment, setUpdatedComment] = useState(comment.text);
   const [updatingComment, setUpdatingComment] = useState(false);
 
-//   const users = useSelector(getUsers());
-//   console.log("users", users)
-
-// console.log("comment", comment)
-
   const dispatch = useDispatch();
   
   const handleDelete = (e) => {
@@ -46,8 +41,6 @@ const CommentForm = ({comment, skeleton}) => {
 
 
   if (comment._id){
-    // console.log("user: ", user);
-    console.log("comment: ", comment);
       return (
         <>
         

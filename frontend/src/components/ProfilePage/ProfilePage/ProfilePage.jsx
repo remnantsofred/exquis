@@ -31,9 +31,6 @@ const ProfilePage = () => {
   
   
   const userSkeletons = user?.skeletons
-  // console.log("userSkeletons: ", userSkeletons);
-
-
   
   const whichSkellies = (switchValue) => {
    switch(switchValue) {
