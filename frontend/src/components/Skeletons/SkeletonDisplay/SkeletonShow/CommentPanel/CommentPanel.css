@@ -40,6 +40,7 @@ p#comment-timestamp {
 div.comment-body {
   margin-top: .75vw;
   margin-left: 1vw;
+  margin-bottom: 2vh;
   opacity: 55%;
   font-style: oblique;
   font-size: 1.25vw;
