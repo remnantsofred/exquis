@@ -90,7 +90,7 @@ router.delete('/skeletons/:skeletonId/:id', requireUser, async (req, res, next) 
       return next(error);
     }
     await bone.remove();
-    await Skeleton.updateOne({_id: bone.skeleton}, {$pull: {bones: bone._id}});
+    await Skeleton.updateOne({_id: bone.skeleton}, {$pull: {bones: bone}});
     return res.json(bone);
   }
   catch(err) {
