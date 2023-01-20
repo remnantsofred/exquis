@@ -1,13 +1,13 @@
 div#comment-form-container {
-  width: 75vw;
+  width: 50vw;
   display: flex;
   flex-direction: column;
   background-color: rgba(188, 208, 228, 0.436);
   height: max-content;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  padding-top: 1.5vh;
-  padding-bottom: 1.5vh;
+  padding-left: .5vw;
+  padding-right: .5vw;
+  padding-top: 3.5vh;
+  padding-bottom: 2.5vh;
   border-radius: 10px;
   margin-left: 4vw;
   margin-right: auto;
@@ -16,11 +16,11 @@ div#comment-form-container {
   font-family: Inter, sans-serif;
 }
 
-#comment-section-label {
+h2#comment-section-label {
   font-family: Inter, sans-serif;
   margin-bottom: 2vh;
-  font-size: 2.5vw;
-  margin-left: 5vw;
+  font-size: 1.5vw;
+  margin-left: 4vw;
   margin-right: auto;
 }
 
@@ -32,7 +32,7 @@ div#comment-form-container {
 }
 
 textarea#comment-input {
-  width: 70vw;
+  width: 45vw;
   /* height: 1vh; */
   margin-left: 1vw;
   margin-right: 1vw;
@@ -56,15 +56,15 @@ textarea#comment-input {
 
 button#submit-comment-button {
   transition: 0.5s;
-  width: 23vw;
-  height: 4.5vh;
+  width: min-content;
+  height: min-content;
   align-content: center;
   align-items: center;
-  margin-top: 1vh;
+  margin-top: .5vh;
   margin-right: 1vw;
   margin-left: auto;
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 1.5vw;
+  font-size: 1vw;
   vertical-align: text-top;
   text-decoration: none;
   font-weight: 400;
@@ -73,7 +73,7 @@ button#submit-comment-button {
   border-color: #34374d49;
   border-radius: 75px;
   padding-top: 5px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   padding-left: 10px;
   padding-right: 10px;
 }
