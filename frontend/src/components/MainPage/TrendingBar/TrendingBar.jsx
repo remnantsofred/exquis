@@ -3,7 +3,6 @@ import './TrendingBar.css'
 const TrendingBar = ({skeletons}) => {
 
   const topTen = skeletons.slice(0, 5)
-  console.log(topTen)
 
   const TrendingSayings = [
     "Here's what's currently poppin! 🔥🔥",

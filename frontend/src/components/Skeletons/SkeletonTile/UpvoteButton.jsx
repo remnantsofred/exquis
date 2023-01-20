@@ -3,7 +3,7 @@ import Upvote from '../../../assets/skeleton_tile/triangle_button_up.png'
 const UpvoteButton = () => {
 
   const handleUpvote = () => {
-    console.log("upvote")
+
   }
 
   return (

@@ -10,14 +10,7 @@ import CommentForm from "../CommentForm/CommentForm";
 
 const CommentPanel= ({skeleton}) => {
     const dispatch = useDispatch();
-    // const user = useSelector(state => state.session.user);
-    // const skeleton = useSelector(getSkeleton);  
-   
-    // console.log(skeleton, "comments in comment panel")
 
-    // if (skeleton?.comments.length === 0) return null;
-  
-    // console.log(skeleton.comments);
 
     return (
         <div>

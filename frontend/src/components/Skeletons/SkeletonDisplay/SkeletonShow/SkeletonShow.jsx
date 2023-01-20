@@ -35,7 +35,6 @@ const SkeletonShow = () => {
   // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
   //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
  
-  // console.log(skellie, "skeleton in skeleton show")
 
 
 
@@ -73,12 +72,10 @@ const SkeletonShow = () => {
 
 
   if (!loaded) {
-    console.log('loading...');
     return (
       <Loading />
     )
   } else if (loaded && skellie) {
-    console.log('skellie:', skellie);
     return (
       <>
         <div className="skellie-main-container">
