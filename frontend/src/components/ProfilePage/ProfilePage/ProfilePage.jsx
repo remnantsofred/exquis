@@ -18,7 +18,6 @@ const ProfilePage = () => {
 
 
   const user = useSelector(getUser(userId))
-
   
   useEffect(() => {
     Promise.all([
@@ -29,9 +28,10 @@ const ProfilePage = () => {
       setLoaded(true);
     })
   }, [])
-
-
+  
+  
   const userSkeletons = user?.skeletons
+  // console.log("userSkeletons: ", userSkeletons);
 
 
   
@@ -121,7 +121,7 @@ const ProfilePage = () => {
         </div>
       </div>
       <div>
-        <SkeletonTab switchValue={tabVal} skellies={{userSkeletons}} userId={userId}/>
+        <SkeletonTab switchValue={tabVal} skellies={userSkeletons} userId={userId}/>
       </div>
 
     </div>
