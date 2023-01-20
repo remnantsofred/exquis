@@ -20,19 +20,20 @@ import "./SkeletonShow.css"
 import {getCommentsForSkeleton} from "../../../../store/skeletons"
 import { fetchSkeletonComments } from "../../../../store/comments"
 import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
+import { fetchUsers, getUser } from "../../../../store/users"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false)
   const [comment, setComment] = useState('');
-
+ 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
   const author = useSelector(state => state.session.user);
+
+
   // const bones = useSelector(state => state.bones)
-  // const author = useSelector(state => state.session.user);
-
-
+ 
   const handlePost = (e) => {
     e.preventDefault();
     const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
@@ -72,8 +73,6 @@ const SkeletonShow = () => {
       <Loading />
     )
   } else if (loaded && skellie) {
-    console.log('skellie RIGHT HERE BABYYYYYYYYYYY:', skellie);
-    console.log('skellie RIGHT HERE BABYYYYYYYYYYY:', skellie);
     return (
       <>
         <div className="skellie-main-container">

@@ -41,7 +41,7 @@ router.get('/:id', async (req, res, next) => {
     const skeleton = await Skeleton.findOne({_id: req.params.id})
                              .populate("owner", "_id, username")
                              .populate("collaborators", "_id, username")
-                             .populate("comments")
+                             .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
                             //  .populate("tags")
                             //  .populate("likes")
     return res.json(skeleton);
