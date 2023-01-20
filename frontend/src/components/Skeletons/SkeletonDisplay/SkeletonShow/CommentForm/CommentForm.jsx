@@ -40,14 +40,17 @@ const CommentForm = ({comment, skeleton}) => {
   }
 
 
+ 
+
 
   if (comment._id){
+     console.log(comment)
       return (
         <>
         
         <div className="post-index-item-comment" key={user._id}> 
             <div className="comment-panel-container" >  
-                <Link id="link-to-profile" to="">
+                <Link id="link-to-profile" to={`/users/${comment.author._id}`}>
                     <h3 className="commenter-username" id="commenter-username">{comment.author.username}</h3>
                 </Link>
                 <p id="comment-timestamp"> {Date(comment.createdAt)}</p>
