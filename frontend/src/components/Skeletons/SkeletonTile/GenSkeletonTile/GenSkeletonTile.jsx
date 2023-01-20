@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 // vote buttons
 import UpvoteButton from '../UpvoteButton'
 import DownvoteButton from '../DownvoteButton'
-
+import GenPlaceBones from './GenPlaceBones'
 const GenSkeletonTile = ({skeletonInfo}) => {
 
   const skeletonId = skeletonInfo._id
@@ -14,7 +14,9 @@ const GenSkeletonTile = ({skeletonInfo}) => {
   const collaborators = ["natty", "daphne", "andrea"]
   const maxBones = 20
   const currentBones = 4 // length of bones attribute
-  const skeletonBody = "A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information Pepsi-Cola."
+  const skeletonBody = skeletonInfo.bones
+  console.log(skeletonInfo.bones)
+  // "A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information Pepsi-Cola."
   const tags = ["lorem",  "ipsum", "dolor",  "sit", "amet", "consectetur", "adipiscing", "elit"]
 
   
@@ -40,7 +42,7 @@ const GenSkeletonTile = ({skeletonInfo}) => {
           </div>
           <div className='skeleton-body-likes-container'>
             <div className="skeleton-body-container">
-              <p className="skeleton-body">{skeletonBody}</p>
+              <GenPlaceBones className="skeleton-body" bones={skeletonInfo.bones} />
             </div>
             <div className="skeleton-likes-container">
               <UpvoteButton />
