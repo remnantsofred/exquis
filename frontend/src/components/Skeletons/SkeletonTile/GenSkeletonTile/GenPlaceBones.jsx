@@ -7,8 +7,6 @@ const GenPlaceBones = (bones) => {
   const [loaded, setLoaded] = useState(false)
   const body = []
   
-
-
   useEffect(() => {
     const onPageLoad = () => {
       setLoaded(true)
@@ -22,11 +20,6 @@ const GenPlaceBones = (bones) => {
     }
 
   }, [])
-
-  // if (!bones.length) {
-  //   return []
-  // }
-
   
   const compileBones = () => {
     bones.bones.map(bone => {
@@ -37,26 +30,10 @@ const GenPlaceBones = (bones) => {
       body
     )
   }
-  // const bonesCompiled = bones.map((bone, idx)=> <span style={{color: `${palette[idx]}`}}>{bone.text} </span>)
-  // useEffect(() => {
-  //   Promise.all([
-  //     bones
-  //   ]).then(() =>{
-  //     setLoaded(true)
-  //   })
 
-  // }, [bones])
-
-  // if (!loaded) {
-  //   return (
-  //     <Loading />
-  //   )  
-  // } else if (loaded && bones) {
   return (
-    // bones.map((bone, idx)=> <span style={{color: `${palette[idx]}`}}>{bone.text} </span>)
     compileBones()
   )
-// }
 }
 
 export default GenPlaceBones;

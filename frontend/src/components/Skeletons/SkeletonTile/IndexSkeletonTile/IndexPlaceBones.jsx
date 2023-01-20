@@ -22,11 +22,6 @@ const IndexPlaceBones = (bones) => {
     }
 
   }, [])
-
-  // if (!bones.length) {
-  //   return []
-  // }
-
   
   const compileBones = () => {
     bones.bones.map(bone => {
@@ -37,23 +32,8 @@ const IndexPlaceBones = (bones) => {
       body
     )
   }
-  // const bonesCompiled = bones.map((bone, idx)=> <span style={{color: `${palette[idx]}`}}>{bone.text} </span>)
-  // useEffect(() => {
-  //   Promise.all([
-  //     bones
-  //   ]).then(() =>{
-  //     setLoaded(true)
-  //   })
 
-  // }, [bones])
-
-  // if (!loaded) {
-  //   return (
-  //     <Loading />
-  //   )  
-  // } else if (loaded && bones) {
   return (
-    // bones.map((bone, idx)=> <span style={{color: `${palette[idx]}`}}>{bone.text} </span>)
     compileBones()
   )
 // }

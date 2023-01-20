@@ -44,4 +44,64 @@ div.comment-body {
   opacity: 55%;
   font-style: oblique;
   font-size: 1.25vw;
+  width: 42vw;
+}
+
+div.owner-comment-class-actions-container {
+  display: flex;
+}
+
+.comment-delete-button, .comment-update-button {
+  transition: 0.5s;
+  width: min-content;
+  height: min-content;
+  align-content: center;
+  align-items: center;
+  margin-top: .5vh;
+  margin-right: 1vw;
+  margin-left: auto;
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1vw;
+  vertical-align: text-top;
+  text-decoration: none;
+  font-weight: 400;
+  border: solid;
+  border-width: 0.5px;
+  border-color: #34374d49;
+  border-radius: 75px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.comment-save-update-button {
+transition: 0.5s;
+  width: max-content;
+  height: min-content;
+  align-content: center;
+  align-items: center;
+  margin-top: .5vh;
+  margin-right: 1vw;
+  margin-left: auto;
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1vw;
+  vertical-align: text-top;
+  text-decoration: none;
+  font-weight: 400;
+  border: solid;
+  border-width: 0.5px;
+  border-color: #34374d49;
+  border-radius: 75px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;  
+}
+
+.comment-delete-button:hover, .comment-update-button:hover, .comment-save-update-button:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  background-color: #34374d;
+  color: white;
 }

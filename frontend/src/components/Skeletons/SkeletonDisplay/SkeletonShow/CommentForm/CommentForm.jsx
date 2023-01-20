@@ -44,7 +44,6 @@ const CommentForm = ({comment, skeleton}) => {
 
 
   if (comment._id){
-     console.log(comment)
       return (
         <>
         
@@ -56,15 +55,15 @@ const CommentForm = ({comment, skeleton}) => {
                 <p id="comment-timestamp"> {Date(comment.createdAt)}</p>
                 <div className="comment-body" style={{display: !updatingComment ? "block" : "none"}} >~ " {comment.text} "</div>
               
-            <div className="">
-                { (user._id === comment.author._id ) ? <button className="comment-delete-button" onClick={handleDelete} >Delete</button> : <></>}
+            <div className="owner-comment-class-actions-container">
                 { (user._id === comment.author._id ) ? <button className="comment-update-button" onClick={handleShowUpdateField} >Edit</button> : <></>}
-            </div>
-    
                 <div className="" style={{display: updatingComment ? "block" : "none"}}>
-                    <input type="text" className="" placeholder="Update Comment" onChange={(e) => setUpdatedComment(e.target.value)} value={updatedComment} name=""/>
-                    <button className="" onClick={handleUpdateSubmit}>Save Comment</button>
+                    <input type="text" className="comment-update-input" placeholder="Update Comment" onChange={(e) => setUpdatedComment(e.target.value)} value={updatedComment} name=""/>
+                    <button className="comment-save-update-button" onClick={handleUpdateSubmit}>Save Comment</button>
                 </div>
+
+                { (user._id === comment.author._id ) ? <button className="comment-delete-button" onClick={handleDelete} >Delete</button> : <></>}    
+            </div>
     
             </div>
         </div>
