@@ -24,21 +24,10 @@ const PlaceBones = (bones) => {
     }
 
   }, [])
-
-  // if (!bones.length) {
-  //   return []
-  // }
-
   
   const compileBones = () => {
-    console.log("i'm not here shhhhhh")
-
     const bonesLength = bones.component.length
-
-
     var pNum = 0
-
-
 
     const resetPNum = () => {
       if (pNum >= palette.length) {

@@ -5,13 +5,13 @@ import { useState } from "react";
 import { deleteComment, updateComment } from "../../../../../store/comments";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
-import { getUsers } from "../../../../../store/users";
+import { fetchUsers, getUsers } from "../../../../../store/users";
+import { useEffect } from 'react';
 
 
 
 const CommentForm = ({comment, skeleton}) => {
   const user = useSelector(state => state.session.user);
-
 
   const [updatedComment, setUpdatedComment] = useState(comment.text);
   const [updatingComment, setUpdatingComment] = useState(false);

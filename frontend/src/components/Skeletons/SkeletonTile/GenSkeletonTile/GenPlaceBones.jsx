@@ -4,7 +4,6 @@ import Loading from "../../../Loading/Loading"
 
 
 const GenPlaceBones = (bones) => {
-  console.log(bones)
   const [loaded, setLoaded] = useState(false)
   const body = []
   
@@ -30,15 +29,10 @@ const GenPlaceBones = (bones) => {
 
   
   const compileBones = () => {
-    console.log("i'm not here shhhhhh")
-
-    console.log('BONES LENGTH')
-    console.log(bones)
     bones.bones.map(bone => {
       const sentence = <span>{bone.text} </span>
       body.push(sentence)    
     })
-    console.log(body)
     return (
       body
     )
