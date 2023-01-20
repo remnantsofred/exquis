@@ -86,8 +86,12 @@ export const createSkeleton = data => async dispatch => {
           body: JSON.stringify(data)
       });
       const newSkeleton = await res.json();
+
+      console.log('newSkeleton', newSkeleton);
       dispatch(receiveSkeleton(newSkeleton));
-      return Promise.resolve();
+      return newSkeleton;
+      // return Promise.resolve();
+
   } catch (err) {
       const resBody = await err.json();
       if (resBody.statusCode === 400) {

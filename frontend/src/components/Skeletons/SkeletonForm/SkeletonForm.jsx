@@ -4,6 +4,7 @@ import './SkeletonForm.css';
 import { createSkeleton } from '../../../store/skeletons';
 import { useHistory } from 'react-router-dom';
 
+
 function SkeletonForm () {
   const [title, setTitle] = useState('');
   const [prompt, setPrompt] = useState('')
@@ -53,7 +54,7 @@ function SkeletonForm () {
     };
 
     dispatch(createSkeleton(skeleton))
-    .then(() => {history.push(`/users/${currentUser._id}`)})
+    .then((res) => {history.push(`/skeletons/${res._id}`)})
 
   }
 
@@ -129,6 +130,23 @@ function SkeletonForm () {
             className='skellie-input'
           />
         </label>
+
+        {/* <div className="errors">{errors?.tags}</div>
+        <label>
+          <span className='skellie-label'>
+            <h2 className='skellie-label-text'>
+              Tags:
+            </h2>
+          </span>
+          <br/>
+            <input type="word"
+            value={tags || ''}
+            onChange={update('tags')}
+            placeholder="Tags"
+            className='skellie-input'>
+            </input>
+        </label> */}
+
         <input
           onClick={e => skeletonSubmit(e)}
           className='skellie-form-submit-button'
@@ -136,6 +154,7 @@ function SkeletonForm () {
           value="Start a New Skellie :)"
           disabled={!title || !maxBones || !maxCollaborators || !tags }
         />
+
       </form>
     </div>
   );
