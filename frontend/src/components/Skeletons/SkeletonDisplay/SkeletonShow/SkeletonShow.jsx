@@ -9,6 +9,8 @@ import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
 
+import NewBoneInput from "./NewBoneInput/NewBoneInput"
+
 import CommentForm from "./CommentForm/CommentForm"
 import CommentPanel from "./CommentPanel/CommentPanel"
 
@@ -26,22 +28,25 @@ const SkeletonShow = () => {
 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
+  // const author = useSelector(state => state.session.user);
+
+  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
+  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
   // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
   //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
  
   // console.log(skellie, "skeleton in skeleton show")
 
-  const author = useSelector(state => state.session.user);
 
-  const handlePost = (e) => {
-    e.preventDefault();
-    const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
 
-    dispatch(createComment(newComment, skeletonId));
-    e.target.value = "";
-    setComment("");
-  };
+  // const handlePost = (e) => {
+  //   e.preventDefault();
+  //   const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
 
+  //   dispatch(createComment(newComment, skeletonId));
+  //   e.target.value = "";
+  //   setComment("");
+  // };
 
 
   const tempBones = [
@@ -87,17 +92,16 @@ const SkeletonShow = () => {
                   </div>
                 <hr />
             </div>
-          </div>
           <div className="show-middle">
               {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
               <div className="skeleton-body-input-container">
                 <div id="skeleton-body">
-                  {/* {PlaceBones(skellie.bones)} */}
+                  <PlaceBones component={loaded ? skellie.bones : []} />
                 <div className="user-input-div">
                   <hr id="body-input-divider" />
                   <div id="current-writer-note" ><span>It is</span><span id="current-writer-username">{`${currentCollaborator}`}'s</span><span>turn.</span></div>
                   {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
-                  <textarea id="current-collab-input" />
+                  <NewBoneInput skellie={skellie} />
                 </div>
                 <div className="horizontal-skeleton-likes-container">
                   <DownvoteButton />
@@ -107,38 +111,35 @@ const SkeletonShow = () => {
                 </div>
               </div>
           </div>
+          </div>
             <div className="collaborator-panel">
               <div className="collaborator-panel-text">
                 <h2>Collaborators</h2>
                 <hr />
                   <ul className="collaborators-list">
-                    {skellie.collaborators.map(collaborator => <h2>{collaborator.username}</h2>)}
+                    {skellie.collaborators.map(collaborator => <h2 key={collaborator._id}>{collaborator.username}</h2>)}
                   </ul>
               </div>
             </div>
             <br />
-            <div className="show-bottom">
-            </div>
+        </div>
+        <hr id="comment-divider" />
 
-          <hr id="comment-divider" />
-          <div className="comments-section">
-
-          </div>
           
-        <div className="comments-section">
-
-
+        {/* <div className="comments-section">
           <div className='create-comment-container' id="comment-form-container">
-          <h2 for="comment" id="comment-form-label">Thoughts?</h2>
-          <br />
+            <h2 for="comment" id="comment-form-label">Thoughts?</h2>
+            <br />
             <input name="comment" id="comment-input" className="create-comment-form" type="text" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
             <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit Your Comment</button>
           </div>
+
         
           <CommentPanel skeleton={skellie} />
           {/* {skellie.comments.length && skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)} */}
         </div>
         </div>
+
 
       </>
     )
