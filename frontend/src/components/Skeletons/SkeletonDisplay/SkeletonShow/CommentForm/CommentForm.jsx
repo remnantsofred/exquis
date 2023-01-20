@@ -52,8 +52,8 @@ const CommentForm = ({comment, skeleton}) => {
                 <div className="comment-body" style={{display: !updatingComment ? "block" : "none"}} >{comment.text}</div>
               
             <div className="">
-                { (user._id === comment.author._id ) ? <button className="delete-botton" onClick={handleDelete} >Delete</button> : <></>}
-                { (user._id === comment.author._id ) ? <button className="update-button" onClick={handleShowUpdateField} >Edit</button> : <></>}
+                { (user._id === comment.author._id ) ? <button className="comment-delete-button" onClick={handleDelete} >Delete</button> : <></>}
+                { (user._id === comment.author._id ) ? <button className="comment-update-button" onClick={handleShowUpdateField} >Edit</button> : <></>}
             </div>
     
             <div className="" style={{display: updatingComment ? "block" : "none"}}>
