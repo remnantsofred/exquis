@@ -102,7 +102,6 @@ export const fetchBone = (skeletonId, boneId) => async (dispatch) => {
 }
 
 export const createBone = (skeletonId, data) => async dispatch => {
-  // console.log("data", data)
   try {
       const res = await jwtFetch(`/api/bones/skeletons/${skeletonId}`, {
           method: 'POST',
