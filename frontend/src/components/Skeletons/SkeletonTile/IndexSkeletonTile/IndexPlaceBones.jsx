@@ -3,10 +3,12 @@ import { useEffect, useState } from "react"
 import Loading from "../../../Loading/Loading"
 
 
-const GenPlaceBones = (bones) => {
+const IndexPlaceBones = (bones) => {
   const [loaded, setLoaded] = useState(false)
   const body = []
   
+  console.log(bones)
+
   useEffect(() => {
     const onPageLoad = () => {
       setLoaded(true)
@@ -34,6 +36,7 @@ const GenPlaceBones = (bones) => {
   return (
     compileBones()
   )
+// }
 }
 
-export default GenPlaceBones;
+export default IndexPlaceBones;
