@@ -7,8 +7,6 @@ const IndexPlaceBones = (bones) => {
   const [loaded, setLoaded] = useState(false)
   const body = []
   
-  console.log(bones)
-
   useEffect(() => {
     const onPageLoad = () => {
       setLoaded(true)

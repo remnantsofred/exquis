@@ -85,7 +85,6 @@ div.owner-comment-class-actions-container {
   align-items: center;
   margin-top: .5vh;
   margin-right: 1vw;
-  margin-left: auto;
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 1vw;
   vertical-align: text-top;
@@ -103,12 +102,14 @@ div.owner-comment-class-actions-container {
 
 textarea#comment-update-input {
   margin-top: .75vw;
-  margin-left: 1vw;
+  margin-left: 0vw;
   margin-bottom: 2vh;
   opacity: 55%;
   font-style: oblique;
   font-size: 1.25vw;
   width: 42vw;
+  height: min-content;
+  min-height: 3vh;
 }
 
 .comment-save-update-button {
