@@ -11,24 +11,8 @@ import { useEffect } from 'react';
 import { memo } from 'react';
 
 const CommentForm = ({comment, skeleton}) => {
-  // const user = useSelector(state => state.session.user);
 
   const user = SessionUserCheck()
-  // const SessionUser = useSelector(state => state.session.user);
-
-  // const BlankUser = {
-  //   email: "",
-  //   username: "", 
-  //   _id: ""
-  // }
-
-  // let user
-
-  // if (SessionUser) {
-  //   user = SessionUser;
-  // } else {
-  //   user = BlankUser
-  // }
 
   const [updatedComment, setUpdatedComment] = useState(comment.text);
   const [updatingComment, setUpdatingComment] = useState(false);
