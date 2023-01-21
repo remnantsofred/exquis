@@ -4,6 +4,7 @@ import './SkeletonForm.css';
 import { createSkeleton } from '../../../store/skeletons';
 import { useHistory } from 'react-router-dom';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
+import Multiselect from 'multiselect-react-dropdown';
 import { getUsers, fetchUsers } from '../../../store/users';
 import Loading from '../../Loading/Loading';
 
@@ -12,7 +13,6 @@ function SkeletonForm () {
   const [prompt, setPrompt] = useState('')
   const [maxBones, setMaxBones] = useState('');
   const [maxCollaborators, setMaxCollaborators] = useState('');
-  const [collaborators, setCollaborators] = useState('');
   const [tags, setTags] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const history = useHistory();
@@ -20,7 +20,10 @@ function SkeletonForm () {
   const users = useSelector(getUsers);
   const errors = useSelector(state => state.errors.skeletons);
   const dispatch = useDispatch();
-  const options = users?.filter(user => user._id !== currentUser._id).map(user => ({value: user._id, label: user.username}));
+  const options = users?.filter(user => user._id !== currentUser._id).map(user => ({name: user.username, id: user._id}));
+  const selectedValue = [];
+  const selectedList = [];
+  const selectedCollaborators = [];
 
 
   useEffect(() => {
@@ -31,7 +34,17 @@ function SkeletonForm () {
     })
   }, [])
 
-
+  
+  const onSelect =(selectedList, selectedItem) => {
+    selectedCollaborators.push(selectedItem.id)
+   
+  }
+  
+  const onRemove = (selectedList, removedItem) => {
+    const index = selectedCollaborators.indexOf(removedItem.id)
+    selectedCollaborators.splice(index, 1)
+    
+  }
   
 
   const update = field => {
@@ -50,9 +63,6 @@ function SkeletonForm () {
       case 'maxCollaborators':
         setState = setMaxCollaborators;
         break;
-      case 'collaborators':
-        setState = setCollaborators;
-        break;
       case 'tags':
         setState = setTags;
         break;
@@ -69,7 +79,8 @@ function SkeletonForm () {
       title,
       prompt,
       maxBones,
-      maxCollaborators
+      maxCollaborators,
+      collaborators: selectedCollaborators
     };
 
     dispatch(createSkeleton(skeleton))
@@ -161,15 +172,15 @@ function SkeletonForm () {
               </h2>
             </span>
             <br/>
-            {/* <input type="number"
-              value={maxCollaborators || ''}
-              onChange={update('maxCollaborators')}
-              placeholder="Max Collaborators"
-              className='skellie-input'
-            />
-            */}
-            <DropdownMenu options={options} placeholder="Choose your collaborators..." value={collaborators} setValue={setCollaborators} />
           </label>
+          <Multiselect
+            options={options}
+            selectedValues={selectedValue} 
+            onSelect={onSelect}
+            onRemove={onRemove} 
+            displayValue="name" 
+            selectionLimit={maxCollaborators}
+            />
   
           {/* <div className="errors">{errors?.tags}</div>
           <label>
