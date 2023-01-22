@@ -27,24 +27,9 @@ const SkeletonShow = () => {
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false)
   const [comment, setComment] = useState('');
- 
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
-  const bones = useSelector(state => state.bones)
   const author = useSelector(state => state.session.user);
-
-  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
-  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
-  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
-  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
- 
-
-
-  // const bones = useSelector(state => state.bones)
- 
-  // const handlePost = (e) => {
-  //   e.preventDefault();
-  //   const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -55,8 +40,25 @@ const SkeletonShow = () => {
     setComment("");
   };
 
-  const currentCollaborator = 'nathan, the wondrous'
+  const ownerColorFxn = (owner, colorArr) => {
+    const colorObj = colorArr.find(color => color.author === owner)
+    return (
+      colorObj.color
+    )
+  }
 
+  const therePrompt = (skellie) => {
+    if (!skellie.prompt) {
+      return (
+      <span>'n/a'</span>
+    )} else {
+      return (
+        <span>{skellie.prompt}</span>
+      )
+    }
+  }
+
+  const currentCollaborator = 'nathan, the wondrous'
 
   useEffect(() => {
     Promise.all([
@@ -72,10 +74,13 @@ const SkeletonShow = () => {
       <Loading />
     )
   } else if (loaded && skellie) {
+
     const collaborators = (Object.values(skellie.collaborators)).concat([skellie.owner])
-    console.log('skeleton show collaborators', collaborators)
     const colorArr = CollaboratorColorMatch(collaborators)
-    console.log('color array????', colorArr)
+    const ownerId = skellie.owner._id
+    const ownerColor = ownerColorFxn(ownerId, colorArr)
+    const prompt = therePrompt(skellie)
+
     return (
       <>
         <div className="skellie-main-container">
@@ -84,8 +89,8 @@ const SkeletonShow = () => {
               <h1 id="skeleton-title">{skellie.title}</h1>
                 <hr />
                   <div className="sub-title">
-                    <h3 id="skeleton-owner">{skellie.owner.username}</h3>
-                    <h3 id="skeleton-prompt">"{skellie.prompt}"</h3>
+                    <h3 id="skeleton-owner" style={{color: `${ownerColor}`}}>{skellie.owner.username}</h3>
+                    <h3 id="skeleton-prompt">///// prompt: {prompt}</h3>
                   </div>
                 <hr />
             </div>

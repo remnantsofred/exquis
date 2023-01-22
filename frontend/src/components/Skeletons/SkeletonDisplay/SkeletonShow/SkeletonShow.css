@@ -89,11 +89,12 @@ div.sub-title {
 }
 
 h3#skeleton-owner {
-  font-size: 1.5vw;
+  font-size: 2.5vw;
 }
 
 h3#skeleton-prompt {
-  font-size: 1vw;
+  margin-top: .25vh;
+  font-size: 1.75vw;
   font-style: italic;
   width: 45vw;
   overflow: hidden;
@@ -103,6 +104,7 @@ h3#skeleton-prompt {
   /* number of lines to show */
   line-clamp: 1;
   -webkit-box-orient: vertical;
+  opacity: 45%;
 }
 
 div.show-middle {
