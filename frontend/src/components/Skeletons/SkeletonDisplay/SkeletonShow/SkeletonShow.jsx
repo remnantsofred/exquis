@@ -1,36 +1,34 @@
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { getSkeleton, fetchSkeleton, updateSkeleton } from '../../../../store/skeletons'
+import { getSkeleton, fetchSkeleton, updateSkeleton, deleteSkeleton } from '../../../../store/skeletons'
 import { getBones, fetchBones } from '../../../../store/bones'
 import Loading from "../../../Loading/Loading"
 import PlaceBones from "./PlaceBones"
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
-
 import NewBoneInput from "./NewBoneInput/NewBoneInput"
-
 import CommentForm from "./CommentForm/CommentForm"
 import CommentPanel from "./CommentPanel/CommentPanel"
-
 import { createComment } from "../../../../store/comments"
-
 import "./SkeletonShow.css"
 import {getCommentsForSkeleton} from "../../../../store/skeletons"
 import { fetchSkeletonComments } from "../../../../store/comments"
 import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
 import { fetchUsers, getUser } from "../../../../store/users"
+import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false)
   const [comment, setComment] = useState('');
- 
+  const history = useHistory();
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
   // const bones = useSelector(state => state.bones)
   const author = useSelector(state => state.session.user);
+  const user = SessionUserCheck()
 
 
   const handlePost = (e) => {
@@ -42,9 +40,7 @@ const SkeletonShow = () => {
     setComment("");
   };
 
-
   const currentCollaborator = 'nathan, the wondrous'
-  const collaborators = ['this knee', 'dare in', 'the eggo', 'tailor', 'ab yee', 'dab-ne', 'and rhea', 'neigh thin']
 
 
   useEffect(() => {
@@ -55,6 +51,16 @@ const SkeletonShow = () => {
     })
   }, [])
 
+  const handleSkellieUpdate = (e) => {
+    e.preventDefault()
+    // dispatch(updateSkeleton(skeletonId))
+  }
+
+  const handleSkellieDelete = (e) => {
+    e.preventDefault()
+    dispatch(deleteSkeleton(skeletonId))
+    .then((res) => {history.push(`/users/${skellie.owner._id}`)})
+  }
 
   if (!loaded) {
     return (
@@ -67,7 +73,9 @@ const SkeletonShow = () => {
           
           <div className="show-top-middle">
             <div className="show-top">
-              <h1 id="skeleton-title">{skellie.title}</h1>
+              { (user._id === skellie.owner._id ) ? <button className="comment-update-button" onClick={handleSkellieUpdate}>Edit</button> : <></>}
+              { (user._id === skellie.owner._id ) ? <button className="comment-delete-button" onClick={handleSkellieDelete} >Delete</button> : <></>} 
+              <h1 id="skeleton-title">{skellie.title}</h1> 
                 <hr />
                   <div className="sub-title">
                     <h3 id="skeleton-owner">{skellie.owner.username}</h3>
