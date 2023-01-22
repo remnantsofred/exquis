@@ -196,3 +196,7 @@ h2.profile-bottom-title {
   transition: .25s;
   color: #979cc6;
 }
+
+span#bone-counter {
+  color: #545ca3;
+}

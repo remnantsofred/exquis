@@ -18,7 +18,7 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
     if (isCurrent(skellie)) {
     return (
       <li key={skellie._id} className="skellie-show-link-profile-page">
-        <Link className="skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link> {`- ${skellie.bones.length} / ${skellie.maxBones} Bones`}
+        <Link className="skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link><span id="bone-counter">{`  -  ${skellie.bones.length} / ${skellie.maxBones} Bones`}</span>
       </li>
     )} else {
     return(
