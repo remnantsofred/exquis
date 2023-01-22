@@ -6,11 +6,13 @@ import { deleteComment, updateComment } from "../../../../../store/comments";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { fetchUsers, getUsers } from "../../../../../store/users";
+import SessionUserCheck from '../../../../SessionUserCheck/SessionUserCheck';
 import { useEffect } from 'react';
-
+import { memo } from 'react';
 
 const CommentForm = ({comment, skeleton}) => {
-  const user = useSelector(state => state.session.user);
+
+  const user = SessionUserCheck()
 
   const [updatedComment, setUpdatedComment] = useState(comment.text);
   const [updatingComment, setUpdatingComment] = useState(false);
@@ -46,7 +48,6 @@ const CommentForm = ({comment, skeleton}) => {
 
   if (comment._id){
     const commenterId = (comment.author._id)
-    // console.log(commenterId)
     console.log(user)
       return (
         <>
@@ -64,7 +65,6 @@ const CommentForm = ({comment, skeleton}) => {
             <div className="owner-comment-class-actions-container">
                 { (user._id === commenterId ) ? <button className="comment-update-button" onClick={handleShowUpdateField}>Edit</button> : <></>}
                 { (user._id === commenterId ) ? <button className="comment-save-update-button" onClick={handleUpdateSubmit} style={{display: updatingComment ? "block" : "none"}}>Save Comment</button> : <></> }
-
                 { (user._id === commenterId ) ? <button className="comment-delete-button" onClick={handleDelete} >Delete</button> : <></>}    
             </div>
     
