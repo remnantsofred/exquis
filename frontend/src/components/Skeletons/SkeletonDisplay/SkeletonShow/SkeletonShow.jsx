@@ -109,7 +109,6 @@ const SkeletonShow = () => {
                         <div id="current-writer-note" >
                             <span>It is</span><span id="current-writer-username">{`${CurrentCollaboratorObj.username}`}'s</span><span>turn.</span>
                         </div>
-                        {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
                         <NewBoneInput component={skellie} skellie={skellie} currentCollabId={CurrentCollaboratorObj._id} authorId={author._id}/>
                       </div>
                       <div className="horizontal-skeleton-likes-container">
@@ -135,9 +134,8 @@ const SkeletonShow = () => {
 
           
         <div className="comments-section">
-          <h2 for="comment" id="comment-section-label">Thoughts?</h2>
+          <h2 for="comment" id="comment-section-label">{skellie.comments.length} Comments</h2>
           <div className='create-comment-container' id="comment-form-container">
-            {/* <br /> */}
             <textarea name="comment" id="comment-input" className="create-comment-form" rows="5" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
             <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit</button>
           </div>
@@ -145,7 +143,7 @@ const SkeletonShow = () => {
 
         
           <CommentPanel skeleton={skellie} />
-          {skellie.comments.length && skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)}
+          {skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)}
         {/* </div> */}
       </>
     )

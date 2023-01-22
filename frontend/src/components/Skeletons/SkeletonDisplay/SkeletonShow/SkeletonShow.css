@@ -5,7 +5,7 @@ div.skellie-main-container {
   font-family: Inter, sans-serif;
   /* padding-bottom: 0; */
   /* padding-right: 0; */
-  width: 95vw;
+  width: 105vw;
   margin-right: 0em;
   height: max-content;
 }
@@ -25,11 +25,11 @@ div.show-top-middle {
 div.collaborator-panel {
   /* margin-left: 0vw; */
   text-align: center;
-  width: 45vw;
+  width: 20vw;
   height: min-content;
   /* min-height: 123vh; */
   margin-top: 4vh;
-  margin-left: 5vw;
+  margin-left: 2vw;
   text-align: center;
   align-items: center;
 
@@ -140,11 +140,11 @@ div.skeleton-body-input-container {
 div.skeleton-body-input-container {
   width: 55vw;
   margin-left: 0px;
-  margin-right: 4vw;
+  /* margin-right: 4vw; */
 }
 
 div.collaborator-panel {
-  margin-left: 4vw;
+  /* margin-left: 4vw; */
   width: 10vw;
 }
 
