@@ -39,7 +39,7 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
         <div className='skeletons-block' id="current-skeletons-block">
         <h2 className='profile-bottom-title'>Current Skeletons</h2>
           <ul className='skeletons-block-list' id="current-skeletons-block-list">
-            {skelliesCurrent === [] 
+            {!skelliesCurrent.length  
             ? <div>No current skeletons</div> 
             : (skelliesCurrent.map((skellie) => (
               <li>{skellie.title}</li>
@@ -53,8 +53,8 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
         <h2 className='profile-bottom-title'>Owned Skeletons</h2>
           <ul className='skeletons-block-list' id="owned-skeletons-block-list">
             {/* {skelliesOwned} */}
-            {skelliesOwned === [] 
-            ? <div>No current skeletons</div> 
+            {!skelliesOwned.length
+            ? <div>No owned skeletons</div> 
             : (skelliesOwned.map((skellie) => (
               <li>{skellie.title}</li>
             )))}
@@ -67,8 +67,8 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
         <h2 className='profile-bottom-title'>Previous Skeletons</h2>
           <ul className='skeletons-block-list' id="previous-skeletons-block-list">
             {/* {skelliesPrevious} */}
-            {skelliesPrevious === [] 
-            ? <div>No current skeletons</div> 
+            {!skelliesPrevious.length
+            ? <p>No current skeletons</p> 
             : (skelliesPrevious.map((skellie) => (
               <li>{skellie.title}</li>
             )))}

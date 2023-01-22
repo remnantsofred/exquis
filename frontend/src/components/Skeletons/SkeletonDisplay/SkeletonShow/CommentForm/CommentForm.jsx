@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { fetchUsers, getUsers } from "../../../../../store/users";
 import SessionUserCheck from '../../../../SessionUserCheck/SessionUserCheck';
 import { useEffect } from 'react';
-import { memo } from 'react';
 
 const CommentForm = ({comment, skeleton}) => {
 

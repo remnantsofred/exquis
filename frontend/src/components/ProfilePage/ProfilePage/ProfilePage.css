@@ -155,6 +155,19 @@ div.skeletons-block {
   margin-right: auto;
 }
 
+ul.skeletons-block {
+  width: 75vw;
+  height: 40vh;
+  background-color: rgba(188, 208, 228, 0.436);
+  border-radius: 25px;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+  padding-left: 4vw;
+  padding-right: 4vw;
+  margin-top: 4vh;
+  margin-left: auto;
+  margin-right: auto;
+}
 div.bottom-skeletons-block {
   border-radius: 25px;
   width: 77vw;
