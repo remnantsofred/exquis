@@ -29,7 +29,7 @@ const SkeletonShow = () => {
  
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
-  const bones = useSelector(state => state.bones)
+  // const bones = useSelector(state => state.bones)
   const author = useSelector(state => state.session.user);
 
 
@@ -42,16 +42,6 @@ const SkeletonShow = () => {
     setComment("");
   };
 
-
-  const tempBones = [
-    "As she sat watching the world go by, something caught her eye.",
-    "It wasn't so much its color or shape, but the way it was moving.",
-    "She squinted to see if she could better understand what it was and where it was going, but it didn't help.",
-    "As she continued to stare into the distance, she didn't understand why this uneasiness was building inside her body.", 
-    "She felt like she should get up and run.",
-    "If only she could make out what it was.",
-    "At that moment, she comprehended what it was and where it was heading, and she knew her life would never be the same."
-  ]
 
   const currentCollaborator = 'nathan, the wondrous'
   const collaborators = ['this knee', 'dare in', 'the eggo', 'tailor', 'ab yee', 'dab-ne', 'and rhea', 'neigh thin']
@@ -132,8 +122,7 @@ const SkeletonShow = () => {
 
         
           <CommentPanel skeleton={skellie} />
-          {/* {skellie.comments.length && skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)} */}
-        {/* </div> */}
+      
       </>
     )
   }

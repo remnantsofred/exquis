@@ -1,4 +1,5 @@
 import jwtFetch from "./jwt";
+import { fetchSkeleton } from "./skeletons";
 
 export const RECEIVE_BONE = "bones/RECEIVE_BONE";
 export const RECEIVE_BONES = "bones/RECEIVE_BONES";
@@ -109,6 +110,7 @@ export const createBone = (skeletonId, data) => async dispatch => {
       });
       const newBone = await res.json();
       dispatch(receiveBone(newBone));
+      dispatch(fetchSkeleton(newBone.skeleton));
       return (newBone)
   } catch (err) {
       const resBody = await err.json();
