@@ -20,7 +20,7 @@ import SkeletonForm from './components/Skeletons/SkeletonForm/SkeletonForm.jsx';
 import SkeletonShow from './components/Skeletons/SkeletonDisplay/SkeletonShow/SkeletonShow';
 
 import UpdateForm from './components/SessionForms/UpdateForm';
-
+import Loading from './components/Loading/Loading';
 
 
 function App() {
@@ -45,6 +45,7 @@ function App() {
         <ProtectedRoute exact path="/edit/profile" component={UpdateForm} />
 
         <Route exact path="/users/:userId" component={ProfilePage} />
+        <Route exact path="/loading" component={Loading} />
       </Switch>
       <Footer />
     </>
