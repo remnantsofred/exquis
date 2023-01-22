@@ -58,7 +58,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) => {
   try {
-    const skeleton = await Skeleton.findById(req.params.id);
+    let skeleton = await Skeleton.findById(req.params.id);
     if (!skeleton) {
       const error = new Error('Skeleton not found');
       error.statusCode = 404;
@@ -99,7 +99,11 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
       }
     }
 
-    await skeleton.save();
+    await skeleton.save()
+    skeleton = await Skeleton.findById(req.params.id).populate("owner", "_id, username")
+        .populate("collaborators", "_id, username")
+        .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
+        .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
     await User.updateMany({_id: {$in: newCollaborators}}, {$push: {skeletons: skeleton._id} });
     await User.updateMany({_id: {$in: removedCollaborators}}, {$pull: {skeletons: skeleton._id} });
  

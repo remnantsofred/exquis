@@ -68,7 +68,6 @@ const SkeletonShow = () => {
   const handleModalClose = () => {
     setModalStatus(false)
   }
-
   
 
   if (!loaded) {
