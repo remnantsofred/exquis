@@ -32,18 +32,6 @@ const SkeletonShow = () => {
   // const bones = useSelector(state => state.bones)
   const author = useSelector(state => state.session.user);
 
-  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
-  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
-  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
-  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
-  // skellie.comments is the correct way to do it so we're only making one api call ^
-
-
-  // const bones = useSelector(state => state.bones)
- 
-  // const handlePost = (e) => {
-  //   e.preventDefault();
-  //   const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -144,7 +132,7 @@ const SkeletonShow = () => {
 
         
           <CommentPanel skeleton={skellie} />
-          {skellie.comments.length && skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)}
+          {/* {skellie.comments.length && skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)} */}
         {/* </div> */}
       </>
     )
