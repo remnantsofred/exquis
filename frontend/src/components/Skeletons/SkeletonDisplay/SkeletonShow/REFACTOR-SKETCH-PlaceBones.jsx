@@ -37,16 +37,17 @@ const NewPlaceBones = ({colorArr, skellie}) => {
   }
   
   const compileBones = () => {
-    bones.forEach(bone => {
-      const color = findColor(bone)
-      console.log(bone.text)
-      let sentence = <span style={{color: `${color}`}}> {bones.text} </span> 
+    for (var i = 0; i < bones.length; i ++) {
+      const color = findColor(bones[i])
+      console.log(bones[i].text)
+      let sentence = <span style={{color: `${color}`}}> {bones[i].text} </span> 
       body.push(sentence)
       console.log(sentence)
-    })
-    console.log('body', body)
+    }
+    console.table('body', body)
     return (
-      body.flat()
+
+      body
 
     )
   }
