@@ -14,6 +14,7 @@ div#comment-form-container {
   margin-bottom: 4vh;
   align-items: center;
   font-family: Inter, sans-serif;
+  font-size: 1.5vw;
 }
 
 h2#comment-section-label {

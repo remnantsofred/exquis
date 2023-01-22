@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 // vote buttons
 import UpvoteButton from '../UpvoteButton'
 import DownvoteButton from '../DownvoteButton'
+import IndexPlaceBones from './IndexPlaceBones'
 
 const IndexSkeletonTile = ({skeletonInfo}) => {
   // const title = skeletonInfo.title
@@ -22,7 +23,6 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
   const likes = 20
   const tags = ["happy",  "nature", "scary",  "romance", "thriller", "mystery", "fantasy", "sci-fi"]
 
-
   return (
     <li className='skeleton-tile-object'>
       <div className="index-tile-container">
@@ -40,8 +40,7 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
           </div>
           <div className='index-skeleton-body-likes-container'>
             <div className="index-skeleton-body-container">
-              <p className="index-skeleton-body">{skeletonBody}</p>
-              
+              <IndexPlaceBones className="index-skeleton-body" bones={skeletonInfo.bones} />
             </div>
             <div className="index-skeleton-likes-container">
               <UpvoteButton />
