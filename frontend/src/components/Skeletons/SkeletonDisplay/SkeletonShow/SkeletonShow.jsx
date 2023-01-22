@@ -35,6 +35,9 @@ const SkeletonShow = () => {
   const skellie = useSelector(getSkeleton(skeletonId))
   const author = SessionUserCheck();
 
+  useEffect(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
   const handlePost = (e) => {
     e.preventDefault();
     const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
