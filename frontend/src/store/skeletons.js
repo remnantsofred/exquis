@@ -100,6 +100,7 @@ export const createSkeleton = data => async dispatch => {
 
 export const updateSkeleton = (skeletonId, data) => async dispatch => {
   try {
+      console.log("patching skeleton")
       const res = await jwtFetch(`/api/skeletons/${skeletonId}`, {
           method: 'PATCH',
           body: JSON.stringify(data)
@@ -157,7 +158,7 @@ const skeletonsReducer = (state = {}, action) => {
     case RECEIVE_USER_SKELETONS:
         return {...newState, ...action.skeletons};
     case REMOVE_SKELETON:
-        delete newState[action.skeleton._id];
+        delete newState[action.skeletonId];
         return newState;
     case RECEIVE_SKELETON_COMMENTS:
         let skeletonComments = newState[action.skeletonId]

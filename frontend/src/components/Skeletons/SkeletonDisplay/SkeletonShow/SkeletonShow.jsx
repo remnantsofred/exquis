@@ -1,7 +1,7 @@
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { getSkeleton, fetchSkeleton, updateSkeleton } from '../../../../store/skeletons'
+import { getSkeleton, fetchSkeleton, updateSkeleton, deleteSkeleton } from '../../../../store/skeletons'
 import { getBones, fetchBones } from '../../../../store/bones'
 import Loading from "../../../Loading/Loading"
 
@@ -11,29 +11,33 @@ import UpvoteButton from "../../UpvoteButton"
 import CollaboratorColorMatch from "./CollaboratorColorMatch/CollaboratorColorMatch"
 import CollaboratorsListMap from "./CollaboratorsListMap"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
-
 import NewPlaceBones from "./PlaceBones"
 import NewBoneInput from "./NewBoneInput/NewBoneInput"
-
 import CommentForm from "./CommentForm/CommentForm"
 import CommentPanel from "./CommentPanel/CommentPanel"
 import { createComment } from "../../../../store/comments"
-
 import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
-
 import "./SkeletonShow.css"
 import {getCommentsForSkeleton} from "../../../../store/skeletons"
 import { fetchSkeletonComments } from "../../../../store/comments"
 import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
 import { fetchUsers, getUser } from "../../../../store/users"
+import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
+import SkeletonEditModal from "../../SkeletonEditModal/SkeletonEditModal"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false)
   const [comment, setComment] = useState('');
+  const history = useHistory();
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
+  // const bones = useSelector(state => state.bones)
+  // const author = useSelector(state => state.session.user);
+  //const user = SessionUserCheck()
   const author = SessionUserCheck();
+  const [ modalStatus, setModalStatus ] = useState(false);
+
 
   useEffect(() => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
@@ -46,6 +50,7 @@ const SkeletonShow = () => {
     e.target.value = "";
     setComment("");
   };
+
 
   const ownerColorFxn = (owner, colorArr) => {
     const colorObj = colorArr.find(color => color.author === owner)
@@ -66,13 +71,34 @@ const SkeletonShow = () => {
   }
 
 
+
   useEffect(() => {
     Promise.all([
       dispatch(fetchSkeleton(skeletonId)),
+      dispatch(fetchUsers())
     ]).then(()=>{
       setLoaded(true);
     })
   }, [])
+
+
+  const handleSkellieUpdate = (e) => {
+    e.preventDefault()
+    // dispatch(updateSkeleton(skeletonId))
+    setModalStatus(1)
+  }
+
+  const handleSkellieDelete = (e) => {
+    e.preventDefault()
+    dispatch(deleteSkeleton(skeletonId))
+    .then((res) => {history.push(`/users/${skellie.owner._id}`)})
+  }
+
+  const handleModalClose = () => {
+    setModalStatus(false)
+  }
+  
+
 
   if (!loaded) {
     return (
@@ -90,10 +116,13 @@ const SkeletonShow = () => {
 
     return (
       <>
+        {modalStatus === 1 && <SkeletonEditModal skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />}
         <div className="skellie-main-container">
           <div className="show-top-middle">
             <div className="show-top">
-              <h1 id="skeleton-title">{skellie.title}</h1>
+              { (user._id === skellie.owner._id ) ? <button className="comment-update-button" onClick={handleSkellieUpdate}>Edit</button> : <></>}
+              { (user._id === skellie.owner._id ) ? <button className="comment-delete-button" onClick={handleSkellieDelete} >Delete</button> : <></>} 
+              <h1 id="skeleton-title">{skellie.title}</h1> 
                 <hr />
                   <div className="sub-title">
                     <h3 id="skeleton-owner" style={{color: `${ownerColor}`}}>{skellie.owner.username}</h3>
