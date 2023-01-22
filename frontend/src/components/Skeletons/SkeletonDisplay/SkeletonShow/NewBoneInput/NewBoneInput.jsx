@@ -12,18 +12,17 @@ const NewBoneInput = ({skellie, currentCollabId, authorId}) => {
   const [isCurrentCollab, setIsCurrentCollab] = useState(false)
 
   useEffect(() => {
-    if (currentCollabId === authorId) {
+    if (CurrentCollabId === authorId) {
       setIsCurrentCollab(true)
     } else {
       setIsCurrentCollab(false)
     }
-  }, [currentCollabId, authorId])
+  }, [CurrentCollabId, authorId])
 
 
   const skellieId = skellie._id
   const createNewBone = (e) => {
     e.preventDefault()
-    const authorId = author._id;
     const data = {
       text: newBoneText,
       skeleton: skellieId,

@@ -3,10 +3,6 @@ import './TrendingBar.css'
 const TrendingBar = ({skeletons}) => {
 
   const skeletonsCopy = JSON.parse(JSON.stringify(skeletons))
-  // console.log(skeletonsCopy)
-
-
-
   skeletonsCopy.sort((a, b) => b.likes.length - a.likes.length)
 
   const topFive = skeletonsCopy.slice(0, 5)

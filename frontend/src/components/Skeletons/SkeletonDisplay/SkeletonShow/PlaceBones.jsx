@@ -14,13 +14,12 @@ const PlaceBones = ({colorArr, skellie}) => {
     }
 
     if (document.readyState === 'complete') {
-      onPageLoad();
-    } else {
-      window.addEventListener('load', onPageLoad);
-      return () => window.removeEventListener('load', onPageLoad)
-    }
-
-  }, [])
+        onPageLoad();
+      } else {
+        window.addEventListener('load', onPageLoad);
+        return () => window.removeEventListener('load', onPageLoad)
+      }
+    }, [])
 
   const findColor = (bone) => {
     const collaborator = bone.author._id
@@ -32,16 +31,15 @@ const PlaceBones = ({colorArr, skellie}) => {
   }
   
   const compileBones = () => {
-
     for (var i = 0; i < bones.length; i ++) {
       const color = findColor(bones[i])
       let sentence = <span style={{color: `${color}`}}> {bones[i].text} </span> 
+      body.push(sentence)
+    }
 
     if (!bones.component) {
       return
     }
-    const bonesLength = bones.component.length
-    var pNum = 0
 
     // const resetPNum = () => {
     //   if (pNum >= palette.length) {
@@ -65,6 +63,7 @@ const PlaceBones = ({colorArr, skellie}) => {
     compileBones()
   )
 }
-}
+
+
 
 export default PlaceBones;

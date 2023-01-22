@@ -91,7 +91,6 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
       maxCollaborators,
       collaborators: selectedCollaborators
     };
-
     dispatch(updateSkeleton(skellie._id, skeleton))
     handleModalClose();
     // .then((res) => {history.push(`/skeletons/${res._id}`)})
