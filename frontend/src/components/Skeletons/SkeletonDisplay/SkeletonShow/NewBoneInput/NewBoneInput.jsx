@@ -20,10 +20,8 @@ const NewBoneInput = (skellie) => {
       author: authorId
     }
     dispatch(createBone(skellieId, data))
-   
   }
 
-  
   return (
     <>
     <form id="new-bone-form" onSubmit={createNewBone}>
