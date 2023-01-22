@@ -77,7 +77,7 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
       skeleton.maxBones = req.body.maxBones,
       skeleton.maxCollaborators = req.body.maxCollaborators,
       skeleton.collaborators = req.body.collaborators,
-      skeleton.bones = req.body.bones,
+      // skeleton.bones = req.body.bones,
       skeleton.tags = req.body.tags
       // need to add future logic to add/remove tags
 
