@@ -22,7 +22,7 @@ import {getCommentsForSkeleton} from "../../../../store/skeletons"
 import { fetchSkeletonComments } from "../../../../store/comments"
 import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
 import { fetchUsers, getUser } from "../../../../store/users"
-import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
+// import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
 import SkeletonEditModal from "../../SkeletonEditModal/SkeletonEditModal"
 
 const SkeletonShow = () => {
@@ -120,8 +120,8 @@ const SkeletonShow = () => {
         <div className="skellie-main-container">
           <div className="show-top-middle">
             <div className="show-top">
-              { (user._id === skellie.owner._id ) ? <button className="comment-update-button" onClick={handleSkellieUpdate}>Edit</button> : <></>}
-              { (user._id === skellie.owner._id ) ? <button className="comment-delete-button" onClick={handleSkellieDelete} >Delete</button> : <></>} 
+              { (author._id === skellie.owner._id ) ? <button className="comment-update-button" onClick={handleSkellieUpdate}>Edit</button> : <></>}
+              { (author._id === skellie.owner._id ) ? <button className="comment-delete-button" onClick={handleSkellieDelete} >Delete</button> : <></>} 
               <h1 id="skeleton-title">{skellie.title}</h1> 
                 <hr />
                   <div className="sub-title">
