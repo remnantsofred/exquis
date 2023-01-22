@@ -18,6 +18,7 @@ import { fetchSkeletonComments } from "../../../../store/comments"
 import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
 import { fetchUsers, getUser } from "../../../../store/users"
 import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
+import SkeletonEditModal from "../../SkeletonEditModal/SkeletonEditModal"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
@@ -29,7 +30,7 @@ const SkeletonShow = () => {
   // const bones = useSelector(state => state.bones)
   const author = useSelector(state => state.session.user);
   const user = SessionUserCheck()
-
+  const [ modalStatus, setModalStatus ] = useState(false);
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -54,14 +55,20 @@ const SkeletonShow = () => {
   const handleSkellieUpdate = (e) => {
     e.preventDefault()
     // dispatch(updateSkeleton(skeletonId))
+    setModalStatus(1)
   }
 
   const handleSkellieDelete = (e) => {
     e.preventDefault()
-    console.log(skellie.owner._id, "skellie.owner._id")
     dispatch(deleteSkeleton(skeletonId))
     .then((res) => {history.push(`/users/${skellie.owner._id}`)})
   }
+
+  const handleModalClose = () => {
+    setModalStatus(false)
+  }
+
+  
 
   if (!loaded) {
     return (
@@ -70,6 +77,7 @@ const SkeletonShow = () => {
   } else if (loaded && skellie) {
     return (
       <>
+        {modalStatus === 1 && <SkeletonEditModal skellie={skellie} handleModalClose={handleModalClose} skellie={skellie} handleSkellieUpdate={handleSkellieUpdate} />}
         <div className="skellie-main-container">
           
           <div className="show-top-middle">
