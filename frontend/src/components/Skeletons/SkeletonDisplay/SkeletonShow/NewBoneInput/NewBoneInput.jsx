@@ -26,12 +26,12 @@ const NewBoneInput = (skellie) => {
   
   return (
     <>
-    <form onSubmit={createNewBone}>
+    <form id="new-bone-form" onSubmit={createNewBone}>
       <textarea id="current-collab-input" 
         value={newBoneText}
         onChange={(e) => setNewBoneText(e.target.value)}
       />
-      <button type="submit">
+      <button type="submit" id="bone-submit-button">
           Submit Your Bone.
       </button>
     </form>
