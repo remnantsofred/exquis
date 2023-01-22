@@ -1,7 +1,6 @@
 const CollaboratorColorMatch = (collaborators) => {
 
   const selected = []
-  console.log('collaborators', collaborators)
 
   // 1
   const RoyalBlueClassyPalette = [
@@ -147,22 +146,15 @@ const CollaboratorColorMatch = (collaborators) => {
 
   const palettes = shuffle(unshuffledPalettes)
 
-  console.log(palettes)
 
   const randomColor = (array) => {
     return (array[Math.floor((Math.random() * (array.length)))])
   };  
 
   const ColorAuthorArray = []
-  console.log('selected', selected)
-  console.log('selected length', selected.length)
-
-  console.log('collaborators', collaborators)
-  console.log('collaborators length', collaborators.length)
   for (var i = 0; selected.length < collaborators.length; i++) {
     if (i === palettes.length) {i = 0}
     var selectedColor = randomColor(palettes[i])
-    console.log(selectedColor)
     if (!selected.includes(selectedColor)) {
       selected.push(selectedColor)
     } else {
@@ -172,7 +164,6 @@ const CollaboratorColorMatch = (collaborators) => {
       selected.push(selectedColor)
     }
     // it does make a selectedColor
-    console.log('selected color in function', selected)
   }
 
   for (var j = 0; j < selected.length; j++) {
@@ -184,7 +175,6 @@ const CollaboratorColorMatch = (collaborators) => {
     })
   }
 
-  // console.log(randomColor(DarkForestGreenClassyPalette))
 
   return (
     ColorAuthorArray

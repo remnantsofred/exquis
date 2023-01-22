@@ -6,7 +6,7 @@ import { getBones, fetchBones } from '../../../../store/bones'
 import Loading from "../../../Loading/Loading"
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
-import CollaboratorColorMatch from "./ColorPalettePicker/CollaboratorColorMatch"
+import CollaboratorColorMatch from "./CollaboratorColorMatch/CollaboratorColorMatch"
 import CollaboratorsListMap from "./CollaboratorsListMap"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
 import NewPlaceBones from "./PlaceBones"
@@ -58,7 +58,6 @@ const SkeletonShow = () => {
     }
   }
 
-  const currentCollaborator = 'nathan, the wondrous'
 
   useEffect(() => {
     Promise.all([
@@ -75,12 +74,12 @@ const SkeletonShow = () => {
     )
   } else if (loaded && skellie) {
 
-    const collaborators = (Object.values(skellie.collaborators)).concat([skellie.owner])
+    const collaborators = [skellie.owner].concat(Object.values(skellie.collaborators))
     const colorArr = CollaboratorColorMatch(collaborators)
     const ownerId = skellie.owner._id
     const ownerColor = ownerColorFxn(ownerId, colorArr)
     const prompt = therePrompt(skellie)
-
+    const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
     return (
       <>
         <div className="skellie-main-container">
@@ -104,7 +103,7 @@ const SkeletonShow = () => {
                       <div className="user-input-div">
                         <hr id="body-input-divider" />
                         <div id="current-writer-note" >
-                            <span>It is</span><span id="current-writer-username">{`${currentCollaborator}`}'s</span><span>turn.</span>
+                            <span>It is</span><span id="current-writer-username">{`${CurrentCollaboratorObj.username}`}'s</span><span>turn.</span>
                         </div>
                         {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
                         <NewBoneInput skellie={skellie} />
