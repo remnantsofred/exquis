@@ -23,7 +23,7 @@ div.LoadingDiv {
   margin-bottom: 7vh;
   width: 20vw;
   height: 20vw;
-  animation: wiggle 4.0s linear infinite;}
+  animation: loadingWiggle 4.0s linear infinite;}
 
 @keyframes spin {
   0% {transform: rotate(0deg);}
@@ -36,7 +36,7 @@ div.LoadingDiv {
   100% {opacity: 100%;}
 }
 
-@keyframes wiggle {
+@keyframes loadingWiggle {
   0% { transform: rotate(0deg), scale(100%) }
   14% { transform: scale(115%) }
   20% { transform: scale(105%) }

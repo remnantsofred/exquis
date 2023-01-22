@@ -1,6 +1,7 @@
 
 .nav-logo-container, #nav-icon, #nav-logo {
   width: 3.5vw;
+  margin-top: .25vh;
 }
 
 div.left {
@@ -48,6 +49,7 @@ div.center, div.right {
 
 .links-auth, .links-nav {
   font-size: 2vw;
+  margin-top: 1.05vh;
 }
 
 #signup-link, #login-link, #skeleton-index-link, #profile-link, #skeleton-form-link, #logout-button {
@@ -68,7 +70,7 @@ div.search-bar-container {
 
 #search-bar-input {
   width: 45vw;
-  height: 2.75vh;
+  height: 2vh;
   margin-left: 2.5vw;
   margin-right: .5vw;
   margin-bottom: 0;
@@ -94,8 +96,8 @@ input#search-bar-input:focus {
 }
 
 button#search-bar-button  {
-  height: 6.75vh;
-  width: 6.75vh;
+  height: 5vh;
+  width: 5vh;
   /* margin-top: -.5vw; */
   align-items: center;
   justify-content: center;
