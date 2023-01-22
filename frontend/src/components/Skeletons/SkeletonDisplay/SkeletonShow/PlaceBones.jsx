@@ -19,7 +19,7 @@ const PlaceBones = ({colorArr, skellie}) => {
         window.addEventListener('load', onPageLoad);
         return () => window.removeEventListener('load', onPageLoad)
       }
-    }, [])
+  }, []);
 
   const findColor = (bone) => {
     const collaborator = bone.author._id
@@ -35,10 +35,6 @@ const PlaceBones = ({colorArr, skellie}) => {
       const color = findColor(bones[i])
       let sentence = <span style={{color: `${color}`}}> {bones[i].text} </span> 
       body.push(sentence)
-    }
-
-    if (!bones.component) {
-      return
     }
 
     // const resetPNum = () => {

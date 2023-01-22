@@ -134,7 +134,7 @@ const SkeletonShow = () => {
                 <div className="skeleton-body-input-container">
                     <div id="skeleton-body">
                       <NewPlaceBones skellie={skellie} colorArr={colorArr} />
-                      <PlaceBones skellie={skellie} colorArr={colorArr} />
+                      {/* <PlaceBones skellie={skellie} colorArr={colorArr} /> */}
 
                     </div> 
                       <div className="user-input-div">

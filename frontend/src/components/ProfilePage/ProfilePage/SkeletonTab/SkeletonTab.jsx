@@ -7,7 +7,9 @@ import { useEffect, useState } from "react";
 const SkeletonTab = ({switchValue, skellies, userId}) => {
 
   const isCurrent = (skellie) => {
-    if (skellie.bones.length < skellie.maxBones) {
+    if (skellie.bones === []) {
+      return (true)
+    } else if (skellie.bones && (skellie.bones.length < skellie.maxBones)) {
       return (true)
     } else {
       return (false)
