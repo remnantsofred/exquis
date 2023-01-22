@@ -6,8 +6,6 @@ const PlaceBones = ({colorArr, skellie}) => {
   const [loaded, setLoaded] = useState(false)
 
   const body = []
-  console.log('skellie here', skellie)
-  console.log('colorArr in place bones', colorArr)
   const bones = skellie.bones
 
   useEffect(() => {
@@ -45,18 +43,18 @@ const PlaceBones = ({colorArr, skellie}) => {
     const bonesLength = bones.component.length
     var pNum = 0
 
-    const resetPNum = () => {
-      if (pNum >= palette.length) {
-        pNum -= pNum;
-      }
-    }
+    // const resetPNum = () => {
+    //   if (pNum >= palette.length) {
+    //     pNum -= pNum;
+    //   }
+    // }
 
-    for (var i = 0; i < bonesLength; i ++) {
-      resetPNum();
-      let sentence = <span style={{color: `${palette[pNum]}`}}>{bones.component[i].text} </span> 
+    // for (var i = 0; i < bonesLength; i ++) {
+    //   resetPNum();
+    //   let sentence = <span style={{color: `${palette[pNum]}`}}>{bones.component[i].text} </span> 
 
-      body.push(sentence)
-    }
+    //   body.push(sentence)
+    // }
 
     return (
       body
@@ -66,6 +64,7 @@ const PlaceBones = ({colorArr, skellie}) => {
   return (
     compileBones()
   )
+}
 }
 
 export default PlaceBones;

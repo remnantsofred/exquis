@@ -4,7 +4,8 @@ import { fetchSkeleton, updateSkeleton } from "../../../../../store/skeletons";
 import { fetchBone, createBone } from "../../../../../store/bones";
 import { useParams } from "react-router-dom";
 
-const NewBoneInput = (skellie, currentCollabId, authorId) => {
+
+const NewBoneInput = ({skellie, currentCollabId, authorId}) => {
   const dispatch = useDispatch()
   const author = useSelector(state => state.session.user);
   const [newBoneText, setNewBoneText] = useState("")
@@ -19,8 +20,7 @@ const NewBoneInput = (skellie, currentCollabId, authorId) => {
   }, [currentCollabId, authorId])
 
 
-  const skellieId = skellie.skellie._id
-  console.log(isCurrentCollab)
+  const skellieId = skellie._id
   const createNewBone = (e) => {
     e.preventDefault()
     const authorId = author._id;
@@ -32,19 +32,24 @@ const NewBoneInput = (skellie, currentCollabId, authorId) => {
     dispatch(createBone(skellieId, data))
   }
 
-  return (
-    <div style={{display: isCurrentCollab ? "block" : "none"}}>
-    <form id="new-bone-form" onSubmit={createNewBone}>
-      <textarea id="current-collab-input" 
-        value={newBoneText}
-        onChange={(e) => setNewBoneText(e.target.value)}
-      />
-      <button type="submit" id="bone-submit-button">
-          Submit Your Bone.
-      </button>
-    </form>
-    </div>
-  )
+  if (currentCollabId === null || authorId === null) {
+    return 
+  } else {
+    return (
+      <div style={{display: isCurrentCollab ? "block" : "none"}}>
+      <form id="new-bone-form" onSubmit={createNewBone}>
+        <textarea id="current-collab-input" 
+          value={newBoneText}
+          onChange={(e) => setNewBoneText(e.target.value)}
+        />
+        <button type="submit" id="bone-submit-button">
+            Submit Your Bone.
+        </button>
+      </form>
+      </div>
+    )
+
+  }
 }
 
 export default NewBoneInput;

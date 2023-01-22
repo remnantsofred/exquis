@@ -10,7 +10,6 @@ const TrendingBar = ({skeletons}) => {
   skeletonsCopy.sort((a, b) => b.likes.length - a.likes.length)
 
   const topFive = skeletonsCopy.slice(0, 5)
-  console.log(topFive)
   const TrendingSayings = [
     "Here's what's currently poppin! 🔥🔥",
     "Currently on their way to fame - ✨✨",
