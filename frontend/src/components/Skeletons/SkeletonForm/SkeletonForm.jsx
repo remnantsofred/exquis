@@ -180,6 +180,7 @@ function SkeletonForm () {
             onRemove={onRemove} 
             displayValue="name" 
             selectionLimit={maxCollaborators}
+            id="collaborator-select"
             />
   
           {/* <div className="errors">{errors?.tags}</div>

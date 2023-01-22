@@ -1,0 +1,57 @@
+div.LoadingDiv {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25vh;
+  width: 90vw;
+  height: 100vh;
+  max-width: max-content;
+  max-height: max-content;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
+
+.loadingText {
+  font-family: Inter, sans-serif;
+  font-size: 2vw;
+  animation: fade-in-out 1.0s linear infinite;
+}
+
+#exquisDudeLoader {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 7vh;
+  width: 20vw;
+  height: 20vw;
+  animation: loadingWiggle 4.0s linear infinite;}
+
+@keyframes spin {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+
+@keyframes fade-in-out {
+  0% {opacity: 100%;}
+  50% {opacity: 25%;}
+  100% {opacity: 100%;}
+}
+
+@keyframes loadingWiggle {
+  0% { transform: rotate(0deg), scale(100%) }
+  14% { transform: scale(115%) }
+  20% { transform: scale(105%) }
+  21% { transform: rotate(-5deg);
+        transform: scale(100%)
+      }
+  23% { transform: rotate(5deg); }
+  25% { transform: rotate(-5deg); }
+  27% { transform: rotate(5deg); }
+  29% { transform: rotate(-5deg); }
+  31% { transform: rotate(5deg); }
+  33% { transform: rotate(-5deg); }
+  35% { transform: rotate(0deg); }
+  48% { transform: scale(100%); }
+  54% { transform: scale(100%); }
+  70% { transform: scale(100%); }
+  100% { transform: scale(100%); }
+}

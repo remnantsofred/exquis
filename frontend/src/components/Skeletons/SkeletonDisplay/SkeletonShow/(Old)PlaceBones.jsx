@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import Loading from "../../../Loading/Loading"
 
-import ColorPalettePicker from "./ColorPalettePicker/ColorPalettePicker"
+// import ColorPalettePicker from "./ColorPalettePicker/ColorPalettePicker"
 
 const PlaceBones = (bones) => {
   const [loaded, setLoaded] = useState(false)
@@ -45,10 +45,26 @@ const PlaceBones = (bones) => {
       body
     )
   }
+  // const bonesCompiled = bones.map((bone, idx)=> <span style={{color: `${palette[idx]}`}}>{bone.text} </span>)
+  // useEffect(() => {
+  //   Promise.all([
+  //     bones
+  //   ]).then(() =>{
+  //     setLoaded(true)
+  //   })
 
+  // }, [bones])
+
+  // if (!loaded) {
+  //   return (
+  //     <Loading />
+  //   )  
+  // } else if (loaded && bones) {
   return (
+    // bones.map((bone, idx)=> <span style={{color: `${palette[idx]}`}}>{bone.text} </span>)
     compileBones()
   )
+// }
 }
 
 export default PlaceBones;
