@@ -8,8 +8,6 @@ import { useParams } from "react-router-dom";
 const NewBoneInput = ({skellie, currentCollabId, authorId}) => {
   const dispatch = useDispatch()
   const author = useSelector(state => state.session.user);
-  const CurrentCollabId = skellie.CurrentCollabId
-  const authorId = author._id
   const [newBoneText, setNewBoneText] = useState("")
   const [isCurrentCollab, setIsCurrentCollab] = useState(false)
 
