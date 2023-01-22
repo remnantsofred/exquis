@@ -155,6 +155,18 @@ div.skeletons-block {
   margin-right: auto;
 }
 
+ul.skeletons-block-list {
+  text-align: left;
+  width: 75vw;
+  height: 35vh;
+  margin-top: 2vh;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Inter, sans-serif;
+  font-size: 1.5vw;
+  overflow: auto;
+  line-height: 5vh;
+}
 div.bottom-skeletons-block {
   border-radius: 25px;
   width: 77vw;
@@ -171,4 +183,20 @@ div.bottom-skeletons-block {
 
 h2.profile-bottom-title {
   font-family: Inter, sans-serif;
+}
+
+.skellie-show-link-profile-page {
+  transition: .25s;
+  text-decoration: none;
+  color: black;
+  font-size: 2.5vw;
+}
+
+#specific-skellie-link:hover {
+  transition: .25s;
+  color: #979cc6;
+}
+
+span#bone-counter {
+  color: #545ca3;
 }

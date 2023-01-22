@@ -5,7 +5,7 @@ import { useState } from "react";
 import { deleteComment, updateComment } from "../../../../../store/comments";
 import { Link } from 'react-router-dom';
 import SessionUserCheck from '../../../../SessionUserCheck/SessionUserCheck';
-import { memo } from 'react';
+import { useEffect } from 'react';
 
 const CommentForm = ({comment, skeleton}) => {
 
