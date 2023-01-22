@@ -11,11 +11,11 @@ import Loading from '../../Loading/Loading';
 import modalCloseButton from './modalCloseButton.png';
 
 function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
-  const [title, setTitle] = useState();
-  const [prompt, setPrompt] = useState('')
-  const [maxBones, setMaxBones] = useState('');
-  const [maxCollaborators, setMaxCollaborators] = useState('');
-  const [tags, setTags] = useState([]);
+  const [title, setTitle] = useState(skellie.title);
+  const [prompt, setPrompt] = useState(skellie.prompt)
+  const [maxBones, setMaxBones] = useState(skellie.maxBones);
+  const [maxCollaborators, setMaxCollaborators] = useState(skellie.maxCollaborators);
+  const [tags, setTags] = useState(skellie.tags);
   const [loaded, setLoaded] = useState(false);
   const history = useHistory();
   const currentUser = useSelector(state => state.session.user);
@@ -23,29 +23,18 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
   const errors = useSelector(state => state.errors.skeletons);
   const dispatch = useDispatch();
   const options = users?.filter(user => user._id !== currentUser._id).map(user => ({name: user.username, id: user._id}));
-  // const selectedValue = [];
   const [selectedValue, setSelectedValue] = useState([]);
   const selectedList = [];
-  // const selectedCollaborators = [];
-  const [selectedCollaborators, setSelectedCollaborators] = useState([]);
+  const [selectedCollaborators, setSelectedCollaborators] = useState(skellie.collaborators);
   const [ modalStatus, setModalStatus ] = useState(false);
 
 
   useEffect(() => {
-    Promise.all([
-      dispatch(fetchUsers()),
-    ]).then(()=>{
-      setCurrentValues(skellie);
-      setLoaded(true);
-    })
-  }, [])
+    setCurrentValues(skellie);
+    setLoaded(true);
+  }, [modalStatus])
 
   const setCurrentValues = (skellie) => {
-    setTitle(skellie.title);
-    setPrompt(skellie.prompt);
-    setMaxBones(skellie.maxBones);
-    setMaxCollaborators(skellie.maxCollaborators);
-    setTags(skellie.tags);
     for (const collaborator of skellie.collaborators){
       console.log(collaborator, 'collaborator')
       for (const option of options) {
@@ -69,7 +58,6 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
     setSelectedCollaborators(selectedCollaborators)
   }
   
-
   const update = field => {
     let setState;
 
@@ -105,7 +93,8 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
       maxCollaborators,
       collaborators: selectedCollaborators
     };
-    console.log(skeleton)
+    console.log(skeleton, "skeleton")
+    console.log(skellie._id, "skellie.id")
     dispatch(updateSkeleton(skellie._id, skeleton))
     handleModalClose();
     // .then((res) => {history.push(`/skeletons/${res._id}`)})

@@ -26,6 +26,9 @@ const PlaceBones = (bones) => {
   }, [])
   
   const compileBones = () => {
+    if (!bones.component) {
+      return
+    }
     const bonesLength = bones.component.length
     var pNum = 0
 

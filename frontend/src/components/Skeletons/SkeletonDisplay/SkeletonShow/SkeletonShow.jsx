@@ -47,6 +47,7 @@ const SkeletonShow = () => {
   useEffect(() => {
     Promise.all([
       dispatch(fetchSkeleton(skeletonId)),
+      dispatch(fetchUsers())
     ]).then(()=>{
       setLoaded(true);
     })
@@ -77,7 +78,7 @@ const SkeletonShow = () => {
   } else if (loaded && skellie) {
     return (
       <>
-        {modalStatus === 1 && <SkeletonEditModal skellie={skellie} handleModalClose={handleModalClose} skellie={skellie} handleSkellieUpdate={handleSkellieUpdate} />}
+        {modalStatus === 1 && <SkeletonEditModal skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />}
         <div className="skellie-main-container">
           
           <div className="show-top-middle">
