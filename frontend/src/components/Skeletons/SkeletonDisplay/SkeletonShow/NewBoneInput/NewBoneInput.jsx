@@ -4,13 +4,23 @@ import { fetchSkeleton, updateSkeleton } from "../../../../../store/skeletons";
 import { fetchBone, createBone } from "../../../../../store/bones";
 import { useParams } from "react-router-dom";
 
-const NewBoneInput = (skellie) => {
+const NewBoneInput = (skellie, currentCollabId, authorId) => {
   const dispatch = useDispatch()
   const author = useSelector(state => state.session.user);
   const [newBoneText, setNewBoneText] = useState("")
+  const [isCurrentCollab, setIsCurrentCollab] = useState(false)
+
+  useEffect(() => {
+    if (currentCollabId === authorId) {
+      setIsCurrentCollab(true)
+    } else {
+      setIsCurrentCollab(false)
+    }
+  }, [currentCollabId, authorId])
+
 
   const skellieId = skellie.skellie._id
-
+  console.log(isCurrentCollab)
   const createNewBone = (e) => {
     e.preventDefault()
     const authorId = author._id;
@@ -23,7 +33,7 @@ const NewBoneInput = (skellie) => {
   }
 
   return (
-    <>
+    <div style={{display: isCurrentCollab ? "block" : "none"}}>
     <form id="new-bone-form" onSubmit={createNewBone}>
       <textarea id="current-collab-input" 
         value={newBoneText}
@@ -33,7 +43,7 @@ const NewBoneInput = (skellie) => {
           Submit Your Bone.
       </button>
     </form>
-    </>
+    </div>
   )
 }
 

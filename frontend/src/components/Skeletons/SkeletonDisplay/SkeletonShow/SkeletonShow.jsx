@@ -4,18 +4,22 @@ import { useSelector, useDispatch } from "react-redux"
 import { getSkeleton, fetchSkeleton, updateSkeleton } from '../../../../store/skeletons'
 import { getBones, fetchBones } from '../../../../store/bones'
 import Loading from "../../../Loading/Loading"
+
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
+
 import CollaboratorColorMatch from "./CollaboratorColorMatch/CollaboratorColorMatch"
 import CollaboratorsListMap from "./CollaboratorsListMap"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
+
 import NewPlaceBones from "./PlaceBones"
 import NewBoneInput from "./NewBoneInput/NewBoneInput"
 
 import CommentForm from "./CommentForm/CommentForm"
 import CommentPanel from "./CommentPanel/CommentPanel"
-
 import { createComment } from "../../../../store/comments"
+
+import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
 
 import "./SkeletonShow.css"
 import {getCommentsForSkeleton} from "../../../../store/skeletons"
@@ -29,7 +33,7 @@ const SkeletonShow = () => {
   const [comment, setComment] = useState('');
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
-  const author = useSelector(state => state.session.user);
+  const author = SessionUserCheck();
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -67,7 +71,6 @@ const SkeletonShow = () => {
     })
   }, [])
 
-
   if (!loaded) {
     return (
       <Loading />
@@ -80,6 +83,8 @@ const SkeletonShow = () => {
     const ownerColor = ownerColorFxn(ownerId, colorArr)
     const prompt = therePrompt(skellie)
     const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
+
+
     return (
       <>
         <div className="skellie-main-container">
@@ -89,12 +94,11 @@ const SkeletonShow = () => {
                 <hr />
                   <div className="sub-title">
                     <h3 id="skeleton-owner" style={{color: `${ownerColor}`}}>{skellie.owner.username}</h3>
-                    <h3 id="skeleton-prompt">///// prompt: {prompt}</h3>
+                    <h3 id="skeleton-prompt">///// prompt: "{prompt}"</h3>
                   </div>
                 <hr />
             </div>
             <div className="show-middle">
-              {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
                 <div className="skeleton-body-input-container">
                     <div id="skeleton-body">
                       <NewPlaceBones skellie={skellie} colorArr={colorArr} />
@@ -106,7 +110,7 @@ const SkeletonShow = () => {
                             <span>It is</span><span id="current-writer-username">{`${CurrentCollaboratorObj.username}`}'s</span><span>turn.</span>
                         </div>
                         {/* TODO - 01/18/2023 - we could disable or erase this panel depending on if it matches w current user */}
-                        <NewBoneInput skellie={skellie} />
+                        <NewBoneInput component={skellie} skellie={skellie} currentCollabId={CurrentCollaboratorObj._id} authorId={author._id}/>
                       </div>
                       <div className="horizontal-skeleton-likes-container">
                         <DownvoteButton id="skeleton-show-downvote" />
