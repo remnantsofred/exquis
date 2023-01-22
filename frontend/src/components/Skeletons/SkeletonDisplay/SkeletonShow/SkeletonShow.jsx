@@ -113,8 +113,6 @@ const SkeletonShow = () => {
     const prompt = therePrompt(skellie)
     const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
     
-    console.log(CurrentCollaboratorObj, "CURRENT COLLABORATOR OBJ");
-    console.log(author, "author");
 
     return (
       <>
