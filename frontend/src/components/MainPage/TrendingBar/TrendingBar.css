@@ -2,7 +2,7 @@
     font-family: Inter, sans-serif;
     position: fixed;
     width: 15vw;
-    height: 72.5vh;
+    height: max-content;
     margin-left: 4vw;
     margin-top: 0;
     left: 69.5vw;
