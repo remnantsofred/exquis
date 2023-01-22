@@ -36,6 +36,24 @@ const PlaceBones = ({colorArr, skellie}) => {
       let sentence = <span style={{color: `${color}`}}> {bones[i].text} </span> 
       body.push(sentence)
     }
+
+    if (!bones.component) {
+      return
+    }
+
+    // const resetPNum = () => {
+    //   if (pNum >= palette.length) {
+    //     pNum -= pNum;
+    //   }
+    // }
+
+    // for (var i = 0; i < bonesLength; i ++) {
+    //   resetPNum();
+    //   let sentence = <span style={{color: `${palette[pNum]}`}}>{bones.component[i].text} </span> 
+
+    //   body.push(sentence)
+    // }
+
     return (
       body
     )
@@ -45,6 +63,7 @@ const PlaceBones = ({colorArr, skellie}) => {
     compileBones()
   )
 }
+
 
 
 export default PlaceBones;

@@ -11,6 +11,7 @@ import UpvoteButton from "../../UpvoteButton"
 import CollaboratorColorMatch from "./CollaboratorColorMatch/CollaboratorColorMatch"
 import CollaboratorsListMap from "./CollaboratorsListMap"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
+import PlaceBones from "./PlaceBones"
 import NewPlaceBones from "./PlaceBones"
 import NewBoneInput from "./NewBoneInput/NewBoneInput"
 import CommentForm from "./CommentForm/CommentForm"
@@ -22,7 +23,6 @@ import {getCommentsForSkeleton} from "../../../../store/skeletons"
 import { fetchSkeletonComments } from "../../../../store/comments"
 import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
 import { fetchUsers, getUser } from "../../../../store/users"
-// import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
 import SkeletonEditModal from "../../SkeletonEditModal/SkeletonEditModal"
 
 const SkeletonShow = () => {
@@ -98,21 +98,22 @@ const SkeletonShow = () => {
     setModalStatus(false)
   }
   
-
-
+  
+  
   if (!loaded) {
     return (
       <Loading />
     )
   } else if (loaded && skellie) {
-
+    
     const collaborators = [skellie.owner].concat(Object.values(skellie.collaborators))
     const colorArr = CollaboratorColorMatch(collaborators)
     const ownerId = skellie.owner._id
     const ownerColor = ownerColorFxn(ownerId, colorArr)
     const prompt = therePrompt(skellie)
     const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
-    const CurrentCollaboratorId = CurrentCollaboratorObj._id
+    
+
     return (
       <>
         {modalStatus === 1 && <SkeletonEditModal skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />}
@@ -133,6 +134,7 @@ const SkeletonShow = () => {
                 <div className="skeleton-body-input-container">
                     <div id="skeleton-body">
                       <NewPlaceBones skellie={skellie} colorArr={colorArr} />
+                      <PlaceBones skellie={skellie} colorArr={colorArr} />
 
                     </div> 
                       <div className="user-input-div">
@@ -140,7 +142,7 @@ const SkeletonShow = () => {
                         <div id="current-writer-note" >
                             <span>It is</span><span id="current-writer-username">{`${CurrentCollaboratorObj.username}`}'s</span><span>turn.</span>
                         </div>
-                        <NewBoneInput skellie={skellie} CurrentCollabId={CurrentCollaboratorId} />
+                        {(CurrentCollaboratorObj && author) && <NewBoneInput skellie={skellie} currentCollabId={CurrentCollaboratorObj._id} authorId={author._id}/>}
                       </div>
                       <div className="horizontal-skeleton-likes-container">
                         <DownvoteButton id="skeleton-show-downvote" />
