@@ -3,9 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { deleteComment, updateComment } from "../../../../../store/comments";
-import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
-import { fetchUsers, getUsers } from "../../../../../store/users";
 import SessionUserCheck from '../../../../SessionUserCheck/SessionUserCheck';
 import { useEffect } from 'react';
 
@@ -42,9 +40,6 @@ const CommentForm = ({comment, skeleton}) => {
   }
 
 
- 
-
-
   if (comment._id){
     const commenterId = (comment.author._id)
     console.log(user)
@@ -66,13 +61,10 @@ const CommentForm = ({comment, skeleton}) => {
                 { (user._id === commenterId ) ? <button className="comment-save-update-button" onClick={handleUpdateSubmit} style={{display: updatingComment ? "block" : "none"}}>Save Comment</button> : <></> }
                 { (user._id === commenterId ) ? <button className="comment-delete-button" onClick={handleDelete} >Delete</button> : <></>}    
             </div>
-    
             </div>
         </div>
         </>
       )
-
-
   }
 }
 
