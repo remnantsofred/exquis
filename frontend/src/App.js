@@ -18,7 +18,6 @@ import "./App.css"
 import SkeletonIndex from './components/Skeletons/SkeletonIndex/SkeletonIndex.jsx';
 import SkeletonForm from './components/Skeletons/SkeletonForm/SkeletonForm.jsx';
 import SkeletonShow from './components/Skeletons/SkeletonDisplay/SkeletonShow/SkeletonShow';
-import NewDraftSkeletonShow from './components/Skeletons/SkeletonDisplay/SkeletonShow/REFACTOR-SKETCH-SkeletonShow';
 
 import UpdateForm from './components/SessionForms/UpdateForm';
 
@@ -37,7 +36,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={MainPage} />
         <ProtectedRoute exact path="/skeletons/new" component={SkeletonForm} />
-        <Route exact path="/skeletons/:skeletonId" component={NewDraftSkeletonShow} />
+        <Route exact path="/skeletons/:skeletonId" component={SkeletonShow} />
         <Route exact path="/skeletons" component={SkeletonIndex} />
 
         <AuthRoute exact path="/login" component={LoginForm} />

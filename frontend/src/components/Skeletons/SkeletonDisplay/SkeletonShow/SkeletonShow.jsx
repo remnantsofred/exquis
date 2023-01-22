@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from "react-redux"
 import { getSkeleton, fetchSkeleton, updateSkeleton } from '../../../../store/skeletons'
 import { getBones, fetchBones } from '../../../../store/bones'
 import Loading from "../../../Loading/Loading"
-import PlaceBones from "./PlaceBones"
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
+import CollaboratorColorMatch from "./ColorPalettePicker/CollaboratorColorMatch"
+import CollaboratorsListMap from "./CollaboratorsListMap"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
-
+import NewPlaceBones from "./PlaceBones"
 import NewBoneInput from "./NewBoneInput/NewBoneInput"
 
 import CommentForm from "./CommentForm/CommentForm"
@@ -29,9 +30,21 @@ const SkeletonShow = () => {
  
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
-  // const bones = useSelector(state => state.bones)
+  const bones = useSelector(state => state.bones)
   const author = useSelector(state => state.session.user);
 
+  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
+  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
+  // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
+  //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
+ 
+
+
+  // const bones = useSelector(state => state.bones)
+ 
+  // const handlePost = (e) => {
+  //   e.preventDefault();
+  //   const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -42,9 +55,7 @@ const SkeletonShow = () => {
     setComment("");
   };
 
-
   const currentCollaborator = 'nathan, the wondrous'
-  const collaborators = ['this knee', 'dare in', 'the eggo', 'tailor', 'ab yee', 'dab-ne', 'and rhea', 'neigh thin']
 
 
   useEffect(() => {
@@ -61,10 +72,13 @@ const SkeletonShow = () => {
       <Loading />
     )
   } else if (loaded && skellie) {
+    const collaborators = (Object.values(skellie.collaborators)).concat([skellie.owner])
+    console.log('skeleton show collaborators', collaborators)
+    const colorArr = CollaboratorColorMatch(collaborators)
+    console.log('color array????', colorArr)
     return (
       <>
         <div className="skellie-main-container">
-          
           <div className="show-top-middle">
             <div className="show-top">
               <h1 id="skeleton-title">{skellie.title}</h1>
@@ -79,7 +93,8 @@ const SkeletonShow = () => {
               {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
                 <div className="skeleton-body-input-container">
                     <div id="skeleton-body">
-                      <PlaceBones component={loaded ? skellie.bones : []} />
+                      <NewPlaceBones skellie={skellie} colorArr={colorArr} />
+
                     </div> 
                       <div className="user-input-div">
                         <hr id="body-input-divider" />
@@ -102,7 +117,7 @@ const SkeletonShow = () => {
                 <h2>Collaborators</h2>
                 <hr />
                   <ul className="collaborators-list">
-                    {skellie.collaborators.map(collaborator => <h2 key={collaborator._id}>{collaborator.username}</h2>)}
+                    <CollaboratorsListMap colorArr={colorArr} skellie={skellie} />
                   </ul>
               </div>
             </div>
@@ -122,7 +137,8 @@ const SkeletonShow = () => {
 
         
           <CommentPanel skeleton={skellie} />
-      
+          {skellie.comments.length && skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)}
+        {/* </div> */}
       </>
     )
   }
