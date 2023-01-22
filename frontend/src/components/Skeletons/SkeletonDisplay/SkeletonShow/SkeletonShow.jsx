@@ -58,6 +58,7 @@ const SkeletonShow = () => {
 
   const handleSkellieDelete = (e) => {
     e.preventDefault()
+    console.log(skellie.owner._id, "skellie.owner._id")
     dispatch(deleteSkeleton(skeletonId))
     .then((res) => {history.push(`/users/${skellie.owner._id}`)})
   }
