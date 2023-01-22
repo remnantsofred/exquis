@@ -4,14 +4,11 @@ import { useSelector, useDispatch } from "react-redux"
 import { getSkeleton, fetchSkeleton, updateSkeleton, deleteSkeleton } from '../../../../store/skeletons'
 import { getBones, fetchBones } from '../../../../store/bones'
 import Loading from "../../../Loading/Loading"
-
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
-
 import CollaboratorColorMatch from "./CollaboratorColorMatch/CollaboratorColorMatch"
 import CollaboratorsListMap from "./CollaboratorsListMap"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
-import PlaceBones from "./PlaceBones"
 import NewPlaceBones from "./PlaceBones"
 import NewBoneInput from "./NewBoneInput/NewBoneInput"
 import CommentForm from "./CommentForm/CommentForm"
@@ -134,7 +131,6 @@ const SkeletonShow = () => {
                 <div className="skeleton-body-input-container">
                     <div id="skeleton-body">
                       <NewPlaceBones skellie={skellie} colorArr={colorArr} />
-                      {/* <PlaceBones skellie={skellie} colorArr={colorArr} /> */}
 
                     </div> 
                       <div className="user-input-div">
