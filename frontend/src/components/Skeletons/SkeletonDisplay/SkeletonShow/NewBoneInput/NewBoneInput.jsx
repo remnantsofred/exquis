@@ -4,26 +4,26 @@ import { fetchSkeleton, updateSkeleton } from "../../../../../store/skeletons";
 import { fetchBone, createBone } from "../../../../../store/bones";
 import { useParams } from "react-router-dom";
 
-const NewBoneInput = (skellie, currentCollabId, authorId) => {
+const NewBoneInput = (skellie) => {
   const dispatch = useDispatch()
   const author = useSelector(state => state.session.user);
+  const CurrentCollabId = skellie.CurrentCollabId
+  const authorId = author._id
   const [newBoneText, setNewBoneText] = useState("")
   const [isCurrentCollab, setIsCurrentCollab] = useState(false)
 
   useEffect(() => {
-    if (currentCollabId === authorId) {
+    if (CurrentCollabId === authorId) {
       setIsCurrentCollab(true)
     } else {
       setIsCurrentCollab(false)
     }
-  }, [currentCollabId, authorId])
+  }, [CurrentCollabId, authorId])
 
 
   const skellieId = skellie.skellie._id
-  console.log(isCurrentCollab)
   const createNewBone = (e) => {
     e.preventDefault()
-    const authorId = author._id;
     const data = {
       text: newBoneText,
       skeleton: skellieId,

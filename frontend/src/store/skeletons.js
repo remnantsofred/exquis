@@ -100,7 +100,6 @@ export const createSkeleton = data => async dispatch => {
 
 export const updateSkeleton = (skeletonId, data) => async dispatch => {
   try {
-      console.log("patching skeleton")
       const res = await jwtFetch(`/api/skeletons/${skeletonId}`, {
           method: 'PATCH',
           body: JSON.stringify(data)

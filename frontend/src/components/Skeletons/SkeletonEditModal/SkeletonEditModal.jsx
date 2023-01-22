@@ -36,9 +36,7 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
 
   const setCurrentValues = (skellie) => {
     for (const collaborator of skellie.collaborators){
-      console.log(collaborator, 'collaborator')
       for (const option of options) {
-        console.log(option, 'option')
         if (collaborator._id === option.id) {
           selectedValue.push(option)
         }
@@ -93,8 +91,6 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
       maxCollaborators,
       collaborators: selectedCollaborators
     };
-    console.log(skeleton, "skeleton")
-    console.log(skellie._id, "skellie.id")
     dispatch(updateSkeleton(skellie._id, skeleton))
     handleModalClose();
     // .then((res) => {history.push(`/skeletons/${res._id}`)})

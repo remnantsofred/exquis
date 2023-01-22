@@ -112,8 +112,7 @@ const SkeletonShow = () => {
     const ownerColor = ownerColorFxn(ownerId, colorArr)
     const prompt = therePrompt(skellie)
     const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
-
-
+    const CurrentCollaboratorId = CurrentCollaboratorObj._id
     return (
       <>
         {modalStatus === 1 && <SkeletonEditModal skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />}
@@ -141,7 +140,7 @@ const SkeletonShow = () => {
                         <div id="current-writer-note" >
                             <span>It is</span><span id="current-writer-username">{`${CurrentCollaboratorObj.username}`}'s</span><span>turn.</span>
                         </div>
-                        <NewBoneInput component={skellie} skellie={skellie} currentCollabId={CurrentCollaboratorObj._id} authorId={author._id}/>
+                        <NewBoneInput skellie={skellie} CurrentCollabId={CurrentCollaboratorId} />
                       </div>
                       <div className="horizontal-skeleton-likes-container">
                         <DownvoteButton id="skeleton-show-downvote" />

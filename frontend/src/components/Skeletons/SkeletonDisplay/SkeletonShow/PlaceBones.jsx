@@ -6,8 +6,6 @@ const PlaceBones = ({colorArr, skellie}) => {
   const [loaded, setLoaded] = useState(false)
 
   const body = []
-  console.log('skellie here', skellie)
-  console.log('colorArr in place bones', colorArr)
   const bones = skellie.bones
 
   useEffect(() => {

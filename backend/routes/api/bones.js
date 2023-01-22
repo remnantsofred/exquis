@@ -127,20 +127,13 @@ router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req
         error.errors = { message: "No skeleton found with that id" };
         return next(error);
       }
-      /// add currentCollaborator function here later? or just don't show on front end
-      // if (skeleton.currentEditor._id.toString() !== req.user._id.toString()) {
-      //   const error = new Error('Unauthorized');
-      //   error.statusCode = 401;
-      //   error.errors = { message: "You are not authorized to add bones to this skeleton" };
-      //   return next(error);
-      // }
-      // console.log(req.body.skeleton, "req.body.skeleton")
+
       const newBone = new Bone({
         text: req.body.text,
         skeleton: req.params.skeletonId,
         author: req.user._id
       });
-      console.log(newBone, "newBone")
+
       let bone = await newBone.save();
       await Skeleton.updateOne({_id: bone.skeleton}, {$push: {bones: bone}});
       // await Skeleton.findOneAndUpdate({_id: bone.skeleton}, {$push: {bones: bone}})
