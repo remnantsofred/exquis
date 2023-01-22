@@ -175,8 +175,7 @@ const SkeletonShow = () => {
 
         
           <CommentPanel skeleton={skellie} />
-          {skellie.comments.map((comment) => <CommentForm skeletonId={skellie._id} skellie={skellie} comment={comment}/>)}
-        {/* </div> */}
+    
       </>
     )
   }
