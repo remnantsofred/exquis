@@ -29,14 +29,14 @@ const SkeletonShow = () => {
  
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
-  const bones = useSelector(state => state.bones)
+  // const bones = useSelector(state => state.bones)
   const author = useSelector(state => state.session.user);
 
   // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
   //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
   // const comments = useSelector((state) => getCommentsForSkeleton(state, skeletonId)) // TODO in order for the comment to show when added w/o page refresh 
   //- need to fix this and correctly get comments and pass them down to comment panel instead of using sklellie.comments
- 
+  // skellie.comments is the correct way to do it so we're only making one api call ^
 
 
   // const bones = useSelector(state => state.bones)
@@ -72,7 +72,6 @@ const SkeletonShow = () => {
   useEffect(() => {
     Promise.all([
       dispatch(fetchSkeleton(skeletonId)),
-      // dispatch(fetchSkeletonComments(skeletonId))
     ]).then(()=>{
       setLoaded(true);
     })

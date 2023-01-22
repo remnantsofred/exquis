@@ -7,56 +7,56 @@ const NewBoneInput = (skellie) => {
   const dispatch = useDispatch()
   const author = useSelector(state => state.session.user);
   const [newBoneText, setNewBoneText] = useState("")
-  const [bones, setBones] = useState([])
-  const [title, setTitle] = useState("")
-  const [prompt, setPrompt] = useState("")
-  const [maxBones, setMaxBones] = useState(0)
-  const [maxCollaborators, setMaxCollaborators] = useState(0)
-  const [collaborators, setCollaborators] = useState([])
-  const [tags, setTags] = useState([])
-  const [likes, setLikes] = useState([])
-  const [comments, setComments] = useState([])
+  // const [bones, setBones] = useState([])
+  // const [title, setTitle] = useState("")
+  // const [prompt, setPrompt] = useState("")
+  // const [maxBones, setMaxBones] = useState(0)
+  // const [maxCollaborators, setMaxCollaborators] = useState(0)
+  // const [collaborators, setCollaborators] = useState([])
+  // const [tags, setTags] = useState([])
+  // const [likes, setLikes] = useState([])
+  // const [comments, setComments] = useState([])
 
-  const skellieId = skellie.skellie._id
+  const skellieId = skellie._id
 
-  useEffect(() => {
-    dispatch(fetchSkeleton(skellieId))
-    setBones(skellie.skellie.bones)
-    setTitle(skellie.skellie.title)
-    setPrompt(skellie.skellie.prompt)
-    setMaxBones(skellie.skellie.maxBones)
-    setMaxCollaborators(skellie.skellie.maxCollaborators)
-    setLikes(skellie.skellie.likes)
-    setTags(skellie.skellie.tags)
-    setComments(skellie.skellie.comments)
-  }, [skellieId])
+  // useEffect(() => {
+  //   // dispatch(fetchSkeleton(skellieId))
+  //   setBones(skellie.skellie.bones)
+  //   // setTitle(skellie.skellie.title)
+  //   // setPrompt(skellie.skellie.prompt)
+  //   // setMaxBones(skellie.skellie.maxBones)
+  //   // setMaxCollaborators(skellie.skellie.maxCollaborators)
+  //   // setLikes(skellie.skellie.likes)
+  //   // setTags(skellie.skellie.tags)
+  //   // setComments(skellie.skellie.comments)
+  // }, [skellieId])
 
   const createNewBone = (e) => {
     e.preventDefault()
     const authorId = author._id;
     const data = {
       text: newBoneText,
-      skeleton: skellieId,
+      skeleton: skellie._id,
       author: authorId
     }
     dispatch(createBone(skellieId, data))
-    .then((newBone) => {
-      setBones(skellie.bones)
-      bones.push(newBone)
-      const data = {
-      bones: bones,
-      title: title,
-      prompt: prompt,
-      maxBones: maxBones,
-      maxCollaborators: maxCollaborators,
-      collaborators: collaborators,
-      tags: tags,
-      likes: likes,
-      comments: comments
-    }
-    dispatch(updateSkeleton(skellieId, data))
-    }
-    )
+    // .then((newBone) => {
+      // setBones(skellie.bones)
+      // bones.push(newBone)
+    //   const data = {
+    //   bones: bones,
+    //   title: title,
+    //   prompt: prompt,
+    //   maxBones: maxBones,
+    //   maxCollaborators: maxCollaborators,
+    //   collaborators: collaborators,
+    //   tags: tags,
+    //   likes: likes,
+    //   comments: comments
+    // }
+    // dispatch(updateSkeleton(skellieId, data))
+    // }
+    // )
   }
 
   

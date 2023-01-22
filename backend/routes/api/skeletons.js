@@ -25,7 +25,8 @@ router.get('/user/:userId', async (req, res, next) => {
                               .sort({ createdAt: -1 })
                               .populate("owner", "_id, username")
                               .populate("collaborators", "_id, username")
-                              .populate("comments")
+                              .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
+                              .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
                               // .populate("tags")
                               // .populate("likes")
     return res.json(skeletons);
@@ -42,6 +43,7 @@ router.get('/:id', async (req, res, next) => {
                              .populate("owner", "_id, username")
                              .populate("collaborators", "_id, username")
                              .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
+                             .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
                             //  .populate("tags")
                             //  .populate("likes")
     return res.json(skeleton);
@@ -146,7 +148,8 @@ router.get('/', async (req, res) => {
     const skeletons = await Skeleton.find()
                               .populate("owner", "_id, username")
                               .populate("collaborators", "_id, username")
-                              .populate("comments")
+                              .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
+                              .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
                               // .populate("tags")
                               // .populate("likes")                         
                               .sort({ createdAt: -1 });
@@ -159,6 +162,7 @@ router.get('/', async (req, res) => {
 
 
 router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
+  console.log("req.body.collaborators", req.body.collaborators);
    
   try {
     const newSkeleton = new Skeleton({
