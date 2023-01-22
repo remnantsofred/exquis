@@ -50,11 +50,11 @@ const GenSkeletonTile = ({skeletonInfo}) => {
               <DownvoteButton />
             </div>
           </div>
-          <div className="skeleton-tags-container">
+          {/* <div className="skeleton-tags-container"> */}
             <ul className='skeleton-tags'>
               {tags.map((tag) => <p className="ind-tag" key={tag}> #{`${tag}`} </p>)}
             </ul>
-          </div>
+          {/* </div> */}
       </div>
       </Link>
     </li>

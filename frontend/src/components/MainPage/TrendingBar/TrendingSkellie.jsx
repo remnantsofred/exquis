@@ -11,7 +11,7 @@ const TrendingSkellie = ({skellie}) => {
         <Link to={`/skeletons/${skeletonId}`} id="gen-title-link">
           <p id="trending-title">{skellie.title} </p>
         </Link>
-        <p id="trending-likes">/////////////// {skellie.likes.length} Votes</p>
+        <p id="trending-likes">//// {skellie.likes.length} Votes</p>
       </div>
     </li>
   )
