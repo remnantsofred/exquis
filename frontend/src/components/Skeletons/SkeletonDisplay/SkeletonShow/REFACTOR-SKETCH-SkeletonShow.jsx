@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { getSkeleton, fetchSkeleton, updateSkeleton } from '../../../../store/skeletons'
 import { getBones, fetchBones } from '../../../../store/bones'
 import Loading from "../../../Loading/Loading"
-import NewDraftPlaceBones from "./PlaceBones"
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
 import CollaboratorColorMatch from "./ColorPalettePicker/CollaboratorColorMatch"
@@ -94,7 +93,8 @@ const NewDraftSkeletonShow = () => {
               {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
                 <div className="skeleton-body-input-container">
                     <div id="skeleton-body">
-                      <NewPlaceBones component={loaded ? skellie.bones : []} />
+                      <NewPlaceBones skellie={skellie} colorArr={colorArr} />
+
                     </div> 
                       <div className="user-input-div">
                         <hr id="body-input-divider" />
