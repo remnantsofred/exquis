@@ -42,7 +42,6 @@ const CommentForm = ({comment, skeleton}) => {
 
   if (comment._id){
     const commenterId = (comment.author._id)
-    console.log(user)
       return (
         <>
         

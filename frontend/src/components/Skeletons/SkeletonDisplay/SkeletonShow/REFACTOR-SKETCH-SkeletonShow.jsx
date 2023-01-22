@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from "react-redux"
 import { getSkeleton, fetchSkeleton, updateSkeleton } from '../../../../store/skeletons'
 import { getBones, fetchBones } from '../../../../store/bones'
 import Loading from "../../../Loading/Loading"
-import PlaceBones from "./PlaceBones"
+import NewDraftPlaceBones from "./PlaceBones"
 import DownvoteButton from "../../DownvoteButton"
 import UpvoteButton from "../../UpvoteButton"
+import CollaboratorColorMatch from "./ColorPalettePicker/CollaboratorColorMatch"
+import CollaboratorsListMap from "./CollaboratorsListMap"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
-
+import NewPlaceBones from "./REFACTOR-SKETCH-PlaceBones"
 import NewBoneInput from "./NewBoneInput/NewBoneInput"
 
 import CommentForm from "./CommentForm/CommentForm"
@@ -22,7 +24,7 @@ import { fetchSkeletonComments } from "../../../../store/comments"
 import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
 import { fetchUsers, getUser } from "../../../../store/users"
 
-const SkeletonShow = () => {
+const NewDraftSkeletonShow = () => {
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false)
   const [comment, setComment] = useState('');
@@ -55,7 +57,6 @@ const SkeletonShow = () => {
   };
 
   const currentCollaborator = 'nathan, the wondrous'
-  const collaborators = ['this knee', 'dare in', 'the eggo', 'tailor', 'ab yee', 'dab-ne', 'and rhea', 'neigh thin']
 
 
   useEffect(() => {
@@ -72,6 +73,10 @@ const SkeletonShow = () => {
       <Loading />
     )
   } else if (loaded && skellie) {
+    const collaborators = (Object.values(skellie.collaborators)).concat([skellie.owner])
+    console.log('skeleton show collaborators', collaborators)
+    const colorArr = CollaboratorColorMatch(collaborators)
+    console.log('color array????', colorArr)
     return (
       <>
         <div className="skellie-main-container">
@@ -89,7 +94,7 @@ const SkeletonShow = () => {
               {/* TODO: 01/17/2023 - We can separate out the body by each bone and map out colors to the owners */}
                 <div className="skeleton-body-input-container">
                     <div id="skeleton-body">
-                      <PlaceBones component={loaded ? skellie.bones : []} />
+                      <NewPlaceBones component={loaded ? skellie.bones : []} />
                     </div> 
                       <div className="user-input-div">
                         <hr id="body-input-divider" />
@@ -112,7 +117,7 @@ const SkeletonShow = () => {
                 <h2>Collaborators</h2>
                 <hr />
                   <ul className="collaborators-list">
-                    {skellie.collaborators.map(collaborator => <h2 key={collaborator._id}>{collaborator.username}</h2>)}
+                    <CollaboratorsListMap colorArr={colorArr} skellie={skellie} />
                   </ul>
               </div>
             </div>
@@ -140,6 +145,6 @@ const SkeletonShow = () => {
 }
 
 
-export default SkeletonShow;
+export default NewDraftSkeletonShow;
 
 

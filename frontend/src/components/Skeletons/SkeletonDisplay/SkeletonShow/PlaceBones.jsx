@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import Loading from "../../../Loading/Loading"
 
-import ColorPalettePicker from "./ColorPalettePicker/ColorPalettePicker"
+// import ColorPalettePicker from "./ColorPalettePicker/ColorPalettePicker"
 
 const PlaceBones = (bones) => {
   const [loaded, setLoaded] = useState(false)
