@@ -132,19 +132,11 @@
     transition: .5s;
   }
 
-  button#upvote-button:hover > img.vote-button-image  {
-    filter: invert(75%);
-    text-shadow: 2px 2px 2px;
+  button#upvote-button:hover > img.vote-button-image,   button#downvote-button:hover>img.vote-button-image  {
+    filter: invert(100%);
+    /* text-shadow: 2px 2px 2px; */
     transition: .5s;
-    scale: 110%;
-    cursor: pointer;
-  } 
-
-  button#downvote-button:hover > img.vote-button-image  {
-    filter: invert(75%);
-    text-shadow: 2px 2px 2px;
-    transition: .5s;
-    scale: 110%;
+    scale: 100%;
     cursor: pointer;
   } 
 

@@ -117,7 +117,7 @@ const SkeletonShow = () => {
                       <div className="horizontal-skeleton-likes-container">
                         <DownvoteButton id="skeleton-show-downvote" />
                           <h1 id="skeleton-show-votes">{skellie.likes.length}</h1>
-                        <UpvoteButton id="skeleton-show-downvote"/>
+                        <UpvoteButton id="skeleton-show-upvote"/>
                       </div>
                 </div>
             </div>
@@ -137,7 +137,7 @@ const SkeletonShow = () => {
 
           
         <div className="comments-section">
-          <h2 for="comment" id="comment-section-label">{skellie.comments.length} Comments</h2>
+          <h2 for="comment" id="comment-section-label">{skellie.comments.length === 1 ? `${skellie.comments.length} Comment` : `${skellie.comments.length} Comments`}</h2>
           <div className='create-comment-container' id="comment-form-container">
             <textarea name="comment" id="comment-input" className="create-comment-form" rows="5" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
             <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit</button>

@@ -5,7 +5,7 @@ div.skellie-main-container {
   font-family: Inter, sans-serif;
   /* padding-bottom: 0; */
   /* padding-right: 0; */
-  width: 105vw;
+  width: 90vw;
   margin-right: 0em;
   height: max-content;
 }
@@ -29,7 +29,7 @@ div.collaborator-panel {
   height: min-content;
   /* min-height: 123vh; */
   margin-top: 4vh;
-  margin-left: 2vw;
+  margin-left: 5vw;
   text-align: center;
   align-items: center;
 
@@ -67,8 +67,8 @@ div.show-top {
   display: flex;
   flex-direction: column;
   height: min-content;
-  padding-left: 4vw;
-  padding-right: 4vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
   padding-top: 4vh;
   padding-bottom: 1vh;
   /* background-color: rgba(188, 208, 228, 0.136); */
@@ -109,14 +109,14 @@ h3#skeleton-prompt {
 
 div.show-middle {
   margin-left: 4vw;
-  width: 55vw;
+  width: 70vw;
   height: max-content;
   justify-content: space-between;
   min-height: 60vh;
   /* padding-left: 4vw;
   padding-right: 4vw; */
   padding-top: 1vh;
-  padding-bottom: 4vh; 
+  padding-bottom: -2vh; 
   /* background-color: rgba(188, 208, 228, 0.436); */
   display: flex;
   border-radius: 25px;
@@ -138,8 +138,8 @@ div.skeleton-body-input-container {
 }
 
 div.skeleton-body-input-container {
-  width: 55vw;
-  margin-left: 0px;
+  width: 58vw;
+  margin-left: 0vw;
   /* margin-right: 4vw; */
 }
 
@@ -203,13 +203,28 @@ textarea#current-collab-input {
 
 div.horizontal-skeleton-likes-container {
   display: flex;
+  width: min-content;
   flex-direction: row;
   vertical-align: middle;
-  background-color: antiquewhite;
+  background-color: #dcd6f0;
+  padding-left: 2vw;
+  padding-right: 2vw;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   align-items: center;
   align-content: center;
   margin-bottom: 3vh;
+  border-radius: 20px;
+}
+
+#skeleton-show-votes {
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+#skeleton-show-votes {
+  transition: .5;
 }
 
 #new-bone-form {
