@@ -166,7 +166,6 @@ router.get('/', async (req, res) => {
 
 
 router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
-  console.log("req.body.collaborators", req.body.collaborators);
    
   try {
     const newSkeleton = new Skeleton({

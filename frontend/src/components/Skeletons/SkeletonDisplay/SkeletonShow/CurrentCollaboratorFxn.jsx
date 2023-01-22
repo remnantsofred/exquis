@@ -1,10 +1,10 @@
 
 
 function CurrentCollaboratorFxn ({skellie, collaborators}) {
-  console.log('current collab fxn collabs', collaborators)
+ 
   const roundAmt = collaborators.length
   const currentRounds = skellie.bones.length
-  console.log('currentRounds', currentRounds)
+  
   const currentAmount = () => {
     let baseNum
     if (currentRounds === 0) {
@@ -12,11 +12,11 @@ function CurrentCollaboratorFxn ({skellie, collaborators}) {
       return (baseNum)
     } else if (currentRounds < roundAmt) {
       baseNum = roundAmt - currentRounds
-      console.log(baseNum)
+  
       return (baseNum);
     } else {
       baseNum = currentRounds % roundAmt;
-      console.log(baseNum)
+  
       return (baseNum);
 
     }

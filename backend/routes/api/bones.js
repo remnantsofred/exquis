@@ -140,7 +140,6 @@ router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req
         skeleton: req.params.skeletonId,
         author: req.user._id
       });
-      console.log(newBone, "newBone")
       let bone = await newBone.save();
       await Skeleton.updateOne({_id: bone.skeleton}, {$push: {bones: bone}});
       // await Skeleton.findOneAndUpdate({_id: bone.skeleton}, {$push: {bones: bone}})
