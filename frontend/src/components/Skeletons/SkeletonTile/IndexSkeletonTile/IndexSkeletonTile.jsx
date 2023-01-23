@@ -4,16 +4,57 @@ import { Link } from "react-router-dom"
 import UpvoteButton from '../UpvoteButton'
 import DownvoteButton from '../DownvoteButton'
 import IndexPlaceBones from './IndexPlaceBones'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useState } from 'react'
+import { createLike, deleteLike } from '../../../../store/likes'
 
 const IndexSkeletonTile = ({skeletonInfo}) => {
-  // const title = skeletonInfo.title
-  // const author = skeletonInfo.author
-  // const collaborators = skeletonInfo.collaborators
-  // const maxBones = skeletonInfo.maxBones
-  // const currentBones = skeletonInfo.currentBones // length of bones attribute
-  // const skeletonBody = skeletonInfo.skeletonBody
-  // const likes = skeletonInfo.likes
-  // const tags = skeletonInfo.tags
+  const dispatch = useDispatch()
+  const currentUser = useSelector(state => state.session.user)
+
+  const votes = skeletonInfo.likes 
+  let skeleton = skeletonInfo
+
+
+  const [upVote, setUpVote] = useState(false)
+  const [downVote, setDownVote] = useState(false)
+  const [upVoteCount, setVoteCount] = useState(votes.length)
+
+
+  const handleUpVote = (e) => {
+    e.preventDefault()
+    if (currentUser) { 
+      if (!upVote ) {
+        const like = {likeType: 'like', skeleton: skeleton._id, liker: currentUser._id }
+        dispatch(createLike(like, skeleton._id))
+        setUpVote(true)
+        setVoteCount(upVoteCount => upVoteCount + 1)
+      } else {
+        dispatch(deleteLike(skeleton._id, currentUser._id))
+        setUpVote(false)
+        setVoteCount (upVoteCount => upVoteCount - 1)
+      }
+    }
+  }
+
+
+  const handleDownVote = (e) => {
+    e.preventDefault()
+    if (currentUser) {
+      if (downVote) {
+        dispatch(deleteLike(skeleton._id, currentUser._id))
+        setDownVote(false)
+        setVoteCount (upVoteCount => upVoteCount - 1)
+      } else {
+        const like = {likeType: 'disLike', skeleton: skeleton._id, liker: currentUser._id }
+        dispatch(createLike(like, skeleton._id))
+        setDownVote(true)
+        setVoteCount(upVoteCount => upVoteCount + 1)
+      }
+    }
+  }
 
   const skeletonId = skeletonInfo._id
   const ownerId = skeletonInfo.owner._id
@@ -43,9 +84,9 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
               <IndexPlaceBones className="index-skeleton-body" bones={skeletonInfo.bones} />
             </div>
             <div className="index-skeleton-likes-container">
-              <UpvoteButton />
-                <p className="index-skeleton-like-count">{skeletonInfo.likes.length}</p>
-              <DownvoteButton />
+              <button onClick={handleUpVote}><UpvoteButton /></button>
+                <p className="index-skeleton-like-count">{upVoteCount}</p>
+              <button onClick={handleDownVote}><DownvoteButton /></button>
             </div>
           </div>
           {/* <div className="index-skeleton-tags-container"> */}

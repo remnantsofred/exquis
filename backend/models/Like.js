@@ -7,7 +7,6 @@ const likeSchema = Schema({
     ref: 'User',
     required: true
   },
-
   skeleton: {
     type: Schema.Types.ObjectId,
     ref: 'Skeleton',
@@ -15,7 +14,7 @@ const likeSchema = Schema({
   },
 
   type: {
-    type: Boolean,
+    type: String,
     required: true
   }
 
