@@ -22,38 +22,43 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
   const users = useSelector(getUsers);
   const errors = useSelector(state => state.errors.skeletons);
   const dispatch = useDispatch();
-  const options = users?.filter(user => user._id !== currentUser._id).map(user => ({name: user.username, id: user._id}));
-  const [selectedValue, setSelectedValue] = useState([]);
+  const options = users?.filter(user => user._id !== currentUser._id).map(user => ({username: user.username, _id: user._id}));
+  const [selectedValue, setSelectedValue] = useState(skellie.collaborators);
   const selectedList = [];
-  const [selectedCollaborators, setSelectedCollaborators] = useState(skellie.collaborators);
+  // const [selectedCollaborators, setSelectedCollaborators] = useState([]);
   const [ modalStatus, setModalStatus ] = useState(false);
 
 
   useEffect(() => {
-    setCurrentValues(skellie);
+    // setCurrentValues(skellie);
     setLoaded(true);
   }, [modalStatus])
 
-  const setCurrentValues = (skellie) => {
-    for (const collaborator of skellie.collaborators){
-      for (const option of options) {
-        if (collaborator._id === option.id) {
-          selectedValue.push(option)
-        }
-      }
-    };
+  // const setCurrentValues = (skellie) => {
+  //   for (const collaborator of skellie.collaborators){
+  //     for (const option of options) {
+  //       if (collaborator._id === option.id) {
+  //         selectedValue.push(option)
+  //       }
+  //     }
+  //   };
+  //   setSelectedValue(selectedValue)
+  // }
+  console.log(skellie.collaborators)
+  
+  const onSelect =(selectedList, selectedItem) => {
+    selectedValue.push(selectedItem)
     setSelectedValue(selectedValue)
   }
   
-  const onSelect =(selectedList, selectedItem) => {
-    selectedCollaborators.push(selectedItem.id)
-    setSelectedCollaborators(selectedCollaborators)
-  }
-  
   const onRemove = (selectedList, removedItem) => {
-    const index = selectedCollaborators.indexOf(removedItem.id)
-    selectedCollaborators.splice(index, 1)
-    setSelectedCollaborators(selectedCollaborators)
+    // const index = selectedCollaborators.indexOf(removedItem.id)
+    // selectedCollaborators.splice(index, 1)
+    // setSelectedCollaborators(selectedCollaborators)
+    const index = selectedValue.indexOf(removedItem)
+    selectedValue.splice(index, 1)
+    setSelectedValue(selectedValue)
+
   }
   
   const update = field => {
@@ -82,14 +87,17 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
     return e => setState(e.currentTarget.value);
   }
 
-  const skeletonSubmit = e => {
+  const skeletonSubmit = (e) => {
     e.preventDefault();
+    console.log(e, "e")
+
+
     const skeleton = {
       title,
       prompt,
       maxBones,
       maxCollaborators,
-      collaborators: selectedCollaborators
+      collaborators: selectedValue.map(value=> value._id)
     };
     dispatch(updateSkeleton(skellie._id, skeleton))
     handleModalClose();
@@ -193,7 +201,7 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
               selectedValues={selectedValue} 
               onSelect={onSelect}
               onRemove={onRemove} 
-              displayValue="name" 
+              displayValue="username" 
               selectionLimit={maxCollaborators}
               />
     
