@@ -19,7 +19,7 @@ const PlaceBones = ({colorArr, skellie}) => {
         window.addEventListener('load', onPageLoad);
         return () => window.removeEventListener('load', onPageLoad)
       }
-    }, [])
+  }, []);
 
   const findColor = (bone) => {
     const collaborator = bone.author._id
