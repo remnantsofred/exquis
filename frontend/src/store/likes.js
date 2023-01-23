@@ -1,5 +1,6 @@
 import { fetchSkeletonComments } from './comments';
 import jwtFetch from './jwt';
+import { fetchSkeleton } from "./skeletons";
 // import { fetchSkeleton, fetchSkeletons } from './skeletons';
 
 
@@ -19,9 +20,10 @@ const receiveLikes = (likes) => ({
     likes
 });
 
-const removeLike = (like) => ({
+const removeLike = (skeletonId, currentUserId) => ({
     type: REMOVE_LIKE,
-    like
+    skeletonId,
+    currentUserId
 });
 
 const receiveSkeletonLikes = (skeletonId, likes) => ({
@@ -42,18 +44,9 @@ const fetchSkeletonLikesLocal = skeletonId => async dispatch => {
     const res = await fetch(`/api/likes/skeletons/${skeletonId}`);
     if (res.ok) {
         const data = await res.json();
-        console.log("fetchSkeletonLikes: ", data)
         dispatch(receiveSkeletonLikes(skeletonId, data));
     }
 }
-
-// const fetchSkeletonCommentsLocal = skeletonId => async dispatch => {
-//     const res = await fetch(`/api/comments/skeletons/${skeletonId}`);
-//     if (res.ok) {
-//         const comments = await res.json();
-//         dispatch(receiveSkeletonComments(skeletonId, comments));
-//     }
-// }
 
 
 
@@ -65,9 +58,8 @@ export const createLike = (newLike, skeletonId) => async (dispatch) => {
         });
         const like = await res.json();
         dispatch(receiveLike(like));
-        // dispatch(fetchSkeletons);
-        fetchSkeletonLikesLocal(skeletonId);
-        console.log("after fetch");
+        dispatch(fetchSkeleton(skeletonId));
+        return(like)
     } catch (err) {
         console.log(err);
     }
@@ -91,12 +83,15 @@ export const updateLike = (like) => async (dispatch) => {
 
 
 
-export const deleteLike = (likeId) => async (dispatch) => {
-    console.log("deleteLike: ", likeId)
-    const response = await jwtFetch(`/api/likes/${likeId}`, {
-        method: 'DELETE'
+export const deleteLike = (skeletonId, currentUserId) => async (dispatch) => {
+    const response = await jwtFetch(`/api/likes/skeletons/${skeletonId}`, { 
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({currentUserId: currentUserId})
     });
-    dispatch(removeLike(likeId));
+    dispatch(removeLike(skeletonId, currentUserId));
     return response;
 }
 
@@ -106,13 +101,11 @@ const likesReducer = (state = {  }, action) => {
     let newState = {...state};
     switch (action.type) {
         case RECEIVE_LIKE:
-            return {...newState, [action.like.id]: action.like };
+            return {...newState, [action.like._id]: action.like };
         case RECEIVE_LIKES:
             return { ...newState, ...action.likes};
         case REMOVE_LIKE:
-            // const newState = { ...state };
-            delete newState[action.like.id];
-            return newState;
+            return {}
         case RECEIVE_SKELETON_LIKES:
             return {...newState, ...action.skeletonId.likes};
         default:

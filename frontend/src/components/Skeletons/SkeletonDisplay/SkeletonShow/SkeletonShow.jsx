@@ -21,6 +21,7 @@ import { fetchSkeletonComments } from "../../../../store/comments"
 import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
 import { fetchUsers, getUser } from "../../../../store/users"
 import SkeletonEditModal from "../../SkeletonEditModal/SkeletonEditModal"
+import { createLike, deleteLike } from "../../../../store/likes"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
@@ -29,11 +30,10 @@ const SkeletonShow = () => {
   const history = useHistory();
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
-  // const bones = useSelector(state => state.bones)
-  // const author = useSelector(state => state.session.user);
-  //const user = SessionUserCheck()
   const author = SessionUserCheck();
   const [ modalStatus, setModalStatus ] = useState(false);
+
+  const currentUser = useSelector(state => state.session.user)
 
 
   useEffect(() => {
@@ -95,6 +95,49 @@ const SkeletonShow = () => {
     setModalStatus(false)
   }
   
+  const votes = skellie?.likes 
+  let skeleton = skellie
+
+
+  const [upVote, setUpVote] = useState(false)
+  const [downVote, setDownVote] = useState(false)
+  const [upVoteCount, setVoteCount] = useState(votes.length)
+
+
+  const handleUpVote = (e) => {
+    e.preventDefault()
+    if (currentUser) { 
+      if (!upVote ) {
+        const like = {likeType: 'like', skeleton: skeleton._id, liker: currentUser._id }
+        dispatch(createLike(like, skeleton._id))
+        setUpVote(true)
+        setVoteCount(upVoteCount => upVoteCount + 1)
+      } else {
+        dispatch(deleteLike(skeleton._id, currentUser._id))
+        setUpVote(false)
+        setVoteCount (upVoteCount => upVoteCount - 1)
+      }
+    }
+  }
+
+
+  const handleDownVote = (e) => {
+    e.preventDefault()
+    if (currentUser) {
+      if (downVote) {
+        dispatch(deleteLike(skeleton._id, currentUser._id))
+        setDownVote(false)
+        setVoteCount (upVoteCount => upVoteCount - 1)
+      } else {
+        const like = {likeType: 'disLike', skeleton: skeleton._id, liker: currentUser._id }
+        dispatch(createLike(like, skeleton._id))
+        setDownVote(true)
+        setVoteCount(upVoteCount => upVoteCount + 1)
+      }
+    }
+  }
+
+
   
   
   if (!loaded) {
@@ -141,9 +184,9 @@ const SkeletonShow = () => {
                         {(CurrentCollaboratorObj && author) && <NewBoneInput skellie={skellie} currentCollabId={CurrentCollaboratorObj._id} authorId={author._id}/>}
                       </div>
                       <div className="horizontal-skeleton-likes-container">
-                        <DownvoteButton id="skeleton-show-downvote" />
-                          <h1 id="skeleton-show-votes">{skellie.likes.length}</h1>
-                        <UpvoteButton id="skeleton-show-upvote"/>
+                        <button onClick={handleDownVote}><DownvoteButton id="skeleton-show-downvote" /></button>
+                          <h1 id="skeleton-show-votes">{upVoteCount}</h1>
+                        <botton onClick={handleUpVote} ><UpvoteButton id="skeleton-show-upvote"/></botton>
                       </div>
                 </div>
             </div>

@@ -74,7 +74,7 @@ export const fetchSkeletons = () => async (dispatch) => {
 export const fetchSkeleton = (skeletonId) => async (dispatch) => {
   const res = await fetch(`/api/skeletons/${skeletonId}`);
   if (res.ok) {
-    const skeleton = await res.json();
+    const skeleton = await res.json();    
     dispatch(receiveSkeleton(skeleton));
     return Promise.resolve();
   }
@@ -165,9 +165,12 @@ const skeletonsReducer = (state = {}, action) => {
         skeletonComments.comments = action.comments
         return newState;
     case RECEIVE_SKELETON_LIKES:
-        return {...newState, ...action.skeletonId.likes};
+        return {...newState, ...action.skeletonId.likes}
     case RECEIVE_COMMENT:
       return {...newState, [action.comment.parent]: {...newState[action.comment.parent], comments: [...newState[action.comment.parent].comments, action.comment]}}
+    // case RECEIVE_LIKE:
+    //   return {...newState, [action.like.skeleton._id]: {...newState[action.like.skeleton._id], likes: [...newState[action.like.skeleton._id].likes, action.like]}}
+      // return {...newState, [action.like.skeleton]}
     default:
         return state;
   }

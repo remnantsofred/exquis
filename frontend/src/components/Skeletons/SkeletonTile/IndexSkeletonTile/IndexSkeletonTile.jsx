@@ -11,22 +11,11 @@ import { useState } from 'react'
 import { createLike, deleteLike } from '../../../../store/likes'
 
 const IndexSkeletonTile = ({skeletonInfo}) => {
-  // const title = skeletonInfo.title
-  // const author = skeletonInfo.author
-  // const collaborators = skeletonInfo.collaborators
-  // const maxBones = skeletonInfo.maxBones
-  // const currentBones = skeletonInfo.currentBones // length of bones attribute
-  // const skeletonBody = skeletonInfo.skeletonBody
-  // const likes = skeletonInfo.likes
-  // const tags = skeletonInfo.tags
-
-  // console.log("skeletonInfo: ", skeletonInfo)
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.session.user)
 
   const votes = skeletonInfo.likes 
   let skeleton = skeletonInfo
-
 
 
   const [upVote, setUpVote] = useState(false)
@@ -35,33 +24,27 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
 
 
   const handleUpVote = (e) => {
-    console.log("upvote clicked")
     e.preventDefault()
-    if (currentUser) {
-      if (!upVote) {
+    if (currentUser) { 
+      if (!upVote ) {
         const like = {likeType: 'like', skeleton: skeleton._id, liker: currentUser._id }
         dispatch(createLike(like, skeleton._id))
         setUpVote(true)
         setVoteCount(upVoteCount => upVoteCount + 1)
       } else {
-        const liketoDelete = votes.find(like => like.liker === currentUser._id)
-
-        dispatch(deleteLike(liketoDelete))
+        dispatch(deleteLike(skeleton._id, currentUser._id))
         setUpVote(false)
         setVoteCount (upVoteCount => upVoteCount - 1)
       }
     }
   }
 
-  console.log("skeleton: ", skeleton)
 
   const handleDownVote = (e) => {
     e.preventDefault()
     if (currentUser) {
       if (downVote) {
-        const liketoDelete = votes.find(like => like.id=== currentUser._id)
-        console.log("liketoDelete: ", liketoDelete)
-        dispatch(deleteLike(liketoDelete))
+        dispatch(deleteLike(skeleton._id, currentUser._id))
         setDownVote(false)
         setVoteCount (upVoteCount => upVoteCount - 1)
       } else {
@@ -72,28 +55,6 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
       }
     }
   }
-
-
-  // useEffect (() => {
-  //   if (currentUser) {
-  //     let like;
-  //     if (skeleton.likes) {
-  //       like = skeleton.likes[currentUser.id]
-  //     }
-  //     if (like) {
-  //       if (like.likeType === 'like') {
-  //         setLiked(true)
-  //       } else if (like.likeType === 'dislike') {
-  //         setDisliked(true)
-  //       } else {
-  //         setLiked(false)
-  //         setDisliked(false)
-  //       }
-  //     }
-  //   }
-  // }, [currentUser, skeleton])
-
-
 
   const skeletonId = skeletonInfo._id
   const ownerId = skeletonInfo.owner._id
@@ -124,7 +85,7 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
             </div>
             <div className="index-skeleton-likes-container">
               <button onClick={handleUpVote}><UpvoteButton /></button>
-                <p className="index-skeleton-like-count">{votes.length}</p>
+                <p className="index-skeleton-like-count">{upVoteCount}</p>
               <button onClick={handleDownVote}><DownvoteButton /></button>
             </div>
           </div>

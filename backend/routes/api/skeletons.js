@@ -154,7 +154,7 @@ router.get('/', async (req, res) => {
                               .populate("collaborators", "_id, username")
                               .populate("comments")
                               .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
-                              .populate({path: "likes", populate: { path: "author", select: "_id, username" }})          
+                              .populate({path: "likes", populate: { path: "liker", select: "_id, username" }})          
                               .sort({ createdAt: -1 });
     return res.json(skeletons);
   }

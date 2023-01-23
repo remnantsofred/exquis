@@ -28,41 +28,17 @@ router.post("/skeletons/:skeletonId", async (req, res, next) => {
    
     return res.json(like);
   } catch (err) {
-    console.log(err)
     next(err);
   }
 });
 
 
-// router.delete('/:id', requireUser, async (req, res, next) => {
-//   try {
-//     const like = await Like.findById(req.params.id);
-//     if (!like) {
-//       const error = new Error('Like not found');
-//       error.statusCode = 404;
-//       error.errors = { message: "No like found with that id" };
-//       return next(error);
-//     }
-//     if (like.liker.toString() !== req.user._id.toString()) {
-//       const error = new Error('Unauthorized');
-//       error.statusCode = 401;
-//       error.errors = { message: "You are not authorized to delete this like" };
-//       return next(error);
-//     }
-//     await like.remove();
-//     await Skeleton.updateOne({_id: like.skeleton}, {$pull: {likes: like._id}});
-//     await User.updateOne({_id: like.liker}, {$pull: {likes: like._id}});
-//     return res.json(like);
-//   }
-//   catch(err) {
-//     next(err);
-//   }
-// });
+router.delete("/skeletons/:skeletonId",  requireUser, async (req, res, next) => {
 
-router.delete("/:id",  async (req, res, next) => {
-  console.log("backend delete like")
   try {
-    const like = await Like.findById(req.params.id);
+    const like = await Like.find({skeleton: req.params.skeletonId, liker: req.body.currentUserId}); // assuming we get an arr back
+    const firstLike = like[0];
+
       if (!like) {
         const error = new Error("Like not found");
         error.statusCode = 404;
@@ -71,19 +47,10 @@ router.delete("/:id",  async (req, res, next) => {
         };
         return next(error);
       }
-      if (like.liker.toString() !== req.user._id.toString()) {
-        const error = new Error("Unauthorized");
-        error.statusCode = 401;
-        error.errors = {
-          message: "You are not authorized to delete this like",
-        };
-        return next(error);
-      }
-      await like.remove();
+      const deletedLike = await Like.findOneAndDelete({_id: firstLike._id});
       await Skeleton.updateOne({ _id: like.skeleton }, { $pull: { likes: like._id } });
       await User.updateOne({ _id: like.liker }, { $pull: { likes: like._id } });
-      return res.json(like);
-             
+      return res.json(like);  
   } catch (err) {
     return next(err);
   }
@@ -103,7 +70,7 @@ router.get('/', async (req, res) => {
     return next(error); 
   }
   try {
-    const likes = await Like.find({ parent: skeleton._id })
+    const likes = await Like.find({ liker: liker._id })
                                .sort({ createdAt: -1 })
                                .populate("liker", "_id, username");
     return res.json(likes);
@@ -127,6 +94,7 @@ router.get("/", async (req, res, next) => {
 });
 
 router.get("/skeletons/:skeletonId"), async (req, res, next) => {
+  console.log("req.params: ", req.params);
   try {
     const likes = await Like.find({ skeleton: req.params.skeletonId });
     return res.json(likes);
