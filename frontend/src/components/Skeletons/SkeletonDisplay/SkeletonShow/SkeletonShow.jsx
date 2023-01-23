@@ -162,7 +162,7 @@ const SkeletonShow = () => {
             <div className="show-top">
               { (author._id === skellie.owner._id ) ? <button className="comment-update-button" onClick={handleSkellieUpdate}>Edit</button> : <></>}
               { (author._id === skellie.owner._id ) ? <button className="comment-delete-button" onClick={handleSkellieDelete} >Delete</button> : <></>} 
-              <h1 id="skeleton-title">{skellie.title}</h1> 
+              <h1 id="skeleton-title">{skellie.title} ///// ({skellie.bones.length} / {skellie.maxBones} Bones)</h1> 
                 <hr />
                   <div className="sub-title">
                     <h3 id="skeleton-owner" style={{color: `${ownerColor}`}}>{skellie.owner.username}</h3>
@@ -174,7 +174,6 @@ const SkeletonShow = () => {
                 <div className="skeleton-body-input-container">
                     <div id="skeleton-body">
                       <NewPlaceBones skellie={skellie} colorArr={colorArr} />
-
                     </div> 
                       <div className="user-input-div">
                         <hr id="body-input-divider" />

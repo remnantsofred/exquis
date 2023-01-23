@@ -37,19 +37,6 @@ const PlaceBones = ({colorArr, skellie}) => {
       body.push(sentence)
     }
 
-    // const resetPNum = () => {
-    //   if (pNum >= palette.length) {
-    //     pNum -= pNum;
-    //   }
-    // }
-
-    // for (var i = 0; i < bonesLength; i ++) {
-    //   resetPNum();
-    //   let sentence = <span style={{color: `${palette[pNum]}`}}>{bones.component[i].text} </span> 
-
-    //   body.push(sentence)
-    // }
-
     return (
       body
     )

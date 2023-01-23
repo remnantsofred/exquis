@@ -62,9 +62,9 @@ const CurrentUserProfilePage = () => {
               <Link to={`/users/${sessionUser._id}`} id="current-user-profile-link">
                 <li className='user-option'>Go to my Page</li>
               </Link>
-              <Link to={`/edit/profile`} id="edit-current-user-profile-link">
+              {/* <Link to={`/edit/profile`} id="edit-current-user-profile-link">
                 <li className='user-option'>Update Profile Settings</li>
-              </Link>
+              </Link> */}
               <li className='user-option' onClick={DangerClick}>Don't think of clicking me. Don't do it.</li>
             </ul>
           </div>

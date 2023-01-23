@@ -1,7 +1,8 @@
 div.LoadingDiv {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 25vh;
+  margin-top: 7vh;
+  margin-bottom: -15vh;
   width: 90vw;
   height: 100vh;
   max-width: max-content;
@@ -14,7 +15,7 @@ div.LoadingDiv {
 .loadingText {
   font-family: Inter, sans-serif;
   font-size: 2vw;
-  animation: fade-in-out 1.0s linear infinite;
+  animation: fade-in-out 2.0s linear infinite;
 }
 
 #exquisDudeLoader {
@@ -23,7 +24,7 @@ div.LoadingDiv {
   margin-bottom: 7vh;
   width: 20vw;
   height: 20vw;
-  animation: loadingWiggle 4.0s linear infinite;}
+  animation: loadingWiggle 4.0s linear infinite, rotateColors 5.0s linear infinite;}
 
 @keyframes spin {
   0% {transform: rotate(0deg);}
@@ -31,9 +32,9 @@ div.LoadingDiv {
 }
 
 @keyframes fade-in-out {
-  0% {opacity: 100%;}
-  50% {opacity: 25%;}
-  100% {opacity: 100%;}
+  0% {opacity: 80%;}
+  25% {opacity: 15%;}
+  100% {opacity: 80%;}
 }
 
 @keyframes loadingWiggle {
@@ -54,4 +55,10 @@ div.LoadingDiv {
   54% { transform: scale(100%); }
   70% { transform: scale(100%); }
   100% { transform: scale(100%); }
+}
+
+@keyframes rotateColors {
+  0% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(125deg); }
+  100% { filter: hue-rotate(360deg); }
 }
