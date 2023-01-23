@@ -95,13 +95,13 @@ for (let i = 0; i < NUM_SEED_USERS; i++) {
 
   users.push(user);
 }
-const artie = users[2]
-const momo = users[3]
-const ashy = users[4]
-const kenny = users[5]
-const daphne = users[6]
-const andrea = users[7]
-const nathan = users[8]
+const artie = users[1]
+const momo = users[2]
+const ashy = users[3]
+const kenny = users[4]
+const daphne = users[5]
+const andrea = users[6]
+const nathan = users[7]
 
 
 // Randomly select an owner
@@ -112,9 +112,9 @@ const ownerId = users[random]._id
 // Seed skeletons
 const skeletons = [];
 
-const catFightSkellie = newSkeleton({
+const catFightSkellie = new Skeleton({
   owner: momo._id, 
-  title: "Meow, meow, mrrp, meow.",
+  title: "Meow mrrp meow.",
   prompt: "purr meow meow meow.",
   maxBones: 20,
   maxCollabrators: 10,
@@ -175,7 +175,7 @@ const cat6 = new Bone ({
   
 skeletons[0].bones.push(cat6)
 
-const demoOne = newSkeleton({
+const demoOne = new Skeleton({
   owner: daphne._id, 
   title: "The Last Supper",
   prompt: "Joyce enjoyed eating pancakes with ketchup.",
@@ -453,7 +453,7 @@ likes.forEach(like => {
 // Seed bones
 const bones = []; 
 
-skeletons.forEach(skeleton => {
+skeletons.slice(2).forEach(skeleton => {
   const skeletonId = skeleton._id;
 
   const boneForOwner = new Bone ({
@@ -530,7 +530,7 @@ const insertSeeds = () => {
   Skeleton.collection.drop()
                   .then(() => User.collection.drop())
                   .then(() => User.insertMany(users))
-                  .then(() => Skeleton.insertMany(skeletons))
+                  .then(() => Skeleton.insertMany(skeletons.reverse()))
                   .then(() => Comment.collection.drop())
                   .then(() => Comment.insertMany(comments))
                   .then(() => Like.collection.drop())
