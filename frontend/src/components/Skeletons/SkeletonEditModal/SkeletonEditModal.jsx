@@ -44,7 +44,6 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
   //   };
   //   setSelectedValue(selectedValue)
   // }
-  console.log(skellie.collaborators)
   
   const onSelect =(selectedList, selectedItem) => {
     selectedValue.push(selectedItem)
@@ -89,7 +88,6 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
 
   const skeletonSubmit = (e) => {
     e.preventDefault();
-    console.log(e, "e")
 
 
     const skeleton = {

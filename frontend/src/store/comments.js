@@ -106,7 +106,6 @@ export const createComment = (newComment, skeletonId )=> async dispatch => {
         dispatch(receiveComment(comment));
         fetchSkeletonCommentsLocal(skeletonId);
     } catch (err) {
-        console.log(err);
     }
 }
 
