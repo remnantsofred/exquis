@@ -1,5 +1,6 @@
 import { fetchSkeletonComments } from './comments';
 import jwtFetch from './jwt';
+// import { fetchSkeleton, fetchSkeletons } from './skeletons';
 
 
 export const RECEIVE_LIKE = 'likes/RECEIVE_LIKE';
@@ -23,7 +24,7 @@ const removeLike = (like) => ({
     like
 });
 
-const receiveSkeletonLikes = (likes, skeletonId) => ({
+const receiveSkeletonLikes = (skeletonId, likes) => ({
     type: RECEIVE_SKELETON_LIKES,
     likes,
     skeletonId
@@ -38,7 +39,6 @@ export const getLikes = () => async (dispatch) => {
 }
 
 const fetchSkeletonLikesLocal = skeletonId => async dispatch => {
-    console.log("skeletonId: ", skeletonId);
     const res = await fetch(`/api/likes/skeletons/${skeletonId}`);
     if (res.ok) {
         const data = await res.json();
@@ -64,9 +64,10 @@ export const createLike = (newLike, skeletonId) => async (dispatch) => {
             body: JSON.stringify(newLike)
         });
         const like = await res.json();
-        // dispatch(receiveLike(like));
-        console.log("after dispatch")
+        dispatch(receiveLike(like));
+        // dispatch(fetchSkeletons);
         fetchSkeletonLikesLocal(skeletonId);
+        console.log("after fetch");
     } catch (err) {
         console.log(err);
     }

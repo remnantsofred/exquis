@@ -2,14 +2,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import Loading from "../../../Loading/Loading"
 
-import ColorPalettePicker from "./ColorPalettePicker/ColorPalettePicker"
-
-const PlaceBones = (bones) => {
+const PlaceBones = ({colorArr, skellie}) => {
   const [loaded, setLoaded] = useState(false)
-  const palette = ColorPalettePicker()
-  const body = []
-  
 
+  const body = []
+  const bones = skellie.bones
 
   useEffect(() => {
     const onPageLoad = () => {
@@ -17,54 +14,52 @@ const PlaceBones = (bones) => {
     }
 
     if (document.readyState === 'complete') {
-      onPageLoad();
-    } else {
-      window.addEventListener('load', onPageLoad);
-      return () => window.removeEventListener('load', onPageLoad)
-    }
+        onPageLoad();
+      } else {
+        window.addEventListener('load', onPageLoad);
+        return () => window.removeEventListener('load', onPageLoad)
+      }
+  }, []);
 
-  }, [])
+  const findColor = (bone) => {
+    const collaborator = bone.author._id
+    const colorObj = colorArr.find(color => color.author === collaborator)
+    const color = colorObj.color
+    return (
+      color
+    )
+  }
   
   const compileBones = () => {
-    const bonesLength = bones.component.length
-    var pNum = 0
-
-    const resetPNum = () => {
-      if (pNum >= palette.length) {
-        pNum -= pNum;
-      }
-    }
-
-    for (var i = 0; i < bonesLength; i ++) {
-      resetPNum();
-      let sentence = <span style={{color: `${palette[pNum]}`}}>{bones.component[i].text} </span> 
+    for (var i = 0; i < bones.length; i ++) {
+      const color = findColor(bones[i])
+      let sentence = <span style={{color: `${color}`}}> {bones[i].text} </span> 
       body.push(sentence)
-      pNum++
     }
+
+    // const resetPNum = () => {
+    //   if (pNum >= palette.length) {
+    //     pNum -= pNum;
+    //   }
+    // }
+
+    // for (var i = 0; i < bonesLength; i ++) {
+    //   resetPNum();
+    //   let sentence = <span style={{color: `${palette[pNum]}`}}>{bones.component[i].text} </span> 
+
+    //   body.push(sentence)
+    // }
+
     return (
       body
     )
   }
-  // const bonesCompiled = bones.map((bone, idx)=> <span style={{color: `${palette[idx]}`}}>{bone.text} </span>)
-  // useEffect(() => {
-  //   Promise.all([
-  //     bones
-  //   ]).then(() =>{
-  //     setLoaded(true)
-  //   })
 
-  // }, [bones])
-
-  // if (!loaded) {
-  //   return (
-  //     <Loading />
-  //   )  
-  // } else if (loaded && bones) {
   return (
-    // bones.map((bone, idx)=> <span style={{color: `${palette[idx]}`}}>{bone.text} </span>)
     compileBones()
   )
-// }
 }
+
+
 
 export default PlaceBones;

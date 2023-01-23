@@ -80,6 +80,16 @@
     width: 50vw;
     color: rgb(42, 42, 42);
     margin-bottom: -4vh; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* margin-bottom: -10.5vw; */
+    display: -webkit-box;
+    /* margin-bottom: 3vw; */
+    -webkit-line-clamp: 4;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+    line-clamp: 4;
+    line-height: 5vh;
   }
 
   .skeleton-body-container > p {
@@ -171,13 +181,22 @@
   }
 
   ul.skeleton-tags {
+    border-radius: 25px;
+    width: 50vw;
+    margin-top: 5vh;
+    max-height: 2vh;
+    align-items: center;
     display: flex;
     align-items: row;
     height: 2vh;
-    margin-top: auto;
-    margin-bottom: auto;
+    margin-bottom: 2vh;
+    padding-top: 2vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    padding-bottom: 2vh;
+    background-color: white;
     display: -webkit-box;
-    width: 30vw;
+    margin-top: 7vh;
       /* margin-bottom: 3vw; */
     -webkit-line-clamp: 1;
       /* number of lines to show */

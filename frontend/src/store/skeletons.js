@@ -158,7 +158,7 @@ const skeletonsReducer = (state = {}, action) => {
     case RECEIVE_USER_SKELETONS:
         return {...newState, ...action.skeletons};
     case REMOVE_SKELETON:
-        delete newState[action.skeleton._id];
+        delete newState[action.skeletonId];
         return newState;
     case RECEIVE_SKELETON_COMMENTS:
         let skeletonComments = newState[action.skeletonId]

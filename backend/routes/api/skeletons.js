@@ -26,8 +26,8 @@ router.get('/user/:userId', async (req, res, next) => {
                               .sort({ createdAt: -1 })
                               .populate("owner", "_id, username")
                               .populate("collaborators", "_id, username")
-                              .populate("comments")
-                              // .populate({path: "likes", populate: { path: "liker", select: "_id, username", "type": "like" }})
+                              .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
+                              .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
                               // .populate("tags")
                               // .populate("likes")
     return res.json(skeletons);
@@ -44,11 +44,8 @@ router.get('/:id', async (req, res, next) => {
                              .populate("owner", "_id, username")
                              .populate("collaborators", "_id, username")
                              .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
-                            //  .populate("likes", "_id, liker, type")
-                            //  .populate({path: "likes", populate: { path: "liker", select: "_id, username" }})
-
-                            //  .populate("tags")
-                            //  .populate("likes")
+                             .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
+                           
     return res.json(skeleton);
   }
   catch(err) {
@@ -61,7 +58,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) => {
   try {
-    const skeleton = await Skeleton.findById(req.params.id);
+    let skeleton = await Skeleton.findById(req.params.id);
     if (!skeleton) {
       const error = new Error('Skeleton not found');
       error.statusCode = 404;
@@ -80,7 +77,7 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
       skeleton.maxBones = req.body.maxBones,
       skeleton.maxCollaborators = req.body.maxCollaborators,
       skeleton.collaborators = req.body.collaborators,
-      skeleton.bones = req.body.bones,
+      // skeleton.bones = req.body.bones,
       skeleton.tags = req.body.tags
       // need to add future logic to add/remove tags
 
@@ -102,7 +99,11 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
       }
     }
 
-    await skeleton.save();
+    await skeleton.save()
+    skeleton = await Skeleton.findById(req.params.id).populate("owner", "_id, username")
+        .populate("collaborators", "_id, username")
+        .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
+        .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
     await User.updateMany({_id: {$in: newCollaborators}}, {$push: {skeletons: skeleton._id} });
     await User.updateMany({_id: {$in: removedCollaborators}}, {$pull: {skeletons: skeleton._id} });
  
@@ -152,12 +153,8 @@ router.get('/', async (req, res) => {
                               .populate("owner", "_id, username")
                               .populate("collaborators", "_id, username")
                               .populate("comments")
-                              .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
-                              .populate("likes")
-                              // .populate({path: "likes", populate: { path: "liker", select: "_id, username" }})
-                              // .populate({path: "likes", populate: { path: "type", select: "_id, liker", "type": "like" }})
-                              // .populate("tags")
-                              // .populate("likes", "_id, liker, type")                       
+                              .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
+                              .populate({path: "likes", populate: { path: "author", select: "_id, username" }})          
                               .sort({ createdAt: -1 });
     return res.json(skeletons);
   }

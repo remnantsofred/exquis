@@ -15,10 +15,11 @@
   font-weight: 600;
   font-size: 3vw;
   text-align: left;
+  margin-bottom: 2vh;
 }
 
 hr#main-page-hr {
-  margin-top: 2vh;
+  margin-top: 4vh;
   margin-bottom: 1vh;
   width: 60%;
   align-self: flex-start;

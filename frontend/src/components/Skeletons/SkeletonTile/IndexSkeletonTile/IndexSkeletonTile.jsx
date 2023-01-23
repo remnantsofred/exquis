@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
-import { deleteLike, createLike } from '../../../../store/likes'
+import { createLike, deleteLike } from '../../../../store/likes'
 
 const IndexSkeletonTile = ({skeletonInfo}) => {
   // const title = skeletonInfo.title

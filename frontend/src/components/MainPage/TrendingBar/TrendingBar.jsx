@@ -2,8 +2,10 @@ import TrendingSkellie from "./TrendingSkellie"
 import './TrendingBar.css'
 const TrendingBar = ({skeletons}) => {
 
-  const topTen = skeletons.slice(0, 5)
+  const skeletonsCopy = JSON.parse(JSON.stringify(skeletons))
+  skeletonsCopy.sort((a, b) => b.likes.length - a.likes.length)
 
+  const topFive = skeletonsCopy.slice(0, 5)
   const TrendingSayings = [
     "Here's what's currently poppin! 🔥🔥",
     "Currently on their way to fame - ✨✨",
@@ -23,7 +25,7 @@ const TrendingBar = ({skeletons}) => {
       <h1 id="trending-bar-header">{saying}</h1>
       <hr id="trending-hl"/>
       <ol className="trending-bar-list">
-        {topTen.map((skellie, idx) => 
+        {topFive.map((skellie, idx) => 
         <TrendingSkellie 
           component={skellie} 
           key={idx}

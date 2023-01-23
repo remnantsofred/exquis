@@ -127,21 +127,16 @@ router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req
         error.errors = { message: "No skeleton found with that id" };
         return next(error);
       }
-      /// add currentCollaborator function here later? or just don't show on front end
-      // if (skeleton.currentEditor._id.toString() !== req.user._id.toString()) {
-      //   const error = new Error('Unauthorized');
-      //   error.statusCode = 401;
-      //   error.errors = { message: "You are not authorized to add bones to this skeleton" };
-      //   return next(error);
-      // }
+
       const newBone = new Bone({
         text: req.body.text,
-        skeleton: skeleton._id,
+        skeleton: req.params.skeletonId,
         author: req.user._id
       });
-      
       let bone = await newBone.save();
       await Skeleton.updateOne({_id: bone.skeleton}, {$push: {bones: bone}});
+      // await Skeleton.findOneAndUpdate({_id: bone.skeleton}, {$push: {bones: bone}})
+
       // bone = await bone.populate('skeleton', '_id, text');
       return res.json(bone);
     }
@@ -149,37 +144,7 @@ router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req
       return res.json([]);
     }
 });
-  
-// router.patch('/:id', requireUser, validateBoneInput, async (req, res, next) => {
-//     try {
-//       const skeleton = await Skeleton.findById(req.params.skeletonId);
-//       if (!skeleton) {
-//         const error = new Error('Skeleton not found');
-//         error.statusCode = 404;
-//         error.errors = { message: "No skeleton found with that id" };
-//         return next(error);
-//       }
-//       if (skeleton.owner.toString() !== req.user._id.toString()) {
-//         const error = new Error('Unauthorized');
-//         error.statusCode = 401;
-//         error.errors = { message: "You are not authorized to edit bones on this skeleton" };
-//         return next(error);
-//       }
-//       const bone = await Bone.findById(req.params.id);
-//       if (!bone) {  
-//         const error = new Error('Bone not found');  
-//         error.statusCode = 404;
-//         error.errors = { message: "No bone found with that id" };
-//         return next(error);
-//       }
-//       bone.text = req.body.text;
-//       await bone.save();
-//       return res.json(bone);
-//     }
-//     catch(err) {
-//       next(err);
-//     }
-// });
+ 
 
 router.get('/user/:userId', async (req, res, next) => {
   let user;

@@ -16,7 +16,9 @@ const validateSkeletonInput = [
     .withMessage('Skeleton should have at least 5 bones and no more than 50 bones'),
   check('tags')
     .isLength({ min: 0, max: 30 }),
-  
+  check('maxCollaborators')
+    .isFloat({ min: 1, max: 50 })
+    .withMessage('Skeleton should have at least 1 collaborator and no more than 50 collaborators'),
     // this was causing issues. Not sure .isFloat is correct
   // check('maxCollabrators')
   //   .isFloat({ min: 2, max: 10 })

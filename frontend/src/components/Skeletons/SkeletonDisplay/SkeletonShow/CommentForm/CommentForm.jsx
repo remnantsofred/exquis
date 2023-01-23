@@ -5,7 +5,7 @@ import { useState } from "react";
 import { deleteComment, updateComment } from "../../../../../store/comments";
 import { Link } from 'react-router-dom';
 import SessionUserCheck from '../../../../SessionUserCheck/SessionUserCheck';
-import { memo } from 'react';
+import { useEffect } from 'react';
 
 const CommentForm = ({comment, skeleton}) => {
 
@@ -42,7 +42,6 @@ const CommentForm = ({comment, skeleton}) => {
 
   if (comment._id){
     const commenterId = (comment.author._id)
-    console.log(user)
       return (
         <>
         

@@ -55,7 +55,7 @@
     height: 2.75vh;
     margin-left: 2.5vw;
     margin-right: .5vw;
-    margin-bottom: 2vw;
+    margin-bottom: 1vw;
     align-items: center;
     /* justify-content: center; */
     /* justify-items: center; */
@@ -75,7 +75,7 @@
   input.session-form-submit-button {
     transition: 0.5s;
     width: 20vw;
-    height: 8vh;
+    height: 5vh;
     align-items: center;
     margin-top: 2vw;
     font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -83,10 +83,13 @@
     font-weight: 400;
     border: solid;
     border-width: 0.5px;
-    border-color: #34374d;
+    border-color: #34374d2f;
     border-radius: 75px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 7px;
+    padding-bottom: 20px;
+    vertical-align: middle;
+    margin-top: 4vw;
+    margin-bottom: auto;
   }
 
   input.session-form-submit-button:hover {

@@ -142,6 +142,7 @@ div.profile-top-bottom {
 }
 
 div.skeletons-block {
+  transition: 0.5s;
   width: 75vw;
   height: 40vh;
   background-color: rgba(188, 208, 228, 0.436);
@@ -155,6 +156,19 @@ div.skeletons-block {
   margin-right: auto;
 }
 
+ul.skeletons-block-list {
+  transition: 0.5s;
+  text-align: left;
+  width: 75vw;
+  height: 35vh;
+  margin-top: 2vh;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Inter, sans-serif;
+  font-size: 1.5vw;
+  overflow: auto;
+  line-height: 5vh;
+}
 div.bottom-skeletons-block {
   border-radius: 25px;
   width: 77vw;
@@ -171,4 +185,40 @@ div.bottom-skeletons-block {
 
 h2.profile-bottom-title {
   font-family: Inter, sans-serif;
+}
+
+.skellie-show-link-profile-page {
+  font-size: 2.5vw;
+  text-decoration: none;
+}
+
+a.skellie-show-link-profile-page {
+  transition: .25s;
+  width: 50vw;
+  text-decoration: none;
+  color: black;
+  font-size: 2.5vw;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  /* number of lines to show */
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+}
+
+#specific-skellie-link:hover {
+  transition: .25s;
+  color: #979cc6;
+}
+
+span#bone-counter {
+  color: #545ca3;
+}
+
+.profile-skellie-sep {
+  width: 60vw;
+  margin-left: 0.5vw;
+  margin-right: auto;
 }

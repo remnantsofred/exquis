@@ -21,6 +21,7 @@
     font-weight: 400;
     font-size: 3vw;
     text-align: center;
+    margin-bottom: -2vw;
   }
 
   div.errors {
@@ -47,11 +48,11 @@
     margin-left: 8vw;
   }
 
-  input.skellie-input, textarea.skellie-input {
+  input.skellie-input {
     width: 45vw;
     height: 2.75vh;
-    margin-left: 2.5vw;
-    margin-right: .5vw;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 2vw;
     align-items: center;
     /* justify-content: center; */
@@ -70,15 +71,40 @@
   }
 
   textarea.skellie-input {
-    width: 20em;
-    height: 5em;
-    padding-left: 6vw;
-    padding-right: 6vw;
-    padding-top: 5vh;
-    padding-bottom: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #30303000;
+    border-radius: 15px;
+    width: 24em;
+    height: 3em;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    border: #c3c3c3;
+    border-style: solid;
+    border-width: 1px;
+    align-self: center;
     /* margin-left: 2vw;
     margin-right: 2vw; */
     z-index: 0;
+  }
+
+  #collaborator-select {
+    margin-left: auto;
+    margin-right: auto;
+    width: 27em;
+    height: 5em;
+    padding-left: 6vw;
+    padding-right: 6vw;
+    padding-bottom: 5vh;
+  }
+
+  input.skellie-input, #collaborator-select, textarea.skellie-input {
+    align-items: center;
+    font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration: none;
+    font-weight: 400;
   }
 
   textarea.skellie-input::-webkit-scrollbar {
