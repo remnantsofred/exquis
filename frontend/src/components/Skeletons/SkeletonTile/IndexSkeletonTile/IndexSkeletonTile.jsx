@@ -59,7 +59,7 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
     e.preventDefault()
     if (currentUser) {
       if (downVote) {
-        const liketoDelete = skeleton.find(like => like.liker === currentUser._id)
+        const liketoDelete = votes.find(like => like.id=== currentUser._id)
         console.log("liketoDelete: ", liketoDelete)
         dispatch(deleteLike(liketoDelete))
         setDownVote(false)
