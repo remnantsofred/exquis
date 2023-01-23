@@ -61,7 +61,6 @@ export const createLike = (newLike, skeletonId) => async (dispatch) => {
         dispatch(fetchSkeleton(skeletonId));
         return(like)
     } catch (err) {
-        console.log(err);
     }
 }
 
@@ -96,7 +95,6 @@ export const deleteLike = (skeletonId, currentUserId) => async (dispatch) => {
 
 
 const likesReducer = (state = {  }, action) => {
-    // console.log("hit reducer: ", action)
     let newState = {...state};
     switch (action.type) {
         case RECEIVE_LIKE:

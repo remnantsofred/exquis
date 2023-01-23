@@ -94,7 +94,6 @@ router.get("/", async (req, res, next) => {
 });
 
 router.get("/skeletons/:skeletonId"), async (req, res, next) => {
-  console.log("req.params: ", req.params);
   try {
     const likes = await Like.find({ skeleton: req.params.skeletonId });
     return res.json(likes);

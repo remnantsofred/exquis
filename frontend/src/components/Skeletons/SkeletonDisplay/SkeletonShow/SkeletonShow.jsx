@@ -107,7 +107,6 @@ const SkeletonShow = () => {
   const [downVote, setDownVote] = useState(false)
   const [upVoteCount, setVoteCount] = useState(setVotes.length)
 
-
   const handleUpVote = (e) => {
     e.preventDefault()
     if (currentUser) { 
@@ -156,7 +155,8 @@ const SkeletonShow = () => {
     const ownerColor = ownerColorFxn(ownerId, colorArr)
     const prompt = therePrompt(skellie)
     const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
-    
+    const likeCount = skeleton.likes.length
+    const CurrentLikeCount = likeCount + upVoteCount
 
     return (
       <>
@@ -164,13 +164,19 @@ const SkeletonShow = () => {
         <div className="skellie-main-container">
           <div className="show-top-middle">
             <div className="show-top">
-              { (author._id === skellie.owner._id ) ? <button className="comment-update-button" onClick={handleSkellieUpdate}>Edit</button> : <></>}
-              { (author._id === skellie.owner._id ) ? <button className="comment-delete-button" onClick={handleSkellieDelete} >Delete</button> : <></>} 
-              <h1 id="skeleton-title">{skellie.title} ///// ({skellie.bones.length} / {skellie.maxBones} Bones)</h1> 
-                <hr />
+                <div className="title-user-edit">
+                <h1 id="skeleton-title">{skellie.title} ///// <span id="bone-counter-in-title">({skellie.bones.length} / {skellie.maxBones} Bones)</span></h1>
+                { (author._id === skellie.owner._id ) ? <hr id="edit-delete-title-divider" /> : <></>} 
+
+                  <div className="edit-delete-div">
+                  { (author._id === skellie.owner._id ) ? <button className="comment-update-button" onClick={handleSkellieUpdate}>Edit</button> : <></>}
+                  { (author._id === skellie.owner._id ) ? <button className="comment-delete-button" onClick={handleSkellieDelete} >Delete</button> : <></>} 
+                  </div>
+                  
+                </div>
                   <div className="sub-title">
                     <h3 id="skeleton-owner" style={{color: `${ownerColor}`}}>{skellie.owner.username}</h3>
-                    <h3 id="skeleton-prompt">///// prompt: "{prompt}"</h3>
+                    <h3 id="skeleton-prompt"><span id="name-prompt-divider">/////</span> prompt: "{prompt}"</h3>
                   </div>
                 <hr />
             </div>
@@ -187,9 +193,9 @@ const SkeletonShow = () => {
                         {(CurrentCollaboratorObj && author) && <NewBoneInput skellie={skellie} currentCollabId={CurrentCollaboratorObj._id} authorId={author._id}/>}
                       </div>
                       <div className="horizontal-skeleton-likes-container">
-                        <button onClick={handleDownVote}><DownvoteButton id="skeleton-show-downvote" /></button>
-                          <h1 id="skeleton-show-votes">{upVoteCount}</h1>
-                        <botton onClick={handleUpVote} ><UpvoteButton id="skeleton-show-upvote"/></botton>
+                        <button onClick={handleDownVote} className="skeleton-show-downvote"><DownvoteButton className="skeleton-show-downvote" /></button>
+                          <h1 id="skeleton-show-votes">{CurrentLikeCount}</h1>
+                        <button onClick={handleUpVote} className="skeleton-show-upvote"><UpvoteButton className="skeleton-show-upvote"/></button>
                       </div>
                 </div>
             </div>
