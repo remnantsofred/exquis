@@ -14,6 +14,7 @@ const SkeletonIndex = ({skellieProps}) => {
   const [loaded, setLoaded] = useState(false);
   let history = useHistory();
 
+
   useEffect(() => {
     Promise.all([
       dispatch(fetchSkeletons())
@@ -21,6 +22,7 @@ const SkeletonIndex = ({skellieProps}) => {
       setLoaded(true);
     })
   },[]);
+
 
   // useEffect(() => {
   //   if (loaded) {

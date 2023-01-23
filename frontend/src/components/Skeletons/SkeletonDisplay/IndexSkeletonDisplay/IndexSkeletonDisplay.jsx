@@ -1,5 +1,7 @@
 import IndexSkeletonTile from '../../SkeletonTile/IndexSkeletonTile/IndexSkeletonTile'
 import "./IndexSkeletonDisplay.css"
+
+
 const IndexSkeletonDisplay = ({ skelliesProps, skeletons, setLoaded}) => {
 
   // NOTE: 01-17-2023 - could we just import an array of skeletons as a prop?

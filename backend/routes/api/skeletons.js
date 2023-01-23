@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Skeleton = mongoose.model('Skeleton');
+const Like = mongoose.model('Like');
 const { requireUser } = require('../../config/passport');
 const { check } = require("express-validator");
 const validateSkeletonInput = require('../../validations/skeletons');
@@ -44,8 +45,7 @@ router.get('/:id', async (req, res, next) => {
                              .populate("collaborators", "_id, username")
                              .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
                              .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
-                            //  .populate("tags")
-                            //  .populate("likes")
+                           
     return res.json(skeleton);
   }
   catch(err) {
@@ -152,10 +152,9 @@ router.get('/', async (req, res) => {
     const skeletons = await Skeleton.find()
                               .populate("owner", "_id, username")
                               .populate("collaborators", "_id, username")
-                              .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
+                              .populate("comments")
                               .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
-                              // .populate("tags")
-                              // .populate("likes")                         
+                              .populate({path: "likes", populate: { path: "liker", select: "_id, username" }})          
                               .sort({ createdAt: -1 });
     return res.json(skeletons);
   }
