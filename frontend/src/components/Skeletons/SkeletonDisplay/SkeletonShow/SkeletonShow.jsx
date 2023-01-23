@@ -32,6 +32,7 @@ const SkeletonShow = () => {
   const skellie = useSelector(getSkeleton(skeletonId))
   const author = SessionUserCheck();
   const [ modalStatus, setModalStatus ] = useState(false);
+  const [votes, setVotes] = useState([])
 
   const currentUser = useSelector(state => state.session.user)
 
@@ -95,13 +96,16 @@ const SkeletonShow = () => {
     setModalStatus(false)
   }
   
-  const votes = skellie?.likes 
+  useEffect(() => {
+    setVotes(skellie?.likes)
+  })
+   
+
   let skeleton = skellie
-
-
+  
   const [upVote, setUpVote] = useState(false)
   const [downVote, setDownVote] = useState(false)
-  const [upVoteCount, setVoteCount] = useState(votes.length)
+  const [upVoteCount, setVoteCount] = useState(setVotes.length)
 
 
   const handleUpVote = (e) => {
