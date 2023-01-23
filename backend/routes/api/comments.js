@@ -60,7 +60,7 @@ router.get('/skeletons/:skeletonId', async (req, res) => {
 
 
 
-router.post('/skeletons/:skeletonId', validateCommentInput, requireUser, async (req, res, next) => {
+router.post('/skeletons/:skeletonId', requireUser, async (req, res, next) => {
   try {
     const newComment = new Comment({
       parent: req.params.skeletonId,
