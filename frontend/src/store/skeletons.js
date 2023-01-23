@@ -1,5 +1,6 @@
 import jwtFetch from "./jwt";
 import { RECEIVE_SKELETON_COMMENTS, RECEIVE_COMMENT, REMOVE_COMMENT } from "./comments";
+import { RECEIVE_SKELETON_LIKES, RECEIVE_LIKE, REMOVE_LIKE } from "./likes";
 
 
 export const RECEIVE_SKELETON = "skeletons/RECEIVE_SKELETON";
@@ -163,6 +164,8 @@ const skeletonsReducer = (state = {}, action) => {
         let skeletonComments = newState[action.skeletonId]
         skeletonComments.comments = action.comments
         return newState;
+    case RECEIVE_SKELETON_LIKES:
+        return {...newState, ...action.skeletonId.likes};
     case RECEIVE_COMMENT:
       return {...newState, [action.comment.parent]: {...newState[action.comment.parent], comments: [...newState[action.comment.parent].comments, action.comment]}}
     default:

@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Skeleton = mongoose.model('Skeleton');
+const Like = mongoose.model('Like');
 const { requireUser } = require('../../config/passport');
 const { check } = require("express-validator");
 const validateSkeletonInput = require('../../validations/skeletons');
@@ -26,6 +27,7 @@ router.get('/user/:userId', async (req, res, next) => {
                               .populate("owner", "_id, username")
                               .populate("collaborators", "_id, username")
                               .populate("comments")
+                              // .populate({path: "likes", populate: { path: "liker", select: "_id, username", "type": "like" }})
                               // .populate("tags")
                               // .populate("likes")
     return res.json(skeletons);
@@ -42,6 +44,9 @@ router.get('/:id', async (req, res, next) => {
                              .populate("owner", "_id, username")
                              .populate("collaborators", "_id, username")
                              .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
+                            //  .populate("likes", "_id, liker, type")
+                            //  .populate({path: "likes", populate: { path: "liker", select: "_id, username" }})
+
                             //  .populate("tags")
                             //  .populate("likes")
     return res.json(skeleton);
@@ -147,8 +152,12 @@ router.get('/', async (req, res) => {
                               .populate("owner", "_id, username")
                               .populate("collaborators", "_id, username")
                               .populate("comments")
+                              .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
+                              .populate("likes")
+                              // .populate({path: "likes", populate: { path: "liker", select: "_id, username" }})
+                              // .populate({path: "likes", populate: { path: "type", select: "_id, liker", "type": "like" }})
                               // .populate("tags")
-                              // .populate("likes")                         
+                              // .populate("likes", "_id, liker, type")                       
                               .sort({ createdAt: -1 });
     return res.json(skeletons);
   }

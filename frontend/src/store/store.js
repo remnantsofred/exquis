@@ -6,6 +6,7 @@ import comments from './comments';
 import skeletons from './skeletons';
 import bones from './bones'
 import users from './users'
+import likes from './likes'
 
 const rootReducer = combineReducers({
   session,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   skeletons,
   comments,
   bones,
-  users
+  users,
+  likes
 });
 
 
