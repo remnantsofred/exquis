@@ -67,7 +67,6 @@ export const createLike = (newLike, skeletonId) => async (dispatch) => {
 
 
 
-
 export const updateLike = (like) => async (dispatch) => {
     const response = await jwtFetch(`/api/likes/${like.id}`, {
         method: 'PUT',
