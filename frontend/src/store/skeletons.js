@@ -155,7 +155,9 @@ const skeletonsReducer = (state = {}, action) => {
       return { ...newState, [action.skeleton._id]: action.skeleton };
       // return { ...newState, ...action.skeleton };
       case RECEIVE_SKELETONS:
-        return { ...newState, ...action.skeletons };
+        const skeletonsHash = {};
+        action.skeletons.forEach(skeleton => {skeletonsHash[skeleton._id] = skeleton})
+        return { ...newState, ...skeletonsHash };
     case RECEIVE_USER_SKELETONS:
         return {...newState, ...action.skeletons};
     case REMOVE_SKELETON:
@@ -166,7 +168,11 @@ const skeletonsReducer = (state = {}, action) => {
         skeletonComments.comments = action.comments
         return newState;
     case RECEIVE_SKELETON_LIKES:
-        return {...newState, ...action.skeletonId.likes}
+        // return {...newState, ...action.skeletonId.likes}
+        console.log("receive_skeleton_likes")
+        let skeletonLikes = newState[action.skeletonId]
+        skeletonLikes.likes = action.likes
+        return newState;
     case RECEIVE_COMMENT:
       return {...newState, [action.comment.parent]: {...newState[action.comment.parent], comments: [...newState[action.comment.parent].comments, action.comment]}}
     // case RECEIVE_LIKE:
