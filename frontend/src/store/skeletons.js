@@ -155,7 +155,9 @@ const skeletonsReducer = (state = {}, action) => {
       return { ...newState, [action.skeleton._id]: action.skeleton };
       // return { ...newState, ...action.skeleton };
       case RECEIVE_SKELETONS:
-        return { ...newState, ...action.skeletons };
+        const skeletonsHash = {};
+        action.skeletons.forEach(skeleton => {skeletonsHash[skeleton._id] = skeleton})
+        return { ...newState, ...skeletonsHash };
     case RECEIVE_USER_SKELETONS:
         return {...newState, ...action.skeletons};
     case REMOVE_SKELETON:
