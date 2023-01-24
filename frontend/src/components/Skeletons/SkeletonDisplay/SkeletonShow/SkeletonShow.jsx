@@ -1,4 +1,4 @@
-import { useParams, useHistory } from "react-router-dom"
+import { useParams, useHistory, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getSkeleton, fetchSkeleton, updateSkeleton, deleteSkeleton } from '../../../../store/skeletons'
@@ -175,7 +175,9 @@ const SkeletonShow = () => {
                   
                 </div>
                   <div className="sub-title">
-                    <h3 id="skeleton-owner" style={{color: `${ownerColor}`}}>{skellie.owner.username}</h3>
+                    <Link to={`/users/${skellie.owner._id}`} class="skeleton-show-profile-link">
+                      <h3 id="skeleton-owner" style={{color: `${ownerColor}`}}>{skellie.owner.username}</h3>
+                    </Link>
                     <h3 id="skeleton-prompt"><span id="name-prompt-divider">/////</span> prompt: "{prompt}"</h3>
                   </div>
                 <hr />
