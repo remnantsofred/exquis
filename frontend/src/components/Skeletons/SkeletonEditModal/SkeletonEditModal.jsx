@@ -106,6 +106,7 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
 
     handleModalClose();
   }
+
    
   if (!loaded) {
     return (
