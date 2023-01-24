@@ -41,7 +41,10 @@ export const getLikes = () => async (dispatch) => {
 }
 
 const fetchSkeletonLikesLocal = skeletonId => async dispatch => {
+    console.log("hittingfetchSkeletonLikesLocal")
+    
     const res = await fetch(`/api/likes/skeletons/${skeletonId}`);
+    console.log(res, "res from fetchSkeletonLikesLocal")
     if (res.ok) {
         const data = await res.json();
         dispatch(receiveSkeletonLikes(skeletonId, data));
@@ -58,6 +61,8 @@ export const createLike = (newLike, skeletonId) => async (dispatch) => {
         });
         const like = await res.json();
         dispatch(receiveLike(like));
+        dispatch(fetchSkeletonLikesLocal(skeletonId))
+        // dispatch(fetchSkeleton(skeletonId))
         return(like)
     } catch (err) {
     }
@@ -90,6 +95,7 @@ export const deleteLike = (skeletonId, currentUserId) => async (dispatch) => {
         body: JSON.stringify({currentUserId: currentUserId})
     });
     dispatch(removeLike(skeletonId, currentUserId));
+    // dispatch(fetchSkeleton(skeletonId))
     return response;
 }
 

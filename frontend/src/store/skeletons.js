@@ -166,7 +166,11 @@ const skeletonsReducer = (state = {}, action) => {
         skeletonComments.comments = action.comments
         return newState;
     case RECEIVE_SKELETON_LIKES:
-        return {...newState, ...action.skeletonId.likes}
+        // return {...newState, ...action.skeletonId.likes}
+        console.log("receive_skeleton_likes")
+        let skeletonLikes = newState[action.skeletonId]
+        skeletonLikes.likes = action.likes
+        return newState;
     case RECEIVE_COMMENT:
       return {...newState, [action.comment.parent]: {...newState[action.comment.parent], comments: [...newState[action.comment.parent].comments, action.comment]}}
     // case RECEIVE_LIKE:

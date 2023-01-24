@@ -47,6 +47,7 @@ export const receiveSkeletonComments = (skeletonId, comments) => ({
 });
 
 
+
 // export const getSkeletonComments = (state, skeletonId) => {
 //     // const comments = Object.values(state.comments);
 //     // return comments.filter(comment => comment.skeletonId === skeletonId);
