@@ -1,49 +1,84 @@
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useSelector, useDispatch} from "react-redux"
-import { getSkeletons , fetchSkeletons } from "../../../../store/skeletons";
+import { getSkeletons , fetchSkeletons, deleteSkeleton } from "../../../../store/skeletons";
 import { useEffect, useState } from "react";
-
+import SkeletonEditModal from "../../../Skeletons/SkeletonEditModal/SkeletonEditModal"
+import { getUsers, fetchUsers } from "../../../../store/users";
 
 const SkeletonTab = ({switchValue, skellies, userId}) => {
 
-  const isCurrent = (skellie) => {
-    if (skellie.bones === []) {
-      return (true)
-    } else if (skellie.bones && (skellie.bones.length < skellie.maxBones)) {
-      return (true)
-    } else {
-      return (false)
-    }
-  };
+  const dispatch = useDispatch()
+  const [ modalStatus, setModalStatus ] = useState(false);
+  const history = useHistory();
 
-  const SkellieShowLink = (skellie) => {
-    if (isCurrent(skellie)) {
+  // const isCurrent = (skellie) => {
+  //   if (skellie.bones === []) {
+  //     return (true)
+  //   } else if (skellie.bones && (skellie.bones.length < skellie.maxBones)) {
+  //     return (true)
+  //   } else {
+  //     return (false)
+  //   }
+  // };
+  useEffect(() => {
+    dispatch(fetchUsers())
+  },[])
+
+  const handleSkellieUpdate = (skellie, e, tab) => {
+    e.preventDefault()
+    // dispatch(updateSkeleton(skeletonId))
+    setModalStatus(`${tab}-${skellie._id}`)
+  }
+
+  const handleSkellieDelete = (skellie, e) => {
+    e.preventDefault()
+    dispatch(deleteSkeleton(skellie._id))
+    .then((res) => {history.push(`/users/${skellie.owner}`)})
+  }
+
+  const handleModalClose = () => {
+    setModalStatus('')
+  }
+
+  const SkellieShowLink = (skellie, switchValue) => {
+    // if (isCurrent(skellie)) {
+    if (switchValue === 'current') {
     return (
-      <li key={skellie._id} className="skellie-show-link-profile-page">
-        <Link className="skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link><span id="bone-counter">{`  -  ${skellie.bones.length} / ${skellie.maxBones} Bones`}</span>
-        <hr class="profile-skellie-sep"/>
+      <li key={skellie._id} className="profile-page-skellie-show-link-profile-page">
+        <Link className="profile-page-skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link><span id="bone-counter">{`  -  ${skellie.bones.length} / ${skellie.maxBones} Bones`}</span>
+        <div className="edit-delete-div-profile-page">
+          { (userId === skellie.owner ) ? <button className="comment-update-button" onClick={(e) => handleSkellieUpdate(skellie, e, 'current')}>Edit</button> : <></>}
+          { (userId === skellie.owner ) ? <button className="comment-delete-button" onClick={(e) => handleSkellieDelete(skellie, e)} >Delete</button> : <></>} 
+        </div>
+        <hr className="profile-skellie-sep"/>
       </li>
     )} else {
-    return(
-      <li className="skellie-show-link-profile-page"> 
-        <Link className="skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link>{` // FINISHED`}  
+    return (
+      <li key={skellie._id} className="profile-page-skellie-show-link-profile-page"> 
+        <Link className="profile-page-skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link>{ (skellie.bones.length >= skellie.maxBones) ? `// FINISHED` : ''}
+        
+        <div className="edit-delete-div">
+          { (userId === skellie.owner ) ? <button className="comment-update-button" onClick={(e) => handleSkellieUpdate(skellie, e, 'owned')}>Edit</button> : <></>}
+          { (userId === skellie.owner ) ? <button className="comment-delete-button" onClick={(e) => handleSkellieDelete(skellie, e)} >Delete</button> : <></>} 
+        </div>
         <hr class="profile-skellie-sep"/>
       </li>
     )}
   }
+
+
 
   const skelliesCurrent = [];
   const skelliesOwned = [];
   const skelliesPrevious = [];
 
 
-    for (let i = 0; i < skellies?.length; i++) {
-      
-      let skellie = skellies[i]
-      if (skellie.owner === userId) {
-        skelliesOwned.push(skellie)
-      }
+  for (let i = 0; i < skellies?.length; i++) {
+    let skellie = skellies[i]
+    if (skellie.owner === userId) {
+      skelliesOwned.push(skellie)
     }
+  }
   
 
   for (let i = 0; i < skellies?.length; i++) { 
@@ -57,7 +92,8 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
     }
   }
 
-  
+
+
   switch(switchValue) {
     case "current":
       return (
@@ -67,7 +103,10 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
             {!skelliesCurrent.length  
             ? <div className="skellie-show-link-profile-page">No current skeletons</div> 
             : (skelliesCurrent.map((skellie) => (
-              SkellieShowLink(skellie)
+              <div  key={`current-${skellie._id}`}>  
+                {SkellieShowLink(skellie, switchValue)}
+                {modalStatus === `current-${skellie._id}` && <SkeletonEditModal skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />}
+              </div>
             )))}
           </ul>
         </div>
@@ -85,7 +124,10 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
                 </Link>
               </div> 
             : (skelliesOwned.map((skellie) => (
-              SkellieShowLink(skellie)
+              <div key={`owned-${skellie._id}`}>  
+                {SkellieShowLink(skellie, switchValue)}
+                {modalStatus === `owned-${skellie._id}` && <SkeletonEditModal skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />}
+              </div>
             )))}
           </ul>
         </div>
@@ -99,7 +141,10 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
             {!skelliesPrevious.length
             ? <p className="skellie-show-link-profile-page">No previous skeletons</p> 
             : (skelliesPrevious.map((skellie) => (
-              <SkellieShowLink skellie={skellie} />
+              <div  key={`prev-${skellie._id}`}>  
+                {SkellieShowLink(skellie, switchValue)}
+                {/* {modalStatus === `previous-${skellie._id}` && <SkeletonEditModal skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />} */}
+              </div>
             )))}
           </ul>
         </div>
@@ -113,7 +158,10 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
           {skelliesCurrent === [] 
             ? <div className="skellie-show-link-profile-page">No current skeletons</div> 
             : (skelliesCurrent.map((skellie) => (
-              <SkellieShowLink skellie={skellie} />
+              <div key={skellie._id}>  
+              <SkellieShowLink skellie={skellie} switchValue={switchValue} />
+              {/* {modalStatus === 1 && <SkeletonEditModal skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />} */}
+              </div>
             )))}
           </ul>
         </div>

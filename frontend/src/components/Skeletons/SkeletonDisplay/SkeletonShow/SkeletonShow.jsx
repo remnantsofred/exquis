@@ -1,4 +1,4 @@
-import { useParams, useHistory } from "react-router-dom"
+import { useParams, useHistory, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getSkeleton, fetchSkeleton, updateSkeleton, deleteSkeleton } from '../../../../store/skeletons'
@@ -157,6 +157,13 @@ const SkeletonShow = () => {
     const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
     const likeCount = skeleton.likes.length
     const CurrentLikeCount = likeCount + upVoteCount
+    const CurrentCollaboratorColor = (collaborator) => {
+        const colorObj = colorArr.find(color => color.author === collaborator)
+        const color = colorObj.color
+        return (
+          color
+        )
+    }
 
     return (
       <>
@@ -175,7 +182,9 @@ const SkeletonShow = () => {
                   
                 </div>
                   <div className="sub-title">
-                    <h3 id="skeleton-owner" style={{color: `${ownerColor}`}}>{skellie.owner.username}</h3>
+                    <Link to={`/users/${skellie.owner._id}`} class="skeleton-show-profile-link">
+                      <h3 id="skeleton-owner" style={{color: `${ownerColor}`}}>{skellie.owner.username}</h3>
+                    </Link>
                     <h3 id="skeleton-prompt"><span id="name-prompt-divider">/////</span> prompt: "{prompt}"</h3>
                   </div>
                 <hr />
@@ -188,7 +197,13 @@ const SkeletonShow = () => {
                       <div className="user-input-div">
                         <hr id="body-input-divider" />
                         <div id="current-writer-note" >
-                            <span>It is</span><span id="current-writer-username">{`${CurrentCollaboratorObj.username}`}'s</span><span>turn.</span>
+                            <span>It is</span>    
+                              <Link to={`/users/${CurrentCollaboratorObj._id}`} class="skeleton-show-profile-current-collab-link" id="skeleton-show-current-collab-text" style={{color: `${CurrentCollaboratorColor(CurrentCollaboratorObj._id)}`}}>
+                                <span id="current-writer-username">
+                                  {`${CurrentCollaboratorObj.username}`}'s
+                                </span>
+                              </Link>
+                            <span>turn.</span>
                         </div>
                         {(CurrentCollaboratorObj && author) && <NewBoneInput skellie={skellie} currentCollabId={CurrentCollaboratorObj._id} authorId={author._id}/>}
                       </div>

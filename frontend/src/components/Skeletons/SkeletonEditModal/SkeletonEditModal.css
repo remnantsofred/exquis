@@ -8,12 +8,13 @@
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 4vh;
-  padding-bottom: 4px;
-  background-color: rgba(188, 208, 228, 1);
+  padding-bottom: 4vh;
+  background-color: rgb(255, 255, 255);
   display: flexbox;
   border-radius: 25px;
   transition: .5s;
 
+  height: 50vh;
 
   display: flex;
   flex-direction: column;
@@ -27,9 +28,10 @@
   position: fixed;
   transform: translateX(-50%);
   top: 16px;
-  left: 50%;
-  width: 800px;
-  height: 800px;
+  /* left: 50%; */
+  margin-left: 37vw;
+  width: 80vw;
+  height: 80vh;
   /* height: max-content; */
   color: #000;
   z-index: 300;
@@ -37,8 +39,8 @@
 }
 
 .edit-modal-form{
-  width: 800px;
-  height: 800px; 
+  width: 80vw;
+  height: 80vh;
 }
 
 .edit-modal-background {
@@ -73,4 +75,83 @@
   cursor: pointer;
   background-color: transparent;
   border: none;
+}
+
+h2.form-title {
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 3vw;
+  text-align: center;
+}
+
+.edit-skellie-label {
+  margin-bottom: -5vh;
+}
+
+h2.edit-skellie-label-text {
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-decoration: none;
+  font-weight: 400;
+  text-align: left;
+  margin-left: 18vw;
+  margin-bottom: -3vh;
+}
+
+input.edit-skellie-input {
+  width: 45vw;
+  height: 2.75vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -5vh;
+  align-items: center;
+  /* justify-content: center; */
+  /* justify-items: center; */
+  background-color: #30303000;
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-decoration: none;
+  font-weight: 400;
+  border: #c3c3c3;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 75px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+textarea.edit-skellie-input {
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: #30303000;
+  border-radius: 15px;
+  width: 45vw;
+  height: 3em;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  border: #c3c3c3;
+  border-style: solid;
+  border-width: 1px;
+  align-self: center;
+  /* margin-left: 2vw;
+    margin-right: 2vw; */
+  z-index: 0;
+}
+
+#edit-collaborator-select {
+  margin-left: auto;
+  margin-right: auto;
+  width: 45em;
+  height: 5em;
+  padding-left: 6vw;
+  padding-right: 6vw;
+  padding-bottom: 5vh;
+  border-radius: 25px;
+}
+
+input#edit-skellie-submit-button {
+  margin-bottom: 10.05vh;
 }

@@ -106,6 +106,7 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
 
     handleModalClose();
   }
+
    
   if (!loaded) {
     return (
@@ -121,8 +122,8 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
             <h2 className='form-title'>Edit Skeleton</h2>
             <div className="errors">{errors?.title}</div>
             <label>
-              <span className='skellie-label'>
-                <h2 className='skellie-label-text'>
+              <span className='edit-skellie-label'>
+                <h2 className='edit-skellie-label-text'>
                   Title:
                 </h2>
               </span>
@@ -131,13 +132,13 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
                 value={title || ''}
                 onChange={update('title')}
                 placeholder="Title"
-                className='skellie-input'
+                className='edit-skellie-input'
               />
             </label>
             <div className="errors">{errors?.prompt}</div>
             <label>
-              <span className='skellie-label'>
-                <h2 className='skellie-label-text'>
+              <span className='edit-skellie-label'>
+                <h2 className='edit-skellie-label-text'>
                   Prompt (optional):
                 </h2>
               </span>
@@ -146,19 +147,19 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
                 value={prompt}
                 onChange={update('prompt')}
                 placeholder="Prompt"
-                className='skellie-input'
+                className='edit-skellie-input'
               /> */}
               <textarea
                 value={prompt || ''}
                 onChange={update('prompt')}
                 placeholder="Prompt"
-                className='skellie-input'
+                className='edit-skellie-input'
               />
             </label>
             <div className="errors">{errors?.maxBones}</div>
             <label>
-              <span className='skellie-label'>
-                <h2 className='skellie-label-text'>
+              <span className='edit-skellie-label'>
+                <h2 className='edit-skellie-label-text'>
                   Max Amount of Bones(Updates):
                 </h2>
               </span>
@@ -167,13 +168,13 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
                 value={maxBones || ''}
                 onChange={update('maxBones')}
                 placeholder="At least 5 bones"
-                className='skellie-input'
+                className='edit-skellie-input'
               />
             </label>
             <div className="errors">{errors?.maxCollaborators}</div>
             <label>
-              <span className='skellie-label'>
-                <h2 className='skellie-label-text'>
+              <span className='edit-skellie-label'>
+                <h2 className='edit-skellie-label-text'>
                   Max Amount of Collaborators:
                 </h2>
               </span>
@@ -182,13 +183,13 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
                 value={maxCollaborators || ''}
                 onChange={update('maxCollaborators')}
                 placeholder="Max Collaborators"
-                className='skellie-input'
+                className='edit-skellie-input'
               />
             </label>
             <div className="errors">{errors?.collaborators}</div>
             <label>
-              <span className='skellie-label'>
-                <h2 className='skellie-label-text'>
+              <span className='edit-skellie-label'>
+                <h2 className='edit-skellie-label-text'>
                   Collaborators:
                 </h2>
               </span>
@@ -201,12 +202,13 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
               onRemove={onRemove} 
               displayValue="username" 
               selectionLimit={maxCollaborators}
+              id="edit-collaborator-select"
               />
     
             {/* <div className="errors">{errors?.tags}</div>
             <label>
-              <span className='skellie-label'>
-                <h2 className='skellie-label-text'>
+              <span className='edit-skellie-label'>
+                <h2 className='edit-skellie-label-text'>
                   Tags:
                 </h2>
               </span>
@@ -215,13 +217,14 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
                 value={tags || ''}
                 onChange={update('tags')}
                 placeholder="Tags"
-                className='skellie-input'>
+                className='edit-skellie-input'>
                 </input>
             </label> */}
     
             <input
               onClick={e => skeletonSubmit(e)}
               className='skellie-form-submit-button'
+              id="edit-skellie-submit-button"
               type="submit"
               value="Save Changes"
               disabled={!title || !maxBones || !maxCollaborators || !tags }
