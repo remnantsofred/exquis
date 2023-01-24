@@ -100,14 +100,50 @@
     padding-bottom: 5vh;
   }
 
-  input.skellie-input, #collaborator-select, textarea.skellie-input {
+  input.skellie-input, textarea.skellie-input {
     align-items: center;
     font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-decoration: none;
     font-weight: 400;
   }
 
-  textarea.skellie-input::-webkit-scrollbar {
+div.multiselect-container, div.search-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 25em;
+  height: 15em;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-bottom: 5vh;
+  border-radius: 25px;
+}
+
+#collaborator-select {
+  margin-left: auto;
+  margin-right: auto;
+  width: 35em;
+  height: 15em;
+  padding-bottom: 5vh;
+  border-radius: 25px;
+}
+
+div.multiselect-container, div.search-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 25em;
+  height: 15em;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-bottom: 5vh;
+  border-radius: 25px;
+}
+
+div.collaborator-select.multiselect-container.multiSelectContainer {
+  align-self: center;
+}
+
+
+textarea.skellie-input::-webkit-scrollbar {
     margin-top: 4vh;
     height: 2px;
     width: 8px;
