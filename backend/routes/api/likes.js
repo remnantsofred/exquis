@@ -56,29 +56,39 @@ router.delete("/skeletons/:skeletonId",  requireUser, async (req, res, next) => 
   }
 });
 
-
-router.get('/', async (req, res) => {
-  let parent;
+router.get("/skeletons/:skeletonId"), async (req, res, next) => {
   try {
-    parent = await Skeleton.findById(req.params.skeletonId);
-  }
-
-  catch(err) {
-    const error = new Error('Parent skeleton not found');
-    error.statusCode = 404;
-    error.errors = { message: "No parent skeleton found with that id" };
-    return next(error); 
-  }
-  try {
-    const likes = await Like.find({ liker: liker._id })
-                               .sort({ createdAt: -1 })
-                               .populate("liker", "_id, username");
+    const likes = await Like.find({ skeleton: req.params.skeletonId });
     return res.json(likes);
-  }
-  catch(err) {
+  } catch (err) {
+    console.error(err);
     return res.json([]);
   }
-});
+}
+
+
+// router.get('/', async (req, res) => {
+//   let parent;
+//   try {
+//     parent = await Skeleton.findById(req.params.skeletonId);
+//   }
+
+//   catch(err) {
+//     const error = new Error('Parent skeleton not found');
+//     error.statusCode = 404;
+//     error.errors = { message: "No parent skeleton found with that id" };
+//     return next(error); 
+//   }
+//   try {
+//     const likes = await Like.find({ liker: liker._id })
+//                                .sort({ createdAt: -1 })
+//                                .populate("liker", "_id, username");
+//     return res.json(likes);
+//   }
+//   catch(err) {
+//     return res.json([]);
+//   }
+// });
 
 
 
@@ -93,15 +103,6 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/skeletons/:skeletonId"), async (req, res, next) => {
-  try {
-    const likes = await Like.find({ skeleton: req.params.skeletonId });
-    return res.json(likes);
-  } catch (err) {
-    console.error(err);
-    return res.json([]);
-  }
-}
 
 
 
