@@ -123,6 +123,7 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
 });
 
 
+
 router.delete('/:id', requireUser, async (req, res, next) => {
   try {
     // const skeleton = await Skeleton.findById(req.params.id);
