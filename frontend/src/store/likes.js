@@ -58,7 +58,6 @@ export const createLike = (newLike, skeletonId) => async (dispatch) => {
         });
         const like = await res.json();
         dispatch(receiveLike(like));
-        dispatch(fetchSkeleton(skeletonId));
         return(like)
     } catch (err) {
     }

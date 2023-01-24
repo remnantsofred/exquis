@@ -14,7 +14,7 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.session.user)
 
-  const votes = skeletonInfo.likes 
+  const votes = skeletonInfo?.likes 
   let skeleton = skeletonInfo
 
 

@@ -155,7 +155,8 @@ const skeletonsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_SKELETON:
       return { ...newState, [action.skeleton._id]: action.skeleton };
-    case RECEIVE_SKELETONS:
+      // return { ...newState, ...action.skeleton };
+      case RECEIVE_SKELETONS:
         return { ...newState, ...action.skeletons };
     case RECEIVE_USER_SKELETONS:
         return {...newState, ...action.skeletons};

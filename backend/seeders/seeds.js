@@ -419,6 +419,7 @@ comments.forEach(comment => {
 
 
 // Seed likes
+//TODO: change this so it's not a random user because a user can only like/dislike a skellie once
 const likes = [];
 
 for (const skeleton of skeletons) {
@@ -427,7 +428,7 @@ for (const skeleton of skeletons) {
     const like = new Like ({
       skeleton: skeleton._id,
       liker: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
-      type: faker.random.word(["like", "dislike", "like", "like"]) //[1, -1, 1, 1, 1, -1, -1]
+      type: faker.helpers.arrayElement(["like", "dislike", "like", "like", "like"]) //[1, -1, 1, 1, 1, -1, -1]
     });
     likes.push(like);
   }
