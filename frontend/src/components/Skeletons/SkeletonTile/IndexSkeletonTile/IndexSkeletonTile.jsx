@@ -22,8 +22,7 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
   const [downVote, setDownVote] = useState(false)
   const [voteCount, setVoteCount] = useState(votes.length)
 
-  console.log("skeleton.upVote", skeleton.upVote)
-  console.log("skeleton.downVote", skeleton.downVote)
+
 
 
   useEffect(() => {
@@ -94,8 +93,6 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
     }
   }
 
-  console.log("skeleton.upVote", skeleton.upVote)
-  console.log("skeleton.downVote", skeleton.downVote)
 
   const skeletonId = skeletonInfo._id
   const ownerId = skeletonInfo.owner._id
