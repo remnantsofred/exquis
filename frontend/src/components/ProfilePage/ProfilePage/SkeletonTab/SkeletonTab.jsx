@@ -12,8 +12,6 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
   const [ modalStatus, setModalStatus ] = useState(false);
   const history = useHistory();
   const sessionUser = SessionUserCheck()
-  console.log(sessionUser)
-
   // const isCurrent = (skellie) => {
   //   if (skellie.bones === []) {
   //     return (true)
@@ -46,7 +44,6 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
   const SkellieShowLink = (skellie, switchValue) => {
     // if (isCurrent(skellie)) {
     if (switchValue === 'current') {
-      console.log(userId === skellie.owner)
     return (
       <li key={skellie._id} className="profile-page-skellie-show-link-profile-page">
         <Link className="profile-page-skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link><span id="bone-counter">{`  -  ${skellie.bones.length} / ${skellie.maxBones} Bones`}</span>
