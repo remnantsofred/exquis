@@ -72,8 +72,10 @@ export const fetchSkeletons = () => async (dispatch) => {
 
 
 export const fetchSkeleton = (skeletonId) => async (dispatch) => {
+  console.log('fetchSkeleton')
   const res = await fetch(`/api/skeletons/${skeletonId}`);
   if (res.ok) {
+    console.log('res.ok')
     const skeleton = await res.json();    
     dispatch(receiveSkeleton(skeleton));
     return Promise.resolve();

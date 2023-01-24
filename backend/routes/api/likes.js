@@ -18,7 +18,7 @@ router.post("/skeletons/:skeletonId", async (req, res, next) => {
     const newLike = new Like({
       skeleton: req.params.skeletonId,
       liker: req.body.liker,
-      type: req.body.likeType
+      type: req.body.type
     });
     let like = await newLike.save();
     like = await like.populate('liker', '_id, username');
