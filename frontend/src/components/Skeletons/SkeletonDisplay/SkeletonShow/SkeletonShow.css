@@ -167,6 +167,17 @@ a.skeleton-show-profile-link:hover {
   transition: .5s;
 }
 
+a.skeleton-show-profile-current-collab-link {
+  text-decoration: none;
+  transition: .5s;
+}
+
+a.skeleton-show-profile-current-collab-link:hover {
+  text-decoration: none;
+  filter: invert(100%);
+  transition: .5s;
+}
+
 h3#skeleton-prompt {
   margin-top: .25vh;
   font-size: 1.5vw;
