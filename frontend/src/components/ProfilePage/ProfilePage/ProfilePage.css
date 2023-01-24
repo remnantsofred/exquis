@@ -187,17 +187,17 @@ h2.profile-bottom-title {
   font-family: Inter, sans-serif;
 }
 
-.skellie-show-link-profile-page {
-  font-size: 2.5vw;
+.profile-page-skellie-show-link-profile-page {
+  font-size: 2vw;
   text-decoration: none;
 }
 
-a.skellie-show-link-profile-page {
+a.profile-page-skellie-show-link-profile-page {
   transition: .25s;
   width: 50vw;
   text-decoration: none;
   color: black;
-  font-size: 2.5vw;
+  font-size: 1.75vw;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -215,10 +215,17 @@ a.skellie-show-link-profile-page {
 
 span#bone-counter {
   color: #545ca3;
+  font-size: 1.25vw;
+  margin-bottom: 0vh;
 }
 
 .profile-skellie-sep {
   width: 60vw;
   margin-left: 0.5vw;
   margin-right: auto;
+}
+
+div.edit-delete-div-profile-page {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
 }
