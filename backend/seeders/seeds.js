@@ -419,6 +419,7 @@ comments.forEach(comment => {
 
 
 // Seed likes
+//TODO: change this so it's not a random user because a user can only like/dislike a skellie once
 const likes = [];
 
 for (const skeleton of skeletons) {
