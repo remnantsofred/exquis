@@ -3,10 +3,10 @@ import { useSelector, useDispatch} from "react-redux"
 import { getSkeletons , fetchSkeletons, deleteSkeleton } from "../../../../store/skeletons";
 import { useEffect, useState } from "react";
 import SkeletonEditModal from "../../../Skeletons/SkeletonEditModal/SkeletonEditModal"
-import { getUsers, fetchUsers } from "../../../../store/users";
+import { getUsers, fetchUsers, getUser } from "../../../../store/users";
 import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
 
-const SkeletonTab = ({switchValue, skellies, userId}) => {
+const SkeletonTab = ({switchValue, userId}) => {
 
   const dispatch = useDispatch()
   const [ modalStatus, setModalStatus ] = useState(false);
@@ -21,6 +21,11 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
   //     return (false)
   //   }
   // };
+
+  const user = useSelector(getUser(userId))
+  const skellies = user?.skeletons
+
+
   useEffect(() => {
     dispatch(fetchUsers())
   },[])
@@ -84,7 +89,7 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
 
   for (let i = 0; i < skellies?.length; i++) { 
     let skellie = skellies[i]
-    if (skellie.collaborators.includes(userId) || (skellie.owner === userId)) {
+    if (skellie.collaborators.map((collaborator)=>collaborator._id).includes(userId) || (skellie.owner === userId)) {
       if ( skellie.bones.length < skellie.maxBones) {
         skelliesCurrent.push(skellie)
       } else {
@@ -92,7 +97,6 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
       }
     }
   }
-
 
 
   switch(switchValue) {

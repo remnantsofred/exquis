@@ -14,11 +14,12 @@ const ProfilePage = () => {
   const [loaded, setLoaded] = useState(false)
   const { userId } = useParams()
   const [tabVal, setTabVal] = useState("current")
-  const [skellies, setSkellies] = useState({})
+  // const [skellies, setSkellies] = useState({})
 
   
   
   const user = useSelector(getUser(userId))
+
   
   useEffect(() => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
@@ -34,30 +35,30 @@ const ProfilePage = () => {
   
   const userSkeletons = user?.skeletons
   
-  const whichSkellies = (switchValue) => {
-   switch(switchValue) {
-    case "current":
-      return (
-        skellies
-      )
-    case "owned":
-      return (
-        skellies
-      )
-    case "previous":
-      return (
-        skellies
-      )
-    default:
-      return (
-        "death, destruction"
-      )
-  }}
+  // const whichSkellies = (switchValue) => {
+  //  switch(switchValue) {
+  //   case "current":
+  //     return (
+  //       skellies
+  //     )
+  //   case "owned":
+  //     return (
+  //       skellies
+  //     )
+  //   case "previous":
+  //     return (
+  //       skellies
+  //     )
+  //   default:
+  //     return (
+  //       "death, destruction"
+  //     )
+  // }}
 
 
   const handleClick = (e) => {
     setTabVal(e.target.id)
-    whichSkellies(e.target.id)
+    // whichSkellies(e.target.id)
   }
 
 
