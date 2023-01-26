@@ -57,8 +57,6 @@ router.delete("/skeletons/:skeletonId",  requireUser, async (req, res, next) => 
 });
 
 router.get('/skeletons/:skeletonId', async (req, res, next) => {
-  console.log("in the likes route")
-  console.log(req.params.skeletonId, "req.params.skeletonId")
   try {
     const likes = await Like.find({ skeleton: req.params.skeletonId });
     return res.json(likes);

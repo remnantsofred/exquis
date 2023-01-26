@@ -33,13 +33,13 @@ const SkeletonShow = () => {
   const author = SessionUserCheck();
   const [ modalStatus, setModalStatus ] = useState(false);
   const [votes, setVotes] = useState([])
-
   const currentUser = useSelector(state => state.session.user)
 
 
   useEffect(() => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, []);
+
   const handlePost = (e) => {
     e.preventDefault();
     const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
@@ -157,6 +157,14 @@ const SkeletonShow = () => {
     const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
     const likeCount = skeleton.likes.length
     const CurrentLikeCount = likeCount + upVoteCount
+    const completeChecker = (bones, maxBones) => {
+      if (bones.length >= maxBones) {
+        return true
+      } else {
+        return false
+      }
+    }
+
     const CurrentCollaboratorColor = (collaborator) => {
         const colorObj = colorArr.find(color => color.author === collaborator)
         const color = colorObj.color
@@ -194,7 +202,13 @@ const SkeletonShow = () => {
                     <div id="skeleton-body">
                       <NewPlaceBones skellie={skellie} colorArr={colorArr} />
                     </div> 
-                      <div className="user-input-div">
+                      <div className="user-input-div" style={{display: completeChecker(skellie.bones, skellie.maxBones) ? "block" : "none" }}>
+                        <div id="current-writer-note" >
+                            <span>The bone limit has been reached.</span>
+                        </div>
+                      </div>
+
+                      <div className="user-input-div" style={{display: completeChecker(skellie.bones, skellie.maxBones) ? "none" : "block" }}>
                         <hr id="body-input-divider" />
                         <div id="current-writer-note" >
                             <span>It is</span>    

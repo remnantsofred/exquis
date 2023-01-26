@@ -3,14 +3,15 @@ import { useSelector, useDispatch} from "react-redux"
 import { getSkeletons , fetchSkeletons, deleteSkeleton } from "../../../../store/skeletons";
 import { useEffect, useState } from "react";
 import SkeletonEditModal from "../../../Skeletons/SkeletonEditModal/SkeletonEditModal"
-import { getUsers, fetchUsers } from "../../../../store/users";
+import { getUsers, fetchUsers, getUser } from "../../../../store/users";
+import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
 
-const SkeletonTab = ({switchValue, skellies, userId}) => {
+const SkeletonTab = ({switchValue, userId}) => {
 
   const dispatch = useDispatch()
   const [ modalStatus, setModalStatus ] = useState(false);
   const history = useHistory();
-
+  const sessionUser = SessionUserCheck()
   // const isCurrent = (skellie) => {
   //   if (skellie.bones === []) {
   //     return (true)
@@ -20,6 +21,11 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
   //     return (false)
   //   }
   // };
+
+  const user = useSelector(getUser(userId))
+  const skellies = user?.skeletons
+
+
   useEffect(() => {
     dispatch(fetchUsers())
   },[])
@@ -47,19 +53,19 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
       <li key={skellie._id} className="profile-page-skellie-show-link-profile-page">
         <Link className="profile-page-skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link><span id="bone-counter">{`  -  ${skellie.bones.length} / ${skellie.maxBones} Bones`}</span>
         <div className="edit-delete-div-profile-page">
-          { (userId === skellie.owner ) ? <button className="comment-update-button" onClick={(e) => handleSkellieUpdate(skellie, e, 'current')}>Edit</button> : <></>}
-          { (userId === skellie.owner ) ? <button className="comment-delete-button" onClick={(e) => handleSkellieDelete(skellie, e)} >Delete</button> : <></>} 
+          { (sessionUser._id === skellie.owner ) ? <button className="comment-update-button" onClick={(e) => handleSkellieUpdate(skellie, e, 'current')}>Edit</button> : <></>}
+          { (sessionUser._id === skellie.owner ) ? <button className="comment-delete-button" onClick={(e) => handleSkellieDelete(skellie, e)} >Delete</button> : <></>} 
         </div>
         <hr className="profile-skellie-sep"/>
       </li>
     )} else {
     return (
       <li key={skellie._id} className="profile-page-skellie-show-link-profile-page"> 
-        <Link className="profile-page-skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link>{ (skellie.bones.length >= skellie.maxBones) ? `// FINISHED` : ''}
+        <Link className="profile-page-skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link>{ (skellie.bones.length >= skellie.maxBones) ? `// FINISHED` : <span id="bone-counter">{`  -  ${skellie.bones.length} / ${skellie.maxBones} Bones`}</span>}
         
-        <div className="edit-delete-div">
-          { (userId === skellie.owner ) ? <button className="comment-update-button" onClick={(e) => handleSkellieUpdate(skellie, e, 'owned')}>Edit</button> : <></>}
-          { (userId === skellie.owner ) ? <button className="comment-delete-button" onClick={(e) => handleSkellieDelete(skellie, e)} >Delete</button> : <></>} 
+        <div className="edit-delete-div-profile-page">
+          { (sessionUser._id === skellie.owner ) ? <button className="comment-update-button" onClick={(e) => handleSkellieUpdate(skellie, e, 'owned')}>Edit</button> : <></>}
+          { (sessionUser._id === skellie.owner ) ? <button className="comment-delete-button" onClick={(e) => handleSkellieDelete(skellie, e)} >Delete</button> : <></>} 
         </div>
         <hr class="profile-skellie-sep"/>
       </li>
@@ -83,7 +89,7 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
 
   for (let i = 0; i < skellies?.length; i++) { 
     let skellie = skellies[i]
-    if (skellie.collaborators.includes(userId) || (skellie.owner === userId)) {
+    if (skellie.collaborators.map((collaborator)=>collaborator._id).includes(userId) || (skellie.owner === userId)) {
       if ( skellie.bones.length < skellie.maxBones) {
         skelliesCurrent.push(skellie)
       } else {
@@ -91,7 +97,6 @@ const SkeletonTab = ({switchValue, skellies, userId}) => {
       }
     }
   }
-
 
 
   switch(switchValue) {

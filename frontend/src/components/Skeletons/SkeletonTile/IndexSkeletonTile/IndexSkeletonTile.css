@@ -120,7 +120,7 @@
 
   button.vote-button {
     aspect-ratio: 1 / 1;
-    background: none;
+    background-color: none;
     border: none;
     padding-top: 0vh;
     padding-bottom: 0vh;
@@ -132,7 +132,7 @@
   }
 
   button#downvote-button {
-    margin-top: 1vw;
+    margin-top: 0vw;
     transition: .5s;
   }
 
@@ -142,31 +142,31 @@
     aspect-ratio: 1 / 1;
   }
 
-  button#upvote-button:hover, button#downvote-button:hover  {
+button#upvote-button:hover, button#downvote-button:hover  {
     cursor: pointer;
   }
 
-  button#upvote-button > img.vote-button-image {
+button#upvote-button > img.vote-button-image {
     transition: .5s;
   }
 
-  button#downvote-button > img.vote-button-image {
+button#downvote-button > img.vote-button-image {
     transition: .5s;
   }
 
-  button#upvote-button:hover > img.vote-button-image  {
+button#upvote-button:hover > img.vote-button-image  {
     filter: invert(75%);
     text-shadow: 2px 2px 2px;
     transition: .5s;
-    scale: 110%;
+    scale: 100%;
     cursor: pointer;
   } 
 
-  button#downvote-button:hover > img.vote-button-image  {
+button#downvote-button:hover > img.vote-button-image  {
     filter: invert(75%);
     text-shadow: 2px 2px 2px;
     transition: .5s;
-    scale: 110%;
+    scale: 100%;
     cursor: pointer;
   } 
 

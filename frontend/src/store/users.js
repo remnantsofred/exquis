@@ -134,13 +134,16 @@ const usersReducer = (state = { }, action) => {
       return { ...newState, [action.user._id]: action.user };
         // return { ...state, new: action.skeleton, new: undefined };
     case RECEIVE_USERS:
-        return { ...newState, ...action.users };
+      const usersHash = {};
+      action.users.forEach(user => {usersHash[user._id] = user})
+      return { ...newState, ...usersHash }; 
+      // return { ...newState, ...action.users };
     case REMOVE_USER:
         // const newState = { ...state };
-        delete newState[action.user._id];
-        return newState;
+      delete newState[action.user._id];
+      return newState;
     default:
-        return state;
+      return state;
   }
 }
 
