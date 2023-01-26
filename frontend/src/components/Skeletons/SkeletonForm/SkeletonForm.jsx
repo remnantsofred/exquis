@@ -25,6 +25,11 @@ function SkeletonForm () {
   const selectedList = [];
   const selectedCollaborators = [];
 
+  useEffect(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
+
+
 
   useEffect(() => {
     Promise.all([

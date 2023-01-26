@@ -33,15 +33,12 @@ const SkeletonShow = () => {
   let skeleton = skellie;
   const author = SessionUserCheck();
   const [ modalStatus, setModalStatus ] = useState(false);
-  
   const currentUser = useSelector(state => state.session.user)
   const [votes, setVotes] = useState([]);
   const [voteCount, setVoteCount] = useState(0)
   const [upVote, setUpVote] = useState(false)
   const [downVote, setDownVote] = useState(false)
-  // console.log("TOP OF THE PAGE");
-  // console.log("upVote: ", upVote);
-  // console.log("downVote: ", downVote);
+
   useEffect(() => {
     setVotes(skellie?.likes)
   })
@@ -51,7 +48,6 @@ const SkeletonShow = () => {
   }, [votes])
 
   const setUpVoteOrDownVote = () => {
-    // console.log("setUpVoteOrDownVote function called")
     if (votes?.length > 0) {
       votes.forEach((vote) => {
         if (vote.liker._id === currentUser._id) {
@@ -68,16 +64,13 @@ const SkeletonShow = () => {
    useEffect(() => {
     setUpVoteOrDownVote()
   })
-  // console.log("======= AFTER setUpVoteOrDownVote =======");
-  // console.log("upVote: ", upVote);
-  // console.log("downVote: ", downVote);
-  // console.log(" =========================")
-   
-  
+
+    
   
   useEffect(() => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, []);
+
   const handlePost = (e) => {
     e.preventDefault();
     const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
@@ -133,46 +126,7 @@ const SkeletonShow = () => {
     setModalStatus(false)
   }
 
-  console.log("upVote: ", upVote);
-
-  // const [votes, setVotesLikes] = useState([])
-  
-  // useEffect(() => {
-  //   setVotesLikes(skellie?.likes)
-  // })
-   
-
-  // let skeleton = skellie
-  
-  // const [upVote, setUpVote] = useState(false)
-  // const [downVote, setDownVote] = useState(false)
-  // const [voteCount, setVotes] = useState(votes.length)
-
-
-  // const setUpVoteOrDownVote = () => {
-  //   if (votes.length > 0) {
-  //     votes.forEach((vote) => {
-  //       if (vote.liker._id === currentUser._id) {
-  //         if (vote.type === 'like') {
-  //           setUpVote(true)
-  //         } else {
-  //           setDownVote(true)
-  //         }
-  //       }
-  //     })
-  //   }
-  // }
-
-  //  useEffect(() => {
-  //   setUpVoteOrDownVote()
-  // }, []) 
-
   const handleUpVote = (e) => {
-    // console.log("==== ====");
-    // console.log("inside handleUpVote");
-    // console.log("upVote: ", upVote);
-    // console.log("downVote: ", downVote);
-    // console.log("==== ====");
 
     e.preventDefault()
     if (currentUser) { 
@@ -244,6 +198,14 @@ const SkeletonShow = () => {
     const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
     // const likeCount = skeleton.likes.length
     // const CurrentLikeCount = likeCount + upVoteCount
+    const completeChecker = (bones, maxBones) => {
+      if (bones.length >= maxBones) {
+        return true
+      } else {
+        return false
+      }
+    }
+
     const CurrentCollaboratorColor = (collaborator) => {
         const colorObj = colorArr.find(color => color.author === collaborator)
         const color = colorObj.color
@@ -281,7 +243,13 @@ const SkeletonShow = () => {
                     <div id="skeleton-body">
                       <NewPlaceBones skellie={skellie} colorArr={colorArr} />
                     </div> 
-                      <div className="user-input-div">
+                      <div className="user-input-div" style={{display: completeChecker(skellie.bones, skellie.maxBones) ? "block" : "none" }}>
+                        <div id="current-writer-note" >
+                            <span>The bone limit has been reached.</span>
+                        </div>
+                      </div>
+
+                      <div className="user-input-div" style={{display: completeChecker(skellie.bones, skellie.maxBones) ? "none" : "block" }}>
                         <hr id="body-input-divider" />
                         <div id="current-writer-note" >
                             <span>It is</span>    

@@ -126,9 +126,9 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
               <IndexPlaceBones className="index-skeleton-body" bones={skeletonInfo.bones} />
             </div>
             <div className="index-skeleton-likes-container">
-              <button onClick={handleUpVote}><UpvoteButton /></button>
+              <button onClick={handleUpVote} className="vote-button" id="upvote-button"><UpvoteButton className="vote-button" id="upvote-button" /></button>
                 <p className="index-skeleton-like-count">{voteCount}</p>
-              <button onClick={handleDownVote}><DownvoteButton /></button>
+              <button onClick={handleDownVote} className="vote-button" id="downvote-button"><DownvoteButton id="downvote-button" /></button>
             </div>
           </div>
           {/* <div className="index-skeleton-tags-container"> */}
