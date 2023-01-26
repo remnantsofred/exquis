@@ -1,0 +1,76 @@
+.edit-modal {
+  text-align: center;
+  align-self: center;
+  /* width: 60vw;
+  height: max-content; */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4vh;
+  padding-bottom: 4px;
+  background-color: rgba(188, 208, 228, 1);
+  display: flexbox;
+  border-radius: 25px;
+  transition: .5s;
+
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+
+  /* flex-shrink: 3; */
+  text-align: center;
+  right: auto;
+  position: fixed;
+  transform: translateX(-50%);
+  top: 16px;
+  left: 50%;
+  width: 800px;
+  height: 800px;
+  /* height: max-content; */
+  color: #000;
+  z-index: 300;
+
+}
+
+.edit-modal-form{
+  width: 800px;
+  height: 800px; 
+}
+
+.edit-modal-background {
+  width: 100vw;
+  height: 100vh;
+  z-index: 200;
+  bottom: 0;
+  background-color: #000;
+  opacity: .7;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0; 
+}
+
+.resModalCloseBtn {
+  width: 20px;
+  height: 20px;
+  margin: 14px;
+  z-index: 301;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: inline-block;
+  text-indent: 200%;
+  white-space: nowrap;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-size: 20px auto;
+  background-position: 50%;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
