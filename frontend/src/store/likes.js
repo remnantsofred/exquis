@@ -41,10 +41,8 @@ export const getLikes = () => async (dispatch) => {
 }
 
 const fetchSkeletonLikesLocal = skeletonId => async dispatch => {
-    console.log("hittingfetchSkeletonLikesLocal")
     
     const res = await fetch(`/api/likes/skeletons/${skeletonId}`);
-    console.log(res, "res from fetchSkeletonLikesLocal")
     if (res.ok) {
         const data = await res.json();
         dispatch(receiveSkeletonLikes(skeletonId, data));

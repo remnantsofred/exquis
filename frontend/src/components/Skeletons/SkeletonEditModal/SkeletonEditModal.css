@@ -14,7 +14,7 @@
   border-radius: 25px;
   transition: .5s;
 
-  height: 50vh;
+  /* height: 50vh; */
 
   display: flex;
   flex-direction: column;
@@ -39,7 +39,7 @@
 }
 
 .edit-modal-form{
-  width: 80vw;
+  width: 78vw;
   height: 80vh;
 }
 
@@ -144,10 +144,21 @@ textarea.edit-skellie-input {
 #edit-collaborator-select {
   margin-left: auto;
   margin-right: auto;
-  width: 45em;
-  height: 5em;
-  padding-left: 6vw;
-  padding-right: 6vw;
+  width: 40em;
+  height: 15em;
+  /* padding-left: 2vw;
+  padding-right: 2vw; */
+  padding-bottom: 5vh;
+  border-radius: 25px;
+}
+
+div.multiselect-container, div.search-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 25em;
+  height: 15em;
+  padding-left: 2vw;
+  padding-right: 2vw;
   padding-bottom: 5vh;
   border-radius: 25px;
 }

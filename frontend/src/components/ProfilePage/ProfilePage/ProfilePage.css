@@ -206,6 +206,7 @@ a.profile-page-skellie-show-link-profile-page {
   /* number of lines to show */
   -webkit-box-orient: vertical;
   line-clamp: 1;
+  margin-bottom: -2vh;
 }
 
 #specific-skellie-link:hover {
@@ -216,7 +217,7 @@ a.profile-page-skellie-show-link-profile-page {
 span#bone-counter {
   color: #545ca3;
   font-size: 1.25vw;
-  margin-bottom: 0vh;
+  margin-bottom: -5vh;
 }
 
 .profile-skellie-sep {
@@ -226,6 +227,6 @@ span#bone-counter {
 }
 
 div.edit-delete-div-profile-page {
-  margin-top: 2vh;
+  margin-top: -2vh;
   margin-bottom: 2vh;
 }

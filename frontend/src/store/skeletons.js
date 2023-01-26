@@ -169,7 +169,6 @@ const skeletonsReducer = (state = {}, action) => {
         return newState;
     case RECEIVE_SKELETON_LIKES:
         // return {...newState, ...action.skeletonId.likes}
-        console.log("receive_skeleton_likes")
         let skeletonLikes = newState[action.skeletonId]
         skeletonLikes.likes = action.likes
         return newState;

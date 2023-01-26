@@ -25,6 +25,11 @@ const CurrentUserProfilePage = () => {
   // const user = useSelector(getUser(userId))
 
   useEffect(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
+
+
+  useEffect(() => {
     Promise.all([
       dispatch(fetchUser(userId))
       
