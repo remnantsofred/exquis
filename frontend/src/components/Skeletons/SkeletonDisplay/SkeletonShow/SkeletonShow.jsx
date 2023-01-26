@@ -30,46 +30,83 @@ const SkeletonShow = () => {
   const history = useHistory();
   const { skeletonId } = useParams()
   const skellie = useSelector(getSkeleton(skeletonId))
+  let skeleton = skellie;
   const author = SessionUserCheck();
   const [ modalStatus, setModalStatus ] = useState(false);
-  const [votes, setVotes] = useState([])
-
+  
   const currentUser = useSelector(state => state.session.user)
+  const [votes, setVotes] = useState([]);
+  const [voteCount, setVoteCount] = useState(0)
+  const [upVote, setUpVote] = useState(false)
+  const [downVote, setDownVote] = useState(false)
+  // console.log("TOP OF THE PAGE");
+  // console.log("upVote: ", upVote);
+  // console.log("downVote: ", downVote);
+  useEffect(() => {
+    setVotes(skellie?.likes)
+  })
 
+  useEffect(() => {
+    setVoteCount(votes?.length)
+  }, [votes])
 
+  const setUpVoteOrDownVote = () => {
+    // console.log("setUpVoteOrDownVote function called")
+    if (votes?.length > 0) {
+      votes.forEach((vote) => {
+        if (vote.liker._id === currentUser._id) {
+          if (vote.type === 'like') {
+            setUpVote(true)
+          } else {
+            setDownVote(true)
+          }
+        }
+      })
+    }
+  }
+
+   useEffect(() => {
+    setUpVoteOrDownVote()
+  })
+  // console.log("======= AFTER setUpVoteOrDownVote =======");
+  // console.log("upVote: ", upVote);
+  // console.log("downVote: ", downVote);
+  // console.log(" =========================")
+   
+  
+  
   useEffect(() => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, []);
   const handlePost = (e) => {
     e.preventDefault();
     const newComment = {"author": author._id, "text": comment, "parent": skeletonId}
-
+    
     dispatch(createComment(newComment, skeletonId));
     e.target.value = "";
     setComment("");
   };
-
-
+  
+  
   const ownerColorFxn = (owner, colorArr) => {
     const colorObj = colorArr.find(color => color.author === owner)
     return (
       colorObj.color
-    )
-  }
-
+      )
+    }
+    
   const therePrompt = (skellie) => {
     if (!skellie.prompt) {
       return (
-      <span>'n/a'</span>
+        <span>'n/a'</span>
     )} else {
       return (
         <span>{skellie.prompt}</span>
       )
     }
   }
-
-
-
+          
+          
   useEffect(() => {
     Promise.all([
       dispatch(fetchSkeleton(skeletonId)),
@@ -78,11 +115,11 @@ const SkeletonShow = () => {
       setLoaded(true);
     })
   }, [])
-
-
+          
+          
+          
   const handleSkellieUpdate = (e) => {
     e.preventDefault()
-    // dispatch(updateSkeleton(skeletonId))
     setModalStatus(1)
   }
 
@@ -95,51 +132,101 @@ const SkeletonShow = () => {
   const handleModalClose = () => {
     setModalStatus(false)
   }
+
+  console.log("upVote: ", upVote);
+
+  // const [votes, setVotesLikes] = useState([])
   
-  useEffect(() => {
-    setVotes(skellie?.likes)
-  })
+  // useEffect(() => {
+  //   setVotesLikes(skellie?.likes)
+  // })
    
 
-  let skeleton = skellie
+  // let skeleton = skellie
   
-  const [upVote, setUpVote] = useState(false)
-  const [downVote, setDownVote] = useState(false)
-  const [upVoteCount, setVoteCount] = useState(setVotes.length)
+  // const [upVote, setUpVote] = useState(false)
+  // const [downVote, setDownVote] = useState(false)
+  // const [voteCount, setVotes] = useState(votes.length)
+
+
+  // const setUpVoteOrDownVote = () => {
+  //   if (votes.length > 0) {
+  //     votes.forEach((vote) => {
+  //       if (vote.liker._id === currentUser._id) {
+  //         if (vote.type === 'like') {
+  //           setUpVote(true)
+  //         } else {
+  //           setDownVote(true)
+  //         }
+  //       }
+  //     })
+  //   }
+  // }
+
+  //  useEffect(() => {
+  //   setUpVoteOrDownVote()
+  // }, []) 
 
   const handleUpVote = (e) => {
+    // console.log("==== ====");
+    // console.log("inside handleUpVote");
+    // console.log("upVote: ", upVote);
+    // console.log("downVote: ", downVote);
+    // console.log("==== ====");
+
     e.preventDefault()
     if (currentUser) { 
-      if (!upVote ) {
-        const like = {likeType: 'like', skeleton: skeleton._id, liker: currentUser._id }
+      if (downVote) {
+        dispatch(deleteLike(skeleton._id, currentUser._id))
+        setDownVote(false)
+        setVoteCount(voteCount => voteCount - 1)
+        const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
         dispatch(createLike(like, skeleton._id))
         setUpVote(true)
-        setVoteCount(upVoteCount => upVoteCount + 1)
+        setVoteCount(voteCount => voteCount + 1)
       } else {
-        dispatch(deleteLike(skeleton._id, currentUser._id))
-        setUpVote(false)
-        setVoteCount (upVoteCount => upVoteCount - 1)
+        if (!upVote) {
+          const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
+          dispatch(createLike(like, skeleton._id))
+          setUpVote(true)
+          setVoteCount(voteCount => voteCount + 1)
+        } else {
+          dispatch(deleteLike(skeleton._id, currentUser._id))
+          setUpVote(false)
+          setVoteCount(voteCount => voteCount - 1)
+        }
       }
     }
   }
+
 
 
   const handleDownVote = (e) => {
     e.preventDefault()
+
     if (currentUser) {
-      if (downVote) {
+      if (upVote) {
         dispatch(deleteLike(skeleton._id, currentUser._id))
-        setDownVote(false)
-        setVoteCount (upVoteCount => upVoteCount - 1)
-      } else {
-        const like = {likeType: 'disLike', skeleton: skeleton._id, liker: currentUser._id }
+        setUpVote(false)
+        setVoteCount(voteCount => voteCount - 1)
+        const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
         dispatch(createLike(like, skeleton._id))
         setDownVote(true)
-        setVoteCount(upVoteCount => upVoteCount + 1)
-      }
+        setVoteCount(voteCount => voteCount + 1)
+      } else {
+        if (downVote) {
+          dispatch(deleteLike(skeleton._id, currentUser._id))
+          setDownVote(false)
+          setVoteCount(voteCount => voteCount - 1)
+        } else {
+          const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
+          dispatch(createLike(like, skeleton._id))
+          setDownVote(true)
+          setVoteCount(voteCount => voteCount + 1)
+        }
+      }  
     }
   }
-
 
   
   
@@ -155,8 +242,8 @@ const SkeletonShow = () => {
     const ownerColor = ownerColorFxn(ownerId, colorArr)
     const prompt = therePrompt(skellie)
     const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
-    const likeCount = skeleton.likes.length
-    const CurrentLikeCount = likeCount + upVoteCount
+    // const likeCount = skeleton.likes.length
+    // const CurrentLikeCount = likeCount + upVoteCount
     const CurrentCollaboratorColor = (collaborator) => {
         const colorObj = colorArr.find(color => color.author === collaborator)
         const color = colorObj.color
@@ -209,7 +296,8 @@ const SkeletonShow = () => {
                       </div>
                       <div className="horizontal-skeleton-likes-container">
                         <button onClick={handleDownVote} className="skeleton-show-downvote"><DownvoteButton className="skeleton-show-downvote" /></button>
-                          <h1 id="skeleton-show-votes">{CurrentLikeCount}</h1>
+                          <h1 id="skeleton-show-votes">{voteCount}</h1>
+                          {/* <h1 id="skeleton-show-votes">{votes}</h1> */}
                         <button onClick={handleUpVote} className="skeleton-show-upvote"><UpvoteButton className="skeleton-show-upvote"/></button>
                       </div>
                 </div>
