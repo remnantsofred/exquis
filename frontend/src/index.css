@@ -73,7 +73,7 @@ form > .errors {
 		margin-right: 1vw;
 	}
 
-	##-webkit-scrollbar-corner {
+	::-webkit-scrollbar-corner {
 		background-color: none;
 	}
 	::-webkit-scrollbar-thumb {

@@ -112,7 +112,7 @@ const SkeletonShow = () => {
 
           
         <div className="comments-section">
-          <h2 for="comment" id="comment-section-label">Thoughts?</h2>
+          <h2 htmlFor="comment" id="comment-section-label">Thoughts?</h2>
           <div className='create-comment-container' id="comment-form-container">
             {/* <br /> */}
             <textarea name="comment" id="comment-input" className="create-comment-form" rows="5" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>

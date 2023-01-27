@@ -104,7 +104,7 @@ hr#edit-delete-title-divider {
 div.edit-delete-div {
   display: flex;
   flex-direction: column;
-  z-index: 99999999;
+  z-index: 4;
 }
 
 button.comment-update-button, button.comment-delete-button {
