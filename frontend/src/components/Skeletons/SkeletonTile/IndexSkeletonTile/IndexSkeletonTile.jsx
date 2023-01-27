@@ -9,10 +9,13 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import { createLike, deleteLike } from '../../../../store/likes'
+import SessionUserCheck from '../../../SessionUserCheck/SessionUserCheck'
+
 
 const IndexSkeletonTile = ({skeletonInfo}) => {
   const dispatch = useDispatch()
-  const currentUser = useSelector(state => state.session.user)
+  const currentUser = SessionUserCheck();
+
 
   const votes = skeletonInfo?.likes 
   let skeleton = skeletonInfo

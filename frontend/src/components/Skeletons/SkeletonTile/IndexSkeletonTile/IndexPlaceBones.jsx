@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import Loading from "../../../Loading/Loading"
 
 
-const IndexPlaceBones = (bones) => {
+const IndexPlaceBones = ({bones}) => {
   const [loaded, setLoaded] = useState(false)
   const body = []
   
@@ -22,7 +22,7 @@ const IndexPlaceBones = (bones) => {
   }, [])
   
   const compileBones = () => {
-    bones.bones.map(bone => {
+    bones.map(bone => {
       const sentence = <span key={bone._id}>{bone.text}</span>
       body.push(sentence)    
     })
