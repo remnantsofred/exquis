@@ -80,7 +80,6 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
       skeleton.prompt = req.body.prompt,
       skeleton.maxBones = req.body.maxBones,
       skeleton.maxCollaborators = req.body.maxCollaborators,
-      skeleton.collaborators = req.body.collaborators,
       // skeleton.bones = req.body.bones,
       skeleton.tags = req.body.tags
       // need to add future logic to add/remove tags
@@ -89,19 +88,25 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
     let newCollaborators = [];
     let removedCollaborators = [];
 
+    
+  
+
     for (const newCollaborator of req.body.collaborators) {
-      if (!skeleton.collaborators.includes(newCollaborator)) {
+      if (!skeleton.collaborators.map((collaborator) => collaborator.toString()).includes(newCollaborator.toString())) {
         newCollaborators.push(newCollaborator);
       } else  {
         currentCollaborators.push(newCollaborator);
       }
     }
 
+
     for (const prevCollaborator of skeleton.collaborators) {
-      if (!req.body.collaborators.includes(prevCollaborator)) {
+      if (!req.body.collaborators.map((collaborator) => collaborator.toString()).includes(prevCollaborator.toString())) {
         removedCollaborators.push(prevCollaborator);
       }
     }
+    
+    skeleton.collaborators = req.body.collaborators;
 
     await skeleton.save()
     skeleton = await Skeleton.findById(req.params.id)

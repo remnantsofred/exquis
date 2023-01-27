@@ -238,7 +238,7 @@ const SkeletonShow = () => {
                   
                 </div>
                   <div className="sub-title">
-                    <Link to={`/users/${skellie.owner._id}`} class="skeleton-show-profile-link">
+                    <Link to={`/users/${skellie.owner._id}`} className="skeleton-show-profile-link">
                       <h3 id="skeleton-owner" style={{color: `${ownerColor}`}}>{skellie.owner.username}</h3>
                     </Link>
                     <h3 id="skeleton-prompt"><span id="name-prompt-divider">/////</span> prompt: "{prompt}"</h3>
@@ -260,7 +260,7 @@ const SkeletonShow = () => {
                         <hr id="body-input-divider" />
                         <div id="current-writer-note" >
                             <span>It is</span>    
-                              <Link to={`/users/${CurrentCollaboratorObj._id}`} class="skeleton-show-profile-current-collab-link" id="skeleton-show-current-collab-text" style={{color: `${CurrentCollaboratorColor(CurrentCollaboratorObj._id)}`}}>
+                              <Link to={`/users/${CurrentCollaboratorObj._id}`} className="skeleton-show-profile-current-collab-link" id="skeleton-show-current-collab-text" style={{color: `${CurrentCollaboratorColor(CurrentCollaboratorObj._id)}`}}>
                                 <span id="current-writer-username">
                                   {`${CurrentCollaboratorObj.username}`}'s
                                 </span>
@@ -293,7 +293,7 @@ const SkeletonShow = () => {
 
           
         <div className="comments-section">
-          <h2 for="comment" id="comment-section-label">{skellie.comments.length === 1 ? `${skellie.comments.length} Comment` : `${skellie.comments.length} Comments`}</h2>
+          <h2 htmlFor="comment" id="comment-section-label">{skellie.comments.length === 1 ? `${skellie.comments.length} Comment` : `${skellie.comments.length} Comments`}</h2>
           <div className='create-comment-container' id="comment-form-container">
             <textarea name="comment" id="comment-input" className="create-comment-form" rows="5" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
             <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit</button>
