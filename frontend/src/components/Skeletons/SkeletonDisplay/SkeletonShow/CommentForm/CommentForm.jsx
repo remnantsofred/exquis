@@ -45,7 +45,7 @@ const CommentForm = ({comment, skeleton}) => {
       return (
         <>
         
-        <div className="post-index-item-comment" key={user._id}> 
+        <div className="post-index-item-comment" key={`post-index-item-comment-${user._id}`}> 
             <div className="comment-panel-container" >  
                 <Link id="link-to-profile" to={`/users/${comment.author._id}`}>
                     <h3 className="commenter-username" id="commenter-username">{comment.author.username}</h3>

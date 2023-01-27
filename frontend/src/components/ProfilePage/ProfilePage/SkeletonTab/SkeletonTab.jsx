@@ -50,7 +50,7 @@ const SkeletonTab = ({switchValue, userId}) => {
     // if (isCurrent(skellie)) {
     if (switchValue === 'current') {
     return (
-      <li key={skellie._id} className="profile-page-skellie-show-link-profile-page">
+      <li key={`skellie-show-${skellie._id}`} className="profile-page-skellie-show-link-profile-page">
         <Link className="profile-page-skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link><span id="bone-counter">{`  -  ${skellie.bones.length} / ${skellie.maxBones} Bones`}</span>
         <div className="edit-delete-div-profile-page">
           { (sessionUser._id === skellie.owner ) ? <button className="comment-update-button" onClick={(e) => handleSkellieUpdate(skellie, e, 'current')}>Edit</button> : <></>}
@@ -60,7 +60,7 @@ const SkeletonTab = ({switchValue, userId}) => {
       </li>
     )} else {
     return (
-      <li key={skellie._id} className="profile-page-skellie-show-link-profile-page"> 
+      <li key={`skellie-show-${skellie._id}`} className="profile-page-skellie-show-link-profile-page"> 
         <Link className="profile-page-skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link>{ (skellie.bones.length >= skellie.maxBones) ? `// FINISHED` : <span id="bone-counter">{`  -  ${skellie.bones.length} / ${skellie.maxBones} Bones`}</span>}
         
         <div className="edit-delete-div-profile-page">
@@ -163,7 +163,7 @@ const SkeletonTab = ({switchValue, userId}) => {
           {skelliesCurrent === [] 
             ? <div className="skellie-show-link-profile-page">No current skeletons</div> 
             : (skelliesCurrent.map((skellie) => (
-              <div key={skellie._id}>  
+              <div key={`skellie-tab-div-${skellie._id}`}>  
               <SkellieShowLink skellie={skellie} switchValue={switchValue} />
               {/* {modalStatus === 1 && <SkeletonEditModal skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />} */}
               </div>
