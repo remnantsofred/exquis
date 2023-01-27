@@ -20,7 +20,21 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
 
   const [upVote, setUpVote] = useState(false)
   const [downVote, setDownVote] = useState(false)
-  const [voteCount, setVoteCount] = useState(votes.length)
+  // const [voteCount, setVoteCount] = useState(votes.length)
+
+  const countLikesDislikes = () => {
+    let likes = 0
+    let dislikes = 0
+    votes.forEach((vote) => {
+      if (vote.type === 'like') {
+        likes++
+      } else {
+        dislikes--
+      }
+    }
+    )
+    return likes + dislikes
+  }
 
 
   const setUpVoteOrDownVote = () => {
@@ -40,6 +54,7 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
 
   useEffect(() => {
     setUpVoteOrDownVote()
+    countLikesDislikes()
   }, []) 
 
   
@@ -49,21 +64,17 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
       if (downVote) {
         dispatch(deleteLike(skeleton._id, currentUser._id))
         setDownVote(false)
-        setVoteCount (voteCount => voteCount - 1)
         const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
         dispatch(createLike(like, skeleton._id))
         setUpVote(true)
-        setVoteCount(voteCount => voteCount + 1)
       } else {
         if (!upVote) {
           const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
           dispatch(createLike(like, skeleton._id))
           setUpVote(true)
-          setVoteCount(voteCount => voteCount + 1)
         } else {
           dispatch(deleteLike(skeleton._id, currentUser._id))
           setUpVote(false)
-          setVoteCount (voteCount => voteCount - 1)
         }
       }
     }
@@ -77,21 +88,17 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
       if (upVote) {
         dispatch(deleteLike(skeleton._id, currentUser._id))
         setUpVote(false)
-        setVoteCount (voteCount => voteCount - 1)
         const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
         dispatch(createLike(like, skeleton._id))
         setDownVote(true)
-        setVoteCount(voteCount => voteCount + 1)
       } else {
         if (downVote) {
           dispatch(deleteLike(skeleton._id, currentUser._id))
           setDownVote(false)
-          setVoteCount (voteCount => voteCount - 1)
         } else {
           const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
           dispatch(createLike(like, skeleton._id))
           setDownVote(true)
-          setVoteCount(voteCount => voteCount + 1)
         }
       }  
     }
@@ -127,7 +134,7 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
             </div>
             <div className="index-skeleton-likes-container">
               <button onClick={handleUpVote} className="vote-button" id="upvote-button"><UpvoteButton className="vote-button" id="upvote-button" /></button>
-                <p className="index-skeleton-like-count">{voteCount}</p>
+                <p className="index-skeleton-like-count">{countLikesDislikes()}</p>
               <button onClick={handleDownVote} className="vote-button" id="downvote-button"><DownvoteButton id="downvote-button" /></button>
             </div>
           </div>

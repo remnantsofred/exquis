@@ -61,8 +61,23 @@ const SkeletonShow = () => {
     }
   }
 
+  const countLikesDislikes = () => {
+    let likes = 0
+    let dislikes = 0
+    votes.forEach((vote) => {
+      if (vote.type === 'like') {
+        likes++
+      } else {
+        dislikes--
+      }
+    }
+    )
+    return likes + dislikes
+  }
+
    useEffect(() => {
     setUpVoteOrDownVote()
+    countLikesDislikes()
   })
 
     
@@ -133,21 +148,17 @@ const SkeletonShow = () => {
       if (downVote) {
         dispatch(deleteLike(skeleton._id, currentUser._id))
         setDownVote(false)
-        setVoteCount(voteCount => voteCount - 1)
         const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
         dispatch(createLike(like, skeleton._id))
         setUpVote(true)
-        setVoteCount(voteCount => voteCount + 1)
       } else {
         if (!upVote) {
           const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
           dispatch(createLike(like, skeleton._id))
           setUpVote(true)
-          setVoteCount(voteCount => voteCount + 1)
         } else {
           dispatch(deleteLike(skeleton._id, currentUser._id))
           setUpVote(false)
-          setVoteCount(voteCount => voteCount - 1)
         }
       }
     }
@@ -162,21 +173,17 @@ const SkeletonShow = () => {
       if (upVote) {
         dispatch(deleteLike(skeleton._id, currentUser._id))
         setUpVote(false)
-        setVoteCount(voteCount => voteCount - 1)
         const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
         dispatch(createLike(like, skeleton._id))
         setDownVote(true)
-        setVoteCount(voteCount => voteCount + 1)
       } else {
         if (downVote) {
           dispatch(deleteLike(skeleton._id, currentUser._id))
           setDownVote(false)
-          setVoteCount(voteCount => voteCount - 1)
         } else {
           const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
           dispatch(createLike(like, skeleton._id))
           setDownVote(true)
-          setVoteCount(voteCount => voteCount + 1)
         }
       }  
     }
@@ -264,7 +271,7 @@ const SkeletonShow = () => {
                       </div>
                       <div className="horizontal-skeleton-likes-container">
                         <button onClick={handleDownVote} className="skeleton-show-downvote"><DownvoteButton className="skeleton-show-downvote" /></button>
-                          <h1 id="skeleton-show-votes">{voteCount}</h1>
+                          <h1 id="skeleton-show-votes">{countLikesDislikes()}</h1>
                           {/* <h1 id="skeleton-show-votes">{votes}</h1> */}
                         <button onClick={handleUpVote} className="skeleton-show-upvote"><UpvoteButton className="skeleton-show-upvote"/></button>
                       </div>
