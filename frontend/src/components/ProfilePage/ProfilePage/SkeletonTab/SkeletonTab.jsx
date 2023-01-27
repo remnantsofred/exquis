@@ -67,7 +67,7 @@ const SkeletonTab = ({switchValue, userId}) => {
           { (sessionUser._id === skellie.owner ) ? <button className="comment-update-button" onClick={(e) => handleSkellieUpdate(skellie, e, 'owned')}>Edit</button> : <></>}
           { (sessionUser._id === skellie.owner ) ? <button className="comment-delete-button" onClick={(e) => handleSkellieDelete(skellie, e)} >Delete</button> : <></>} 
         </div>
-        <hr class="profile-skellie-sep"/>
+        <hr className="profile-skellie-sep"/>
       </li>
     )}
   }
