@@ -91,8 +91,8 @@
   }
 
   #collaborator-select {
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
     width: 45vw;
     /* max-width: 27em; */
     height: 5em;
@@ -109,12 +109,12 @@
     margin-bottom: -2vh;
   }
 
-    div.multiselect-container#collaborator-select {
+div.multiselect-container#collaborator-select {
     margin-top: -2vh;
   }
 div.multiselect-container, div.search-wrapper {
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
   width: 48vw;
   height: 4vh;
   padding-left: 2vw;
@@ -125,7 +125,7 @@ div.multiselect-container, div.search-wrapper {
 
 #collaborator-select {
   margin-left: 0;
-  margin-right: auto;
+  /* margin-right: auto; */
   width: 48vw;
   height: max-content;
   padding-bottom: 2vh;
@@ -147,14 +147,15 @@ div.multiselect-container, div.search-wrapper.searchWrapper {
 
 div.search-wrapper.searchWrapper {
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  margin-left: 0vw;
+  /* margin-left: 0vw; */
 }
 
-div.collaborator-select.multiselect-container.multiSelectContainer {
+div#collaborator-select.multiselect-container.multiSelectContainer {
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   align-self: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin-right: 20vw;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
 }
 
 
