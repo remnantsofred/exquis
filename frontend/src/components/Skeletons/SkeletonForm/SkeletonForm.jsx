@@ -130,22 +130,16 @@ function SkeletonForm () {
       maxCollaborators,
       collaborators: selectedCollaborators
     };
-    // const errors = useSelector(state => state.errors.skeletons)
-    // console.log(errors, "errors")
-    // console.log(state.errors.skeletons, "errors.skeletons")
+    
     if (Object.values(errors).length === 0) {
       dispatch(createSkeleton(skeleton))
         .then((res) => {history.push(`/skeletons/${res._id}`)})
     }
-    // if (res.ok){
-    //   history.push(`/skeletons/${res._id}`)
-    // }
+    
 
   }
 
-  // if (errors?.skeletons?.length ) {
-  //   return console.log(errors.skeletons)
-  // }
+  
 
   if (!loaded) {
     return (
