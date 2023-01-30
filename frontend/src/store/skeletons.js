@@ -27,12 +27,12 @@ const removeSkeleton = skeletonId => ({
   skeletonId
 });
 
-const receiveErrors = errors => ({
+export const receiveErrors = errors => ({
   type: RECEIVE_SKELETON_ERRORS,
   errors
 });
 
-const clearErrors = () => ({
+export const clearErrors = () => ({
   type: CLEAR_SKELETON_ERRORS
 });
 
@@ -40,6 +40,7 @@ const receiveUserSkeletons = skeletons => ({
   type: RECEIVE_USER_SKELETONS,
   skeletons
 });
+
 
 
 export const getSkeletons = (store) => { 
