@@ -44,9 +44,9 @@ const GenSkeletonTile = ({skeletonInfo}) => {
             </div>
           </div>
           {/* <div className="skeleton-tags-container"> */}
-            <ul className='skeleton-tags'>
+            {/* <ul className='skeleton-tags'>
               {tags.map((tag) => <p className="ind-tag" key={tag}> #{`${tag}`} </p>)}
-            </ul>
+            </ul> */}
           {/* </div> */}
       </div>
       </Link>
