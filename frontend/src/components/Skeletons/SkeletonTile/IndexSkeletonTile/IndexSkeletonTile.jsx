@@ -135,19 +135,10 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
               <IndexPlaceBones className="index-skeleton-body" bones={skeletonInfo.bones} />
             </div>
             <div className="index-skeleton-likes-container">
-              {/* <button onClick={handleUpVote} className="vote-button" id="upvote-button"><img src={Upvote} className="vote-button-image vote-button" id="upvote-button"/></button> */}
-              {/* <button onClick={handleUpVote} className="vote-button" id="upvote-button"><UpvoteButton className="vote-button" id="upvote-button" /></button> */}
-                <p className="index-skeleton-like-count">{countLikesDislikes()}</p>
-                <p className="index-skeleton-like-text">Votes</p>
-              {/* <button onClick={handleDownVote} className="vote-button" id="downvote-button"><DownvoteButton id="downvote-button" /></button> */}
-              {/* <button onClick={handleDownVote} className="vote-button" id="downvote-button"><img src={Downvote} className="vote-button-image" id="downvote-button"  /></button> */}
+              <p className="index-skeleton-like-count">{countLikesDislikes()}</p>
+              <p className="index-skeleton-like-caption">Votes</p>
             </div>
           </div>
-          {/* <div className="index-skeleton-tags-container"> */}
-            {/* <ul className='index-skeleton-tags'>
-              {tags.map((tag) => <p className="index-ind-tag" key={tag} > #{`${tag}`} </p>)}
-            </ul> */}
-          {/* </div> */}
       </div>
     </li>
   )

@@ -83,7 +83,7 @@
   .index-skeleton-body-container {
     margin-top: 4vh;
     font-style: italic;
-    width: 50vw;
+    width: 45vw;
     color: rgb(42, 42, 42);
     margin-bottom: .25vh; 
   }
@@ -98,6 +98,7 @@
     -webkit-line-clamp: 5;
       /* number of lines to show */
     line-clamp: 5;
+    width: 28vw;
     -webkit-box-orient: vertical;
     font-size: 2vw;
     line-height: 3vh;
@@ -121,9 +122,15 @@
     scale: 75%;
     margin-left: 1vw;
     margin-right: -2.5vw;
+    margin-top: 5vh;
     text-align: center;
     align-content: center;
     vertical-align: center;
+  }
+
+  p.index-skeleton-like-caption{
+    font-size: 1.5vw;
+    margin-top: 0.75vh;
   }
 
   button.vote-button {
@@ -150,11 +157,11 @@
     aspect-ratio: 1 / 1;
   }
 
-button#upvote-button:hover, button#downvote-button:hover  {
+  button#upvote-button:hover, button#downvote-button:hover  {
     cursor: pointer;
   }
 
-button#upvote-button > img.vote-button-image {
+  button#upvote-button > img.vote-button-image {
     transition: .5s;
   }
 

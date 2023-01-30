@@ -53,11 +53,8 @@ const GenSkeletonTile = ({skeletonInfo}) => {
               <GenPlaceBones className="skeleton-body" bones={skeletonInfo.bones} />
             </div>
             <div className="skeleton-likes-container">
-              {/* <UpvoteButton /> */}
-                {/* <p className="skeleton-like-count">{skeletonInfo.likes.length}</p> */}
-                <p className="skeleton-like-count">{countLikesDislikes()}</p>
-                <p className="skeleton-like-caption">Votes</p>
-              {/* <DownvoteButton /> */}
+              <p className="skeleton-like-count">{countLikesDislikes()}</p>
+              <p className="skeleton-like-caption">Votes</p>
             </div>
           </div>
       </div>

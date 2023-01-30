@@ -1,6 +1,6 @@
   div.skeleton-tile-container {
     width: 60vw;
-    height: min-content;
+    height: 15vh;
     padding-left: 4vw;
     padding-right: 4vw;
     padding-top: 4vh;
@@ -111,7 +111,7 @@
     flex-direction: column;
     margin-left: auto;
     margin-right: 0;
-    margin-top: 3.5vh;
+    margin-top: 2vh;
     text-align: center;
     align-content: center;
     vertical-align: center;
@@ -127,6 +127,7 @@
 
   p.skeleton-like-caption{
     font-size: 1.5vw;
+    margin-top: 0.75vh;
   }
 
   button#upvote-button {
