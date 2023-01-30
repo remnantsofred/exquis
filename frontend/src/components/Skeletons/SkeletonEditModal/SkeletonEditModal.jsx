@@ -20,30 +20,19 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
   const history = useHistory();
   const currentUser = useSelector(state => state.session.user);
   const users = useSelector(getUsers);
-  const errors = useSelector(state => state.errors.skeletons);
   const dispatch = useDispatch();
   const options = users?.filter(user => user._id !== currentUser._id).map(user => ({username: user.username, _id: user._id}));
   const [selectedValue, setSelectedValue] = useState(skellie.collaborators);
   const selectedList = [];
   // const [selectedCollaborators, setSelectedCollaborators] = useState([]);
   const [ modalStatus, setModalStatus ] = useState(false);
-
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    // setCurrentValues(skellie);
     setLoaded(true);
   }, [modalStatus])
 
-  // const setCurrentValues = (skellie) => {
-  //   for (const collaborator of skellie.collaborators){
-  //     for (const option of options) {
-  //       if (collaborator._id === option.id) {
-  //         selectedValue.push(option)
-  //       }
-  //     }
-  //   };
-  //   setSelectedValue(selectedValue)
-  // }
+
   
   const onSelect =(selectedList, selectedItem) => {
     selectedValue.push(selectedItem)
@@ -51,30 +40,59 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
   }
   
   const onRemove = (selectedList, removedItem) => {
-    // const index = selectedCollaborators.indexOf(removedItem.id)
-    // selectedCollaborators.splice(index, 1)
-    // setSelectedCollaborators(selectedCollaborators)
     const index = selectedValue.indexOf(removedItem)
     selectedValue.splice(index, 1)
     setSelectedValue(selectedValue)
-
   }
   
-  const update = field => {
+  const update = (e, field) => {
     let setState;
-
+    const value = e.currentTarget.value;
+    const newErrors = {...errors};
     switch (field) {
       case 'title':
         setState = setTitle;
+        if (value.length > 100) {
+          newErrors[field] = 'Skeleton title is required and must be between 1 and 100 characters';
+        } else if (value.length < 1){
+          newErrors[field] = 'Skeleton title is required and must be between 1 and 100 characters';
+        } else {
+          delete newErrors[field];
+        }
+        setErrors(newErrors);
         break;
       case 'prompt':
         setState = setPrompt;
+        if (value.length > 150) {
+          newErrors[field] = 'Prompt must be less than 150 characters';
+        } else {
+          delete newErrors[field];
+        }
+        setErrors(newErrors);
         break;
       case 'maxBones':
         setState = setMaxBones;
+        let num = parseInt(value);
+        if (num < 5) {
+          newErrors[field] = 'Skeleton should have at least 5 bones and no more than 50 bones';
+        } else if (num > 50) {
+          newErrors[field] = 'Skeleton should have at least 5 bones and no more than 50 bones';
+        } else {
+          delete newErrors[field];
+        }
+        setErrors(newErrors);
         break;
       case 'maxCollaborators':
         setState = setMaxCollaborators;
+        let numCollab = parseInt(value);
+        if (numCollab < 1) {
+          newErrors[field] = 'Skeleton should have at least 1 collaborator and no more than 50 collaborators';
+        } else if (numCollab > 50) {
+          newErrors[field] = 'Skeleton should have at least 1 collaborator and no more than 50 collaborators';
+        } else {
+          delete newErrors[field];
+        }
+        setErrors(newErrors);
         break;
       case 'tags':
         setState = setTags;
@@ -83,13 +101,11 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
         throw Error('Unknown field in Signup Form');
     }
 
-    return e => setState(e.currentTarget.value);
+    setState(value);
   }
 
   const skeletonSubmit = (e) => {
     e.preventDefault();
-
-
     const skeleton = {
       title,
       prompt,
@@ -97,13 +113,14 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
       maxCollaborators,
       collaborators: selectedValue.map(value=> value._id)
     };
-    dispatch(updateSkeleton(skellie._id, skeleton))
-    handleModalClose();
+    if (Object.values(errors).length === 0) {
+      dispatch(updateSkeleton(skellie._id, skeleton))
+      handleModalClose();
+    }
     // .then((res) => {history.push(`/skeletons/${res._id}`)})
   }
 
   const handleClose = () => {
-
     handleModalClose();
   }
 
@@ -130,7 +147,7 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
               <br/>
               <input type="text"
                 value={title || ''}
-                onChange={update('title')}
+                onChange={e => update(e,'title')}
                 placeholder="Title"
                 className='edit-skellie-input'
               />
@@ -143,15 +160,9 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
                 </h2>
               </span>
               <br/>
-              {/* <input type="text"
-                value={prompt}
-                onChange={update('prompt')}
-                placeholder="Prompt"
-                className='edit-skellie-input'
-              /> */}
               <textarea
                 value={prompt || ''}
-                onChange={update('prompt')}
+                onChange={e => update(e, 'prompt')}
                 placeholder="Prompt"
                 className='edit-skellie-input'
               />
@@ -166,7 +177,7 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
               <br/>
               <input type="number"
                 value={maxBones || ''}
-                onChange={update('maxBones')}
+                onChange={e => update(e, 'maxBones')}
                 placeholder="At least 5 bones"
                 className='edit-skellie-input'
               />
@@ -181,7 +192,7 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
               <br/>
               <input type="number"
                 value={maxCollaborators || ''}
-                onChange={update('maxCollaborators')}
+                onChange={e => update(e, 'maxCollaborators')}
                 placeholder="Max Collaborators"
                 className='edit-skellie-input'
               />
