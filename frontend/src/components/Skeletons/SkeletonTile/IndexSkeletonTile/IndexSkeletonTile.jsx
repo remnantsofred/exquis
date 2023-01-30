@@ -135,9 +135,9 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
             </div>
           </div>
           {/* <div className="index-skeleton-tags-container"> */}
-            <ul className='index-skeleton-tags'>
+            {/* <ul className='index-skeleton-tags'>
               {tags.map((tag) => <p className="index-ind-tag" key={tag} > #{`${tag}`} </p>)}
-            </ul>
+            </ul> */}
           {/* </div> */}
       </div>
     </li>

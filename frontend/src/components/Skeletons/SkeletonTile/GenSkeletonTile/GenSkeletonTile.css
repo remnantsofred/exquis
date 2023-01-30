@@ -75,7 +75,7 @@
   }
 
   .skeleton-body-container {
-    margin-top: 4vh;
+    margin-top: 2vh;
     font-style: italic;
     height: 9vh;
     width: 50vw;
@@ -83,6 +83,7 @@
     margin-bottom: -4vh; 
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 2vw;
     /* margin-bottom: -10.5vw; */
     display: -webkit-box;
     /* margin-bottom: 3vw; */

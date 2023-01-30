@@ -23,7 +23,7 @@ const IndexPlaceBones = ({bones}) => {
   
   const compileBones = () => {
     bones.map(bone => {
-      const sentence = <span key={bone._id}>{bone.text}</span>
+      const sentence = <span key={bone._id}>{bone.text} </span>
       body.push(sentence)    
     })
     return (

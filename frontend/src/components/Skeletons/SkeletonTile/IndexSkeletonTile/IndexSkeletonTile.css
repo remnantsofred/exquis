@@ -31,6 +31,10 @@
     width: 30vw;
   }
 
+  div.index-tile-container {
+    height: 21vh;
+  }
+
   h1.index-title {
     font-weight: 400;
     font-size: 2.5vw;
@@ -85,6 +89,7 @@
   }
 
   .index-skeleton-body-container {
+    margin-top: 3vh;
     overflow: hidden;
     text-overflow: ellipsis;
     /* margin-bottom: -10.5vw; */
@@ -94,6 +99,8 @@
       /* number of lines to show */
     line-clamp: 5;
     -webkit-box-orient: vertical;
+    font-size: 2vw;
+    line-height: 3vh;
   }
 
   span.index-skeleton-body {
@@ -106,6 +113,7 @@
     /* number of lines to show */
     line-clamp: 5;
     -webkit-box-orient: vertical;
+    line-height: 4vh;
   }
 
   div.index-skeleton-likes-container {
@@ -229,13 +237,13 @@ button#downvote-button:hover > img.vote-button-image  {
     background: #2e33385b;
   }
 
-  ul.index-skeleton-tags ~ li {
+  /* ul.index-skeleton-tags ~ li {
     /* overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     line-clamp: 1;
     -webkit-box-orient: horizontal; */
-  }
+  /* } */
 
   p.index-ind-tag {
     font-style: italic;

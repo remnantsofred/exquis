@@ -33,7 +33,8 @@ const SkeletonShow = () => {
   let skeleton = skellie;
   const author = SessionUserCheck();
   const [ modalStatus, setModalStatus ] = useState(false);
-  const currentUser = useSelector(state => state.session.user)
+  // const currentUser = useSelector(state => state.session.user)
+  const currentUser = SessionUserCheck()
   const [votes, setVotes] = useState([]);
   const [voteCount, setVoteCount] = useState(0)
   const [upVote, setUpVote] = useState(false)
