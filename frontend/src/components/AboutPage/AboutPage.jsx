@@ -93,7 +93,7 @@ const AboutPage = () => {
                   <br />
                 </blockquote>
                  <br />
-                <a href='https://en.wikipedia.org/wiki/Exquisite_corpse' id="wiki-link"> ~ Exquisite corpse (Wikipedia) </a>
+                <a href='https://en.wikipedia.org/wiki/Exquisite_corpse' target="_blank" id="wiki-link"> ~ Exquisite corpse (Wikipedia) </a>
               </div>
             </div>
 
@@ -111,7 +111,7 @@ const AboutPage = () => {
             </div>
             <h1 className='about-sub-greeting'>about the developers</h1> 
             <div id="about-hr-container-2">
-              <hr id="about-hr-2" />
+              {/* <hr id="about-hr-2" /> */}
             </div>
               <div id="about-grid-container-2" grid-template-columns="5">
               <div className="about-container-2" id="daphne-about">
@@ -128,10 +128,10 @@ const AboutPage = () => {
                       <p id="mini-descriptor">Some of her other projects include:</p>
                       <ul>
                         <li className='project-list-link'>                    
-                          // <a href='https://cosmere-pass.onrender.com/'>Cosmerepass</a> (ClassPass Clone)
+                          // <a href='https://cosmere-pass.onrender.com/' target="_blank">Cosmerepass</a> (ClassPass Clone)
                         </li>
                         <li className='project-list-link'>
-                          // <a href='https://remnantsofred.github.io/momos_misadventures/'>Momo's Misadventures</a> (Minigame Collection)
+                          // <a href='https://remnantsofred.github.io/momos_misadventures/' target="_blank">Momo's Misadventures</a> (Minigame Collection)
                         </li>
                       </ul>
                     </div>
@@ -154,10 +154,10 @@ const AboutPage = () => {
                     <p id="mini-descriptor">Some of her other projects include:</p>
                     <ul>
                       <li className='project-list-link'>                    
-                        // <a href='https://instapound.onrender.com/'>Instapound</a> (Instagram Clone)
+                        // <a href='https://instapound.onrender.com/' target="_blank">Instapound</a> (Instagram Clone)
                       </li>
                       <li className='project-list-link'>
-                        // <a href='https://andreacanog.github.io/XmasClash/'>X-Mas Clash</a> (Tile Switch Game)
+                        // <a href='https://andreacanog.github.io/XmasClash/' target="_blank">X-Mas Clash</a> (Tile Switch Game)
                       </li>
                     </ul>
                   </div>
@@ -175,15 +175,15 @@ const AboutPage = () => {
                   In his spare time, Nathan likes reading, sampling coffee, cooking new foods, listening to all sorts of metal, and annoying his cat, Artemis, with lots of love and affection.
                   <br />
                   <br />
-                  <br />
+
                   <div className='projects-list'>
                     <p id="mini-descriptor">Some of his other projects include:</p>
                     <ul>
                       <li className='project-list-link'>                    
-                        // <a href='https://haeuncreative.github.io/mosatic/'>Mosatic</a> (Interactive Music App)
+                        // <a href='https://haeuncreative.github.io/mosatic/' target="_blank">Mosatic</a> (Interactive Music App)
                       </li>
                       <li className='project-list-link'>
-                        // <a href='https://tremolo.onrender.com/'>Tremolo</a> (Reverb Clone)
+                        // <a href='https://tremolo.onrender.com/' target="_blank">Tremolo</a> (Reverb Clone)
                       </li>
                     </ul>
                   </div>
@@ -211,13 +211,7 @@ const AboutPage = () => {
       <h1 class={isDisobey ? "danger-text" : "silent-text"} id="danger-text-3">YOU HAVEN'T REFRESHED YET?? WHAT ARE YOU WAITING FOR?? DEAR LORD</h1>
 
       <div id="current-user-whitespace">
-        <br className='whitespace' />
-        <br className='whitespace' />
-        <br className='whitespace' />
-        <br className='whitespace' />
-        <br className='whitespace' />
-        <br className='whitespace' />
-        <br className='whitespace' />
+
         {/* <br className='whitespace' /> */}
 
       </div>
