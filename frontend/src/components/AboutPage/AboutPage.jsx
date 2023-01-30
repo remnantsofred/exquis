@@ -6,7 +6,13 @@ import Loading from '../Loading/Loading'
 import AniFrame1 from '../../assets/profile_page/exquis_smol_ani_1.png'
 import AniFrame2 from '../../assets/profile_page/exquis_smol_ani_2.png'
 import ExquisLogo from '../../assets/main-nav-bar/exquisLogo.png'
-import DangerImage from '../../assets/profile_page/danger_anger.jfif'
+import SocialLinkDiv from './SocialLinkDiv'
+import DeveloperPicture from './DeveloperPicture'
+import DangerImage2 from '../../assets/profile_page/angerdog.jfif'
+
+import DaphnePic from '../../assets/social-media-icons/daphneGithub.jfif'
+import AndreaPic from '../../assets/social-media-icons/andreaGithub.jfif'
+import NathanPic from '../../assets/social-media-icons/nathanGithub.png'
 
 import { getUser, fetchUser } from '../../store/users'
 
@@ -18,10 +24,21 @@ const AboutPage = () => {
   const [loaded, setLoaded] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isDisobey, setIsDisobey] = useState(false)
-  // const { userId } = useParams()
-  // const [tabVal, setTabVal] = useState("current")
-  // const [skellies, setSkellies] = useState({})
-  // const user = useSelector(getUser(userId))
+  
+  const daphneGithub = "https://github.com/remnantsofred"
+  const daphneLinkedin = " https://www.linkedin.com/in/lamdaphne/"
+  const daphneSocials = SocialLinkDiv(daphneGithub, daphneLinkedin)
+  const daphneProfile = DeveloperPicture(DaphnePic)
+
+  const andreaGithub = "https://github.com/andreacanog"
+  const andreaLinkedin = "https://www.linkedin.com/in/andrea-cano-gisbert-4402151b8/"
+  const andreaSocials = SocialLinkDiv(andreaGithub, andreaLinkedin)
+  const andreaProfile = DeveloperPicture(AndreaPic)
+
+  const nathanGithub = "https://github.com/haeuncreative"
+  const nathanLinkedin = "https://www.linkedin.com/in/nathankwon818/"
+  const nathanSocials = SocialLinkDiv(nathanGithub, nathanLinkedin)
+  const nathanProfile = DeveloperPicture(NathanPic)
 
   useEffect(() => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
@@ -40,11 +57,6 @@ const AboutPage = () => {
     setIsDisobey(true)
   }
 
-  // const OwnedSkeletons = () => {
-  //   const filteredSkeletons =  skeletons.filter(skeleton => skeleton.ownerId === userId);
-  //   return (filteredSkeletons);
-  // }
-  // if (user !== null) setLoaded(true)
   if (!loaded) {
     return (
       <div>
@@ -97,6 +109,93 @@ const AboutPage = () => {
             <div id="about-hr-container">
               <hr id="about-hr" />
             </div>
+            <h1 className='about-sub-greeting'>about the developers</h1> 
+            <div id="about-hr-container-2">
+              <hr id="about-hr-2" />
+            </div>
+              <div id="about-grid-container-2" grid-template-columns="5">
+              <div className="about-container-2" id="daphne-about">
+                {daphneProfile}
+                <h2 className="developer-name" >Daphne Lam</h2>
+                <div id="developer-text">
+                  <blockquote className='developer-bio'>
+                    Daphne enjoys puzzles, reading, running, all forms of movement, and trying new things. 
+                    She's also obsessed with her two cats Momo and Ash.
+                    <br />
+                    <br />
+                    <br />
+                    <div className='projects-list'>
+                      <p id="mini-descriptor">Some of her other projects include:</p>
+                      <ul>
+                        <li className='project-list-link'>                    
+                          // <a href='https://cosmere-pass.onrender.com/'>Cosmerepass</a> (ClassPass Clone)
+                        </li>
+                        <li className='project-list-link'>
+                          // <a href='https://remnantsofred.github.io/momos_misadventures/'>Momo's Misadventures</a> (Minigame Collection)
+                        </li>
+                      </ul>
+                    </div>
+                  </blockquote>
+                </div>
+                <br />
+                {daphneSocials}
+              </div>
+              <div id="about-vr-container-2">
+                <hr id="about-vr-2" />
+              </div>
+              <div className="about-container-2" id="andrea-about">
+                {andreaProfile}
+                <h2 className="developer-name" >Andrea Cano</h2>
+                <blockquote className='developer-bio'>
+                  Andrea enjoys socializing and catching up with friends, trying new foods, traveling, and doing any type of sport. At home, she loves spending time with her fiancé and their dog, Dobby.
+                  <br />
+                  <br />
+                  <div className='projects-list'>
+                    <p id="mini-descriptor">Some of her other projects include:</p>
+                    <ul>
+                      <li className='project-list-link'>                    
+                        // <a href='https://instapound.onrender.com/'>Instapound</a> (Instagram Clone)
+                      </li>
+                      <li className='project-list-link'>
+                        // <a href='https://andreacanog.github.io/XmasClash/'>X-Mas Clash</a> (Tile Switch Game)
+                      </li>
+                    </ul>
+                  </div>
+                </blockquote>
+                 <br />
+                 {andreaSocials}
+              </div>
+                <div id="about-vr-container-3">
+                <hr id="about-vr-3" />
+              </div>
+              <div className="about-container-2" id="nathan-about">
+                {nathanProfile}
+                <h2 className="developer-name" >Nathan Kwon</h2>
+                <blockquote className='developer-bio'>
+                  In his spare time, Nathan likes reading, sampling coffee, cooking new foods, listening to all sorts of metal, and annoying his cat, Artemis, with lots of love and affection.
+                  <br />
+                  <br />
+                  <br />
+                  <div className='projects-list'>
+                    <p id="mini-descriptor">Some of his other projects include:</p>
+                    <ul>
+                      <li className='project-list-link'>                    
+                        // <a href='https://haeuncreative.github.io/mosatic/'>Mosatic</a> (Interactive Music App)
+                      </li>
+                      <li className='project-list-link'>
+                        // <a href='https://tremolo.onrender.com/'>Tremolo</a> (Reverb Clone)
+                      </li>
+                    </ul>
+                  </div>
+
+                </blockquote>
+                 <br />
+                 {nathanSocials}
+              </div>
+            </div>
+            <div id="about-hr-container">
+              <hr id="about-hr" />
+            </div>
           <div className="current-user-options-container">
             <ul className='current-user-options'>
               <li className='user-option' onClick={DangerClick}>Don't think of clicking me. Don't do it.</li>
@@ -104,7 +203,9 @@ const AboutPage = () => {
           </div>
         </div>
       </div>
-      <img src={DangerImage} class={isDisobey ? "cat-activate" : "danger-image"} />
+      <div class={isDisobey ? "cat-activate" : "danger-image"} >
+        <img src={DangerImage2} class={isDisobey ? "cat-activate" : "danger-image"} />
+      </div>
       <h1 class={isDisobey ? "danger-text" : "silent-text"} id="danger-text-1">YOU JUST HAD TO - I WARNED YOU. I WARNED YOU BUT YOU SAID 'OOOH NO, NO NO I GOTTA PRESS IT NO'</h1>
       <h1 class={isDisobey ? "danger-text" : "silent-text"} id="danger-text-2">LOOK WHAT YOU DID. NOW YOU HAVE TO REFRESH THE PAGE. ARE YOU HAPPY NOW???? ARE YOU???? ARE YOU HAPPY? ARE YOU??</h1>
       <h1 class={isDisobey ? "danger-text" : "silent-text"} id="danger-text-3">YOU HAVEN'T REFRESHED YET?? WHAT ARE YOU WAITING FOR?? DEAR LORD</h1>
