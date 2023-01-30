@@ -42,44 +42,6 @@ const SkeletonShow = () => {
   useEffect(() => {
     setVotes(skellie?.likes)
   })
-
-  useEffect(() => {
-    setVoteCount(votes?.length)
-  }, [votes])
-
-  const setUpVoteOrDownVote = () => {
-    if (votes?.length > 0) {
-      votes.forEach((vote) => {
-        if (vote.liker._id === currentUser._id) {
-          if (vote.type === 'like') {
-            setUpVote(true)
-          } else {
-            setDownVote(true)
-          }
-        }
-      })
-    }
-  }
-
-  const countLikesDislikes = () => {
-    let likes = 0
-    let dislikes = 0
-    votes.forEach((vote) => {
-      if (vote.type === 'like') {
-        likes++
-      } else {
-        dislikes--
-      }
-    }
-    )
-    return likes + dislikes
-  }
-
-   useEffect(() => {
-    setUpVoteOrDownVote()
-    countLikesDislikes()
-  })
-
     
   
   useEffect(() => {
@@ -141,11 +103,52 @@ const SkeletonShow = () => {
     setModalStatus(false)
   }
 
-  const handleUpVote = (e) => {
 
+  const countLikesDislikes = () => {
+    let likes = 0
+    let dislikes = 0
+    votes.forEach((vote) => {
+      if (vote.type === 'like') {
+        likes++
+      } else {
+        dislikes--
+      }
+    }
+    )
+    console.log(likes, dislikes, 'likes dislikes')
+    return likes + dislikes
+  }
+
+  useEffect(() => {
+    setVoteCount(votes?.length)
+  }, [votes])
+
+  const setUpVoteOrDownVote = () => {
+    if (votes?.length > 0) {
+      votes.forEach((vote) => {
+        if (vote.liker._id === currentUser._id) {
+          if (vote.type === 'like') {
+            setUpVote(true)
+          } else {
+            setDownVote(true)
+          }
+        }
+      })
+    }
+  }
+
+   useEffect(() => {
+    setUpVoteOrDownVote()
+    countLikesDislikes()
+  })
+
+
+  const handleUpVote = (e) => {
+    console.log('upvote')
     e.preventDefault()
     if (currentUser) { 
       if (downVote) {
+        console.log('delete dislike and create a like')
         dispatch(deleteLike(skeleton._id, currentUser._id))
         setDownVote(false)
         const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
@@ -153,10 +156,12 @@ const SkeletonShow = () => {
         setUpVote(true)
       } else {
         if (!upVote) {
+          console.log('create like')
           const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
           dispatch(createLike(like, skeleton._id))
           setUpVote(true)
         } else {
+          console.log('delete like')
           dispatch(deleteLike(skeleton._id, currentUser._id))
           setUpVote(false)
         }
@@ -203,8 +208,8 @@ const SkeletonShow = () => {
     const ownerColor = ownerColorFxn(ownerId, colorArr)
     const prompt = therePrompt(skellie)
     const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
-    // const likeCount = skeleton.likes.length
-    // const CurrentLikeCount = likeCount + upVoteCount
+  
+
     const completeChecker = (bones, maxBones) => {
       if (bones.length >= maxBones) {
         return true
