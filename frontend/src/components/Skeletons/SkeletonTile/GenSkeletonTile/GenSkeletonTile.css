@@ -1,6 +1,8 @@
   div.skeleton-tile-container {
     width: 60vw;
-    height: 15vh;
+    min-height: 12vh;
+    height: 14vh;
+    max-height: 15vh;
     padding-left: 4vw;
     padding-right: 4vw;
     padding-top: 4vh;
@@ -37,7 +39,7 @@
 
   h1.title, h1.title-author-divider, h1.author {
     font-weight: 400;
-    font-size: 2.5vw;
+    font-size: 2vw;
   }
 
   h1.title, h1.author {
@@ -83,15 +85,15 @@
     margin-bottom: -4vh; 
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 2vw;
+    font-size: 1.25vw;
     /* margin-bottom: -10.5vw; */
     display: -webkit-box;
     /* margin-bottom: 3vw; */
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     /* number of lines to show */
     -webkit-box-orient: vertical;
-    line-clamp: 2;
-    line-height: 5vh;
+    line-clamp: 3;
+    line-height: 3vh;
   }
 
   .skeleton-body-container > p {
@@ -111,7 +113,7 @@
     flex-direction: column;
     margin-left: auto;
     margin-right: 0;
-    margin-top: 2vh;
+    margin-top: .75vh;
     text-align: center;
     align-content: center;
     vertical-align: center;
@@ -126,53 +128,9 @@
   }
 
   p.skeleton-like-caption{
-    font-size: 1.5vw;
+    font-size: 1vw;
     margin-top: 0.75vh;
   }
-
-  button#upvote-button {
-    margin-top: 1vw;
-    transition: .5s;
-  }
-
-  button#downvote-button {
-    margin-top: 1vw;
-    transition: .5s;
-  }
-
-  img.vote-button-image {
-    max-width: 2vw;
-    max-height: 2vw;
-    aspect-ratio: 1 / 1;
-  }
-
-  button#upvote-button:hover, button#downvote-button:hover  {
-    cursor: pointer;
-  }
-
-  button#upvote-button > img.vote-button-image {
-    transition: .5s;
-  }
-
-  button#downvote-button > img.vote-button-image {
-    transition: .5s;
-  }
-
-  button#upvote-button:hover > img.vote-button-image  {
-    filter: invert(75%);
-    text-shadow: 2px 2px 2px;
-    transition: .5s;
-    scale: 100%;
-    cursor: pointer;
-  } 
-
-  button#downvote-button:hover > img.vote-button-image  {
-    filter: invert(75%);
-    text-shadow: 2px 2px 2px;
-    transition: .5s;
-    scale: 100%;
-    cursor: pointer;
-  } 
 
   div.skeleton-tags-container {
     width: 50vw;
@@ -228,6 +186,6 @@
   }
 
   .skeleton-like-count {
-    font-size: 2.5vw;
-    margin-top: 2vh;
+    font-size: 2vw;
+    margin-top: .5vh;
   }

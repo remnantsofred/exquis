@@ -19,11 +19,6 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
   const votes = skeletonInfo?.likes 
   let skeleton = skeletonInfo
 
-
-  // const [upVote, setUpVote] = useState(false)
-  // const [downVote, setDownVote] = useState(false)
-  // const [voteCount, setVoteCount] = useState(votes.length)
-
   const countLikesDislikes = () => {
     let likes = 0
     let dislikes = 0
@@ -38,82 +33,8 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
     return likes + dislikes
   }
 
-
-  // const setUpVoteOrDownVote = () => {
-  //   if (votes.length > 0) {
-  //     votes.forEach((vote) => {
-  //       if (vote.liker._id === currentUser._id) {
-  //         if (vote.type === 'like') {
-  //           setUpVote(true)
-  //         } else {
-  //           setDownVote(true)
-  //         }
-  //       }
-  //     })
-  //   }
-  // }
-
-
-  // useEffect(() => {
-  //   setUpVoteOrDownVote()
-  //   countLikesDislikes()
-  // }, []) 
-
-  
-  // const handleUpVote = (e) => {
-  //   e.preventDefault()
-  //   if (currentUser) { 
-  //     if (downVote) {
-  //       dispatch(deleteLike(skeleton._id, currentUser._id))
-  //       setDownVote(false)
-  //       const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
-  //       dispatch(createLike(like, skeleton._id))
-  //       setUpVote(true)
-  //     } else {
-  //       if (!upVote) {
-  //         const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
-  //         dispatch(createLike(like, skeleton._id))
-  //         setUpVote(true)
-  //       } else {
-  //         dispatch(deleteLike(skeleton._id, currentUser._id))
-  //         setUpVote(false)
-  //       }
-  //     }
-  //   }
-  // }
-
-
-  // const handleDownVote = (e) => {
-  //   e.preventDefault()
-
-  //   if (currentUser) {
-  //     if (upVote) {
-  //       dispatch(deleteLike(skeleton._id, currentUser._id))
-  //       setUpVote(false)
-  //       const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
-  //       dispatch(createLike(like, skeleton._id))
-  //       setDownVote(true)
-  //     } else {
-  //       if (downVote) {
-  //         dispatch(deleteLike(skeleton._id, currentUser._id))
-  //         setDownVote(false)
-  //       } else {
-  //         const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
-  //         dispatch(createLike(like, skeleton._id))
-  //         setDownVote(true)
-  //       }
-  //     }  
-  //   }
-  // }
-
-
   const skeletonId = skeletonInfo._id
   const ownerId = skeletonInfo.owner._id
-
-  const collaborators = ["natty", "daphne", "andrea"]
-  const skeletonBody = "A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information Pepsi-Cola."
-  const likes = 20
-  const tags = ["happy",  "nature", "scary",  "romance", "thriller", "mystery", "fantasy", "sci-fi"]
 
   return (
     <li className='skeleton-tile-object'>

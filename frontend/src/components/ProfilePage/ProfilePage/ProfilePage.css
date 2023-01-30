@@ -81,7 +81,7 @@ div.profile-icon-border, div.profile-icon, img#icon-image {
 }
 
 h1#username {
-  margin-top: 19vh;
+  margin-top: max(19vh);
   margin-right: auto;
   margin-left: auto;
   font-family: Inter, sans-serif;

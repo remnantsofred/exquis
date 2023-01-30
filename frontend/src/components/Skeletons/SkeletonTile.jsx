@@ -35,9 +35,7 @@ const SkeletonTile = ({skeletonInfo}) => {
               <p className="skeleton-body">{skeletonInfo.skeletonBody}</p>
             </div>
             <div className="skeleton-likes-container">
-              <UpvoteButton />
                 <p className="skeleton-like-count">{skeletonInfo.likes}</p>
-              <DownvoteButton />
             </div>
           </div>
           <div className="skeleton-tags-container">
