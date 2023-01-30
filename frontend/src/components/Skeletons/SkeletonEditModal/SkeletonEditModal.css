@@ -184,7 +184,7 @@ textarea.edit-skellie-input {
 div.multiselect-container, div.search-wrapper.searchWrapper {
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   /* width: 40vw; */
-  height: 4vh;
+  height: 8vh;
   vertical-align: middle;
   padding-top: 1vh;
   /* padding-left: 2vw;
@@ -195,6 +195,7 @@ div.multiselect-container, div.search-wrapper.searchWrapper {
 
 div.search-wrapper.searchWrapper {
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  height: 12vh;
   /* margin-left: auto; */
   /* margin-right: 5vw; */
 }
@@ -202,14 +203,11 @@ div.search-wrapper.searchWrapper {
 div.edit-collaborator-select.multiselect-container.multiSelectContainer {
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   align-self: center;
+  height: 40vh;
   /* margin-left: auto;
   margin-right: auto; */
   text-align: center;
   /* width: 40vw; */
-}
-
-#edit-collaborator-select {
-
 }
 
 /* div.multiselect-container, div.search-wrapper {
@@ -224,5 +222,6 @@ div.edit-collaborator-select.multiselect-container.multiSelectContainer {
 } */
 
 input#edit-skellie-submit-button {
+  margin-top: 6vh;
   margin-bottom: 2vh;
 }
