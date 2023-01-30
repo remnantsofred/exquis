@@ -107,10 +107,11 @@
   }
 
   div.skeleton-likes-container {
-    display: flexbox;
+    display: flex;
+    flex-direction: column;
     margin-left: auto;
     margin-right: 0;
-    margin-top: 2vh;
+    margin-top: 3.5vh;
     text-align: center;
     align-content: center;
     vertical-align: center;
@@ -122,6 +123,10 @@
     border: none;
     padding-top: 0vh;
     padding-bottom: 0vh;
+  }
+
+  p.skeleton-like-caption{
+    font-size: 1.5vw;
   }
 
   button#upvote-button {
@@ -219,4 +224,9 @@
     filter: opacity(100%);
     transition: 1s;
     cursor: pointer;
+  }
+
+  .skeleton-like-count {
+    font-size: 2.5vw;
+    margin-top: 2vh;
   }

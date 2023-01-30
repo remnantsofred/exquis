@@ -9,6 +9,21 @@ const GenSkeletonTile = ({skeletonInfo}) => {
 
   const skeletonId = skeletonInfo._id
   const ownerId = skeletonInfo.owner._id
+  const votes = skeletonInfo?.likes
+
+  const countLikesDislikes = () => {
+    let likes = 0
+    let dislikes = 0
+    votes.forEach((vote) => {
+      if (vote.type === 'like') {
+        likes++
+      } else {
+        dislikes--
+      }
+    }
+    )
+    return likes + dislikes
+  }
 
   // "A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information Pepsi-Cola."
   const tags = ["lorem",  "ipsum", "dolor",  "sit", "amet", "consectetur", "adipiscing", "elit"]
@@ -38,16 +53,13 @@ const GenSkeletonTile = ({skeletonInfo}) => {
               <GenPlaceBones className="skeleton-body" bones={skeletonInfo.bones} />
             </div>
             <div className="skeleton-likes-container">
-              <UpvoteButton />
-                <p className="skeleton-like-count">{skeletonInfo.likes.length}</p>
-              <DownvoteButton />
+              {/* <UpvoteButton /> */}
+                {/* <p className="skeleton-like-count">{skeletonInfo.likes.length}</p> */}
+                <p className="skeleton-like-count">{countLikesDislikes()}</p>
+                <p className="skeleton-like-caption">Votes</p>
+              {/* <DownvoteButton /> */}
             </div>
           </div>
-          {/* <div className="skeleton-tags-container"> */}
-            {/* <ul className='skeleton-tags'>
-              {tags.map((tag) => <p className="ind-tag" key={tag}> #{`${tag}`} </p>)}
-            </ul> */}
-          {/* </div> */}
       </div>
       </Link>
     </li>

@@ -2,26 +2,21 @@ import { useParams, useHistory, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getSkeleton, fetchSkeleton, updateSkeleton, deleteSkeleton } from '../../../../store/skeletons'
-import { getBones, fetchBones } from '../../../../store/bones'
 import Loading from "../../../Loading/Loading"
-import DownvoteButton from "../../DownvoteButton"
-import UpvoteButton from "../../UpvoteButton"
 import CollaboratorColorMatch from "./CollaboratorColorMatch/CollaboratorColorMatch"
 import CollaboratorsListMap from "./CollaboratorsListMap"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
 import NewPlaceBones from "./PlaceBones"
 import NewBoneInput from "./NewBoneInput/NewBoneInput"
-import CommentForm from "./CommentForm/CommentForm"
 import CommentPanel from "./CommentPanel/CommentPanel"
 import { createComment } from "../../../../store/comments"
 import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
 import "./SkeletonShow.css"
-import {getCommentsForSkeleton} from "../../../../store/skeletons"
-import { fetchSkeletonComments } from "../../../../store/comments"
-import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
 import { fetchUsers, getUser } from "../../../../store/users"
 import SkeletonEditModal from "../../SkeletonEditModal/SkeletonEditModal"
 import { createLike, deleteLike } from "../../../../store/likes"
+import Downvote from "../../../../assets/skeleton_tile/triangle_button_down.png"
+import Upvote from "../../../../assets/skeleton_tile/triangle_button_up.png"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
@@ -41,32 +36,8 @@ const SkeletonShow = () => {
   const [downVote, setDownVote] = useState(false)
 
   useEffect(() => {
-    setVotes(skellie?.likes)
-  })
-
-  useEffect(() => {
-    setVoteCount(votes?.length)
-  }, [votes])
-
-  const setUpVoteOrDownVote = () => {
-    if (votes?.length > 0) {
-      votes.forEach((vote) => {
-        if (vote.liker._id === currentUser._id) {
-          if (vote.type === 'like') {
-            setUpVote(true)
-          } else {
-            setDownVote(true)
-          }
-        }
-      })
-    }
-  }
-
-   useEffect(() => {
-    setUpVoteOrDownVote()
-  })
-
-    
+    setVotes(skellie?.likes);
+  })    
   
   useEffect(() => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
@@ -127,28 +98,68 @@ const SkeletonShow = () => {
     setModalStatus(false)
   }
 
-  const handleUpVote = (e) => {
 
+  const countLikesDislikes = () => {
+    let likes = 0
+    let dislikes = 0
+    votes?.forEach((vote) => {
+      if (vote.type === 'like') {
+        likes++
+      } else {
+        dislikes--
+      }
+    })
+
+    let totalVotes = likes + dislikes;
+    setVoteCount(totalVotes);
+  }
+
+  const setUpVoteOrDownVote = () => {
+    if (votes?.length > 0) {
+      votes.forEach((vote) => {
+        if (vote.liker._id === currentUser._id) {
+          if (vote.type === 'like') {
+            setUpVote(true)
+          } else {
+            setDownVote(true)
+          }
+        }
+      })
+    }
+  }
+
+   useEffect(() => {
+    setUpVoteOrDownVote();
+    countLikesDislikes();
+  }, [votes])
+
+
+  const handleUpVote = (e) => {
     e.preventDefault()
     if (currentUser) { 
       if (downVote) {
         dispatch(deleteLike(skeleton._id, currentUser._id))
         setDownVote(false)
-        setVoteCount(voteCount => voteCount - 1)
         const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
         dispatch(createLike(like, skeleton._id))
         setUpVote(true)
-        setVoteCount(voteCount => voteCount + 1)
+        setTimeout(() => {
+          setVoteCount(count => count + 2);
+        }, 100);
       } else {
         if (!upVote) {
           const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
           dispatch(createLike(like, skeleton._id))
           setUpVote(true)
-          setVoteCount(voteCount => voteCount + 1)
+          setTimeout(() => {
+            setVoteCount(count => count + 1);
+          }, 100);
         } else {
           dispatch(deleteLike(skeleton._id, currentUser._id))
           setUpVote(false)
-          setVoteCount(voteCount => voteCount - 1)
+          setTimeout(() => {
+            setVoteCount(count => count - 1);
+          }, 100);
         }
       }
     }
@@ -158,28 +169,32 @@ const SkeletonShow = () => {
 
   const handleDownVote = (e) => {
     e.preventDefault()
-
     if (currentUser) {
       if (upVote) {
-        dispatch(deleteLike(skeleton._id, currentUser._id))
-        setUpVote(false)
-        setVoteCount(voteCount => voteCount - 1)
+        dispatch(deleteLike(skeleton._id, currentUser._id));
+        setUpVote(false);
         const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
-        dispatch(createLike(like, skeleton._id))
-        setDownVote(true)
-        setVoteCount(voteCount => voteCount + 1)
+        dispatch(createLike(like, skeleton._id));
+        setDownVote(true);
+        setTimeout(() => {
+          setVoteCount(count => count - 2);
+        }, 100);
       } else {
         if (downVote) {
-          dispatch(deleteLike(skeleton._id, currentUser._id))
-          setDownVote(false)
-          setVoteCount(voteCount => voteCount - 1)
+          dispatch(deleteLike(skeleton._id, currentUser._id));
+          setDownVote(false);
+          setTimeout(() => {
+            setVoteCount(count => count + 1);
+          }, 100);
         } else {
           const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
-          dispatch(createLike(like, skeleton._id))
-          setDownVote(true)
-          setVoteCount(voteCount => voteCount + 1)
+          dispatch(createLike(like, skeleton._id));
+          setDownVote(true);
+          setTimeout(() => {
+            setVoteCount(count => count - 1);
+          }, 100);
         }
-      }  
+      }
     }
   }
 
@@ -197,8 +212,8 @@ const SkeletonShow = () => {
     const ownerColor = ownerColorFxn(ownerId, colorArr)
     const prompt = therePrompt(skellie)
     const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
-    // const likeCount = skeleton.likes.length
-    // const CurrentLikeCount = likeCount + upVoteCount
+  
+
     const completeChecker = (bones, maxBones) => {
       if (bones.length >= maxBones) {
         return true
@@ -264,10 +279,11 @@ const SkeletonShow = () => {
                         {(CurrentCollaboratorObj && author) && <NewBoneInput skellie={skellie} currentCollabId={CurrentCollaboratorObj._id} authorId={author._id}/>}
                       </div>
                       <div className="horizontal-skeleton-likes-container">
-                        <button onClick={handleDownVote} className="skeleton-show-downvote"><DownvoteButton className="skeleton-show-downvote" /></button>
+                        {/* <button onClick={handleDownVote} className="skeleton-show-downvote">{currentUser ? <img src={Downvote} className="vote-button-image skeleton-show-downvote" /> : <img src={Downvote} className="downVote-grey-color vote-button-image" /> }</button> */}
+                        {currentUser ? <button onClick={handleDownVote} className="skeleton-show-downvote"><img src={Downvote} className="vote-button-image skeleton-show-downvote" /></button> : <img src={Downvote} className="downVote-grey-color vote-button-image" /> }
                           <h1 id="skeleton-show-votes">{voteCount}</h1>
-                          {/* <h1 id="skeleton-show-votes">{votes}</h1> */}
-                        <button onClick={handleUpVote} className="skeleton-show-upvote"><UpvoteButton className="skeleton-show-upvote"/></button>
+                       {currentUser ?  <button onClick={handleUpVote} className="skeleton-show-upvote"><img src={Upvote} className="vote-button-image skeleton-show-upvote" /></button> : <img src={Upvote} className="upVote-grey-color vote-button-image" />}
+                        {/* <button onClick={handleUpVote} className="skeleton-show-upvote">{ currentUser ? <img src={Upvote} className="vote-button-image skeleton-show-upvote" /> : <img src={Upvote} className="upVote-grey-color vote-button-image" /> } </button> */}
                       </div>
                 </div>
             </div>

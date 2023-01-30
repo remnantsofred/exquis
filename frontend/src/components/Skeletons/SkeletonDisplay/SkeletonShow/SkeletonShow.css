@@ -368,3 +368,18 @@ hr#comment-divider {
   background-color: #34374d;
   color: white;
 }
+
+
+.downVote-grey-color {
+  color: grey;
+  padding-top: 10px;
+}
+
+.upVote-grey-color {
+  color: grey;
+  padding-top: 10px;
+}
+
+#skeleton-show-votes {
+  padding-top: 10px;
+}
