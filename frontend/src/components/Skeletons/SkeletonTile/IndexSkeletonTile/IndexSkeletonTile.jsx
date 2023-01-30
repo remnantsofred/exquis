@@ -1,6 +1,7 @@
 import './IndexSkeletonTile.css'
 import { Link } from "react-router-dom"
-// vote buttons
+// import Downvote from '../../../assets/skeleton_tile/triangle_button_down.png'
+// import Upvote from '../../../assets/skeleton_tile/triangle_button_up.png'
 import UpvoteButton from '../UpvoteButton'
 import DownvoteButton from '../DownvoteButton'
 import IndexPlaceBones from './IndexPlaceBones'

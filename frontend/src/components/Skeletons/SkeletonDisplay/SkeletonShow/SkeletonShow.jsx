@@ -22,6 +22,8 @@ import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
 import { fetchUsers, getUser } from "../../../../store/users"
 import SkeletonEditModal from "../../SkeletonEditModal/SkeletonEditModal"
 import { createLike, deleteLike } from "../../../../store/likes"
+import Downvote from "../../../../assets/skeleton_tile/triangle_button_down.png"
+import Upvote from "../../../../assets/skeleton_tile/triangle_button_up.png"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
@@ -40,9 +42,8 @@ const SkeletonShow = () => {
   const [downVote, setDownVote] = useState(false)
 
   useEffect(() => {
-    setVotes(skellie?.likes)
-  })
-    
+    setVotes(skellie?.likes);
+  })    
   
   useEffect(() => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
@@ -107,21 +108,17 @@ const SkeletonShow = () => {
   const countLikesDislikes = () => {
     let likes = 0
     let dislikes = 0
-    votes.forEach((vote) => {
+    votes?.forEach((vote) => {
       if (vote.type === 'like') {
         likes++
       } else {
         dislikes--
       }
-    }
-    )
-    console.log(likes, dislikes, 'likes dislikes')
-    return likes + dislikes
-  }
+    })
 
-  useEffect(() => {
-    setVoteCount(votes?.length)
-  }, [votes])
+    let totalVotes = likes + dislikes;
+    setVoteCount(totalVotes);
+  }
 
   const setUpVoteOrDownVote = () => {
     if (votes?.length > 0) {
@@ -138,32 +135,37 @@ const SkeletonShow = () => {
   }
 
    useEffect(() => {
-    setUpVoteOrDownVote()
-    countLikesDislikes()
-  })
+    setUpVoteOrDownVote();
+    countLikesDislikes();
+  }, [votes])
 
 
   const handleUpVote = (e) => {
-    console.log('upvote')
     e.preventDefault()
     if (currentUser) { 
       if (downVote) {
-        console.log('delete dislike and create a like')
         dispatch(deleteLike(skeleton._id, currentUser._id))
         setDownVote(false)
         const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
         dispatch(createLike(like, skeleton._id))
         setUpVote(true)
+        setTimeout(() => {
+          setVoteCount(count => count + 2);
+        }, 100);
       } else {
         if (!upVote) {
-          console.log('create like')
           const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
           dispatch(createLike(like, skeleton._id))
           setUpVote(true)
+          setTimeout(() => {
+            setVoteCount(count => count + 1);
+          }, 100);
         } else {
-          console.log('delete like')
           dispatch(deleteLike(skeleton._id, currentUser._id))
           setUpVote(false)
+          setTimeout(() => {
+            setVoteCount(count => count - 1);
+          }, 100);
         }
       }
     }
@@ -173,24 +175,32 @@ const SkeletonShow = () => {
 
   const handleDownVote = (e) => {
     e.preventDefault()
-
     if (currentUser) {
       if (upVote) {
-        dispatch(deleteLike(skeleton._id, currentUser._id))
-        setUpVote(false)
+        dispatch(deleteLike(skeleton._id, currentUser._id));
+        setUpVote(false);
         const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
-        dispatch(createLike(like, skeleton._id))
-        setDownVote(true)
+        dispatch(createLike(like, skeleton._id));
+        setDownVote(true);
+        setTimeout(() => {
+          setVoteCount(count => count - 2);
+        }, 100);
       } else {
         if (downVote) {
-          dispatch(deleteLike(skeleton._id, currentUser._id))
-          setDownVote(false)
+          dispatch(deleteLike(skeleton._id, currentUser._id));
+          setDownVote(false);
+          setTimeout(() => {
+            setVoteCount(count => count + 1);
+          }, 100);
         } else {
           const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
-          dispatch(createLike(like, skeleton._id))
-          setDownVote(true)
+          dispatch(createLike(like, skeleton._id));
+          setDownVote(true);
+          setTimeout(() => {
+            setVoteCount(count => count - 1);
+          }, 100);
         }
-      }  
+      }
     }
   }
 
@@ -276,7 +286,8 @@ const SkeletonShow = () => {
                       </div>
                       <div className="horizontal-skeleton-likes-container">
                         <button onClick={handleDownVote} className="skeleton-show-downvote"><DownvoteButton className="skeleton-show-downvote" /></button>
-                          <h1 id="skeleton-show-votes">{countLikesDislikes()}</h1>
+                          <h1 id="skeleton-show-votes">{voteCount}</h1>
+                          {/* <h1 id="skeleton-show-votes">{countLikesDislikes()}</h1> */}
                           {/* <h1 id="skeleton-show-votes">{votes}</h1> */}
                         <button onClick={handleUpVote} className="skeleton-show-upvote"><UpvoteButton className="skeleton-show-upvote"/></button>
                       </div>
