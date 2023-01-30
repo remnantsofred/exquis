@@ -27,12 +27,12 @@ const removeSkeleton = skeletonId => ({
   skeletonId
 });
 
-const receiveErrors = errors => ({
+export const receiveErrors = errors => ({
   type: RECEIVE_SKELETON_ERRORS,
   errors
 });
 
-const clearErrors = () => ({
+export const clearErrors = () => ({
   type: CLEAR_SKELETON_ERRORS
 });
 
@@ -40,6 +40,7 @@ const receiveUserSkeletons = skeletons => ({
   type: RECEIVE_USER_SKELETONS,
   skeletons
 });
+
 
 
 export const getSkeletons = (store) => { 
@@ -72,7 +73,6 @@ export const fetchSkeletons = () => async (dispatch) => {
 
 
 export const fetchSkeleton = (skeletonId) => async (dispatch) => {
-  console.log('fetchSkeleton')
   const res = await fetch(`/api/skeletons/${skeletonId}`);
   if (res.ok) {
     const skeleton = await res.json();    

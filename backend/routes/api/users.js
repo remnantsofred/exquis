@@ -13,19 +13,20 @@ const validateLoginInput = require('../../validations/login');
 /* GET users listing. */
   
 router.post('/register', validateRegisterInput, async (req, res, next) => {
-
+  let downcaseEmail =  req.body.email.toLowerCase();
+  let downcaseUsername = req.body.username.toLowerCase();
   const user = await User.findOne({
-    $or: [{ email: req.body.email }, { username: req.body.username }]
+    $or: [{ email: downcaseEmail }, { username: downcaseUsername }]
   });
   
   if (user) {
     const err = new Error("Validation Error");
     err.statusCode = 400;
     const errors = {};
-    if (user.email === req.body.email) {
+    if (user.email.toLowerCase() === downcaseEmail) {
       errors.email = "A user has already registered with this email";
     }
-    if (user.username === req.body.username) {
+    if (user.username.toLowerCase() === downcaseUsername) {
       errors.username = "A user has already registered with this username";
     }
     err.errors = errors;
@@ -33,8 +34,8 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
   }
 
   const newUser = new User({
-    username: req.body.username,
-    email: req.body.email
+    username: downcaseUsername,
+    email: downcaseEmail
   });
   
   bcrypt.genSalt(10, (err, salt) => {

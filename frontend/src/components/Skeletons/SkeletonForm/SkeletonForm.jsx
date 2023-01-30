@@ -8,6 +8,7 @@ import Multiselect from 'multiselect-react-dropdown';
 import { getUsers, fetchUsers } from '../../../store/users';
 import Loading from '../../Loading/Loading';
 
+
 function SkeletonForm () {
   const [title, setTitle] = useState('');
   const [prompt, setPrompt] = useState('')
@@ -18,18 +19,16 @@ function SkeletonForm () {
   const history = useHistory();
   const currentUser = useSelector(state => state.session.user);
   const users = useSelector(getUsers);
-  const errors = useSelector(state => state.errors.skeletons);
   const dispatch = useDispatch();
   const options = users?.filter(user => user._id !== currentUser._id).map(user => ({name: user.username, id: user._id}));
   const selectedValue = [];
   const selectedList = [];
   const selectedCollaborators = [];
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, []);
-
-
 
   useEffect(() => {
     Promise.all([
@@ -39,34 +38,63 @@ function SkeletonForm () {
     })
   }, [])
 
-  
   const onSelect =(selectedList, selectedItem) => {
     selectedCollaborators.push(selectedItem.id)
-   
   }
   
   const onRemove = (selectedList, removedItem) => {
     const index = selectedCollaborators.indexOf(removedItem.id)
     selectedCollaborators.splice(index, 1)
-    
   }
   
-
-  const update = field => {
+  const update = (e, field) => {
     let setState;
-
+    const value = e.currentTarget.value;
+    const newErrors = {...errors};
     switch (field) {
       case 'title':
         setState = setTitle;
+        if (value.length > 100) {
+          newErrors[field] = 'Skeleton title is required and must be between 1 and 100 characters';
+        } else if (value.length < 1){
+          newErrors[field] = 'Skeleton title is required and must be between 1 and 100 characters';
+        } else {
+          delete newErrors[field];
+        }
+        setErrors(newErrors);
         break;
       case 'prompt':
         setState = setPrompt;
+        if (value.length > 150) {
+          newErrors[field] = 'Prompt must be less than 150 characters';
+        } else {
+          delete newErrors[field];
+        }
+        setErrors(newErrors);
         break;
       case 'maxBones':
         setState = setMaxBones;
+        let num = parseInt(value);
+        if (num < 5) {
+          newErrors[field] = 'Skeleton should have at least 5 bones and no more than 50 bones';
+        } else if (num > 50) {
+          newErrors[field] = 'Skeleton should have at least 5 bones and no more than 50 bones';
+        } else {
+          delete newErrors[field];
+        }
+        setErrors(newErrors);
         break;
       case 'maxCollaborators':
         setState = setMaxCollaborators;
+        let numCollab = parseInt(value);
+        if (numCollab < 1) {
+          newErrors[field] = 'Skeleton should have at least 1 collaborator and no more than 50 collaborators';
+        } else if (numCollab > 50) {
+          newErrors[field] = 'Skeleton should have at least 1 collaborator and no more than 50 collaborators';
+        } else {
+          delete newErrors[field];
+        }
+        setErrors(newErrors);
         break;
       case 'tags':
         setState = setTags;
@@ -75,10 +103,12 @@ function SkeletonForm () {
         throw Error('Unknown field in Signup Form');
     }
 
-    return e => setState(e.currentTarget.value);
+    setState(value);
   }
 
-  const skeletonSubmit = e => {
+  
+  
+  const skeletonSubmit = (e, errors) => {
     e.preventDefault();
     const skeleton = {
       title,
@@ -87,13 +117,17 @@ function SkeletonForm () {
       maxCollaborators,
       collaborators: selectedCollaborators
     };
-
-    dispatch(createSkeleton(skeleton))
-    .then((res) => {history.push(`/skeletons/${res._id}`)})
+    
+    if (Object.values(errors).length === 0) {
+      dispatch(createSkeleton(skeleton))
+        .then((res) => {history.push(`/skeletons/${res._id}`)})
+    }
+    
 
   }
 
-   
+  
+
   if (!loaded) {
     return (
       <Loading />
@@ -113,7 +147,8 @@ function SkeletonForm () {
             <br/>
             <input type="text"
               value={title || ''}
-              onChange={update('title')}
+              // maxLength={100}
+              onChange={e => update(e, 'title')}
               placeholder="Title"
               className='skellie-input'
             />
@@ -126,15 +161,9 @@ function SkeletonForm () {
               </h2>
             </span>
             <br/>
-            {/* <input type="text"
-              value={prompt}
-              onChange={update('prompt')}
-              placeholder="Prompt"
-              className='skellie-input'
-            /> */}
             <textarea
               value={prompt || ''}
-              onChange={update('prompt')}
+              onChange={e=> update(e, 'prompt')}
               placeholder="Prompt"
               className='skellie-input'
             />
@@ -143,13 +172,13 @@ function SkeletonForm () {
           <label>
             <span className='skellie-label'>
               <h2 className='skellie-label-text'>
-                Max Amount of Bones(Updates):
+                Max Amount of Bones (Updates):
               </h2>
             </span>
             <br/>
             <input type="number"
               value={maxBones || ''}
-              onChange={update('maxBones')}
+              onChange={e => update(e, 'maxBones')}
               placeholder="At least 5 bones"
               className='skellie-input'
             />
@@ -164,7 +193,7 @@ function SkeletonForm () {
             <br/>
             <input type="number"
               value={maxCollaborators || ''}
-              onChange={update('maxCollaborators')}
+              onChange={e => update(e, 'maxCollaborators')}
               placeholder="Max Collaborators"
               className='skellie-input'
             />
@@ -205,7 +234,7 @@ function SkeletonForm () {
           </label> */}
   
           <input
-            onClick={e => skeletonSubmit(e)}
+            onClick={e => skeletonSubmit(e, errors)}
             className='skellie-form-submit-button'
             type="submit"
             value="Start a New Skellie :)"
