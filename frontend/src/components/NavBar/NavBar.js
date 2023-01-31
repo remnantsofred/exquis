@@ -9,11 +9,12 @@ import SearchIcon from "../../assets/main-nav-bar/search-line-icon.svg"
 // misc/css
 import './NavBar.css';
 import { logout } from '../../store/session';
+import { useHistory } from 'react-router-dom';
 
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
   const dispatch = useDispatch();
-
+  const history = useHistory();
 
   const SearchButton = () => {
   return (
@@ -25,12 +26,14 @@ function NavBar () {
   const logoutUser = e => {
       e.preventDefault();
       dispatch(logout());
+      history.push(`/login`);
   }
 
   const getLinks = () => {
     if (loggedIn) {
       return (
         <div className="links-nav">
+          <Link to={'/about'} id="about-us-link">about</Link>
           <Link to={'/skeletons'} id="skeleton-index-link">all skeletons</Link>
           <Link to={'/profile'} id="profile-link">profile</Link>
           <Link to={'/skeletons/new'} id="skeleton-form-link">new skeleton</Link>
@@ -41,6 +44,7 @@ function NavBar () {
     } else {
       return (
         <div className="links-auth">
+          <Link to={'/about'} id="about-us-link">about</Link>
           <Link to={'/signup'} id="signup-link">signup</Link>
           <Link to={'/login'} id="login-link">login</Link>
         </div>

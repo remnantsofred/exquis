@@ -52,13 +52,14 @@ div.center, div.right {
   margin-top: 1.05vh;
 }
 
-#signup-link, #login-link, #skeleton-index-link, #profile-link, #skeleton-form-link, #logout-button {
+#about-us-link, #signup-link, #login-link, #skeleton-index-link, #profile-link, #skeleton-form-link, #logout-button {
   text-decoration: none;
   margin-left: 1vw;
   margin-right: 1vw;
   color: black;
+  transition: 0.5s;
 }
-#signup-link:hover, #login-link:hover, #skeleton-index-link:hover, #profile-link:hover, #skeleton-form-link:hover, #logout-button:hover {
+#about-us-link:hover, #signup-link:hover, #login-link:hover, #skeleton-index-link:hover, #profile-link:hover, #skeleton-form-link:hover, #logout-button:hover {
   transition: 0.5s;
   text-shadow: 2px 2px 2px lightgray;
 }
@@ -69,7 +70,7 @@ div.search-bar-container {
 }
 
 #search-bar-input {
-  width: 45vw;
+  width: 37vw;
   height: 2vh;
   margin-left: 2.5vw;
   margin-right: .5vw;

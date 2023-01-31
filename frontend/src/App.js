@@ -10,6 +10,7 @@ import LoginForm from './components/SessionForms/LoginForm.jsx';
 import SignupForm from './components/SessionForms/SignupForm.jsx';
 import ProfilePage from './components/ProfilePage/ProfilePage/ProfilePage'
 import CurrentUserProfilePage from './components/CurrentUserProfilePage/ProfilePage/CurrentUserProfilePage';
+import AboutPage from './components/AboutPage/AboutPage';
 
 import { getCurrentUser } from './store/session';
 
@@ -43,6 +44,7 @@ function App() {
         <AuthRoute exact path="/signup" component={SignupForm} />
         <ProtectedRoute exact path="/profile" component={CurrentUserProfilePage} />
         <ProtectedRoute exact path="/edit/profile" component={UpdateForm} />
+        <Route exact path="/about" component={AboutPage} />
 
         <Route exact path="/users/:userId" component={ProfilePage} />
         <Route exact path="/loading" component={Loading} />
