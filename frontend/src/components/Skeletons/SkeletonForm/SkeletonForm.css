@@ -93,18 +93,19 @@
   #collaborator-select {
     /* margin-left: auto;
     margin-right: auto; */
-    width: 45vw;
+    width: 10vw;
     /* max-width: 27em; */
     height: 5em;
     padding-left: 6vw;
     padding-right: 6vw;
     padding-bottom: 5vh;
+    margin-bottom: 10vh;
   }
 
   p#credit-to-website {
     margin-top: 2vh;
     font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 1.75vw;
+    font-size: 1vw;
     opacity: 55%;
     font-style: italic;
     margin-bottom: -3vh;
@@ -136,7 +137,7 @@
   div.multiselect-container, div.search-wrapper {
     /* margin-left: auto; */
     /* margin-right: auto; */
-    width: 48vw;
+    width: 20vw;
     height: 4vh;
     padding-left: 2vw;
     padding-right: 2vw;
@@ -147,13 +148,29 @@
 #collaborator-select {
   margin-left: 0;
   /* margin-right: auto; */
-  width: 48vw;
+  width: 20vw;
   height: max-content;
   padding-bottom: 2vh;
   border-radius: 25px;
+  margin-bottom: 2vh;
 }
 
-div.multiselect-container, div.search-wrapper.searchWrapper {
+div.multiselect-container, ul.optionContainer {
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  width: 48vw;
+  /* width: 20vw; */
+  height: 20vh;
+  padding-top: 2vh;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-bottom: 5vh;
+  border-radius: 25px;
+}
+
+/* problem not this */
+div.search-wrapper.searchWrapper {
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin-left: auto;
   margin-right: auto;

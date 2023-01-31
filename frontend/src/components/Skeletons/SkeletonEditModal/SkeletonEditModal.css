@@ -171,7 +171,7 @@ textarea.edit-skellie-input {
     margin-top: -2vh;
   }
 
-  div.multiselect-container, div.search-wrapper {
+  div.multiselect-container {
   margin-left: auto;
   margin-right: auto;
   width: auto;
@@ -182,7 +182,11 @@ textarea.edit-skellie-input {
   border-radius: 25px;
 }
 
-div.multiselect-container, div.search-wrapper.searchWrapper {
+div.search-wrapper.searchWrapper {
+  width: inherit;
+}
+
+div.multiselect-container {
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   /* width: 40vw; */
   height: 8vh;
@@ -201,13 +205,40 @@ div.search-wrapper.searchWrapper {
   /* margin-right: 5vw; */
 }
 
+div.multiselect-container, ul.optionContainer {
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  width: 48vw;
+  /* width: 20vw; */
+  height: 20vh;
+  padding-top: 2vh;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-bottom: 5vh;
+  border-radius: 25px;
+}
+div.multiselect-container, ul.optionContainer {
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  width: 48vw;
+  /* width: 20vw; */
+  height: 20vh;
+  padding-top: 2vh;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-bottom: 5vh;
+  border-radius: 25px;
+}
+
 div.edit-collaborator-select.multiselect-container.multiSelectContainer {
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  align-self: center;
+  /* align-self: center; */
   height: 40vh;
   /* margin-left: auto;
   margin-right: auto; */
-  text-align: center;
+  /* text-align: center; */
   /* width: 40vw; */
 }
 
