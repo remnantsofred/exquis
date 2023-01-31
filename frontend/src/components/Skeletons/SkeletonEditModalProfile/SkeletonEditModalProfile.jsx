@@ -132,7 +132,7 @@ function SkeletonEditModalProfile ({skellie, handleModalClose, handleSkellieUpda
   } else {
     return (
       <>  
-        <div className='edit-modal-background' onClick={handleClose}></div>
+        <div className='edit-modal-background' ></div>
         <div className='edit-modal-profile' id="edit-skeleton-form">
             <img src={modalCloseButton} className='resModalCloseBtn' onClick={handleClose} />
           <form className="edit-modal-form-profile" onSubmit={skeletonSubmit}>
