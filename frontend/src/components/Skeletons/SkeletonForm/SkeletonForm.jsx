@@ -123,7 +123,7 @@ function SkeletonForm () {
       collaborators: selectedCollaborators
     };
     
-    if (Object.values(errors).length === 0) {
+    if (errors && Object.values(errors).length === 0) {
       dispatch(createSkeleton(skeleton))
         .then((res) => {history.push(`/skeletons/${res._id}`)})
     }
