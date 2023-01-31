@@ -32,7 +32,7 @@ const PlaceBones = ({colorArr, skellie}) => {
   const compileBones = () => {
     for (var i = 0; i < bones.length; i ++) {
       const color = findColor(bones[i])
-      let sentence = <span style={{color: `${color}`}}> {bones[i].text} key={`compile-bones-${bones[i]._id}`}</span> 
+      let sentence = <span style={{color: `${color}`}} key={`compile-bones-${bones[i]._id}`}> {bones[i].text} </span> 
       body.push(sentence)
     }
 
