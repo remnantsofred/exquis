@@ -12,6 +12,7 @@ const SkeletonTab = ({switchValue, userId}) => {
   const [ modalStatus, setModalStatus ] = useState(false);
   const history = useHistory();
   const sessionUser = SessionUserCheck()
+  const [ deleted, setDeleted ] = useState(false)
   // const isCurrent = (skellie) => {
   //   if (skellie.bones === []) {
   //     return (true)
@@ -28,7 +29,8 @@ const SkeletonTab = ({switchValue, userId}) => {
 
   useEffect(() => {
     dispatch(fetchUsers())
-  },[])
+    setDeleted(false)
+  },[deleted])
 
   const handleSkellieUpdate = (skellie, e, tab) => {
     e.preventDefault()
@@ -39,7 +41,9 @@ const SkeletonTab = ({switchValue, userId}) => {
   const handleSkellieDelete = (skellie, e) => {
     e.preventDefault()
     dispatch(deleteSkeleton(skellie._id))
-    .then((res) => {history.push(`/users/${skellie.owner}`)})
+    setDeleted(true)
+    // .then((res) => {history.push(`/users/${skellie.owner}`)})
+
   }
 
   const handleModalClose = () => {

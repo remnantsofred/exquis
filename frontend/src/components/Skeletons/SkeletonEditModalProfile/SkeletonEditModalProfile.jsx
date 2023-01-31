@@ -113,7 +113,7 @@ function SkeletonEditModalProfile ({skellie, handleModalClose, handleSkellieUpda
       maxCollaborators,
       collaborators: selectedValue.map(value=> value._id)
     };
-    if (Object.values(errors).length === 0) {
+    if (errors && Object.values(errors).length === 0) {
       dispatch(updateSkeleton(skellie._id, skeleton))
       .then(() => {history.push(`/skeletons/${skellie._id}`)})
       handleModalClose();
