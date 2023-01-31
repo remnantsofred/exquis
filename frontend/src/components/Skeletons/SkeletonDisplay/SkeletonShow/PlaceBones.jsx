@@ -7,7 +7,7 @@ const PlaceBones = ({colorArr, skellie}) => {
 
   const body = []
   const bones = skellie.bones
-
+  console.log('skellie', skellie)
   useEffect(() => {
     const onPageLoad = () => {
       setLoaded(true)
@@ -22,8 +22,10 @@ const PlaceBones = ({colorArr, skellie}) => {
   }, []);
 
   const findColor = (bone) => {
+    console.log(bone)
     const collaborator = bone.author._id
     const colorObj = colorArr.find(color => color.author === collaborator)
+    console.log(colorObj)
     const color = colorObj.color
     return (
       color
