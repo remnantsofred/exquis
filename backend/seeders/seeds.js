@@ -86,8 +86,8 @@ users.push(
 
 for (let i = 0; i < NUM_SEED_USERS; i++) {
   const user = new User ({
-    username: faker.helpers.unique(faker.name.firstName()),
-    email: faker.helpers.unique(faker.internet.email()),
+    username: faker.name.firstName(),
+    email: faker.internet.email(),
     hashedPassword: bcrypt.hashSync("password", 10),
     skeletons: [],
     comments: []
@@ -356,11 +356,11 @@ function shuffle(array) {
 
 for (const user of users){
   let ownerIndex = users.indexOf(user);
+  let possibleCollabs = users.filter(otherUser => otherUser !== user)
   for (let i = 0; i < 3; i++) {
-    let possibleCollabs = users.splice(ownerIndex, 1)
     let shuffledCollabs = shuffle(possibleCollabs)
-    let collaborator1Id = shuffledCollabs[1]._id;
-    let collaborator2Id = shuffledCollabs[2]._id; 
+    let collaborator1Id = shuffledCollabs[0]._id;
+    let collaborator2Id = shuffledCollabs[1]._id; 
     let numWordsTitle = (Math.floor(Math.random() * 10) + 1)
     let numWordsPrompt = Math.floor(Math.random() * 16)
     const skeleton = new Skeleton ({
