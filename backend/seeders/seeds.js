@@ -86,8 +86,8 @@ users.push(
 
 for (let i = 0; i < NUM_SEED_USERS; i++) {
   const user = new User ({
-    username: faker.name.firstName(),
-    email: faker.internet.email(),
+    username: faker.helpers.unique(faker.name.firstName()),
+    email: faker.helpers.unique(faker.internet.email()),
     hashedPassword: bcrypt.hashSync("password", 10),
     skeletons: [],
     comments: []
@@ -350,18 +350,25 @@ const bone20 = new Bone ({
 
 skeletons[1].bones.push(bone20)
 
+function shuffle(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
 
 for (const user of users){
   let ownerIndex = users.indexOf(user);
   for (let i = 0; i < 3; i++) {
-    let collaborator1Id = users[(ownerIndex+1) % NUM_SEED_USERS]._id;
-    let collaborator2Id = users[(ownerIndex+2) % NUM_SEED_USERS]._id; 
+    let possibleCollabs = users.splice(ownerIndex, 1)
+    let shuffledCollabs = shuffle(possibleCollabs)
+    let collaborator1Id = shuffledCollabs[1]._id;
+    let collaborator2Id = shuffledCollabs[2]._id; 
+    let numWordsTitle = (Math.floor(Math.random() * 10) + 1)
+    let numWordsPrompt = Math.floor(Math.random() * 16)
     const skeleton = new Skeleton ({
       owner: user._id, 
-      title: faker.lorem.sentence(),
-      prompt: faker.lorem.paragraph(),
-      maxBones: faker.datatype.number({'min': 3,'max': 6}),
-      maxCollabrators: faker.datatype.number({'min': 3,'max': 6}),
+      title: faker.random.words(numWordsTitle),
+      prompt: faker.random.words(numWordsPrompt),
+      maxBones: faker.datatype.number({'min': 5,'max': 50}),
+      maxCollabrators: faker.datatype.number({'min': 2,'max': 8}),
       collaborators: [collaborator1Id, collaborator2Id],
       bones: [],
       tags: [],
@@ -389,10 +396,10 @@ skeletons.forEach(skeleton => {
 const comments = [];
 
 for (const skeleton of skeletons) {
-
+  let numWordsComments = (Math.floor(Math.random() * 20) + 1)
   for (let i = 0; i < NUM_SEED_COMMENTS; i++) {
     const comment = new Comment ({
-      text: faker.lorem.paragraph(),
+      text: faker.random.words(numWordsComments),
       parent: skeleton._id,
       author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
     });
@@ -456,9 +463,9 @@ const bones = [];
 
 skeletons.slice(2).forEach(skeleton => {
   const skeletonId = skeleton._id;
-
+  let numWordsBones = (Math.floor(Math.random() * 50) + 10)
   const boneForOwner = new Bone ({
-    text: faker.lorem.paragraph(),
+    text: faker.random.words(numWordsBones),
     skeleton: skeletonId,
     author: skeleton.owner
   });
@@ -467,7 +474,7 @@ skeletons.slice(2).forEach(skeleton => {
 
   skeleton.collaborators.forEach(collaborator => {
     const bone = new Bone ({
-      text: faker.lorem.paragraph(),
+      text: faker.random.words(numWordsBones),
       skeleton: skeletonId,
       author: collaborator
     });
@@ -495,7 +502,7 @@ skeletons.forEach(skeleton => {
   const skeletonId = skeleton._id;
 
   const tagForOwner = new Tag ({
-    text: faker.lorem.word(),
+    text: faker.random.word(),
     skeleton: skeletonId,
     owner: skeleton.owner
   });
