@@ -20,8 +20,8 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
   let skeleton = skeletonInfo
 
 
-  const [upVote, setUpVote] = useState(false)
-  const [downVote, setDownVote] = useState(false)
+  // const [upVote, setUpVote] = useState(false)
+  // const [downVote, setDownVote] = useState(false)
   // const [voteCount, setVoteCount] = useState(votes.length)
 
   const countLikesDislikes = () => {
@@ -39,72 +39,72 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
   }
 
 
-  const setUpVoteOrDownVote = () => {
-    if (votes.length > 0) {
-      votes.forEach((vote) => {
-        if (vote.liker._id === currentUser._id) {
-          if (vote.type === 'like') {
-            setUpVote(true)
-          } else {
-            setDownVote(true)
-          }
-        }
-      })
-    }
-  }
+  // const setUpVoteOrDownVote = () => {
+  //   if (votes.length > 0) {
+  //     votes.forEach((vote) => {
+  //       if (vote.liker._id === currentUser._id) {
+  //         if (vote.type === 'like') {
+  //           setUpVote(true)
+  //         } else {
+  //           setDownVote(true)
+  //         }
+  //       }
+  //     })
+  //   }
+  // }
 
 
-  useEffect(() => {
-    setUpVoteOrDownVote()
-    countLikesDislikes()
-  }, []) 
+  // useEffect(() => {
+  //   setUpVoteOrDownVote()
+  //   countLikesDislikes()
+  // }, []) 
 
   
-  const handleUpVote = (e) => {
-    e.preventDefault()
-    if (currentUser) { 
-      if (downVote) {
-        dispatch(deleteLike(skeleton._id, currentUser._id))
-        setDownVote(false)
-        const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
-        dispatch(createLike(like, skeleton._id))
-        setUpVote(true)
-      } else {
-        if (!upVote) {
-          const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
-          dispatch(createLike(like, skeleton._id))
-          setUpVote(true)
-        } else {
-          dispatch(deleteLike(skeleton._id, currentUser._id))
-          setUpVote(false)
-        }
-      }
-    }
-  }
+  // const handleUpVote = (e) => {
+  //   e.preventDefault()
+  //   if (currentUser) { 
+  //     if (downVote) {
+  //       dispatch(deleteLike(skeleton._id, currentUser._id))
+  //       setDownVote(false)
+  //       const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
+  //       dispatch(createLike(like, skeleton._id))
+  //       setUpVote(true)
+  //     } else {
+  //       if (!upVote) {
+  //         const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
+  //         dispatch(createLike(like, skeleton._id))
+  //         setUpVote(true)
+  //       } else {
+  //         dispatch(deleteLike(skeleton._id, currentUser._id))
+  //         setUpVote(false)
+  //       }
+  //     }
+  //   }
+  // }
 
 
-  const handleDownVote = (e) => {
-    e.preventDefault()
+  // const handleDownVote = (e) => {
+  //   e.preventDefault()
 
-    if (currentUser) {
-      if (upVote) {
-        dispatch(deleteLike(skeleton._id, currentUser._id))
-        setUpVote(false)
-        const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
-        dispatch(createLike(like, skeleton._id))
-        setDownVote(true)
-      } else {
-        if (downVote) {
-          dispatch(deleteLike(skeleton._id, currentUser._id))
-          setDownVote(false)
-        } else {
-          const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
-          dispatch(createLike(like, skeleton._id))
-          setDownVote(true)
-        }
-      }  
-    }
-  }
+  //   if (currentUser) {
+  //     if (upVote) {
+  //       dispatch(deleteLike(skeleton._id, currentUser._id))
+  //       setUpVote(false)
+  //       const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
+  //       dispatch(createLike(like, skeleton._id))
+  //       setDownVote(true)
+  //     } else {
+  //       if (downVote) {
+  //         dispatch(deleteLike(skeleton._id, currentUser._id))
+  //         setDownVote(false)
+  //       } else {
+  //         const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
+  //         dispatch(createLike(like, skeleton._id))
+  //         setDownVote(true)
+  //       }
+  //     }  
+  //   }
+  // }
 
 
   const skeletonId = skeletonInfo._id
@@ -135,11 +135,12 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
               <IndexPlaceBones className="index-skeleton-body" bones={skeletonInfo.bones} />
             </div>
             <div className="index-skeleton-likes-container">
-              <button onClick={handleUpVote} className="vote-button" id="upvote-button"><img src={Upvote} className="vote-button-image vote-button" id="upvote-button"/></button>
+              {/* <button onClick={handleUpVote} className="vote-button" id="upvote-button"><img src={Upvote} className="vote-button-image vote-button" id="upvote-button"/></button> */}
               {/* <button onClick={handleUpVote} className="vote-button" id="upvote-button"><UpvoteButton className="vote-button" id="upvote-button" /></button> */}
                 <p className="index-skeleton-like-count">{countLikesDislikes()}</p>
+                <p className="index-skeleton-like-text">Votes</p>
               {/* <button onClick={handleDownVote} className="vote-button" id="downvote-button"><DownvoteButton id="downvote-button" /></button> */}
-              <button onClick={handleDownVote} className="vote-button" id="downvote-button"><img src={Downvote} className="vote-button-image" id="downvote-button"  /></button>
+              {/* <button onClick={handleDownVote} className="vote-button" id="downvote-button"><img src={Downvote} className="vote-button-image" id="downvote-button"  /></button> */}
             </div>
           </div>
           {/* <div className="index-skeleton-tags-container"> */}

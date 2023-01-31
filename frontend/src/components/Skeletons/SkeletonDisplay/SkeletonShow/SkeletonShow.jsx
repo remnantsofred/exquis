@@ -2,23 +2,16 @@ import { useParams, useHistory, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getSkeleton, fetchSkeleton, updateSkeleton, deleteSkeleton } from '../../../../store/skeletons'
-import { getBones, fetchBones } from '../../../../store/bones'
 import Loading from "../../../Loading/Loading"
-import DownvoteButton from "../../DownvoteButton"
-import UpvoteButton from "../../UpvoteButton"
 import CollaboratorColorMatch from "./CollaboratorColorMatch/CollaboratorColorMatch"
 import CollaboratorsListMap from "./CollaboratorsListMap"
 import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
 import NewPlaceBones from "./PlaceBones"
 import NewBoneInput from "./NewBoneInput/NewBoneInput"
-import CommentForm from "./CommentForm/CommentForm"
 import CommentPanel from "./CommentPanel/CommentPanel"
 import { createComment } from "../../../../store/comments"
 import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
 import "./SkeletonShow.css"
-import {getCommentsForSkeleton} from "../../../../store/skeletons"
-import { fetchSkeletonComments } from "../../../../store/comments"
-import GenSkeletonTile from "../../SkeletonTile/GenSkeletonTile/GenSkeletonTile"
 import { fetchUsers, getUser } from "../../../../store/users"
 import SkeletonEditModal from "../../SkeletonEditModal/SkeletonEditModal"
 import { createLike, deleteLike } from "../../../../store/likes"
@@ -285,11 +278,11 @@ const SkeletonShow = () => {
                         {(CurrentCollaboratorObj && author) && <NewBoneInput skellie={skellie} currentCollabId={CurrentCollaboratorObj._id} authorId={author._id}/>}
                       </div>
                       <div className="horizontal-skeleton-likes-container">
-                        <button onClick={handleDownVote} className="skeleton-show-downvote"><img src={Downvote} className="vote-button-image skeleton-show-downvote" /></button>
-                        {/* <button onClick={handleDownVote} className="skeleton-show-downvote"><DownvoteButton className="skeleton-show-downvote" /></button> */}
+                        {/* <button onClick={handleDownVote} className="skeleton-show-downvote">{currentUser ? <img src={Downvote} className="vote-button-image skeleton-show-downvote" /> : <img src={Downvote} className="downVote-grey-color vote-button-image" /> }</button> */}
+                        {currentUser ? <button onClick={handleDownVote} className="skeleton-show-downvote"><img src={Downvote} className="vote-button-image skeleton-show-downvote" /></button> : <img src={Downvote} className="downVote-grey-color vote-button-image" /> }
                           <h1 id="skeleton-show-votes">{voteCount}</h1>
-                        {/* <button onClick={handleUpVote} className="skeleton-show-upvote"><UpvoteButton className="skeleton-show-upvote"/></button> */}
-                        <button onClick={handleUpVote} className="skeleton-show-upvote"><img src={Upvote} className="vote-button-image skeleton-show-upvote" /></button>
+                       {currentUser ?  <button onClick={handleUpVote} className="skeleton-show-upvote"><img src={Upvote} className="vote-button-image skeleton-show-upvote" /></button> : <img src={Upvote} className="upVote-grey-color vote-button-image" />}
+                        {/* <button onClick={handleUpVote} className="skeleton-show-upvote">{ currentUser ? <img src={Upvote} className="vote-button-image skeleton-show-upvote" /> : <img src={Upvote} className="upVote-grey-color vote-button-image" /> } </button> */}
                       </div>
                 </div>
             </div>
