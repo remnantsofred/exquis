@@ -75,7 +75,7 @@
     margin-right: auto;
     background-color: #30303000;
     border-radius: 15px;
-    width: 24em;
+    width: 43vw;
     height: 3em;
     padding-left: 2vw;
     padding-right: 2vw;
@@ -91,13 +91,35 @@
   }
 
   #collaborator-select {
-    margin-left: auto;
-    margin-right: auto;
-    width: 27em;
+    /* margin-left: auto;
+    margin-right: auto; */
+    width: 45vw;
+    /* max-width: 27em; */
     height: 5em;
     padding-left: 6vw;
     padding-right: 6vw;
     padding-bottom: 5vh;
+  }
+
+  p#credit-to-website {
+    margin-top: 2vh;
+    font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.75vw;
+    opacity: 55%;
+    font-style: italic;
+    margin-bottom: -3vh;
+  }
+
+  a#random-word-link {
+    text-decoration: underline;
+    color: black;
+    transition: .5s;
+  }
+
+  a#random-word-link:hover {
+    color: #454c83;
+    font-weight: 700;
+    transition: .5s;
   }
 
   input.skellie-input, textarea.skellie-input {
@@ -105,41 +127,56 @@
     font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-decoration: none;
     font-weight: 400;
+    margin-bottom: -2vh;
   }
 
-div.multiselect-container, div.search-wrapper {
-  margin-left: auto;
-  margin-right: auto;
-  width: 25em;
-  height: 15em;
-  padding-left: 2vw;
-  padding-right: 2vw;
-  padding-bottom: 5vh;
-  border-radius: 25px;
-}
+  div.multiselect-container#collaborator-select {
+    margin-top: -2vh;
+  }
+  div.multiselect-container, div.search-wrapper {
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    width: 48vw;
+    height: 4vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-bottom: 5vh;
+    border-radius: 25px;
+  }
 
 #collaborator-select {
-  margin-left: auto;
-  margin-right: auto;
-  width: 35em;
-  height: 15em;
-  padding-bottom: 5vh;
+  margin-left: 0;
+  /* margin-right: auto; */
+  width: 48vw;
+  height: max-content;
+  padding-bottom: 2vh;
   border-radius: 25px;
 }
 
-div.multiselect-container, div.search-wrapper {
+div.multiselect-container, div.search-wrapper.searchWrapper {
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin-left: auto;
   margin-right: auto;
-  width: 25em;
-  height: 15em;
+  width: 48vw;
+  height: 4vh;
+  padding-top: 2vh;
   padding-left: 2vw;
   padding-right: 2vw;
   padding-bottom: 5vh;
   border-radius: 25px;
 }
 
-div.collaborator-select.multiselect-container.multiSelectContainer {
+div.search-wrapper.searchWrapper {
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  /* margin-left: 0vw; */
+}
+
+div#collaborator-select.multiselect-container.multiSelectContainer {
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   align-self: center;
+  margin-right: 20vw;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
 }
 
 
@@ -177,6 +214,35 @@ textarea.skellie-input::-webkit-scrollbar {
     border: none;
   }
 
+  button#random-prompt-button {
+    transition: 0.5s;
+    width: 30vw;
+    height: 4vh;
+    align-items: center;
+    vertical-align: middle;
+    background: none;
+    margin-top: 2vw;
+    font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration: none;
+    font-weight: 400;
+    border: solid;
+    border-width: 0.5px;
+    border-color: #34374d5c;
+    border-radius: 75px;
+    margin-top: 4vh;
+    /* padding-top: 10px; */
+    /* padding-bottom: 10px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    
+  }
+
+  button#random-prompt-button:hover {
+    transition: 0.5s;
+    background-color: #34374d;
+    color: white;
+  }
+
   input.skellie-form-submit-button {
     transition: 0.5s;
     width: 30vw;
@@ -188,8 +254,9 @@ textarea.skellie-input::-webkit-scrollbar {
     font-weight: 400;
     border: solid;
     border-width: 0.5px;
-    border-color: #34374d;
+    border-color: #34374d5c;
     border-radius: 75px;
+    margin-top: 5vh;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;

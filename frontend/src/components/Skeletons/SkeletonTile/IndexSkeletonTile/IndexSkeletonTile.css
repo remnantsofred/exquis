@@ -31,6 +31,10 @@
     width: 30vw;
   }
 
+  div.index-tile-container {
+    height: 21vh;
+  }
+
   h1.index-title {
     font-weight: 400;
     font-size: 2.5vw;
@@ -79,12 +83,13 @@
   .index-skeleton-body-container {
     margin-top: 4vh;
     font-style: italic;
-    width: 50vw;
+    width: 45vw;
     color: rgb(42, 42, 42);
     margin-bottom: .25vh; 
   }
 
   .index-skeleton-body-container {
+    margin-top: 3vh;
     overflow: hidden;
     text-overflow: ellipsis;
     /* margin-bottom: -10.5vw; */
@@ -93,7 +98,10 @@
     -webkit-line-clamp: 5;
       /* number of lines to show */
     line-clamp: 5;
+    width: 28vw;
     -webkit-box-orient: vertical;
+    font-size: 2vw;
+    line-height: 3vh;
   }
 
   span.index-skeleton-body {
@@ -106,6 +114,7 @@
     /* number of lines to show */
     line-clamp: 5;
     -webkit-box-orient: vertical;
+    line-height: 4vh;
   }
 
   div.index-skeleton-likes-container {
@@ -113,9 +122,15 @@
     scale: 75%;
     margin-left: 1vw;
     margin-right: -2.5vw;
+    margin-top: 5vh;
     text-align: center;
     align-content: center;
     vertical-align: center;
+  }
+
+  p.index-skeleton-like-caption{
+    font-size: 1.5vw;
+    margin-top: 0.75vh;
   }
 
   button.vote-button {
@@ -142,11 +157,11 @@
     aspect-ratio: 1 / 1;
   }
 
-button#upvote-button:hover, button#downvote-button:hover  {
+  button#upvote-button:hover, button#downvote-button:hover  {
     cursor: pointer;
   }
 
-button#upvote-button > img.vote-button-image {
+  button#upvote-button > img.vote-button-image {
     transition: .5s;
   }
 
@@ -229,13 +244,13 @@ button#downvote-button:hover > img.vote-button-image  {
     background: #2e33385b;
   }
 
-  ul.index-skeleton-tags ~ li {
+  /* ul.index-skeleton-tags ~ li {
     /* overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     line-clamp: 1;
     -webkit-box-orient: horizontal; */
-  }
+  /* } */
 
   p.index-ind-tag {
     font-style: italic;

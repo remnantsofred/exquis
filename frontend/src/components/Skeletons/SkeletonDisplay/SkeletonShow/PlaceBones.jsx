@@ -7,7 +7,6 @@ const PlaceBones = ({colorArr, skellie}) => {
 
   const body = []
   const bones = skellie.bones
-
   useEffect(() => {
     const onPageLoad = () => {
       setLoaded(true)

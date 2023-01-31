@@ -6,7 +6,7 @@ ul.index-skeleton-grid {
   grid-template-columns: repeat(2, 1fr);
   column-count: 2;
   column-gap: 5vw;
-  row-gap: 9vh;
+  row-gap: 5vh;
 }
 
 ul.index-skeleton-grid > li {

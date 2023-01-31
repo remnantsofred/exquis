@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import NavBar from './components/NavBar/NavBar';
+import ResetScroll from './components/ResetScroll';
 import Footer from './components/Footer/Footer'
 
 import MainPage from './components/MainPage/MainPage.js';
@@ -19,6 +20,7 @@ import "./App.css"
 import SkeletonIndex from './components/Skeletons/SkeletonIndex/SkeletonIndex.jsx';
 import SkeletonForm from './components/Skeletons/SkeletonForm/SkeletonForm.jsx';
 import SkeletonShow from './components/Skeletons/SkeletonDisplay/SkeletonShow/SkeletonShow';
+import RandoPrompt from './components/Skeletons/SkeletonForm/RandoPrompt';
 
 import UpdateForm from './components/SessionForms/UpdateForm';
 import Loading from './components/Loading/Loading';
@@ -34,6 +36,7 @@ function App() {
   return loaded && (
     <>
       <NavBar />
+      <ResetScroll />
       <Switch>
         <Route exact path="/" component={MainPage} />
         <ProtectedRoute exact path="/skeletons/new" component={SkeletonForm} />
@@ -48,6 +51,7 @@ function App() {
 
         <Route exact path="/users/:userId" component={ProfilePage} />
         <Route exact path="/loading" component={Loading} />
+        <Route exact path="/random_prompt_test" component={RandoPrompt} />
       </Switch>
       <Footer />
     </>

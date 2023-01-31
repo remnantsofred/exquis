@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './SkeletonForm.css';
+import { PromptList } from './PromptList';
 import { createSkeleton } from '../../../store/skeletons';
 import { useHistory } from 'react-router-dom';
 import DropdownMenu from '../../DropdownMenu/DropdownMenu';
@@ -37,6 +38,10 @@ function SkeletonForm () {
       setLoaded(true);
     })
   }, [])
+
+  const handlePromptClick = () => {
+    setPrompt(PromptList[Math.floor(Math.random()*PromptList.length)])
+  }
 
   const onSelect =(selectedList, selectedItem) => {
     selectedCollaborators.push(selectedItem.id)
@@ -122,8 +127,6 @@ function SkeletonForm () {
       dispatch(createSkeleton(skeleton))
         .then((res) => {history.push(`/skeletons/${res._id}`)})
     }
-    
-
   }
 
   
@@ -168,6 +171,11 @@ function SkeletonForm () {
               className='skellie-input'
             />
           </label>
+          <br />
+          <button id="random-prompt-button" onClick={handlePromptClick}>
+              Generate a Random Prompt
+          </button>
+          <p id="credit-to-website">Most phrases by <a id="random-word-link" href='https://randomword.com/sentence' target="_blank">RandomWord</a>, some by Daphne</p>
           <div className="errors">{errors?.maxBones}</div>
           <label>
             <span className='skellie-label'>

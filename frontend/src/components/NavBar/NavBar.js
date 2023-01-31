@@ -64,10 +64,10 @@ function NavBar () {
           </NavLink>
         </div>
         <div className='center'>
-            <div className="search-bar-container">
+            {/* <div className="search-bar-container">
             <input type="text" className="search-bar" id="search-bar-input" placeholder="Search a new story here..." />
             <SearchButton className="search-bar" id="search-bar-button" />
-          </div>
+            </div> */}
         </div>
         <div className='right'>
           { getLinks() }          

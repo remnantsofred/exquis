@@ -21,8 +21,8 @@ h1.current-user-greeting, h1.about-sub-greeting, ul.current-user-options, p.expl
 }
 
 #about-logo:hover {
-  animation: wiggle 2.5s;
-  animation-fill-mode: forwards;
+  animation: wiggle 2.5s forwards;
+  animation-iteration-count: infinite;
 }
 
 div#about-grid-container {

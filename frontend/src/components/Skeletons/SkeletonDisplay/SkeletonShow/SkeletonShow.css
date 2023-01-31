@@ -15,7 +15,7 @@ div.show-top-middle {
   height: min-content;
   padding-left: 0vw;
   padding-right: 1vw;
-  padding-top: 4vh;
+  padding-top: 1vh;
   display: flex;
   flex-direction: column;
   /* margin-right: 10vw; */
@@ -65,11 +65,12 @@ div.show-top {
   margin-left: 2vw;
   width: 65vw;
   display: flex;
+  margin-top: 0vh;
   flex-direction: column;
   height: min-content;
   padding-left: 4vw;
   padding-right: 5vw;
-  padding-top: 4vh;
+  /* padding-top: 2vh; */
   padding-bottom: 1vh;
   /* background-color: rgba(188, 208, 228, 0.136); */
   display: flex;
@@ -330,6 +331,14 @@ div.horizontal-skeleton-likes-container {
 button.skeleton-show-downvote, button.skeleton-show-upvote, .skeleton-show-upvote, .skeleton-show-downvote {
   border: none;
   background-color: transparent;
+  margin-top: 1vh;
+  transition: .25s;
+}
+
+button.skeleton-show-downvote:hover, button.skeleton-show-upvote:hover, .skeleton-show-upvote:hover, .skeleton-show-downvote:hover {
+  cursor: pointer;
+  filter: invert(25%);
+  transition: .25s;
 }
 
 hr#comment-divider {

@@ -1,4 +1,4 @@
-.edit-modal {
+.edit-modal-profile {
   /* text-align: center; */
   align-self: center;
   margin-left: 10vw;
@@ -20,7 +20,7 @@
   /* flex-shrink: 3; */
   text-align: center;
   position: fixed;
-  transform: translateX(12%);
+  transform: translateX(-3%);
   top: 10vh;
   margin-left: auto;
   margin-right: auto;
@@ -32,7 +32,7 @@
 
 }
 
-.edit-modal-form{
+.edit-modal-form-profile{
   width: 78vw;
   height: 75vh;
   margin-left: auto;
@@ -73,7 +73,7 @@
   border: none;
 }
 
-h2.form-title {
+h2.form-title-profile {
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   text-decoration: none;
   font-weight: 400;
@@ -81,25 +81,26 @@ h2.form-title {
   text-align: center;
 }
 
-.edit-skellie-label {
+.edit-skellie-label-profile {
   margin-bottom: -5vh;
 }
 
-h2.edit-skellie-label-text {
+h2.edit-skellie-label-text-profile {
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   text-decoration: none;
   font-weight: 400;
   text-align: left;
   margin-left: 15vw;
-  margin-bottom: -0.5vh;
+  margin-bottom: -3.5vh;
+  font-size: 2.5vw;
 }
 
-input.edit-skellie-input {
+input.edit-skellie-input-profile {
   width: 45vw;
   height: 2.75vh;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: -5vh;
+  margin-bottom: -6vh;
   align-items: center;
   /* justify-content: center; */
   /* justify-items: center; */
@@ -116,7 +117,7 @@ input.edit-skellie-input {
   padding-bottom: 10px;
 }
 
-textarea.edit-skellie-input {
+textarea.edit-skellie-input-profile {
   margin-left: auto;
   margin-right: auto;
   font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -137,7 +138,7 @@ textarea.edit-skellie-input {
   z-index: 0;
 }
 
-#edit-collaborator-select {
+#edit-collaborator-select-profile {
   margin-left: auto;
   margin-right: auto;
   /* width: 40em; */
@@ -148,7 +149,7 @@ textarea.edit-skellie-input {
   border-radius: 25px;
 }
 
- #collaborator-select {
+ #collaborator-select-profile {
     margin-left: auto;
     margin-right: auto;
     width: 45vw;
@@ -159,7 +160,7 @@ textarea.edit-skellie-input {
     padding-bottom: 5vh;
   }
 
-  input.skellie-input, textarea.skellie-input {
+  input.skellie-input-profile, textarea.skellie-input-profile {
     align-items: center;
     font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-decoration: none;
@@ -167,10 +168,9 @@ textarea.edit-skellie-input {
     margin-bottom: -2vh;
   }
 
-  div.multiselect-container#collaborator-select {
+  div.multiselect-container#collaborator-select-profile {
     margin-top: -2vh;
   }
-
   div.multiselect-container, div.search-wrapper {
   margin-left: auto;
   margin-right: auto;
@@ -222,7 +222,30 @@ div.edit-collaborator-select.multiselect-container.multiSelectContainer {
   border-radius: 25px;
 } */
 
-input#edit-skellie-submit-button {
+input#edit-skellie-submit-button-profile {
   margin-top: 6vh;
   margin-bottom: 2vh;
+  transition: 0.5s;
+  width: 30vw;
+  height: 8vh;
+  align-items: center;
+  margin-top: 2vw;
+  font-family: 'Open Sans', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-decoration: none;
+  font-weight: 400;
+  border: solid;
+  border-width: 0.5px;
+  border-color: #34374d;
+  border-radius: 75px;
+  margin-top: 5vh;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+input#edit-skellie-submit-button-profile:hover {
+  transition: 0.5s;
+  background-color: #34374d;
+  color: white;
 }
