@@ -198,7 +198,7 @@ const SkeletonShow = () => {
     }
   }
 
-  
+  console.log("currentUser: ", currentUser)
   
   if (!loaded) {
     return (
@@ -280,9 +280,9 @@ const SkeletonShow = () => {
                       </div>
                       <div className="horizontal-skeleton-likes-container">
                         {/* <button onClick={handleDownVote} className="skeleton-show-downvote">{currentUser ? <img src={Downvote} className="vote-button-image skeleton-show-downvote" /> : <img src={Downvote} className="downVote-grey-color vote-button-image" /> }</button> */}
-                        {currentUser ? <button onClick={handleDownVote} className="skeleton-show-downvote"><img src={Downvote} className="vote-button-image skeleton-show-downvote" /></button> : <img src={Downvote} className="downVote-grey-color vote-button-image" /> }
+                        {currentUser._id !== "" ? <button onClick={handleDownVote} className="skeleton-show-downvote"><img src={Downvote} className="vote-button-image skeleton-show-downvote" /></button> : <img src={Downvote} className="downVote-grey-color vote-button-image" /> }
                           <h1 id="skeleton-show-votes">{voteCount}</h1>
-                       {currentUser ?  <button onClick={handleUpVote} className="skeleton-show-upvote"><img src={Upvote} className="vote-button-image skeleton-show-upvote" /></button> : <img src={Upvote} className="upVote-grey-color vote-button-image" />}
+                       {currentUser._id !== "" ?  <button onClick={handleUpVote} className="skeleton-show-upvote"><img src={Upvote} className="vote-button-image skeleton-show-upvote" /></button> : <img src={Upvote} className="upVote-grey-color vote-button-image" />}
                         {/* <button onClick={handleUpVote} className="skeleton-show-upvote">{ currentUser ? <img src={Upvote} className="vote-button-image skeleton-show-upvote" /> : <img src={Upvote} className="upVote-grey-color vote-button-image" /> } </button> */}
                       </div>
                 </div>
@@ -304,10 +304,10 @@ const SkeletonShow = () => {
           
         <div className="comments-section">
           <h2 htmlFor="comment" id="comment-section-label">{skellie.comments.length === 1 ? `${skellie.comments.length} Comment` : `${skellie.comments.length} Comments`}</h2>
-          <div className='create-comment-container' id="comment-form-container">
-            <textarea name="comment" id="comment-input" className="create-comment-form" rows="5" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
-            <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit</button>
-          </div>
+          { currentUser._id !== "" ? <div className='create-comment-container' id="comment-form-container">
+            <textarea name="comment" id="comment-input" className="create-comment-form" rows="5" placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)}/> 
+            <button type="submit" id="submit-comment-button" className="create-comment-sumbit" onClick={handlePost}>Submit</button> 
+          </div> : <></> }
         </div>
 
         
