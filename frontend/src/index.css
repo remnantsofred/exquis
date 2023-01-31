@@ -4,6 +4,16 @@
    License: none (public domain)
 */
 
+@font-face {
+	font-family: "Inter";
+	src: local('../frontend/src/assets/fonts/Inter-VariableFont_slnt,wght.ttf');
+}
+
+@font-face {
+	font-family: "Open Sans";
+	src: local('../frontend/src/assets/')
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
