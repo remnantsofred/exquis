@@ -1,9 +1,7 @@
 import './IndexSkeletonTile.css'
 import { Link } from "react-router-dom"
-// import Downvote from '../../../assets/skeleton_tile/triangle_button_down.png'
-// import Upvote from '../../../assets/skeleton_tile/triangle_button_up.png'
-import UpvoteButton from '../UpvoteButton'
-import DownvoteButton from '../DownvoteButton'
+import Downvote from '../../../../assets/skeleton_tile/triangle_button_down.png'
+import Upvote from '../../../../assets/skeleton_tile/triangle_button_up.png'
 import IndexPlaceBones from './IndexPlaceBones'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
@@ -137,9 +135,11 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
               <IndexPlaceBones className="index-skeleton-body" bones={skeletonInfo.bones} />
             </div>
             <div className="index-skeleton-likes-container">
-              <button onClick={handleUpVote} className="vote-button" id="upvote-button"><UpvoteButton className="vote-button" id="upvote-button" /></button>
+              <button onClick={handleUpVote} className="vote-button" id="upvote-button"><img src={Upvote} className="vote-button-image vote-button" id="upvote-button"/></button>
+              {/* <button onClick={handleUpVote} className="vote-button" id="upvote-button"><UpvoteButton className="vote-button" id="upvote-button" /></button> */}
                 <p className="index-skeleton-like-count">{countLikesDislikes()}</p>
-              <button onClick={handleDownVote} className="vote-button" id="downvote-button"><DownvoteButton id="downvote-button" /></button>
+              {/* <button onClick={handleDownVote} className="vote-button" id="downvote-button"><DownvoteButton id="downvote-button" /></button> */}
+              <button onClick={handleDownVote} className="vote-button" id="downvote-button"><img src={Downvote} className="vote-button-image" id="downvote-button"  /></button>
             </div>
           </div>
           {/* <div className="index-skeleton-tags-container"> */}

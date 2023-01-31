@@ -285,11 +285,11 @@ const SkeletonShow = () => {
                         {(CurrentCollaboratorObj && author) && <NewBoneInput skellie={skellie} currentCollabId={CurrentCollaboratorObj._id} authorId={author._id}/>}
                       </div>
                       <div className="horizontal-skeleton-likes-container">
-                        <button onClick={handleDownVote} className="skeleton-show-downvote"><DownvoteButton className="skeleton-show-downvote" /></button>
+                        <button onClick={handleDownVote} className="skeleton-show-downvote"><img src={Downvote} className="vote-button-image skeleton-show-downvote" /></button>
+                        {/* <button onClick={handleDownVote} className="skeleton-show-downvote"><DownvoteButton className="skeleton-show-downvote" /></button> */}
                           <h1 id="skeleton-show-votes">{voteCount}</h1>
-                          {/* <h1 id="skeleton-show-votes">{countLikesDislikes()}</h1> */}
-                          {/* <h1 id="skeleton-show-votes">{votes}</h1> */}
-                        <button onClick={handleUpVote} className="skeleton-show-upvote"><UpvoteButton className="skeleton-show-upvote"/></button>
+                        {/* <button onClick={handleUpVote} className="skeleton-show-upvote"><UpvoteButton className="skeleton-show-upvote"/></button> */}
+                        <button onClick={handleUpVote} className="skeleton-show-upvote"><img src={Upvote} className="vote-button-image skeleton-show-upvote" /></button>
                       </div>
                 </div>
             </div>
