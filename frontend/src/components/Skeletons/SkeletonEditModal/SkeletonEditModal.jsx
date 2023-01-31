@@ -115,9 +115,9 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
     };
     if (Object.values(errors).length === 0) {
       dispatch(updateSkeleton(skellie._id, skeleton))
+      .then(() => {history.push(`/skeletons/${skellie._id}`)})
       handleModalClose();
     }
-    // .then((res) => {history.push(`/skeletons/${res._id}`)})
   }
 
   const handleClose = () => {
