@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import Loading from "../../../Loading/Loading"
 
 
-const GenPlaceBones = (bones) => {
+const GenPlaceBones = ({bones}) => {
   const [loaded, setLoaded] = useState(false)
   const body = []
   
@@ -22,8 +22,8 @@ const GenPlaceBones = (bones) => {
   }, [])
   
   const compileBones = () => {
-    bones.bones.map(bone => {
-      const sentence = <span>{bone.text} </span>
+    bones.map(bone => {
+      const sentence = <span key={`compile-bones-genplace-bones-${bone._id}`}>{bone.text} </span>
       body.push(sentence)    
     })
     return (
