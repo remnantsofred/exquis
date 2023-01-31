@@ -15,7 +15,7 @@ const validateLoginInput = require('../../validations/login');
 router.post('/register', validateRegisterInput, async (req, res, next) => {
 
   const user = await User.findOne({
-    $or: [{ email: req.body.email }, { username: req.body.username }]
+    $or: [{ email: req.body.email.toLowerCase() }, { username: req.body.username.toLowerCase() }]
   });
   
   if (user) {
