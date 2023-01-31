@@ -41,7 +41,6 @@ function SkeletonForm () {
 
   const handlePromptClick = () => {
     setPrompt(PromptList[Math.floor(Math.random()*PromptList.length)])
-    console.log(prompt)
   }
 
   const onSelect =(selectedList, selectedItem) => {
