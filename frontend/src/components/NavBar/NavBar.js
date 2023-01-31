@@ -9,11 +9,12 @@ import SearchIcon from "../../assets/main-nav-bar/search-line-icon.svg"
 // misc/css
 import './NavBar.css';
 import { logout } from '../../store/session';
+import { useHistory } from 'react-router-dom';
 
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
   const dispatch = useDispatch();
-
+  const history = useHistory();
 
   const SearchButton = () => {
   return (
@@ -25,6 +26,7 @@ function NavBar () {
   const logoutUser = e => {
       e.preventDefault();
       dispatch(logout());
+      history.push(`/login`);
   }
 
   const getLinks = () => {
