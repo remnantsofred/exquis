@@ -198,7 +198,6 @@ const SkeletonShow = () => {
     }
   }
 
-  console.log("currentUser: ", currentUser)
   
   if (!loaded) {
     return (
