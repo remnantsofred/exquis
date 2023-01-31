@@ -8,7 +8,7 @@ const CommentPanel= ({skeleton}) => {
     return (
         <div>
             {skeleton.comments.map((comment) => (
-                <CommentForm key={`skellie-comment-form-${comment._id}`} comment={comment} skeleton={skeleton} />
+                <CommentForm key={`skellie-comment-form-${comment._id}-${skeleton._id}-${comment.author}`} comment={comment} skeleton={skeleton} />
             )).reverse()}
         </div>
     )
