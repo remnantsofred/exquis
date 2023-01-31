@@ -7,7 +7,6 @@ import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 import Multiselect from 'multiselect-react-dropdown';
 import { getUsers, fetchUsers } from '../../../store/users';
 import Loading from '../../Loading/Loading';
-import {receiveErrors, clearErrors  } from '../../../store/skeletons';
 
 
 function SkeletonForm () {
@@ -20,7 +19,6 @@ function SkeletonForm () {
   const history = useHistory();
   const currentUser = useSelector(state => state.session.user);
   const users = useSelector(getUsers);
-  // const errors = useSelector(state => state.errors.skeletons);
   const dispatch = useDispatch();
   const options = users?.filter(user => user._id !== currentUser._id).map(user => ({name: user.username, id: user._id}));
   const selectedValue = [];
@@ -33,13 +31,6 @@ function SkeletonForm () {
   }, []);
 
   useEffect(() => {
-    return () => {
-      dispatch(clearErrors());
-    };
-  }, [dispatch]);
-
-
-  useEffect(() => {
     Promise.all([
       dispatch(fetchUsers()),
     ]).then(()=>{
@@ -47,19 +38,15 @@ function SkeletonForm () {
     })
   }, [])
 
-  
   const onSelect =(selectedList, selectedItem) => {
     selectedCollaborators.push(selectedItem.id)
-   
   }
   
   const onRemove = (selectedList, removedItem) => {
     const index = selectedCollaborators.indexOf(removedItem.id)
     selectedCollaborators.splice(index, 1)
-    
   }
   
-
   const update = (e, field) => {
     let setState;
     const value = e.currentTarget.value;
