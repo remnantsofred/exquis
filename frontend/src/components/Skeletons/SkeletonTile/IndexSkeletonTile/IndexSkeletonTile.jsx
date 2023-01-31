@@ -1,8 +1,7 @@
 import './IndexSkeletonTile.css'
 import { Link } from "react-router-dom"
-// vote buttons
-import UpvoteButton from '../UpvoteButton'
-import DownvoteButton from '../DownvoteButton'
+import Downvote from '../../../../assets/skeleton_tile/triangle_button_down.png'
+import Upvote from '../../../../assets/skeleton_tile/triangle_button_up.png'
 import IndexPlaceBones from './IndexPlaceBones'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
@@ -21,84 +20,91 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
   let skeleton = skeletonInfo
 
 
-  const [upVote, setUpVote] = useState(false)
-  const [downVote, setDownVote] = useState(false)
-  const [voteCount, setVoteCount] = useState(votes.length)
+  // const [upVote, setUpVote] = useState(false)
+  // const [downVote, setDownVote] = useState(false)
+  // const [voteCount, setVoteCount] = useState(votes.length)
 
-
-  const setUpVoteOrDownVote = () => {
-    if (votes.length > 0) {
-      votes.forEach((vote) => {
-        if (vote.liker._id === currentUser._id) {
-          if (vote.type === 'like') {
-            setUpVote(true)
-          } else {
-            setDownVote(true)
-          }
-        }
-      })
-    }
-  }
-
-
-  useEffect(() => {
-    setUpVoteOrDownVote()
-  }, []) 
-
-  
-  const handleUpVote = (e) => {
-    e.preventDefault()
-    if (currentUser) { 
-      if (downVote) {
-        dispatch(deleteLike(skeleton._id, currentUser._id))
-        setDownVote(false)
-        setVoteCount (voteCount => voteCount - 1)
-        const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
-        dispatch(createLike(like, skeleton._id))
-        setUpVote(true)
-        setVoteCount(voteCount => voteCount + 1)
+  const countLikesDislikes = () => {
+    let likes = 0
+    let dislikes = 0
+    votes.forEach((vote) => {
+      if (vote.type === 'like') {
+        likes++
       } else {
-        if (!upVote) {
-          const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
-          dispatch(createLike(like, skeleton._id))
-          setUpVote(true)
-          setVoteCount(voteCount => voteCount + 1)
-        } else {
-          dispatch(deleteLike(skeleton._id, currentUser._id))
-          setUpVote(false)
-          setVoteCount (voteCount => voteCount - 1)
-        }
+        dislikes--
       }
     }
+    )
+    return likes + dislikes
   }
 
 
-  const handleDownVote = (e) => {
-    e.preventDefault()
+  // const setUpVoteOrDownVote = () => {
+  //   if (votes.length > 0) {
+  //     votes.forEach((vote) => {
+  //       if (vote.liker._id === currentUser._id) {
+  //         if (vote.type === 'like') {
+  //           setUpVote(true)
+  //         } else {
+  //           setDownVote(true)
+  //         }
+  //       }
+  //     })
+  //   }
+  // }
 
-    if (currentUser) {
-      if (upVote) {
-        dispatch(deleteLike(skeleton._id, currentUser._id))
-        setUpVote(false)
-        setVoteCount (voteCount => voteCount - 1)
-        const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
-        dispatch(createLike(like, skeleton._id))
-        setDownVote(true)
-        setVoteCount(voteCount => voteCount + 1)
-      } else {
-        if (downVote) {
-          dispatch(deleteLike(skeleton._id, currentUser._id))
-          setDownVote(false)
-          setVoteCount (voteCount => voteCount - 1)
-        } else {
-          const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
-          dispatch(createLike(like, skeleton._id))
-          setDownVote(true)
-          setVoteCount(voteCount => voteCount + 1)
-        }
-      }  
-    }
-  }
+
+  // useEffect(() => {
+  //   setUpVoteOrDownVote()
+  //   countLikesDislikes()
+  // }, []) 
+
+  
+  // const handleUpVote = (e) => {
+  //   e.preventDefault()
+  //   if (currentUser) { 
+  //     if (downVote) {
+  //       dispatch(deleteLike(skeleton._id, currentUser._id))
+  //       setDownVote(false)
+  //       const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
+  //       dispatch(createLike(like, skeleton._id))
+  //       setUpVote(true)
+  //     } else {
+  //       if (!upVote) {
+  //         const like = {type: 'like', skeleton: skeleton._id, liker: currentUser._id }
+  //         dispatch(createLike(like, skeleton._id))
+  //         setUpVote(true)
+  //       } else {
+  //         dispatch(deleteLike(skeleton._id, currentUser._id))
+  //         setUpVote(false)
+  //       }
+  //     }
+  //   }
+  // }
+
+
+  // const handleDownVote = (e) => {
+  //   e.preventDefault()
+
+  //   if (currentUser) {
+  //     if (upVote) {
+  //       dispatch(deleteLike(skeleton._id, currentUser._id))
+  //       setUpVote(false)
+  //       const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
+  //       dispatch(createLike(like, skeleton._id))
+  //       setDownVote(true)
+  //     } else {
+  //       if (downVote) {
+  //         dispatch(deleteLike(skeleton._id, currentUser._id))
+  //         setDownVote(false)
+  //       } else {
+  //         const like = {type: 'dislike', skeleton: skeleton._id, liker: currentUser._id }
+  //         dispatch(createLike(like, skeleton._id))
+  //         setDownVote(true)
+  //       }
+  //     }  
+  //   }
+  // }
 
 
   const skeletonId = skeletonInfo._id
@@ -129,9 +135,12 @@ const IndexSkeletonTile = ({skeletonInfo}) => {
               <IndexPlaceBones className="index-skeleton-body" bones={skeletonInfo.bones} />
             </div>
             <div className="index-skeleton-likes-container">
-              <button onClick={handleUpVote} className="vote-button" id="upvote-button"><UpvoteButton className="vote-button" id="upvote-button" /></button>
-                <p className="index-skeleton-like-count">{voteCount}</p>
-              <button onClick={handleDownVote} className="vote-button" id="downvote-button"><DownvoteButton id="downvote-button" /></button>
+              {/* <button onClick={handleUpVote} className="vote-button" id="upvote-button"><img src={Upvote} className="vote-button-image vote-button" id="upvote-button"/></button> */}
+              {/* <button onClick={handleUpVote} className="vote-button" id="upvote-button"><UpvoteButton className="vote-button" id="upvote-button" /></button> */}
+                <p className="index-skeleton-like-count">{countLikesDislikes()}</p>
+                <p className="index-skeleton-like-text">Votes</p>
+              {/* <button onClick={handleDownVote} className="vote-button" id="downvote-button"><DownvoteButton id="downvote-button" /></button> */}
+              {/* <button onClick={handleDownVote} className="vote-button" id="downvote-button"><img src={Downvote} className="vote-button-image" id="downvote-button"  /></button> */}
             </div>
           </div>
           {/* <div className="index-skeleton-tags-container"> */}
