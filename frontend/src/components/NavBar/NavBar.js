@@ -31,6 +31,7 @@ function NavBar () {
     if (loggedIn) {
       return (
         <div className="links-nav">
+          <Link to={'/about'} id="about-us-link">about</Link>
           <Link to={'/skeletons'} id="skeleton-index-link">all skeletons</Link>
           <Link to={'/profile'} id="profile-link">profile</Link>
           <Link to={'/skeletons/new'} id="skeleton-form-link">new skeleton</Link>
@@ -41,6 +42,7 @@ function NavBar () {
     } else {
       return (
         <div className="links-auth">
+          <Link to={'/about'} id="about-us-link">about</Link>
           <Link to={'/signup'} id="signup-link">signup</Link>
           <Link to={'/login'} id="login-link">login</Link>
         </div>
