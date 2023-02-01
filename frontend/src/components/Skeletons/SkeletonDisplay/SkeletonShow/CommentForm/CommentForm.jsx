@@ -39,7 +39,7 @@ const CommentForm = ({comment, skeleton}) => {
     }
   }
 
-  console.log("comment author", comment.author.username)
+  
 
   if (comment._id){
     const commenterId = (comment.author._id)
