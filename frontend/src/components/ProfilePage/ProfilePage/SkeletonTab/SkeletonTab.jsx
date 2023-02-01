@@ -42,8 +42,6 @@ const SkeletonTab = ({switchValue, userId}) => {
     e.preventDefault()
     dispatch(deleteSkeleton(skellie._id))
     setDeleted(true)
-    // .then((res) => {history.push(`/users/${skellie.owner}`)})
-
   }
 
   const handleModalClose = () => {
@@ -51,14 +49,13 @@ const SkeletonTab = ({switchValue, userId}) => {
   }
 
   const SkellieShowLink = (skellie, switchValue) => {
-    // if (isCurrent(skellie)) {
     if (switchValue === 'current') {
     return (
       <li key={`skellie-show-${skellie._id}`} className="profile-page-skellie-show-link-profile-page">
         <Link className="profile-page-skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link><span id="bone-counter">{`  -  ${skellie.bones.length} / ${skellie.maxBones} Bones`}</span>
         <div className="edit-delete-div-profile-page">
-          { (sessionUser._id === skellie.owner ) ? <button className="comment-update-button" onClick={(e) => handleSkellieUpdate(skellie, e, 'current')}>Edit</button> : <></>}
-          { (sessionUser._id === skellie.owner ) ? <button className="comment-delete-button" onClick={(e) => handleSkellieDelete(skellie, e)} >Delete</button> : <></>} 
+          { (sessionUser._id === skellie.owner ) && <button className="comment-update-button" onClick={(e) => handleSkellieUpdate(skellie, e, 'current')}>Edit</button>}
+          { (sessionUser._id === skellie.owner ) && <button className="comment-delete-button" onClick={(e) => handleSkellieDelete(skellie, e)}>Delete</button> } 
         </div>
         <hr className="profile-skellie-sep"/>
       </li>
@@ -68,8 +65,8 @@ const SkeletonTab = ({switchValue, userId}) => {
         <Link className="profile-page-skellie-show-link-profile-page" id="specific-skellie-link" to={`/skeletons/${skellie._id}`}>{skellie.title}</Link>{ (skellie.bones.length >= skellie.maxBones) ? <span id="bone-counter">- FINISHED</span> : <span id="bone-counter">{`  -  ${skellie.bones.length} / ${skellie.maxBones} Bones`}</span>}
         
         <div className="edit-delete-div-profile-page">
-          { (sessionUser._id === skellie.owner ) ? <button className="comment-update-button" onClick={(e) => handleSkellieUpdate(skellie, e, 'owned')}>Edit</button> : <></>}
-          { (sessionUser._id === skellie.owner ) ? <button className="comment-delete-button" onClick={(e) => handleSkellieDelete(skellie, e)} >Delete</button> : <></>} 
+          { (sessionUser._id === skellie.owner ) && <button className="comment-update-button" onClick={(e) => handleSkellieUpdate(skellie, e, 'owned')}>Edit</button>}
+          { (sessionUser._id === skellie.owner ) && <button className="comment-delete-button" onClick={(e) => handleSkellieDelete(skellie, e)}>Delete</button>} 
         </div>
         <hr className="profile-skellie-sep"/>
       </li>
