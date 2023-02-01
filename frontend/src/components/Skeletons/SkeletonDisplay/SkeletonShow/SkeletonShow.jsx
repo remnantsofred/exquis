@@ -17,6 +17,8 @@ import SkeletonEditModal from "../../SkeletonEditModal/SkeletonEditModal"
 import { createLike, deleteLike } from "../../../../store/likes"
 import Downvote from "../../../../assets/skeleton_tile/triangle_button_down.png"
 import Upvote from "../../../../assets/skeleton_tile/triangle_button_up.png"
+import Downvoted from "../../../../assets/skeleton_tile/triangle_button_down_downvoted.png"
+import Upvoted from  "../../../../assets/skeleton_tile/triangle_button_up_upvoted.png"
 
 const SkeletonShow = () => {
   const dispatch = useDispatch()
@@ -229,6 +231,41 @@ const SkeletonShow = () => {
         )
     }
 
+    const buttonTypeDown = () => {
+      if (currentUser._id !== "" && downVote) {
+        return (
+          <button onClick={handleDownVote} className="skeleton-show-downvote"><img src={Downvoted} className="vote-button-image skeleton-show-downvote" /></button>
+        )
+      } else if (currentUser._id !== "" && !downVote) {
+        return (
+          <button onClick={handleDownVote} className="skeleton-show-downvote"><img src={Downvote} className="vote-button-image skeleton-show-downvote" /></button>
+        )
+      } else if (currentUser._id === "") {
+        return (
+          <img src={Downvote} className="downVote-grey-color vote-button-image" />
+        )
+      }
+
+    }
+
+
+    const buttonTypeUp = () => {
+      if (currentUser._id !== "" && upVote) {
+        return (
+          <button onClick={handleUpVote} className="skeleton-show-upvote"><img src={Upvoted} className="vote-button-image skeleton-show-upvote" /></button>
+        )
+      } else if (currentUser._id !== "" && !upVote) {
+        return (
+          <button onClick={handleUpVote} className="skeleton-show-upvote"><img src={Upvote} className="vote-button-image skeleton-show-upvote" /></button>
+        )
+      } else if (currentUser._id === "") {
+        return (
+          <img src={Upvote} className="upVote-grey-color vote-button-image" />
+        )
+      }
+
+    }
+
     return (
       <>
         {modalStatus === 1 && <SkeletonEditModal skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />}
@@ -279,9 +316,11 @@ const SkeletonShow = () => {
                       </div>
                       <div className="horizontal-skeleton-likes-container">
                         {/* <button onClick={handleDownVote} className="skeleton-show-downvote">{currentUser ? <img src={Downvote} className="vote-button-image skeleton-show-downvote" /> : <img src={Downvote} className="downVote-grey-color vote-button-image" /> }</button> */}
-                        {currentUser._id !== "" ? <button onClick={handleDownVote} className="skeleton-show-downvote"><img src={Downvote} className="vote-button-image skeleton-show-downvote" /></button> : <img src={Downvote} className="downVote-grey-color vote-button-image" /> }
+                        {/* {currentUser._id !== "" ? <button onClick={handleDownVote} className="skeleton-show-downvote"><img src={Downvote} className="vote-button-image skeleton-show-downvote" /></button> : <img src={Downvote} className="downVote-grey-color vote-button-image" /> } */}
+                        {buttonTypeDown()}
                           <h1 id="skeleton-show-votes">{voteCount}</h1>
-                       {currentUser._id !== "" ?  <button onClick={handleUpVote} className="skeleton-show-upvote"><img src={Upvote} className="vote-button-image skeleton-show-upvote" /></button> : <img src={Upvote} className="upVote-grey-color vote-button-image" />}
+                        {buttonTypeUp()}
+                       {/* {currentUser._id !== "" ?  <button onClick={handleUpVote} className="skeleton-show-upvote"><img src={Upvote} className="vote-button-image skeleton-show-upvote" /></button> : <img src={Upvote} className="upVote-grey-color vote-button-image" />} */}
                         {/* <button onClick={handleUpVote} className="skeleton-show-upvote">{ currentUser ? <img src={Upvote} className="vote-button-image skeleton-show-upvote" /> : <img src={Upvote} className="upVote-grey-color vote-button-image" /> } </button> */}
                       </div>
                 </div>
