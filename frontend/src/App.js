@@ -24,6 +24,8 @@ import RandoPrompt from './components/Skeletons/SkeletonForm/RandoPrompt';
 
 import UpdateForm from './components/SessionForms/UpdateForm';
 import Loading from './components/Loading/Loading';
+import "./fonts/OpenSans-VariableFont_wdth,wght.ttf";
+import "./fonts/Inter-VariableFont_slnt,wght.ttf";
 
 
 function App() {
