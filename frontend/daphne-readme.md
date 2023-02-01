@@ -1,28 +1,14 @@
-import { Link, useHistory } from "react-router-dom"
-import { useSelector, useDispatch} from "react-redux"
-import { getSkeletons , fetchSkeletons, deleteSkeleton } from "../../../../store/skeletons";
-import { useEffect, useState } from "react";
-import SkeletonEditModalProfile from "../../../Skeletons/SkeletonEditModalProfile/SkeletonEditModalProfile"
-import { getUsers, fetchUsers, getUser } from "../../../../store/users";
-import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
+## Feature 2 - Edit Skeleton from Profile Page
 
-const SkeletonTab = ({switchValue, userId}) => {
+A second feature to highlight is the ability to edit skeletons you own from the user profile page. From the Skeleton show page, it was fairly simple to write out the logic for the edit modal form to have all the existing information about the skeleton pre-populated. 
 
-  const dispatch = useDispatch()
-  const [ modalStatus, setModalStatus ] = useState(false);
-  const history = useHistory();
-  const sessionUser = SessionUserCheck()
-  const [ deleted, setDeleted ] = useState(false)
+The user profile page, on the other hand, includes all the skeletons the user is an owner of (meaning a user is able to edit) and collaborator on (collaborators are not given edit access). The user profile page also has three tabs for different collections of skeletons - Current Skeletons (skeletons the user is owner or collaborator on that still have bones remaining and therefore have not been completed), Owned Skeletons (skeletons the user is the owner of, regardless of complete or incomplete status), and Previous Skeletons (skeletons the user is owner or collaborator that have reached max bones and have been completed). 
 
-  const user = useSelector(getUser(userId))
-  const skellies = user?.skeletons
+When we initially ported over the edit modal form functionality from the Skeleton show page, the edit modal did not know which skeleton was being passed in. To correct this issue and to ensure the correct skeleton's information was pre-populating the correct skeleton's information into the edit form modal, we updated refactored the code such that each skeleton of each tab had an assciated modal that would open if the modalStatus was set to the tab name + skeleton id. We then had an onClick function that would set the modal status to the tab and skeleton id. 
 
 
-  useEffect(() => {
-    dispatch(fetchUsers())
-    setDeleted(false)
-  },[deleted])
-
+### Code snippet below:
+```jsx
   const handleSkellieUpdate = (skellie, e, tab) => {
     e.preventDefault()
     setModalStatus(`${tab}-${skellie._id}`)
@@ -166,6 +152,6 @@ const SkeletonTab = ({switchValue, userId}) => {
         </div>
       )
   }
-}
 
-export default SkeletonTab;
+
+```
