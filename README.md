@@ -1,8 +1,10 @@
+
+
 ## Exquis
 Exquis is a collaborative story-telling app, where users can create “skeletons” and add collaborators, who take turns adding “bones” to the skeleton.
 
-
-[Exquis live link](https://exquis.onrender.com/ "Exquis")
+***
+[Exquis Live Link](https://exquis.onrender.com/ "Exquis")
 
 Exquis is inspired by the surrealist technique known as “exquisite corpse,” where participants take turns adding piece by piece to a dynamic, evolving collective art piece. At Exquis we believe more minds = more fun. Watch your skeletons grow and unfold into unpredictable and unique writing pieces of art. Build beautiful stories and experiences with friends, or build friendships by creating art together.
 
