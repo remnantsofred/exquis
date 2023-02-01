@@ -1,4 +1,4 @@
-
+![Exquis Splash](./frontend/src/assets/read-me/Exquis%20Splash.png)
 
 ## Exquis
 Exquis is a collaborative story-telling app, where users can create “skeletons” and add collaborators, who take turns adding “bones” to the skeleton.
