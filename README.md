@@ -19,16 +19,16 @@ Exquis was developed using:
 ### Featured Features
 
 #### Create Skeletons 
-![](https://github.com/remnantsofred/exquis/blob/main/frontend/src/assets/readme-videos/create-skeleton.gif)
+![](https://github.com/remnantsofred/exquis/blob/main/frontend/src/assets/readme-videos/create-skeleton-large.gif)
 
 #### Create Bones in a skeleton
-![](https://github.com/remnantsofred/exquis/blob/main/frontend/src/assets/readme-videos/create-bone.gif)
+![](https://github.com/remnantsofred/exquis/blob/main/frontend/src/assets/readme-videos/create-bone-large.gif)
 
 #### Comment on a skeleton. Likes and dislike a skeleton
-![](https://github.com/remnantsofred/exquis/blob/main/frontend/src/assets/readme-videos/likes-comments.gif)
+![](https://github.com/remnantsofred/exquis/blob/main/frontend/src/assets/readme-videos/likes-comments-large.gif)
 
 #### Edit a skeleton
-![](https://github.com/remnantsofred/exquis/blob/main/frontend/src/assets/readme-videos/edit-skeleton.gif)
+![](https://github.com/remnantsofred/exquis/blob/main/frontend/src/assets/readme-videos/edit-skeleton-large.gif)
 
 
 ### Color Mapping Bones
