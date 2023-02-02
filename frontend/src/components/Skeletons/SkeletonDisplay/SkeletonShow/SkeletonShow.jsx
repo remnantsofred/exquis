@@ -232,11 +232,11 @@ const SkeletonShow = () => {
     }
 
     const buttonTypeDown = () => {
-      if (currentUser._id !== "" && downVote) {
+      if (currentUser._id !== "" && downVote === true) {
         return (
           <button onClick={handleDownVote} className="skeleton-show-downvote"><img src={Downvoted} className="vote-button-image skeleton-show-downvote" /></button>
         )
-      } else if (currentUser._id !== "" && !downVote) {
+      } else if (currentUser._id !== "" && downVote === false ) {
         return (
           <button onClick={handleDownVote} className="skeleton-show-downvote"><img src={Downvote} className="vote-button-image skeleton-show-downvote" /></button>
         )
@@ -250,11 +250,11 @@ const SkeletonShow = () => {
 
 
     const buttonTypeUp = () => {
-      if (currentUser._id !== "" && upVote) {
+      if (currentUser._id !== "" && upVote === true) {
         return (
           <button onClick={handleUpVote} className="skeleton-show-upvote"><img src={Upvoted} className="vote-button-image skeleton-show-upvote" /></button>
         )
-      } else if (currentUser._id !== "" && !upVote) {
+      } else if (currentUser._id !== "" && upVote === false) {
         return (
           <button onClick={handleUpVote} className="skeleton-show-upvote"><img src={Upvote} className="vote-button-image skeleton-show-upvote" /></button>
         )
@@ -274,11 +274,12 @@ const SkeletonShow = () => {
             <div className="show-top">
                 <div className="title-user-edit">
                 <h1 id="skeleton-title">{skellie.title} ///// <span id="bone-counter-in-title">({skellie.bones.length} / {skellie.maxBones} Bones)</span></h1>
-                { (author._id === skellie.owner._id ) ? <hr id="edit-delete-title-divider" /> : <></>} 
+                  { (author._id === skellie.owner._id && skellie.bones.length < skellie.maxBones) && <hr id="edit-delete-title-divider" /> } 
 
                   <div className="edit-delete-div">
-                  { (author._id === skellie.owner._id ) ? <button className="comment-update-button" onClick={handleSkellieUpdate}>Edit</button> : <></>}
-                  { (author._id === skellie.owner._id ) ? <button className="comment-delete-button" onClick={handleSkellieDelete} >Delete</button> : <></>} 
+                    {/* <hr id="edit-delete-title-divider" /> */}
+                   { (author._id === skellie.owner._id && skellie.bones.length < skellie.maxBones) && <button className="comment-update-button" onClick={handleSkellieUpdate}>Edit</button>}
+                   { (author._id === skellie.owner._id && skellie.bones.length < skellie.maxBones) && <button className="comment-delete-button" onClick={handleSkellieDelete} >Delete</button>} 
                   </div>
                   
                 </div>
