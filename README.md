@@ -181,7 +181,7 @@ Exquis was developed using:
 
 The initial challenge was to accurate map each sentence to an author in a separate component by color, and have that be consistent. The challenge was getting random, unique colors for each sentence and owner, which I ended up solving by first creating an array of palettes. Each palette is an array of five unique colors. The array of palettes are shuffled each time before assignment. An array of the collaborators of the relevant skeleton is passed in and then each writer is assigned a color. Then the writer and color are put into an object and pushed into an array that is returned to the skeleton show page, where then it's passed again with the skeleton bones into a Place Bones function which, takes the author id of each bone and connects it with the writer id, confirms that they're the same, then pushes a span element with the color style into an array which is then pushed as the full body of the skeleton back to the skeleton show page.
 
-## Feature 2 - Edit Skeleton from Profile Page
+### Edit Skeleton from Profile Page
 
 A second feature to highlight is the ability to edit skeletons you own from the user profile page. From the Skeleton show page, it was fairly simple to write out the logic for the edit modal form to have all the existing information about the skeleton pre-populated. 
 
@@ -190,7 +190,7 @@ The user profile page, on the other hand, includes all the skeletons the user is
 When we initially ported over the edit modal form functionality from the Skeleton show page, the edit modal did not know which skeleton was being passed in. To correct this issue and to ensure the correct skeleton's information was pre-populating the correct skeleton's information into the edit form modal, we updated refactored the code such that each skeleton of each tab had an assciated modal that would open if the modalStatus was set to the tab name + skeleton id. We then had an onClick function that would set the modal status to the tab and skeleton id. 
 
 
-### Code snippet below:
+#### Code snippet below:
 ```jsx
   const handleSkellieUpdate = (skellie, e, tab) => {
     e.preventDefault()
