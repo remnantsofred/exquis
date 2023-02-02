@@ -431,8 +431,8 @@ const likes = [];
 for (const skeleton of skeletons) {
   let possibleLikers = users
   let shuffledLikers = shuffle(possibleLikers)
+  let copyShuffledLikers = [...shuffledLikers]
   for (let i = 0; i < NUM_SEED_LIKES; i++) {
-    let copyShuffledLikers = [...shuffledLikers]
     let currentliker = copyShuffledLikers.pop()
     const like = new Like ({
       skeleton: skeleton._id,
