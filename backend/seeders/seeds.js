@@ -426,15 +426,17 @@ comments.forEach(comment => {
 
 
 // Seed likes
-//TODO: change this so it's not a random user because a user can only like/dislike a skellie once
 const likes = [];
 
 for (const skeleton of skeletons) {
-  
+  let possibleLikers = users
+  let shuffledLikers = shuffle(possibleLikers)
+  let copyShuffledLikers = [...shuffledLikers]
   for (let i = 0; i < NUM_SEED_LIKES; i++) {
+    let currentliker = copyShuffledLikers.pop()
     const like = new Like ({
       skeleton: skeleton._id,
-      liker: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      liker: currentliker._id,
       type: faker.helpers.arrayElement(["like", "dislike", "like", "like", "like"]) //[1, -1, 1, 1, 1, -1, -1]
     });
     likes.push(like);
@@ -449,14 +451,13 @@ likes.forEach(like => {
   })
 })
 
-// likes.forEach(like => {
-//   users.forEach(user => {
-//     if (user._id === like.liker) {
-//       user.likes.push(like._id);
-//     }
-//   })
-// })
-
+likes.forEach(like => {
+  users.forEach(user => {
+    if (user._id === like.liker) {
+      user.likes.push(like._id);
+    }
+  })
+})
 
 // Seed bones
 const bones = []; 
@@ -484,14 +485,6 @@ skeletons.slice(2).forEach(skeleton => {
   skeleton.update()
 });
 
-
-// bones.forEach(bone => {
-//   skeletons.forEach(skeleton => {
-//     if (skeleton._id === bone.skeleton) {
-//       skeleton.bones.push(bone._id);
-//     }
-//   })
-// })
 
 
 

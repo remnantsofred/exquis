@@ -93,6 +93,7 @@ router.get('/:id', async (req, res, next) => {
                                   { path: "comments" }
                                 ]})
                               .populate({path: "comments", populate: { path: "parent", select: "_id, title" }})
+                              .populate({path: "likes", populate: { path: "skeleton", select: "_id, title" }})
                               .sort({ createdAt: -1})
     return res.json(user);
   }
@@ -115,6 +116,7 @@ router.get('/', async (req, res) => {
                                 { path: "comments" }
                               ]})
                             .populate({path: "comments", populate: { path: "parent", select: "_id, title" }})
+                            .populate({path: "likes", populate: { path: "skeleton", select: "_id, title" }})
                             .sort({ createdAt: -1})
     return res.json(users);
   }
