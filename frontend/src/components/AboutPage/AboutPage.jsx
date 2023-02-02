@@ -123,7 +123,6 @@ const AboutPage = () => {
                     She's also obsessed with her two cats Momo and Ash.
                     <br />
                     <br />
-                    <br />
                     <div className='projects-list'>
                       <p id="mini-descriptor">Some of her other projects include:</p>
                       <ul>
