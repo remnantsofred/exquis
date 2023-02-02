@@ -451,6 +451,13 @@ likes.forEach(like => {
   })
 })
 
+likes.forEach(like => {
+  users.forEach(user => {
+    if (user._id === like.liker) {
+      user.likes.push(like._id);
+    }
+  })
+})
 
 // Seed bones
 const bones = []; 
