@@ -28,7 +28,7 @@ Exquis was developed using:
 ![](https://github.com/remnantsofred/exquis/blob/main/frontend/src/assets/readme-videos/likes-comments-large.gif)
 
 #### Edit a skeleton
-![](https://github.com/remnantsofred/exquis/blob/main/frontend/src/assets/readme-videos/edit-skeleton-large.gif)
+![](https://github.com/remnantsofred/exquis/blob/main/frontend/src/assets/readme-videos/Large-new-edit-skeleton.gif)
 
 
 ### Color Mapping Bones
