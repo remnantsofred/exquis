@@ -9,6 +9,7 @@ import CurrentCollaboratorFxn from "./CurrentCollaboratorFxn"
 import NewPlaceBones from "./PlaceBones"
 import NewBoneInput from "./NewBoneInput/NewBoneInput"
 import CommentPanel from "./CommentPanel/CommentPanel"
+import SetCurrentCollaborator from "./SetCurrentCollaboratorBackend"
 import { createComment } from "../../../../store/comments"
 import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
 import "./SkeletonShow.css"
@@ -77,7 +78,7 @@ const SkeletonShow = () => {
   useEffect(() => {
     Promise.all([
       dispatch(fetchSkeleton(skeletonId)),
-      dispatch(fetchUsers())
+      dispatch(fetchUsers()),
     ]).then(()=>{
       setLoaded(true);
     })
@@ -213,7 +214,9 @@ const SkeletonShow = () => {
     const ownerColor = ownerColorFxn(ownerId, colorArr)
     const prompt = therePrompt(skellie)
     const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
-  
+    console.log(CurrentCollaboratorObj)
+    
+    SetCurrentCollaborator(skeletonId, CurrentCollaboratorObj)
 
     const completeChecker = (bones, maxBones) => {
       if (bones.length >= maxBones) {

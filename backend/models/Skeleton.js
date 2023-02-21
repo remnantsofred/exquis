@@ -39,6 +39,12 @@ const skeletonSchema = Schema({
   maxCollaborators: {
     type: Number
   },
+
+  currentCollaborator: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+
   collaborators: [{
     type: Schema.Types.ObjectId,
     ref: 'User'

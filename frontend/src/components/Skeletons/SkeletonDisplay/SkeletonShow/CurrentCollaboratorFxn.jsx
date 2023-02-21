@@ -1,7 +1,9 @@
-
+import { useEffect } from "react"
+import { updateSkeleton } from "../../../../store/skeletons"
+import { useDispatch } from "react-redux"
 
 function CurrentCollaboratorFxn ({skellie, collaborators}) {
- 
+  const dispatch = useDispatch()
   const roundAmt = collaborators.length
   const currentRounds = skellie.bones.length
   
@@ -12,17 +14,14 @@ function CurrentCollaboratorFxn ({skellie, collaborators}) {
       return (baseNum)
     } else if (currentRounds < roundAmt) {
       baseNum = roundAmt - currentRounds
-  
       return (baseNum);
     } else {
       baseNum = currentRounds % roundAmt;
-  
       return (baseNum);
-
     }
   }
-  const turnNum = currentAmount()
 
+  const turnNum = currentAmount()
   return (collaborators[turnNum])
 }
 

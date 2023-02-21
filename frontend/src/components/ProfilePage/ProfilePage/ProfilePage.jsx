@@ -15,12 +15,8 @@ const ProfilePage = () => {
   const { userId } = useParams()
   const [tabVal, setTabVal] = useState("current")
   // const [skellies, setSkellies] = useState({})
-
-  
-  
   const user = useSelector(getUser(userId))
 
-  
   useEffect(() => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     Promise.all([
