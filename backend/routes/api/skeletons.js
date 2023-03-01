@@ -128,65 +128,65 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
   }
 });
 
-router.patchCurrentCollab('/:id', async (req, res, next) => {
-  try {
-    let skeleton = await Skeleton.findById(req.params.id);
-    if (!skeleton) {
-      const error = new Error('Skeleton not found');
-      error.statusCode = 404;
-      error.errors = { message: "No skeleton found with that id" };
-      return next(error);
-    }
-      skeleton.owner = req.user._id,
-      skeleton.title = req.body.title,
-      skeleton.prompt = req.body.prompt,
-      skeleton.maxBones = req.body.maxBones,
-      skeleton.maxCollaborators = req.body.maxCollaborators,
-      skeleton.currentCollaborator = req.body.currentCollaborator
-      // skeleton.bones = req.body.bones,
-      skeleton.tags = req.body.tags
-      // need to add future logic to add/remove tags
+// router.patchCurrentCollab('/:id', async (req, res, next) => {
+//   try {
+//     let skeleton = await Skeleton.findById(req.params.id);
+//     if (!skeleton) {
+//       const error = new Error('Skeleton not found');
+//       error.statusCode = 404;
+//       error.errors = { message: "No skeleton found with that id" };
+//       return next(error);
+//     }
+//       skeleton.owner = req.user._id,
+//       skeleton.title = req.body.title,
+//       skeleton.prompt = req.body.prompt,
+//       skeleton.maxBones = req.body.maxBones,
+//       skeleton.maxCollaborators = req.body.maxCollaborators,
+//       skeleton.currentCollaborator = req.body.currentCollaborator
+//       // skeleton.bones = req.body.bones,
+//       skeleton.tags = req.body.tags
+//       // need to add future logic to add/remove tags
 
-    let currentCollaborators = [];
-    let newCollaborators = [];
-    let removedCollaborators = [];
+//     let currentCollaborators = [];
+//     let newCollaborators = [];
+//     let removedCollaborators = [];
 
-    for (const newCollaborator of req.body.collaborators) {
-      if (!skeleton.collaborators.map((collaborator) => collaborator.toString()).includes(newCollaborator.toString())) {
-        newCollaborators.push(newCollaborator);
-      } else  {
-        currentCollaborators.push(newCollaborator);
-      }
-    }
+//     for (const newCollaborator of req.body.collaborators) {
+//       if (!skeleton.collaborators.map((collaborator) => collaborator.toString()).includes(newCollaborator.toString())) {
+//         newCollaborators.push(newCollaborator);
+//       } else  {
+//         currentCollaborators.push(newCollaborator);
+//       }
+//     }
 
 
-    for (const prevCollaborator of skeleton.collaborators) {
-      if (!req.body.collaborators.map((collaborator) => collaborator.toString()).includes(prevCollaborator.toString())) {
-        removedCollaborators.push(prevCollaborator);
-      }
-    }
+//     for (const prevCollaborator of skeleton.collaborators) {
+//       if (!req.body.collaborators.map((collaborator) => collaborator.toString()).includes(prevCollaborator.toString())) {
+//         removedCollaborators.push(prevCollaborator);
+//       }
+//     }
     
-    skeleton.collaborators = req.body.collaborators;
+//     skeleton.collaborators = req.body.collaborators;
 
-    await skeleton.save()
-    skeleton = await Skeleton.findById(req.params.id)
-        .populate("owner", "_id, username")
-        .populate("collaborators", "_id, username")
-        .populate("currentCollaborator", "_id, username")
-        // .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
-        .populate("comments")
-        .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
-        .populate({path: "likes", populate: { path: "liker", select: "_id, username" }}) 
-    await User.updateMany({_id: {$in: newCollaborators}}, {$push: {skeletons: skeleton._id} });
-    await User.updateMany({_id: {$in: removedCollaborators}}, {$pull: {skeletons: skeleton._id} });
+//     await skeleton.save()
+//     skeleton = await Skeleton.findById(req.params.id)
+//         .populate("owner", "_id, username")
+//         .populate("collaborators", "_id, username")
+//         .populate("currentCollaborator", "_id, username")
+//         // .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
+//         .populate("comments")
+//         .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
+//         .populate({path: "likes", populate: { path: "liker", select: "_id, username" }}) 
+//     await User.updateMany({_id: {$in: newCollaborators}}, {$push: {skeletons: skeleton._id} });
+//     await User.updateMany({_id: {$in: removedCollaborators}}, {$pull: {skeletons: skeleton._id} });
  
     
-    return res.json(skeleton);
-  }
-  catch(err) {
-    next(err);
-  }
-});
+//     return res.json(skeleton);
+//   }
+//   catch(err) {
+//     next(err);
+//   }
+// });
 
 router.delete('/:id', requireUser, async (req, res, next) => {
   try {
