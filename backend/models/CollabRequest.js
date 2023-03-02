@@ -1,62 +1,28 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const CollabRequestSchema = new Schema({
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    // required: true
-  },
-  text: {
-    type: String
-  },
+const collabRequestSchema = new Schema({
   skeleton: {
     type: Schema.Types.ObjectId,
     ref: 'Skeleton',
-    // required: true
+    required: true
   },
-}, {
-  timestamps: true
-});
-
-const skeletonSchema = Schema({
-  owner: {
+  requester: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
-  title: {
-    type: String,
-    required: true
-  }, 
-  prompt: {
-    type: String,
-  },
-  maxBones: {
-    type: Number,
+  collaborator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     required: true
   },
-  maxCollaborators: {
-    type: Number
+  status: {
+    type: int,
+    // 1 = 'pending', 2 = 'accepted', 3 = 'rejected'
+    required: true
   },
-  collaborators: [{
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  }], 
-  bones: [BoneSchema],
-
-  tags: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Tag'
-  }],
-  likes: [{ 
-    type: Schema.Types.ObjectId, 
-    ref: 'Like'
-  }],
-  comments: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Comment'
-  }]
+  
 }, {
   timestamps: true
 });
