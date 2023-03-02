@@ -22,7 +22,7 @@ function SkeletonEditModal ({skellie, handleModalClose, handleSkellieUpdate}) {
   const users = useSelector(getUsers);
   const dispatch = useDispatch();
   const options = users?.filter(user => user._id !== currentUser._id).map(user => ({username: user.username, _id: user._id}));
-  const [selectedValue, setSelectedValue] = useState(skellie.collaborators);
+  const [selectedValue, setSelectedValue] = useState(skellie.collaborators?.filter(user => user._id !== currentUser._id));
   const selectedList = [];
   // const [selectedCollaborators, setSelectedCollaborators] = useState([]);
   const [ modalStatus, setModalStatus ] = useState(false);

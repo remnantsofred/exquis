@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import SkeletonEditModalProfile from "../../../Skeletons/SkeletonEditModalProfile/SkeletonEditModalProfile"
 import { getUsers, fetchUsers, getUser } from "../../../../store/users";
 import SessionUserCheck from "../../../SessionUserCheck/SessionUserCheck"
+import CurrentBadge from "../CurrentBadge/CurrentBadge";
 
 const SkeletonTab = ({switchValue, userId}) => {
 
@@ -16,7 +17,6 @@ const SkeletonTab = ({switchValue, userId}) => {
 
   const user = useSelector(getUser(userId))
   const skellies = user?.skeletons
-
 
   useEffect(() => {
     dispatch(fetchUsers())
@@ -96,6 +96,13 @@ const SkeletonTab = ({switchValue, userId}) => {
     }
   }
 
+  // const ownerUp = (skellie)=>{
+  //   if (skellie.owner === sessionUser._id && skellie.collaborators[0] === sessionUser._id) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
 
   switch(switchValue) {
     case "current":
@@ -109,12 +116,14 @@ const SkeletonTab = ({switchValue, userId}) => {
               <div  key={`current-${skellie._id}`}>  
                 {SkellieShowLink(skellie, switchValue)}
                 {modalStatus === `current-${skellie._id}` && <SkeletonEditModalProfile skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />}
+                {(skellie.owner === sessionUser._id && skellie.collaborators[0]._id === sessionUser._id) && <CurrentBadge /> }
               </div>
             )))}
           </ul>
         </div>
       )
     case "owned":
+  
       return (
         <div className='skeletons-block' id="owned-skeletons-block">
         <h2 className='profile-bottom-title'>Owned Skeletons</h2>
@@ -130,6 +139,7 @@ const SkeletonTab = ({switchValue, userId}) => {
               <div key={`owned-${skellie._id}`}>  
                 {SkellieShowLink(skellie, switchValue)}
                 {modalStatus === `owned-${skellie._id}` && <SkeletonEditModalProfile skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />}
+                {(skellie.owner === sessionUser._id && skellie.collaborators[0]._id === sessionUser._id) && <CurrentBadge /> }
               </div>
             )))}
           </ul>

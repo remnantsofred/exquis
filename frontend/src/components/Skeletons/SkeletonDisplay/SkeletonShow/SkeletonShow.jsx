@@ -206,13 +206,13 @@ const SkeletonShow = () => {
       <Loading />
     )
   } else if (loaded && skellie) {
-    
-    const collaborators = [skellie.owner].concat(Object.values(skellie.collaborators))
+    const collaborators = skellie.collaborators
     const colorArr = CollaboratorColorMatch(collaborators)
     const ownerId = skellie.owner._id
     const ownerColor = ownerColorFxn(ownerId, colorArr)
     const prompt = therePrompt(skellie)
-    const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
+    // const CurrentCollaboratorObj = CurrentCollaboratorFxn({skellie: skellie, collaborators: collaborators})
+    const CurrentCollaboratorObj = skellie.collaborators[0]
   
 
     const completeChecker = (bones, maxBones) => {

@@ -127,6 +127,7 @@ router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req
         error.errors = { message: "No skeleton found with that id" };
         return next(error);
       }
+      // console.log(skeleton.collaborators, "skeleton.collaborators")
 
       const newBone = new Bone({
         text: req.body.text,
@@ -134,8 +135,12 @@ router.post('/skeletons/:skeletonId', requireUser, validateBoneInput, async (req
         author: req.user._id
       });
       let bone = await newBone.save();
-      await Skeleton.updateOne({_id: bone.skeleton}, {$push: {bones: bone}});
-      // await Skeleton.findOneAndUpdate({_id: bone.skeleton}, {$push: {bones: bone}})
+      // let newOrderCollaborators = skeleton.collaborators.push(bone.skeleton.collaborators.shift());
+      // console.log(newOrderCollaborators, "newOrderCollaborators")
+      let firstUpate = await Skeleton.updateOne({_id: bone.skeleton}, {$push: {bones: bone}, $pull: {collaborators: bone.author}});
+      let secondUpdate = await Skeleton.updateOne({_id: bone.skeleton}, {$push: {collaborators: bone.author}});
+      // let secondUpdate = await Skeleton.updateOne({_id: bone.skeleton}, {$push: {bones: bone}, $set: {collaborators: skeleton.collaborators.push(skeleton.collaborators.shift()) }});
+      
 
       // bone = await bone.populate('skeleton', '_id, text');
       return res.json(bone);

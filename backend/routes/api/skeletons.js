@@ -45,7 +45,7 @@ router.get('/:id', async (req, res, next) => {
     const skeleton = await Skeleton.findOne({_id: req.params.id})
                              .populate("owner", "_id, username")
                              .populate("collaborators", "_id, username")
-                             .populate("comments")
+                            //  .populate("comments")
                             .populate({path: "comments", populate: { path: "author", select: "_id, username" }})
                              .populate({path: "bones", populate: { path: "author", select: "_id, username" }})
                              .populate({path: "likes", populate: { path: "liker", select: "_id, username" }}) 
@@ -106,7 +106,7 @@ router.patch('/:id', requireUser, validateSkeletonInput, async (req, res, next) 
       }
     }
     
-    skeleton.collaborators = req.body.collaborators;
+    skeleton.collaborators = [req.user._id].concat(req.body.collaborators);
 
     await skeleton.save()
     skeleton = await Skeleton.findById(req.params.id)
@@ -186,7 +186,7 @@ router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
       prompt: req.body.prompt,
       maxBones: req.body.maxBones,
       maxCollaborators: req.body.maxCollaborators,
-      collaborators: req.body.collaborators,
+      collaborators: [req.user._id].concat(req.body.collaborators),
       bones: [],
       tags: [],
       likes: [],
@@ -196,7 +196,7 @@ router.post('/', requireUser, validateSkeletonInput, async (req, res, next) => {
     let skeleton = await newSkeleton.save();
     skeleton = await skeleton
                      
-    await User.updateOne({_id: skeleton.owner._id}, {$push: {skeletons: skeleton._id} });
+    // await User.updateOne({_id: skeleton.owner._id}, {$push: {skeletons: skeleton._id} });
     await User.updateMany({_id: {$in: skeleton.collaborators}}, {$push: {skeletons: skeleton._id} });
 
     return res.json(skeleton);
