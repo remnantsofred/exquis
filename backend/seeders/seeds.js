@@ -118,7 +118,7 @@ const catFightSkellie = new Skeleton({
   prompt: "purr meow meow meow.",
   maxBones: 20,
   maxCollaborators: 10,
-  collaborators: [artie._id, ashy._id],
+  collaborators: [momo._id, artie._id, ashy._id],
   bones: [],
   tags: [],
   likes: [],
@@ -181,7 +181,7 @@ const demoOne = new Skeleton({
   prompt: "Joyce enjoyed eating pancakes with ketchup.",
   maxBones: 20,
   maxCollaborators: 2,
-  collaborators: [nathan._id],
+  collaborators: [daphne._id, nathan._id],
   bones: [],
   tags: [],
   likes: [],
@@ -369,7 +369,7 @@ for (const user of users){
       prompt: faker.random.words(numWordsPrompt),
       maxBones: faker.datatype.number({'min': 5,'max': 50}),
       maxCollaborators: faker.datatype.number({'min': 2,'max': 8}),
-      collaborators: [collaborator1Id, collaborator2Id],
+      collaborators: [user._id, collaborator1Id, collaborator2Id],
       bones: [],
       tags: [],
       likes: [],
@@ -383,9 +383,7 @@ for (const user of users){
 
 skeletons.forEach(skeleton => {
   users.forEach(user => {
-    if (user._id === skeleton.owner) {
-      user.skeletons.push(skeleton);
-    } else if (skeleton.collaborators.includes(user._id)) {
+    if (skeleton.collaborators.includes(user._id)) {
       user.skeletons.push(skeleton);
     }
   })
