@@ -11,22 +11,21 @@ const { requireUser } = require('../../config/passport');
 // const validateCommentInput = require('../../validations/comments');
 // const validateLikeInput = require('../../validations/likes');
 
-
-
 router.post('/collabrequests/:skeletonId', async (req, res, next) => {
   try {
-    const newLike = new Like({
+    const newCpllabRequest = new CollabRequest({
       skeleton: req.params.skeletonId,
-      requester: req.body.liker,
-      receiver: req.body.type
+      requester: req.body.requesterId,
+      receiver: req.body.receiverId,
+      status: req.body.status
     });
-    let like = await newLike.save();
-    like = await like.populate('liker', '_id, username');
+    let collabRequest = await newCollabRequest.save();
+    collabRequest = await collabRequest.populate('liker', '_id, username');
     await Skeleton.updateOne({ _id: like.skeleton },{ $push: { likes: like._id } });
     await User.updateOne({_id: like.liker}, {$push: {likes: like._id}});
-    like = await like.populate('skeleton', '_id, title');
+    request = await collabRequest.populate('skeleton', '_id, title');
    
-    return res.json(like);
+    return res.json(request);
   } catch (err) {
     next(err);
   }
