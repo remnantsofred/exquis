@@ -67,65 +67,67 @@ const ProfilePage = () => {
       <div>
         <Loading />
       </div>
-    )} else {
-  return (
-    <div className='general-profile-container'>
-      <div className='profile-top'>
-        <div className='profile-banner'>
-            <img src={Banner} className="profile-banner" id="banner-image" />
-        </div>
+    )
+  } else {
+    return (
+      <div className='general-profile-container'>
+        <div className='profile-top'>
+          <div className='profile-banner'>
+              <img src={Banner} className="profile-banner" id="banner-image" />
+          </div>
 
-        <div className='profile-top-middle'>
-          <div className='profile-icon-border'>
-            <div className='profile-icon'>
-                <img src={ProfileIcon} className='profile-icon' id="profile-icon-image" />
+          <div className='profile-top-middle'>
+            <div className='profile-icon-border'>
+              <div className='profile-icon'>
+                  <img src={ProfileIcon} className='profile-icon' id="profile-icon-image" />
+              </div>
+            </div>
+
+
+            <div className='username-block'>
+              <h1 id="username">
+                {user.username}
+              </h1>
+              <hr id="username-line-divider" />
+            </div>
+
+          </div>
+        </div>
+        <div className='profile-bottom'>
+          <div className='profile-skeleton-tab-bar'>
+            <div>
+              <h3 className='profile-skeleton-tab'
+                  onClick={(e) => handleClick(e)}
+                  id="current"
+                >
+                Current Skeletons
+              </h3>
+            </div>
+            <div>
+              <h3 className='profile-skeleton-tab'
+                onClick={(e) => handleClick(e)}
+                id="owned"
+                >
+                Owned Skeletons
+              </h3>
+            </div>
+            <div>
+              <h3 className='profile-skeleton-tab'
+                onClick={(e) => handleClick(e)}
+                id="previous"
+                >
+                Previous Skeletons
+              </h3>
             </div>
           </div>
-
-
-          <div className='username-block'>
-            <h1 id="username">
-              {user.username}
-            </h1>
-            <hr id="username-line-divider" />
-          </div>
-
         </div>
-      </div>
-      <div className='profile-bottom'>
-        <div className='profile-skeleton-tab-bar'>
-          <div>
-            <h3 className='profile-skeleton-tab'
-                onClick={(e) => handleClick(e)}
-                id="current"
-              >
-              Current Skeletons
-            </h3>
-          </div>
-          <div>
-            <h3 className='profile-skeleton-tab'
-              onClick={(e) => handleClick(e)}
-              id="owned"
-              >
-              Owned Skeletons
-            </h3>
-          </div>
-          <div>
-            <h3 className='profile-skeleton-tab'
-              onClick={(e) => handleClick(e)}
-              id="previous"
-              >
-              Previous Skeletons
-            </h3>
-          </div>
+        <div>
+          <SkeletonTab switchValue={tabVal} skellies={userSkeletons} userId={userId}/>
         </div>
-      </div>
-      <div>
-        <SkeletonTab switchValue={tabVal} skellies={userSkeletons} userId={userId}/>
-      </div>
 
-    </div>
-  )}
+      </div>
+    )
+  }
 }
 
 export default ProfilePage;
