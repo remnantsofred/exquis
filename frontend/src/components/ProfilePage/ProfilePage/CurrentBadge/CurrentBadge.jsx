@@ -1,9 +1,9 @@
-
+import './CurrentBadge.css'
 
 const CurrentBadge = () => {
   return (
     <>
-    <div id="current-badge">
+    <div id="current-badge" className="current-badge">
       You're up!
     </div>
     </>

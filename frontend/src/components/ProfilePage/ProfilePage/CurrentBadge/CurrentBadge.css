@@ -2,4 +2,10 @@
   border-radius: 20px;
   background-color: #18be18;
   color: white;
+  width: 150px;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-right: 2vh;
+  margin-bottom: 6vh;
 }

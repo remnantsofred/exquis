@@ -113,7 +113,7 @@ const SkeletonTab = ({switchValue, userId}) => {
             {!skelliesCurrent.length  
             ? <div className="skellie-show-link-profile-page">No current skeletons</div> 
             : (skelliesCurrent.map((skellie) => (
-              <div  key={`current-${skellie._id}`}>  
+              <div  key={`current-${skellie._id}`} className='skellie-show-li-div-container'>  
                 {SkellieShowLink(skellie, switchValue)}
                 {modalStatus === `current-${skellie._id}` && <SkeletonEditModalProfile skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />}
                 {(skellie.owner === sessionUser._id && skellie.collaborators[0]._id === sessionUser._id) && <CurrentBadge /> }
