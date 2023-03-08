@@ -136,7 +136,7 @@ const SkeletonTab = ({switchValue, userId}) => {
                 </Link>
               </div> 
             : (skelliesOwned.map((skellie) => (
-              <div key={`owned-${skellie._id}`}>  
+              <div key={`owned-${skellie._id}`} className='skellie-show-li-div-container'>  
                 {SkellieShowLink(skellie, switchValue)}
                 {modalStatus === `owned-${skellie._id}` && <SkeletonEditModalProfile skellie={skellie} handleModalClose={handleModalClose} handleSkellieUpdate={handleSkellieUpdate} modalStatus={modalStatus} />}
                 {(skellie.owner === sessionUser._id && skellie.collaborators[0]._id === sessionUser._id) && <CurrentBadge /> }
